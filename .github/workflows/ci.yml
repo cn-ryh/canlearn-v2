@@ -5,14 +5,21 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
-  check:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -27,9 +34,10 @@ jobs:
       - name: Install Python dependencies
         working-directory: apps/workflow
         run: uv sync --frozen
-      - name: Check
-        run: pnpm check
-      - name: Build
-        run: pnpm build
-      - name: Validate Compose configuration
-        run: docker compose config --quiet
+      - name: Validate pull request title
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$PR_TITLE" | pnpm exec commitlint
+      - name: Verify repository
+        run: pnpm verify

@@ -3,6 +3,9 @@ info:
   title: CanLearn API
   version: 1.0.0
   description: RESTful business contract for the CanLearn MVP.
+  license:
+    name: Proprietary
+    identifier: Proprietary
 servers:
   - url: http://localhost:3001
 paths:
@@ -10,6 +13,7 @@ paths:
     get:
       operationId: getHealth
       summary: Check the API process
+      security: []
       responses:
         "200":
           description: The API process is healthy.
