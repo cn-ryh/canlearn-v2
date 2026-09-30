@@ -1,0 +1,44 @@
+[project]
+name = "canlearn-workflow"
+version = "0.1.0"
+description = "Durable workflows and AI workers for CanLearn"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "httpx==0.28.1",
+  "pydantic-settings==2.15.0",
+  "temporalio==1.33.0",
+]
+
+[project.scripts]
+canlearn-worker = "canlearn_workflow.worker:run"
+
+[dependency-groups]
+dev = [
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "pytest-asyncio==1.4.0",
+  "ruff==0.16.9",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/canlearn_workflow"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["canlearn_workflow"]

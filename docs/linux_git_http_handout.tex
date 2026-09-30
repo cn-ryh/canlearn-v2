@@ -1,0 +1,211 @@
+\documentclass[11pt,a4paper]{ctexart}
+\usepackage[margin=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{accent}{HTML}{1769AA}
+\hypersetup{colorlinks=true,linkcolor=accent,urlcolor=accent}
+\setlist{nosep,leftmargin=2em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Linux、Git 与 HTTP 基础}
+\rhead{课堂讲义}
+\cfoot{\thepage}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codebg},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\newcommand{\key}[1]{\textcolor{accent}{\textbf{#1}}}
+
+\title{\textbf{Linux 基础、Git 与请求状态码}\\\large 一节课入门讲义}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+\begin{center}
+\fcolorbox{accent}{codebg}{\parbox{0.88\textwidth}{
+\textbf{学习目标：}能在 Linux 中定位和操作文件；能用 Git 完成一次基本版本提交；能根据 HTTP 状态码快速判断请求结果。
+}}
+\end{center}
+
+\section{Linux 基础}
+
+Linux 是一种广泛用于服务器和开发环境的操作系统。命令行的基本形式是：
+
+\begin{lstlisting}
+command [options] [arguments]
+ls -la /home
+\end{lstlisting}
+
+其中 \texttt{ls} 是命令，\texttt{-la} 是选项，\texttt{/home} 是操作对象。
+
+\subsection{目录与路径}
+
+\begin{itemize}
+  \item \key{绝对路径}：从根目录 \texttt{/} 开始，例如 \texttt{/home/student/project}。
+  \item \key{相对路径}：从当前目录开始，例如 \texttt{./src}。
+  \item \texttt{.} 表示当前目录，\texttt{..} 表示上一级目录。
+  \item Linux 文件名区分大小写：\texttt{Readme.md} 与 \texttt{README.md} 是两个文件。
+\end{itemize}
+
+\subsection{常用命令速查}
+
+\begin{tabularx}{\textwidth}{>{\ttfamily}l X l}
+\toprule
+\normalfont 命令 & 作用 & 示例 \\
+\midrule
+pwd & 显示当前目录 & \texttt{pwd} \\
+ls & 查看目录内容 & \texttt{ls -la} \\
+cd & 切换目录 & \texttt{cd project} \\
+mkdir & 创建目录 & \texttt{mkdir demo} \\
+touch & 创建空文件或更新时间 & \texttt{touch notes.txt} \\
+cp & 复制文件或目录 & \texttt{cp a.txt b.txt} \\
+mv & 移动或重命名 & \texttt{mv old.txt new.txt} \\
+rm & 删除文件；删除通常难以恢复 & \texttt{rm notes.txt} \\
+cat & 输出文件内容 & \texttt{cat notes.txt} \\
+grep & 在文本中搜索 & \texttt{grep error app.log} \\
+man & 查看命令手册 & \texttt{man ls} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{权限概念}
+
+\texttt{ls -l} 可能显示 \texttt{-rwxr-xr--}。前三位是所有者权限，中间三位是用户组权限，最后三位是其他人权限。\texttt{r/w/x} 分别表示读、写、执行。
+
+\begin{lstlisting}
+chmod +x deploy.sh     # add execute permission
+sudo command           # run as administrator (use carefully)
+\end{lstlisting}
+
+\textbf{小提醒：}执行命令前确认自己所在的目录；使用 \texttt{rm}、\texttt{sudo} 前尤其要检查目标。
+
+\section{Git：让修改可追踪}
+
+Git 是\key{分布式版本控制系统}。它记录文件的变化，便于回退、协作和审查。
+
+\subsection{三个区域}
+
+\begin{center}
+工作区 $\xrightarrow{\texttt{git add}}$ 暂存区 $\xrightarrow{\texttt{git commit}}$ 本地仓库
+\end{center}
+
+\begin{itemize}
+  \item \key{工作区}：正在编辑的文件。
+  \item \key{暂存区}：准备放进下一次提交的修改。
+  \item \key{本地仓库}：已经提交的版本历史。
+\end{itemize}
+
+\subsection{一次完整的基本流程}
+
+\begin{lstlisting}
+git init                         # initialize a repository
+git status                       # inspect current state
+git add README.md                # stage a file
+git commit -m "docs: add intro"  # create a commit
+git log --oneline                # view compact history
+\end{lstlisting}
+
+提交信息应简短说明“这次修改做了什么”，一次提交尽量只解决一个主题。
+
+\subsection{分支与远程协作}
+
+\begin{lstlisting}
+git switch -c feature/login  # create and switch branch
+git switch main              # switch back to main
+git pull                     # fetch and merge updates
+git push                     # push local commits
+\end{lstlisting}
+
+\textbf{推荐习惯：}开始工作前先同步；在功能分支上修改；提交前运行 \texttt{git status} 和测试；发生冲突时理解双方修改后再解决。
+
+\section{HTTP 请求状态码}
+
+浏览器或客户端向服务器发送请求，服务器返回响应。状态码是三位数字，用来概括请求结果。\key{第一位数字表示大类}。
+
+\begin{tabularx}{\textwidth}{c l X}
+\toprule
+类别 & 含义 & 常见判断 \\
+\midrule
+1xx & 信息性响应 & 请求已收到，仍在处理 \\
+2xx & 成功 & 请求已被正常处理 \\
+3xx & 重定向 & 资源位置变化，或可使用缓存 \\
+4xx & 客户端错误 & 请求参数、身份或权限等有问题 \\
+5xx & 服务器错误 & 服务端处理请求时发生异常 \\
+\bottomrule
+\end{tabularx}
+
+\subsection{常见状态码}
+
+\begin{tabularx}{\textwidth}{c l X}
+\toprule
+状态码 & 名称 & 典型场景 \\
+\midrule
+200 & OK & 请求成功并返回内容 \\
+201 & Created & 创建资源成功，例如新增用户 \\
+204 & No Content & 成功，但没有响应正文 \\
+301 & Moved Permanently & 资源永久迁移 \\
+302 & Found & 临时重定向 \\
+304 & Not Modified & 缓存仍有效，可继续使用 \\
+400 & Bad Request & 参数格式或请求语法有误 \\
+401 & Unauthorized & 未认证或凭证无效，通常需要登录 \\
+403 & Forbidden & 已识别身份，但没有访问权限 \\
+404 & Not Found & 请求的资源不存在 \\
+409 & Conflict & 当前状态冲突，例如重复创建 \\
+429 & Too Many Requests & 请求过于频繁，触发限流 \\
+500 & Internal Server Error & 服务器内部异常 \\
+502 & Bad Gateway & 网关收到上游服务的无效响应 \\
+503 & Service Unavailable & 服务暂时不可用或过载 \\
+504 & Gateway Timeout & 网关等待上游服务超时 \\
+\bottomrule
+\end{tabularx}
+
+\textbf{重点辨析：}\texttt{401} 强调“你是谁尚未通过验证”；\texttt{403} 强调“知道你是谁，但你无权访问”。\texttt{404} 不等于服务器宕机，而是目标资源未找到。
+
+\subsection{排查请求问题的顺序}
+
+\begin{enumerate}
+  \item 先看状态码的大类：成功、客户端问题还是服务端问题。
+  \item 再看响应正文和响应头中的错误信息。
+  \item 检查 URL、请求方法、参数、登录状态与权限。
+  \item 若为 5xx，结合服务端日志定位异常或上游依赖。
+\end{enumerate}
+
+\section{随堂练习}
+
+\begin{enumerate}
+  \item 在终端创建目录 \texttt{lesson-demo}，进入目录并创建 \texttt{README.md}。
+  \item 初始化 Git 仓库，把 \texttt{README.md} 加入暂存区并提交。
+  \item 某接口返回 401、403、404 时，分别应优先检查什么？
+  \item 用户提交表单后成功创建记录，最合适的状态码是什么？
+  \item 网关等待后端服务超时，最可能看到哪个状态码？
+\end{enumerate}
+
+\textbf{参考答案：}（1--2）依次使用 \texttt{mkdir}、\texttt{cd}、\texttt{touch}、\texttt{git init}、\texttt{git add}、\texttt{git commit}；（3）认证信息、访问权限、资源路径；（4）201；（5）504。
+
+\section*{一页记忆}
+
+\begin{itemize}
+  \item Linux：先用 \texttt{pwd} 定位，再用 \texttt{ls} 查看；危险命令先核对路径。
+  \item Git：\texttt{status} 看状态，\texttt{add} 选修改，\texttt{commit} 存版本。
+  \item HTTP：2xx 成功，3xx 重定向，4xx 查请求，5xx 查服务端。
+\end{itemize}
+
+\end{document}

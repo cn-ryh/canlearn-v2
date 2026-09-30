@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          version: "0.12.15"
+      - name: Install TypeScript dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Python dependencies
+        working-directory: apps/workflow
+        run: uv sync --frozen
+      - name: Check
+        run: pnpm check
+      - name: Build
+        run: pnpm build
+      - name: Validate Compose configuration
+        run: docker compose config --quiet

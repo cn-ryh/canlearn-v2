@@ -1,0 +1,28 @@
+{
+  "name": "canlearn",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@12.4.2",
+  "engines": {
+    "node": "24.x",
+    "pnpm": "12.x"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "check": "pnpm lint && pnpm typecheck && pnpm test",
+    "dev": "concurrently --names web,api,workflow --prefix-colors cyan,green,yellow \"pnpm dev:web\" \"pnpm dev:api\" \"pnpm dev:workflow\"",
+    "dev:api": "pnpm --filter @canlearn/api dev",
+    "dev:web": "pnpm --filter @canlearn/web dev",
+    "dev:workflow": "cd apps/workflow && uv run canlearn-worker",
+    "format": "biome format --write .",
+    "infra:down": "docker compose down",
+    "infra:up": "docker compose up -d postgres redis temporal temporal-ui",
+    "lint": "biome check . && cd apps/workflow && uv run ruff check . && uv run ruff format --check .",
+    "test": "pnpm -r --if-present test && cd apps/workflow && uv run pytest",
+    "typecheck": "pnpm -r --if-present typecheck && cd apps/workflow && uv run mypy src"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "concurrently": "10.0.5"
+  }
+}

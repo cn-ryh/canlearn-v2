@@ -1,0 +1,32 @@
+openapi: 3.1.0
+info:
+  title: CanLearn API
+  version: 1.0.0
+  description: RESTful business contract for the CanLearn MVP.
+servers:
+  - url: http://localhost:3001
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      summary: Check the API process
+      responses:
+        "200":
+          description: The API process is healthy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      additionalProperties: false
+      required: [service, status]
+      properties:
+        service:
+          type: string
+          const: canlearn-api
+        status:
+          type: string
+          const: ok

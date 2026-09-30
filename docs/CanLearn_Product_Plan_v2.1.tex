@@ -1,0 +1,1139 @@
+% !TeX program = xelatex
+% CanLearn product plan v2.1 | Research snapshot: 2026-09-27 | Engineering stack revision: 2026-09-30
+% Self-contained source. Compile twice with XeLaTeX, or use latexmk -xelatex.
+\documentclass[UTF8,a4paper,11pt,fontset=none]{ctexart}
+\usepackage[left=21mm,right=21mm,top=21mm,bottom=21mm,headheight=15pt,headsep=7mm,footskip=10mm]{geometry}
+\usepackage{fontspec}
+\IfFontExistsTF{TeX Gyre Pagella}{\setmainfont{TeX Gyre Pagella}}{\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]}
+\IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{lmsans10-regular.otf}[BoldFont=lmsans10-bold.otf,ItalicFont=lmsans10-oblique.otf,BoldItalicFont=lmsans10-boldoblique.otf]}
+\setmonofont{lmmono10-regular.otf}[Scale=0.88]
+\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}[BoldFont=Noto Serif CJK SC Bold]}{\setCJKmainfont{FandolSong-Regular.otf}[BoldFont=FandolSong-Bold.otf]}
+\IfFontExistsTF{Noto Sans CJK SC}{\setCJKsansfont{Noto Sans CJK SC}[BoldFont=Noto Sans CJK SC Bold]}{\setCJKsansfont{FandolHei-Regular.otf}[BoldFont=FandolHei-Bold.otf]}
+\setCJKmonofont{FandolFang-Regular.otf}
+\usepackage[table]{xcolor}
+\definecolor{Ink}{HTML}{20374B}
+\definecolor{Teal}{HTML}{147D86}
+\definecolor{Soft}{HTML}{EFF6F7}
+\definecolor{Rule}{HTML}{D6E1E5}
+\definecolor{Muted}{HTML}{617480}
+\definecolor{Warn}{HTML}{8B612C}
+\usepackage{amsmath,amssymb,booktabs,array,tabularx,longtable,multirow}
+\usepackage{enumitem,graphicx,tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr,lastpage,needspace,setspace,listings,xurl}
+\usepackage[unicode,colorlinks=true,linkcolor=Teal,urlcolor=Teal,citecolor=Teal,bookmarksnumbered=true]{hyperref}
+\hypersetup{pdftitle={CanLearn 产品策划案 v2.1},pdfauthor={长春航萧网络科技有限公司},pdfsubject={全学科学习平台、公开知识库与微服务编排},pdfkeywords={CanLearn,MinerU,PDF,学习规划,习题生成,讲解生成}}
+\setstretch{1.20}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{4.2pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{7pt}
+\renewcommand{\arraystretch}{1.34}
+\setlist[itemize]{leftmargin=1.7em,topsep=3pt,itemsep=2pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.9em,topsep=3pt,itemsep=2pt,parsep=0pt}
+\ctexset{section={format=\Large\sffamily\bfseries\color{Ink},beforeskip=8pt,afterskip=10pt},subsection={format=\large\sffamily\bfseries\color{Teal},beforeskip=9pt,afterskip=5pt},subsubsection={format=\normalsize\sffamily\bfseries\color{Ink},beforeskip=7pt,afterskip=3pt}}
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}CanLearn\quad /\quad 产品策划案 v2.1}
+\fancyhead[R]{\small\sffamily\color{Muted}长春航萧网络科技有限公司}
+\fancyfoot[L]{\footnotesize\sffamily\color{Muted}产品规划与验证执行稿\quad |\quad 更新 2026.09.30}
+\fancyfoot[R]{\footnotesize\sffamily\color{Muted}\thepage\ /\ \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\cth}[1]{\textbf{\sffamily #1}}
+\newcommand{\minor}[1]{{\small\color{Muted}#1}}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\newsec}[1]{\clearpage\section{#1}}
+\newcommand{\cont}[1]{\clearpage\noindent{\small\sffamily\color{Muted}#1}\par\vspace{3pt}}
+\newtcolorbox{insight}[1]{enhanced,breakable,colback=Soft,colframe=Teal,boxrule=0pt,borderline west={2pt}{0pt}{Teal},arc=0pt,left=10pt,right=10pt,top=7pt,bottom=7pt,title={#1},coltitle=Ink,fonttitle=\bfseries\sffamily,attach title to upper={\par\smallskip},before skip=9pt,after skip=9pt}
+\newtcolorbox{caution}[1]{enhanced,breakable,colback=Warn!5,colframe=Warn,boxrule=0pt,borderline west={2pt}{0pt}{Warn},arc=0pt,left=10pt,right=10pt,top=7pt,bottom=7pt,title={#1},coltitle=Warn,fonttitle=\bfseries\sffamily,attach title to upper={\par\smallskip},before skip=9pt,after skip=9pt}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,frame=single,rulecolor=\color{Rule},backgroundcolor=\color{Soft},xleftmargin=5pt,xrightmargin=5pt,framesep=7pt,aboveskip=8pt,belowskip=8pt}
+\newenvironment{tbl}{\par\vspace{3pt}\small\noindent\ignorespaces}{\unskip\par\vspace{5pt}}
+\newcommand{\sourceentry}[3]{\bibitem{#1} #2.\par\nopagebreak{\footnotesize\url{#3}}\par}
+\begin{document}
+
+% -------------------- COVER --------------------
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\thispagestyle{empty}
+\noindent{\sffamily\color{Muted}长春航萧网络科技有限公司}\hfill{\sffamily\color{Teal}PRODUCT PLAN / 02}
+\vspace*{28mm}
+
+{\sffamily\bfseries\fontsize{49}{54}\selectfont\color{Ink}CanLearn\par}
+\vspace{8mm}
+{\sffamily\bfseries\fontsize{22}{31}\selectfont\color{Ink}全学科主动式自适应学习平台\par}
+\vspace{5mm}
+{\sffamily\fontsize{16}{24}\selectfont\color{Teal}把资料变成理解、练习与可执行的学习计划\par}
+\vspace{12mm}
+\noindent\textcolor{Teal}{\rule{\linewidth}{1.4pt}}
+\vspace{6mm}
+{\large\sffamily 产品策划案\quad v2.1\par}
+\vspace{3mm}
+{\color{Muted}让学习计划在真实节奏中持续成立\par}
+\vspace{14mm}
+\begin{insight}{本次升级}
+开放各学科学习入口；首批建设 408 与英语四六级公开知识库；\par
+以 MinerU 微服务打通文档解析、习题生成、讲解生成与计划恢复。
+\end{insight}
+\vfill
+\begin{tabular}{@{}ll@{}}
+编制单位 & 长春航萧网络科技有限公司 \\
+项目负责人 & 任宇航 \\
+文档属性 & 产品规划与验证执行稿 \\
+修订基线 & 用户提供的产品策划案 v1.0 \\
+资料检索截止 & 2026 年 9 月 27 日 \\
+工程决策更新 & 2026 年 9 月 30 日 \\
+\end{tabular}
+\vspace{8mm}
+
+\noindent\minor{本稿中的服务架构、功能范围、资源配额、指标阈值与路线图均为规划方案，\newline 不代表相关功能已经上线、性能已经实测或学习效果已经验证。}
+\end{titlepage}
+\setcounter{page}{1}
+\hypersetup{pageanchor=true}
+
+% -------------------- CONTENTS --------------------
+\tableofcontents
+
+% -------------------- REVISION --------------------
+\clearpage
+\section*{修订摘要与证据口径}
+\addcontentsline{toc}{section}{修订摘要与证据口径}
+本稿基于原案进行扩展修订，而不是另起一套通用 AI 教育方案。原案中的约束排程、计划恢复、变更确认与撤销、掌握证据、阶段验证和权利台账继续保留；调整的是服务边界、内容起步策略以及“资料到学习行动”的实现路径。原案相关基础见第 3--8、11--13 页。\cite{original}
+
+\textbf{v2.1 数据复核（2026-09-27）：}教育部 2025 年高等教育在学总规模仍以已发布公报的 4872.57 万人为准；本轮未用未经验证的估算替换。Google 9 月新增学习工具，MinerU 4.0.7 已取代原稿所列 3.4.5 为发布页的 Latest；因此同步修订竞品对标、解析档位、V1 API、结果契约及版本评估清单。以上为公开资料复核，不代表 CanLearn 已完成部署或竞品实测。\cite{moe2025,google_sept,mineru_release}
+
+\textbf{工程技术栈确认（2026-09-30）：}Web 前端采用 Next.js；主业务后端采用 Node.js、TypeScript、NestJS 与 Fastify，数据访问采用 Drizzle ORM；长任务和 AI 编排采用 Python 与 Temporal；文档解析保持独立 MinerU 微服务；主数据库采用 PostgreSQL；Redis 用于缓存、短期状态、限流与异步协调；同步业务接口采用 RESTful API，并以 OpenAPI 作为正式契约。该选择是研发基线，不表示业务功能已经实现或通过压测。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{24mm}YY@{}}
+\toprule
+\cth{修订维度}&\cth{原案基线}&\cth{v2.1 决策}\\\midrule
+品牌与定位&以 408 备考为产品边界&统一命名 CanLearn，面向各学科自主学习\\
+目标人群&408 本科生与往届考生&高校课程学习者、各类自主备考者与成人自学者；408、四六级为首批重点验证人群\\
+内容策略&先建设 408 四科结构&公共内容首建 408、英语四级与六级；其他学科可立即使用私有资料与通用学习工具\\
+产品范围&私有知识空间、多目标和四六级后置&私有上传、文档理解、基础练习与讲解进入 MVP；跨目标数据结构与总容量校验前置\\
+技术架构&模型解释层与规则排程器&确定 Next.js、Node.js/TypeScript、Python 工作流、MinerU、PostgreSQL、Redis 与 RESTful API；保留渐进式服务拆分\\
+竞品判断&垂直 408 与学习工作台&补充跨学科学习产品和最新官方动态，不以“能出题、能排计划”作为独有优势\\
+成本与治理&主要围绕模型调用&按解析页、GPU 时长、生成、验证、存储与人工审校核算，治理覆盖全部衍生资产\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection*{三条不可混淆的边界}
+\textbf{学科开放不等于全学科内容已建成。}没有平台公开知识库的学科，用户仍可创建目标、上传资料、理解与练习；页面明确展示“基于你的资料”，不冒充权威完整课程。
+
+\textbf{公开知识库不等于无版权限制。}“公开”指用户可访问，不表示来源处于公有领域；收录、演绎、出题、导出和再分发分别核验权利。
+
+\textbf{解析成功不等于内容正确。}文档完整性、题目正确性、讲解依据与掌握证据必须分层校验；不能把生成结果直接当作学习事实。
+
+\begin{caution}{资料性质标记}
+外部事实使用编号来源；竞品能力以官网/帮助中心公开说明为准，未做登录后全功能实测。产品设计、工程建议和试验阈值属于本稿建议。原案未提供用户实测、真实收入、团队编制或算力压测数据，本稿不补写为既成事实。
+\end{caution}
+
+% -------------------- 1 --------------------
+\newsec{项目总览}
+\subsection{项目背景与一句话定义}
+学习者常需要同时处理教材、课件、论文、题库、笔记和时间安排。CanLearn 将原案“计划恢复型学习执行系统”扩展为跨学科学习平台：先把资料组织成可引用的学习对象，再生成讲解、练习和任务，最后根据真实作答与可用容量持续调整计划。\cite{original}
+
+\begin{insight}{产品定义}
+CanLearn 是面向各学科自主学习者的主动式自适应学习平台，把用户资料与合法公共资源转化为可溯源的知识、讲解、练习和学习计划，在节奏变化时帮助用户恢复执行并积累可验证的学习成果。
+\end{insight}
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{27mm}Y@{}}
+\toprule
+\cth{项目项}&\cth{内容}\\\midrule
+愿景&成为自主学习者可信赖的长期学习基础设施\\
+使命&降低资料组织、理解验证和计划恢复的成本，让每一次学习有行动、有依据、有反馈\\
+产品主线&资料导入 $\rightarrow$ 知识组织 $\rightarrow$ 讲解与练习 $\rightarrow$ 学习证据 $\rightarrow$ 计划恢复\\
+内容起点&平台首批公共内容为 408 与英语四六级，不以此限制注册、目标创建或资料导入\\
+核心价值&资料可用、内容可信、计划可行、执行稳定、恢复清晰、用户可控\\
+品牌关键词&克制、清晰、可靠、可控、长期主义\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{项目目标}
+第一，建立学科无关的资料、知识点、技能、题目、讲解、任务与证据模型，以配置化学科包承载考试差异。第二，把 PDF 导入、解析质检、引用定位和用户纠错做成首发能力，而非后续附件功能。第三，建设可复用的出题与讲解工作流，质量未达标的内容不得进入正式诊断或公共库。第四，保留容量约束、冻结窗口、版本记录、差异展示和撤销机制。第五，通过 408、四六级与其他学科三类样本分别验证使用价值、成本和付费意愿。
+
+\subsection{成功标准与非目标}
+产品成功不能仅用上传量、生成题量或对话时长定义，而应观察首次有效学习、延迟检验、持续回填与中断后恢复。首发不建设所有学科的完整题库，不承诺“保过”“精准预测分数”或自动替代专业教师；不把学习辅助扩展为医疗、法律等高风险专业决策服务。
+
+% -------------------- 2 --------------------
+\newsec{市场机会与行业环境}
+\subsection{需求基础：从考试工具到资料驱动学习}
+教育部于 2026 年 7 月发布的《2025 年全国教育事业发展统计公报》显示，全国各种形式高等教育在学总规模为 \textbf{4872.57 万人}。这可以说明高校学习场景具有广泛人口基础，但不能直接等同于 CanLearn 可服务市场或付费用户数。\cite{moe2025}
+
+教育数字化相关政策提出建设教育多模态语料、高质量数据集与智能化应用，并重视过程评价和安全治理。CanLearn 的资源结构化与过程证据方向与这些议题相关，但政策方向不是产品有效性或商业可行性的证明。\cite{digital}
+
+\subsection{市场机会假设}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{28mm}YY@{}}
+\toprule
+\cth{场景}&\cth{待验证痛点}&\cth{切入产品}\\\midrule
+高校课程学习&课件和讲义分散，难以判断重点及理解程度&上传一章资料，生成学习地图、带引用讲解与小测\\
+自主备考&多科并行、截止日明确，学习计划易偏离&公共知识库起步，按总容量生成近期计划与恢复方案\\
+成人持续学习&自有资料较多，学习时间不连续&私有知识空间、碎片学习单元与延迟复习\\
+内容创作者与教师&资料整理、题目审校和学习反馈成本高&后期提供授权学科包、审校台与班级视图\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{自下而上的市场测算}
+原案按 408 单一考试人数测算的框架，改为\textbf{分场景漏斗加用户去重}，不能直接把考研、四六级和在校生人数相加。\cite{original}
+\[
+\mathrm{SAM}_{s}=N_s\times r_{\text{数字自学},s}\times r_{\text{明确痛点},s}\times r_{\text{可触达},s}
+\]
+\[
+\mathrm{SOM}_{s}=V_s\times r_{\text{注册},s}\times r_{\text{激活},s}\times r_{W4,s}\times r_{\text{付费},s}
+\]
+其中 $s$ 表示学习场景，$V_s$ 为有效触达人数；总量按跨场景账户去重。以上比例均待调研和实验测量，不填入未经验证的行业均值。
+
+\subsection{进入策略}
+\textbf{产品入口开放，内容投入聚焦，效果分组验证。}获客先围绕高校与成人学习社群，公开内容集中投入 408 与四六级；同时保留至少三个其他学科的自带资料样本，验证平台没有依赖固定考试目录。只有内容可用性、持续使用与单位经济均达标，才扩大公开学科包与投放规模。
+
+% -------------------- 3 --------------------
+\newsec{竞争格局与最新研究}
+\subsection{研究范围与时效}
+本轮检索截止 2026 年 9 月 27 日，优先采用产品官网、官方帮助中心及官方更新。下表中的“已公开”仅指厂商已公开描述，不表示在所有地区、套餐、客户端均可使用；未披露能力记为待验证，而不是判定不存在。官网用户规模、提分比例和宣传案例不作为独立效果证据。
+
+\subsection{直接竞品：学习工作台与资料学习平台}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{28mm}YY@{}}
+\toprule
+\cth{产品}&\cth{本轮可确认的公开能力}&\cth{对 CanLearn 的影响}\\\midrule
+Gemini Notebook\newline（原 NotebookLM）&Google 于 2026-07-16 宣布更名；9 月公告新增或逐步推出实时语音讨论、移动端录音、交互式学习概览、更多测验题型与短视频概览，功能上线范围与时间各异。\cite{google_rename,google_sept}&不能仅靠资料问答、卡片、测验或多模态摘要区分；需验证本土内容、任务执行与恢复机制的增量价值\\
+StudyFetch&资料生成笔记、闪卡、测验、辅导和音视频学习内容；Study Plan 与 Calendar 连接资料、截止日与学习安排。\cite{studyfetch,studyplan}&“有 AI 计划”不是空白市场；应对比容量约束、变更幅度、解释和撤销\\
+RemNote&Guided Learn 把资料拆成摘要、卡片、测验和学习路径；Exam Study Plan 展示考试前学习与复习安排。\cite{remnote_guided,remnote_exam}&已有从资料到练习再到计划的闭环，必须纳入核心对标，而非仅视作笔记工具\\
+Knowt&PDF/笔记转学习指南、卡片和测验；面向部分考试提供练习、模拟和学习安排。\cite{knowt}&免费工具与资源库降低基础生成能力的付费空间；需证明本地内容和稳定执行的价值\\
+Hyperknow&课程文件生成总结、测验和练习；公开描述将课程文件、LMS 截止日与待办及学习计划连接。\cite{hyperknow}&直接竞争于“资料到行动”，应比较多科任务冲突、引用质量与长周期恢复体验\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\begin{insight}{近期变化：竞争从生成能力延伸到执行与资源预算}
+Google 于 2026-08-28 宣布 Gemini Notebook 的弹性计算用量机制，并说明自 9 月 2 日起向消费者账户逐步推出，包含预算可见、替代输出和延迟生成。\cite{google_limits} \par
+9 月的学习功能更新进一步增加资料交互和测验能力。\cite{google_sept} 本稿判断：CanLearn 应把任务排队、费用预估与可取消生成做成产品体验，并将差异化验证重点放在来源纠错后的传播、跨目标容量约束与中断恢复。
+\end{insight}
+
+\cont{3 / 竞争格局与最新研究（续）}
+\subsection{相邻竞品与原案垂直竞品复核}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{产品}&\cth{已公开能力 / 核验边界}&\cth{对标重点}\\\midrule
+ChatGPT 学习模式&官方介绍逐步引导、交互提示与知识检查；这说明通用助手也在提供教学型体验。\cite{chatgpt}&提示式辅导、用户基础适配；不把“逐步讲解”描述为独创\\
+腾讯 ima&官网可确认以知识库为基础的“搜、读、写”定位，以及知识库、发现广场和问答入口；本轮未据第三方文章补写细粒度能力。\cite{ima}&中文知识整理入口、知识库分发；复杂 PDF 与计划能力需实测\\
+408OS&官网展示真题掌握度热力图、PDF 阅读器、刷题和知识图谱；部分其他功能注明即将上线。\cite{os408}&408 阅读与刷题路径、原文定位；不将预告当作已上线\\
+408 Pilot&当前公开页描述多智能体、RAG、知识图谱、讲题、错题复盘与动态计划；页面含上线预告与营销表述。\cite{pilot408}&记录为厂商自述，不采用其规模、时延、成绩或题库权属作为已验证事实\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{调整后的差异化主张}
+\textbf{资料可信链。}把原文件、页码、区域、解析版本、知识点、题目、讲解和作答连接起来，用户发现错误后能定位并修订受影响内容。\textbf{学习执行链。}把低掌握、中断和容量变化转化为最小改动的计划提案，而不是重新生成整张计划。\textbf{内容起步方式。}公开知识库提供 408、四六级标准入口，其他学科依靠私有资料启动；不要求用户等候平台建设完所有课程。
+
+这些是\textbf{拟重点验证的组合优势}，不是“竞品均不具备”的事实判断。真正的差异化须由统一任务测试和真实持续使用数据支持。
+
+\subsection{统一对标任务与证据留存}
+选择具有使用权的中文双栏讲义、公式密集章节、英文阅读资料和非首发学科资料；各产品使用同一输入、同一问题和同一截止日。依次测试原文定位、缺页识别、生成五道可答题、讲解与来源一致性、错题后的调整，以及“本周减少两小时”的恢复过程。
+
+每次测试保存日期、账户套餐、客户端、原始输入、输出截图与人工评分；记录首次可学习耗时、引用正确率、题目可用率、改动数量和用户操作成本。套餐价格仅在同地区、同周期、同权益条件下另行比较；本稿不以未经复核的低价或“无限使用”作市场依据。% -------------------- 4 --------------------
+\newsec{产品战略与目标用户}
+\subsection{用户边界与首发优先级}
+CanLearn 面向有自主学习需求的各学科学习者。首期运营优先覆盖高校学生和成人自学者，不把年龄、考试科目或专业写死在核心业务模型中；未成年人保护属于专门上线闸门，不因“全学科”而默认同时开展未成年人教育运营。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{用户群}&\cth{典型任务}&\cth{首发服务方式}\\\midrule
+408 自主备考者&四科复习、跨资料学习、错题补强和阶段冲刺&408 公共知识结构与原创/授权练习，叠加用户私有资源\\
+英语四六级学习者&词汇、阅读、写作、翻译与听力复习安排&四六级分层技能包；首发以文本学习和合法听力资源导航为主\\
+其他学科高校学习者&复习课程讲义、阅读教材、准备课程考试&自建学习空间、上传资料、生成通用练习与讲解，不要求匹配已有公共库\\
+成人自学者&学习专业基础、资格考试或工作所需知识&私有知识空间、可调整学习节奏与证据记录；高风险用途明确限制\\
+教师/创作者&整理授权资料、设计练习、观察学习困难&先作为内容合作与审校角色，机构管理端后置\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{核心待办任务（JTBD）}
+\textbf{面对一份资料时：}“帮我知道它讲什么、哪里重要、我缺什么，并能回到原文核对。”\par
+\textbf{理解卡住时：}“按我的基础解释这个概念，给我适量提示，再用新问题检验我是否理解。”\par
+\textbf{目标与时间冲突时：}“告诉我今天最值得做什么，哪里可以顺延，以及这样调整会带来什么影响。”\par
+\textbf{学习中断后：}“保留已经完成的成果，让我从最小可行的一步继续，而不是推倒重来。”
+
+\subsection{产品原则}
+执行优先、证据优先与用户控制继续沿用原案。\cite{original} 新增\textbf{资料忠实}与\textbf{可恢复编排}：来源事实和 AI 推导分开呈现，任何生成或解析任务都应有状态、超时、错误解释与可重试入口。模型负责识别、候选映射、内容生成和自然语言解释，规则与业务服务负责权限、发布、预算、排程及写入。
+
+\begin{insight}{支持程度必须可见}
+学科包标注“平台维护”“合作维护”或“用户自建”；题型标注“已校验”“试用生成”或“暂不支持”。开放的是工具和资料学习入口，不是对所有专业内容与所有题型作同等质量承诺。
+\end{insight}
+
+% -------------------- 5 --------------------
+\newsec{核心体验与使用场景}
+\subsection{升级后的学习闭环}
+\begin{center}
+\begin{tikzpicture}[node distance=10mm and 7mm,box/.style={draw=Teal,fill=Soft,rounded corners=2pt,text width=31mm,minimum height=15mm,align=center,font=\small\sffamily},arr/.style={-{Stealth[length=2mm]},thick,Teal}]
+\node[box] (a) {目标与容量\\选择 / 上传资料};
+\node[box,right=of a] (b) {解析与质检\\确认知识地图};
+\node[box,right=of b] (c) {生成可行计划\\讲解与练习};
+\node[box,right=of c] (d) {执行与作答\\记录学习证据};
+\node[box,below=of d] (e) {识别薄弱与偏离\\生成恢复提案};
+\node[box,left=of e] (f) {查看差异\\确认 / 撤销};
+\node[box,left=of f] (g) {近期任务更新\\延迟检验};
+\node[box,left=of g] (h) {复盘与资料更新\\形成下一轮目标};
+\draw[arr] (a)--(b);\draw[arr] (b)--(c);\draw[arr] (c)--(d);\draw[arr] (d)--(e);
+\draw[arr] (e)--(f);\draw[arr] (f)--(g);\draw[arr] (g)--(h);\draw[arr] (h)--(a);
+\end{tikzpicture}
+\end{center}
+\minor{图 1\quad CanLearn 学习闭环：资料处理不是终点，真实学习证据才驱动后续安排。}
+
+\subsection{三条首发用户路径}
+\textbf{公共知识库起步。}408 或四六级用户选目标与当前基础，浏览知识结构及内容覆盖说明，填写每周总容量。系统提供少量诊断题和七日滚动计划；用户可以再上传自有资料，不被锁定在平台教材体系内。
+
+\textbf{自带资料起步。}其他学科用户直接上传一份 PDF，先看到页数、解析范围、缺失页和可用章节；确认后选择一节，生成讲解与少量练习。完成第一份有效学习证据后，再建立完整计划，避免冗长建档阻断使用。
+
+\textbf{中断后恢复。}用户说明本周可用时间减少或某节理解不足。系统先展示未完成任务和证据缺口，再给出保底、平衡、冲刺三种可行范围；超出容量时明确“无法全部完成”，不偷偷压缩任务估时或删除内容。
+
+\subsection{核心场景输出契约}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{场景}&\cth{系统必须输出}&\cth{用户控制}\\\midrule
+资料更新&新旧版本差异、受影响知识点与练习&选择替换、并存或暂不更新\\
+识别错误&原文区域、识别结果、修改记录与影响范围&纠错、重跑指定页、反馈未解决\\
+练习失效&题目问题、原始作答、撤销计分和证据重算&查看更正原因与恢复后的掌握状态\\
+容量冲突&各目标占用、不可行原因与范围取舍&确定优先级，不由模型代选人生目标\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+% -------------------- 6 --------------------
+\newsec{产品范围与信息架构}
+\subsection{范围分层与版本取舍}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{22mm}Y@{}}
+\toprule
+\cth{层级}&\cth{能力范围}\\\midrule
+P0 / MVP&全学科目标创建、私有资料空间、PDF 上传与 MinerU 异步解析、解析质检和来源定位；公共 408/四六级种子内容；基础知识地图、带引用文字讲解、单选/填空/短答练习、作答记录、近期计划、恢复提案、版本撤销、数据导出与删除\\
+P0 / 多目标基础&允许登记多个学科目标，共用用户总容量；按明确优先级分配，发现冲突即提示。先保证不重复占用时间，不承诺首版已完成复杂全局优化\\
+P1 / 增强&复杂表格与跨页题组修正、题型模板深化、批量审校、错因聚合、跨目标优化、日历订阅、写作/翻译反馈、可共享的授权学习包\\
+P2 / 拓展&听力音频处理、口语练习、音视频讲解、更多公开学科包、机构空间与授权管理；按质量、需求和经济性逐项放行\\
+不纳入首发&全科完整题库、自动官方评分、直播课程、代写代考、无权商业教材搬运、无配额的无限生成\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{一级信息架构}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{24mm}YY@{}}
+\toprule
+\cth{页面}&\cth{核心内容}&\cth{设计重点}\\\midrule
+今日&当前任务、讲解、练习、完成标准&一屏知道下一步；等待生成时不阻塞其他任务\\
+学习空间&学科、目标、目录、知识点与技能&公共与私有明确区分；不再使用“408 地图”作为全局导航\\
+资料与知识库&公开资源、上传文件、解析状态、来源版本&可用范围、权利状态、修订入口\\
+练习与讲解&题集、错题、提示、知识讲解、引用回跳&检验与学习分离；不提前泄露测验答案\\
+计划与复盘&日历、容量、证据、恢复、差异与版本&跨目标冲突可见，完成任务不被重排\\
+设置与数据&通知、模型处理告知、配额、导出与删除&授权分离、预算透明、删除可追踪\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{全局验收原则}
+新学科无需改动核心表结构即可创建学习空间；每个学习产物都有来源或“无来源补充”标签；未通过权限与质量检查的资料不能进入检索；已完成任务不可被模型改写；任何重要变更都可解释、确认、拒绝和追溯。移动与桌面浏览器均提供完整核心路径，复杂资料审校优先优化桌面端。
+
+% -------------------- 7 --------------------
+\newsec{公开知识库与资源建设}
+\subsection{一套平台、两类空间、多种学科包}
+公共知识库由平台或合作方维护，承担冷启动、规范知识结构和基础内容分发。私有空间由用户管理，承载其有权使用的讲义、笔记和教材资料；默认仅自己可访问，不自动用于公共库、训练或其他用户检索。知识节点允许跨资源关联，但权限不因关联而扩散。
+
+采用\textbf{学科包（Subject Pack）}组织领域差异：包含目标类型、知识/技能结构、先修关系、可用题型、讲解模板、评分量规、诊断规则、来源与权利清单。通用平台只消费这些配置，不在排程、检索或界面写死 408 四科。
+
+\subsection{首批公共库之一：408}
+沿用原案数据结构、计算机组成原理、操作系统、计算机网络四科框架。\cite{original} 公共包先覆盖高频基础概念和关键先修链，不把“四科结构完整”混同于“全部教材、真题与解析齐备”。
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{26mm}YY@{}}
+\toprule
+\cth{资产}&\cth{首批建设内容}&\cth{发布要求}\\\midrule
+知识结构&四科章节树、概念、算法、机制与先修关系&领域审校，节点可定位到原创或授权依据\\
+学习说明&概念说明、对比表、算法过程和常见误区&版本化，必要条件和适用范围明确\\
+练习资源&原创概念题、计算题、短答题和同构练习&独立求解与审校；不得标为真实考题\\
+诊断与退出测&按基础单元组织的小规模质量题集&与学习提示分离，记录题目曝光与帮助程度\\
+资源导航&官方信息、合法课程链接、用户自有章节映射&合法外链，不提供无权下载或去水印副本\\
+任务模板&阅读、比较、推演、练习、结构化回忆&预计耗时、完成标准、先修与证据要求\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{种子内容规模：按质量而非总题量验收}
+建议第一轮每个 408 科目选择 2--3 个代表性知识单元，形成一条可执行的学习链；其余节点可先提供目录和覆盖状态。每个发布单元至少包含来源说明、一份经过审校的讲解、基础练习与退出测，并由内容负责人签署发布记录。具体单元数和题量在 R0 根据审校产能确定，不以自动生成海量题目冲抵内容建设任务。
+
+\begin{insight}{跨学科的语义隔离}
+“栈”“网络”“模型”等同名概念必须保存学科、课程、定义和来源上下文。公共节点与用户课程节点通过“相关/等价候选”关联，未经确认不直接合并，也不在不同学科之间迁移掌握结论。
+\end{insight}
+
+\cont{7 / 公开知识库与资源建设（续）}
+\subsection{首批公共库之二：英语四六级}
+官方 CET 笔试说明将英语四级和六级内容分为写作、听力理解、阅读理解与翻译，两级听力题型与时长存在差异。CanLearn 应采用“共享基础能力节点 + 四级/六级分层目标”，而不是将四六级合并成一套完全相同的题型模板。\cite{cet}
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{技能模块}&\cth{P0 建设内容}&\cth{后续增强与边界}\\\midrule
+词汇与句法&词义辨析、搭配、长难句拆解与语境练习&掌握以新语境验证，不能用背过次数替代理解\\
+阅读&篇章结构、定位、推断、匹配与选词类练习&材料难度和题型分层；平台原创题不冒充官方真题\\
+写作&审题、结构、衔接、语言使用与示例讲解&P1 增加量规反馈；生成的建议分不是官方成绩\\
+翻译&信息完整性、表达选择、语法与术语对照&保留多种合理译法，不以单一答案机械判错\\
+听力&技能目录、学习任务、合法音频外链与文字资源&完整音频解析、对齐与自动出题后置；没有音频时不声称测量听力\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{公共内容的来源与发布流程}
+来源准入 $\rightarrow$ 权利核验 $\rightarrow$ 资料解析 $\rightarrow$ 内容结构化 $\rightarrow$ 学科审校 $\rightarrow$ 小范围验证 $\rightarrow$ 发布版本。官方事实以原始页面为准，原创内容保留创作与审校记录，开放内容逐项核对商业使用、演绎、署名及再分发条件。教材、培训材料、试题和解析不能仅因“网上可见”就进入公共库。\cite{copyright}
+
+每个条目至少保存作者、来源地址、适用学科、目标级别、许可依据、允许用途、版本、审校人、有效期与撤回状态。更换考试目录或政策依据时，先发布变更说明，再标记受影响任务与内容；不直接改写用户历史记录。
+
+\subsection{运营与扩科闸门}
+内容负责人按周处理缺失、错误与过期项；教学审校和权利审查各有明确责任人。用户纠错先形成工单，不自动改变公共事实。公共内容下架后，阻止新的检索和生成，同时提示历史引用状态；依法依约处理衍生内容，保留最小必要审计信息。
+
+新增公共学科包需同时具备重复用户需求、合法可用来源、可持续审校人力和可接受的学习效果。\textbf{新增公开学科包的闸门，不影响其他学科用户使用私有空间。}
+
+% -------------------- 8 --------------------
+\newsec{PDF 解析与内容识别：MinerU 微服务}
+\subsection{能力定位与技术事实}
+MinerU 作为独立解析服务，把 PDF 等输入转换为 Markdown、结构化 JSON 和相关图像资产。4.0 增加 Office、EPUB、HTML 等原生文档解析及分档解析质量，但 CanLearn 的 P0 仍以 PDF 为主；公式、表格、扫描与复杂版面的实际质量仍需按自有样本评测。\cite{mineru_release,mineru_output}
+
+\textbf{CanLearn 的业务增量}是将解析结果转化为可学习内容：目录和章节识别、题目/答案分离、知识点候选、引用区域、错误修正与质量分级。这些并非安装 MinerU 后自动获得的完整教育功能，需由平台业务服务实现。
+
+\subsection{输入分类与路由策略（建议）}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{27mm}YY@{}}
+\toprule
+\cth{资料类型}&\cth{处理策略}&\cth{风险与用户提示}\\\midrule
+数字文本 PDF&优先评测 flash 文本层解析；复杂版面再比较 basic、standard 或 advanced&检测乱码、字体映射和阅读顺序，不把“有文本层”当作可靠\\
+扫描 / 混合 PDF&按页检测，必要时启动 OCR；文本页与扫描页可采用不同策略&模糊、歪斜、缺页单独标记，不用模型补造缺失文本\\
+公式 / 表格密集&保留公式、表格、图注和周边语境；问题页提高解析强度&校验上下标、负号、合并单元格与跨页连接\\
+图表 / 流程图&保留原图和区域，再按需进行视觉说明&图像识别与语义推断分开；低可靠结果不直接用于出题\\
+手写 / 严重污损&进入试用识别或人工纠正通道&不承诺完整识别；请求更清晰资料或确认转录\\
+加密 / 损坏文件&提示解锁或重新导出；在权限允许范围内处理&不绕过访问控制，不静默跳过后宣称全部成功\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{用户可见的解析体验}
+上传后先展示文件名、页数、选定页范围与估算消耗，再异步处理。状态至少区分排队、解析中、质检中、部分可用、全部可用、需修复、失败和取消。先完成的章节可先学习，但必须显示其覆盖范围；整份文档不得因一页成功就被标记“已解析”。
+
+\begin{insight}{双栏阅读与纠错}
+左侧展示原 PDF，右侧展示结构化章节、公式和题目；点击引用可定位原页区域。用户修订识别文本后保留原文、旧结果、修订人和时间，并提示哪些题目、讲解与索引需要重新生成。
+\end{insight}
+
+\cont{8 / PDF 解析与内容识别（续）}
+\subsection{文档处理流水线与资产分层}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}C{9mm}L{28mm}Y@{}}
+\toprule
+\cth{步}&\cth{环节}&\cth{处理与输出}\\\midrule
+1&接入与准入&身份和空间权限、文件类型与安全检查、页数/大小限额、使用权声明；生成文档与版本标识\\
+2&预检与任务建档&文件哈希、文本层质量、页方向和复杂度；建立幂等解析任务，返回可查询任务 ID\\
+3&MinerU 解析&提交固定版本与解析档位；落盘原始输出、图像与解析日志；失败页单独记录\\
+4&标准化与重建&转换为统一文档模型；恢复章节、阅读顺序、图文关联、公式与表格；记录缺失页\\
+5&教育内容识别&识别定义、例题、题干、选项、答案、解析、术语、技能与先修候选；答案不混入测验检索\\
+6&质量与人工确认&检查覆盖、结构、页码映射和关键符号；低质量对象挂起，允许指定页重跑\\
+7&分块与索引&按章节和语义对象分块，保留父子关系；建立全文与向量索引，写入访问控制\\
+8&发布可学习资产&生成知识映射候选，触发学习包/题目/讲解工作流；所有产物继续关联文档版本\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{不能只保存 Markdown}
+4.0 官方结果采用共享文档模型，区分 ModelJson、MiddleJson 和面向消费端的 Structured Content；中间 JSON 以 \code{schema} 与 \code{schema_version} 识别结构，\code{page_idx} 从 0 起始。导出的结构 JSON 不必然包含完整图像字节，须连同素材保存。\cite{mineru_output} 平台同时保存\textbf{不可变原件、原始解析产物、标准化模型、派生索引与学习资产}，其中标准化层承担兼容不同版本和解析档位的职责。
+
+统一文档块至少记录：文档与版本标识、块与父块标识、类型、阅读顺序、页索引与印刷页码、归一化位置、正文/公式/表格载荷、图像资产引用、质量状态和来源权限。这些是 \textbf{CanLearn 内部字段}，不冒充 MinerU 原生接口；部分字段示例见附录 A。
+
+\subsection{分页、题组与分块规则}
+页索引使用 0 起始内部编号，界面提供 PDF 页序和印刷页码；目录、罗马数字页码与正文页码单独映射。4.0 的 CLI PDF 页范围是 1 起始，与结果中的 \code{page_idx} 不同；坐标与旋转信息由适配器按结果契约归一化。跨页题干、选项、图表与答案建立关联，不因固定长度切块而分离。\cite{mineru_migration,mineru_output}
+
+正文、图注、公式条件和表格说明组成完整语义对象；题目与答案分区保存。页眉等辅助信息可从正文流排除，但学术脚注、版权说明和题目条件须保留在可追溯层，不能一律删除。
+
+\cont{8 / PDF 解析与内容识别（续）}
+\subsection{服务集成：评估 4.0.7 与 3.x 迁移}
+截至 2026-09-27，官方 Releases 页将 \code{mineru-4.0.7-released} 标为 Latest。建议以 4.0.7 为首轮评估候选，实际部署固定镜像摘要、代码版本、DocVortex 依赖与模型版本；4.0.7 要求 \code{docvortex>=0.4.24}。这只是候选版本，不表示已通过 CanLearn 的质量、性能和许可验收。\cite{mineru_release}
+
+MinerU 4.0 的 HTTP V1 流程是建立上传、传输文件、提交解析任务、轮询并下载产物，使用 \code{/v1/uploads}、\code{/v1/parse/jobs} 和 \code{/v1/files} 等接口；3.x 的 \code{/tasks} 与 \code{/file_parse} 在 4.0 不再提供。上游 V1 任务索引存于进程内，重启后不保证可恢复，因此 CanLearn 必须持久化自己的任务状态和输入快照。\cite{mineru_http,mineru_migration} 前端只连接 CanLearn 的业务接口。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{30mm}Y@{}}
+\toprule
+\cth{集成决策}&\cth{实施要求}\\\midrule
+对外接口&统一由 CanLearn 暴露文档/任务接口，鉴权、配额、审计与取消语义由平台负责；详见附录 A\\
+解析调度&优先使用上游异步任务；平台持久化自身状态和上游任务映射，不把上游临时任务存储当业务数据库\\
+解析档位&按样本与成本选择 flash、basic、standard、advanced；flash 适合可用文本层，复杂图表与扫描资料重点比较高档位。\cite{mineru_migration}\\
+范围与产物&批处理显式指定全页范围；\code{mineru parse} 默认只读 PDF 前 10 页。按部署的 \code{/v1/health} 能力选择输出格式，核验页数、结构 JSON 和图像素材。\cite{mineru_migration,mineru_http}\\
+输出适配&不同版本的输出执行契约测试；原始产物与归一化产物分开保存，避免字段变动污染题库\\
+运行部署&解析服务和 GPU 工作者独立部署，队列隔离；开发可使用容器编排，规模化后再引入多节点调度。\cite{mineru_docker}\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{必须澄清的职责边界}
+MinerU 负责\textbf{文档内容提取}，不负责判断知识是否正确、题目是否可解或用户是否掌握。CanLearn 编排器负责连接业务步骤；内容校验服务负责引用、可答性、格式和风险检查；权限服务负责所有读取与发布。解析模型的置信字段只按其真实含义保留，不直接等同于“事实正确概率”。
+
+\begin{caution}{许可证变化应纳入上线检查}
+本轮核验的 4.0.7 标签许可为基于 Apache 2.0、附加条件的 MinerU 许可，并非无附加条件的纯 Apache 2.0。条款要求在线服务显著说明使用 MinerU；关联方合并口径超过月活 1 亿或月收入 2000 万美元任一门槛时需另行取得商业许可。\cite{mineru_license} \par
+上线前固定许可快照，逐项核对模型权重、依赖与镜像许可；架构拆成微服务不自动免除相关义务。
+\end{caution}
+
+\cont{8 / PDF 解析与内容识别（续）}
+\subsection{解析质量门禁与基准集}
+建议建立 60 份、约 600 页的合法测试集：408 约 300 页、四六级约 180 页、至少三个其他学科合计约 120 页。按数字文本、扫描、双栏、公式、表格、图题跨页与低质量样本分层标注。文档级划分开发集和固定回归集，避免同一教材相邻页同时泄入调参与验收样本。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{30mm}YL{30mm}@{}}
+\toprule
+\cth{指标}&\cth{测量口径}&\cth{建议初始验收线}\\\midrule
+处理覆盖&成功处理页 / 请求页；空白页与失败页单列&每页状态记录 100\%\\
+正文识别&人工真值的字符编辑错误率，文本与扫描分开&清晰文本 $\leq1\%$；清晰扫描 $\leq5\%$\\
+阅读顺序&抽样关键相邻块的先后关系一致率&$\geq98\%$\\
+公式与表格&关键符号、公式结构与单元格关联经人工核对的合格率&公式 $\geq95\%$；表格 $\geq90\%$\\
+来源定位&引用回跳到正确文档版本、页与覆盖区域的比例&$\geq99\%$\\
+题目结构化&题干、选项、图表、答案对应完整的题目比例&$\geq95\%$\\
+可观测失败&失败具有原因、失败范围和恢复入口的比例&100\%\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+\minor{以上是本稿建议目标，不是 MinerU 官方指标或已实测结果。各项必须同时报告样本量、文档类型和置信区间；严重污损样本单列，不用排除困难样本美化总体结果。}
+
+\subsection{异常与降级}
+缺页、乱码和公式异常时只发布已验证范围；提示用户重新上传或确认识别结果。GPU 资源不足时排队或进入经验证的低成本后端，不自动切换到不满足数据边界的外部服务。用户取消后停止新的计费步骤，晚到结果必须检查取消标记，不能重新发布；已发生的消耗按事先说明的结算规则处理。
+
+重复上传仅在\textbf{同一权限域}内复用可复用产物；公共且权利允许的资源可按明确规则共享缓存。不能跨私有空间根据文件哈希返回他人解析文本，也不能通过缓存命中与否泄露另一用户是否持有该资料。
+
+\subsection{识别修正的传播机制}
+用户确认纠错后生成新的解析修订号，并将依赖此内容的分块、索引、题目与讲解标为待复核；保存旧版作答记录但暂停相关诊断计分。重新发布后通过版本关系重算必要证据，向用户展示变化，不把修订当成“用户突然学不会”。
+
+\begin{insight}{首发发布闸门}
+只把“可追溯且通过质量门禁”的内容交给生成链路。无法确认的公式、表格或题干可以保留原图供阅读，但不得静默转成确定答案或高置信诊断题。
+\end{insight}% -------------------- 9 --------------------
+\newsec{微服务架构与业务编排}
+\subsection{总体架构与拆分原则}
+采用“统一产品入口 + 模块化主后端 + Python 持久化业务编排 + 可独立扩缩的计算服务”。解析、出题、讲解与校验具有独立契约和版本；账户、目标、计划及证据先由 Node.js/TypeScript 主后端中的清晰模块承载，避免首发就把每个业务模块拆成独立服务。技术栈已经确定，但以下架构仍是待实现和验证的研发基线。
+
+\subsection{已确定的工程技术栈}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{35mm}L{42mm}Y@{}}
+\toprule
+\cth{层次}&\cth{选型}&\cth{责任边界}\\\midrule
+Web 前端&Next.js&学习工作台、资料阅读、练习、计划与任务状态界面；只调用 CanLearn RESTful API，不直连 MinerU、PostgreSQL 或 Redis\\
+主业务后端&Node.js + TypeScript + NestJS / Fastify&模块化单体；Drizzle ORM 访问 PostgreSQL，承担权限、业务规则、审计和对外 API\\
+工作流与 AI 工作者&Python + Temporal&长任务编排、模型调用、生成与校验工作者、重试和补偿\\
+文档解析&MinerU 微服务&通过版本化 Adapter 接入 MinerU V1 HTTP API；解析进程和 GPU 资源独立部署\\
+关系数据库&PostgreSQL&业务事实、权限、版本、任务、费用与审计的权威数据源；跨模块写入须经责任模块\\
+高速数据层&Redis&缓存、限流、短期协调、锁和队列/任务通知；不得作为不可恢复业务事实的唯一存储\\
+接口风格&RESTful API + OpenAPI&浏览器与主后端、主后端与同步内部服务的版本化契约；耗时操作返回任务资源并异步查询状态\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+\minor{尚未确定：身份认证方案、Redis 是否需要独立队列库、对象存储实现、检索/向量方案和生产部署平台。这些不得在实现中无记录地默认选定。}
+\minor{该决策已记录于 \code{docs/architecture/ADR-0001-technology-stack.md}。}
+
+\begin{center}
+\begin{tikzpicture}[box/.style={draw=Teal,fill=Soft,rounded corners=2pt,align=center,font=\small\sffamily,minimum height=12mm},arr/.style={-{Stealth[length=2mm]},thick,Teal},node distance=7mm]
+\node[box,text width=148mm] (ui) {Next.js Web：今日、资料阅读、练习、计划与复盘};
+\node[box,text width=148mm,below=of ui] (api) {Node.js / TypeScript REST API：身份权限、目标容量、预算、内容发布、计划版本};
+\node[box,text width=148mm,below=of api] (wf) {Python 工作流层：任务状态、步骤依赖、并行校验、重试、人工确认与补偿};
+\node[box,text width=44mm,below=of wf,xshift=-52mm] (parse) {MinerU 解析服务\\标准化与内容识别};
+\node[box,text width=44mm,below=of wf] (gen) {习题生成 / 讲解生成\\检索与模型网关};
+\node[box,text width=44mm,below=of wf,xshift=52mm] (verify) {内容校验 / 评分\\学习证据与排程};
+\node[box,text width=148mm,below=of gen,yshift=-2mm] (db) {受控数据层：PostgreSQL、Redis、对象存储、检索索引与审计};
+\draw[arr] (ui)--(api);\draw[arr] (api)--(wf);
+\draw[arr] (wf.south -| parse.north)--(parse.north);\draw[arr] (wf)--(gen);\draw[arr] (wf.south -| verify.north)--(verify.north);
+\draw[arr] (parse.south)--(db.north -| parse.south);\draw[arr] (gen)--(db);\draw[arr] (verify.south)--(db.north -| verify.south);
+\end{tikzpicture}
+\end{center}
+\minor{图 2\quad 逻辑服务边界。各工作者可以独立部署；小规模阶段允许共用进程或受控数据库实例，但数据写入职责不混用。}
+
+\subsection{服务责任与产物}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{33mm}Y@{}}
+\toprule
+\cth{服务 / 模块}&\cth{唯一主要职责与输出}\\\midrule
+Document / Parse Adapter&文档准入、MinerU 调用、产物接收与标准化文档版本\\
+Content / Knowledge&章节、题组、知识/技能映射、来源关系与审校状态\\
+Retrieval&按权限和版本检索，输出可核验的证据包，而非只返回无来源文本\\
+Exercise Generator&按题目蓝图生成候选题、答案、量规、错因标签与依据\\
+Explanation Generator&按资料、学习基础与错误类型生成分层讲解、提示与检查点\\
+Validation / Assessment&引用、可答性、答案、格式、风险校验；作答判定与不确定状态\\
+Evidence / Planner&管理有效学习证据；在规则约束下生成计划与变更提案\\
+Workflow / Model Gateway&编排步骤；统一模型路由、预算、密钥、调用记录与供应商边界\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\cont{9 / 微服务架构与业务编排（续）}
+\subsection{工作流一：从资料到可学习单元}
+\textbf{Document-to-Learning Workflow：}准入检查 $\rightarrow$ 解析任务 $\rightarrow$ 标准化 $\rightarrow$ 质量判定 $\rightarrow$ 章节/知识映射 $\rightarrow$ 索引发布 $\rightarrow$ 学习单元候选。解析和映射可按章节推进；每个子任务明确页范围、输入版本和完整性状态。章节达到门禁才允许生成内容，待修复章节不进入正式学习包。
+
+文档纠错触发\textbf{派生资产刷新工作流}，只更新受影响对象；文档删除触发删除工作流，停止解析、生成与索引写入，防止晚到结果“复活”已删除内容。
+
+\subsection{工作流二：习题生成与发布}
+\textbf{练习请求}包含知识范围、题型、数量、目标难度、可用时间与用途。编排器先判断是否已有合格题目可复用；需要新题时，检索证据并构建蓝图，再调用习题生成服务。候选题分别送往结构检查、独立求解、引用支持与重复/风险检查，\textbf{并行完成后汇总门禁}。
+
+未通过的题目只做有限次定向修复；达到次数或费用上限后返回可用题数和缺失原因，不用低质量题凑数。通过基础校验的题目可进入“生成练习”；作为正式诊断或公共题库内容时，还需相应人工审校与校准。发布和扣减额度由业务服务提交一次。
+
+\subsection{工作流三：分层讲解与学习验证}
+\textbf{讲解请求}读取用户当前问题、可用证据与帮助偏好，先判断是资料释义、概念解释、错题反馈还是延伸学习。检索服务构建证据包，讲解服务生成结构化段落，校验服务检查事实支持、引用、公式与前后矛盾，再发布经过检查的内容。
+
+讲解后的检查题由习题服务单独生成，不能直接重复刚展示的答案。用户作答后由评分服务输出判定和依据；有效证据进入 Evidence 服务，再由 Planner 产生复习或恢复提案。\textbf{生成讲解服务没有直接更新掌握度或计划的权限。}
+
+\subsection{工作流四：作答后的计划恢复}
+作答事件 $\rightarrow$ 题目有效性检查 $\rightarrow$ 判分或量规评估 $\rightarrow$ 证据更新 $\rightarrow$ 触发条件判断 $\rightarrow$ 约束排程 $\rightarrow$ 计划差异解释 $\rightarrow$ 用户确认 $\rightarrow$ 版本提交。若题目自身出错，进入内容纠正分支，不能把错误全部归因于学习者。
+
+\begin{insight}{编排器与模型的关系}
+长任务由 Python 与 Temporal 管理。Activity 必须设计为明确且幂等的外部操作单元，并显式设计重试和检查点。\cite{temporal,temporal_error} \par
+模型可提出调用意图，但不能绕过状态机、权限、质量门禁和预算直接执行写入。MinerU Router 只解决解析资源路由，不替代端到端业务编排。
+\end{insight}
+
+\cont{9 / 微服务架构与业务编排（续）}
+\subsection{状态、可靠性与成本护栏}
+平台任务建议使用以下状态：\code{QUEUED}、\code{RUNNING}、\code{WAITING_REVIEW}、\code{PARTIAL_READY}、\code{SUCCEEDED}、\code{FAILED}、\code{CANCELLED}。每个任务保存当前步骤、输入/输出引用、版本、尝试次数、费用累计和最后心跳；部分可用状态附带完整的可用与失败范围。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{27mm}Y@{}}
+\toprule
+\cth{机制}&\cth{业务约束}\\\midrule
+幂等&按权限域、输入版本、操作参数和请求键建立唯一任务；重复事件、工作者重启和网络重传不能重复发布、计分或扣费\\
+重试与超时&网络/限流故障退避重试；格式错误、权限拒绝等永久错误不盲目重试。各步骤独立超时，长任务有心跳和检查点\\
+并发与优先级&互动讲解、少量练习优先于批量建库；解析 GPU 与模型生成队列隔离，按用户和租户限制并发\\
+人工确认&引用冲突、低质量题目和公共发布进入等待审校；等待时释放计算资源，超时提醒而非自动放行\\
+预算&开始前预估；逐步骤记账；达到预算停止新增调用。修复最多两轮作为首轮建议，超限返回可用部分\\
+原子发布&内容状态、费用账本与待发布事件在同一业务事务或可补偿流程中处理；采用 Outbox 与消费去重防止事件丢失\\
+版本冲突&任务读取的资料/计划版本变化后，必须重新校验；旧版本产物不得无提示覆盖新版\\
+取消与删除&每步和写入前检查取消/删除标记；停止后续步骤，清理临时资产，按公开规则结算或返还额度\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{可观测性与可重放}
+一个用户请求贯穿 \code{trace_id}、\code{workflow_id}、\code{task_id}、文档版本、模型版本与提示模板版本。记录各步骤时延、排队时长、失败类型、重试、缓存命中、校验结果与实际成本；分析日志不保存文件原文或完整敏感对话。重放使用固定输入快照，不声称重新调用模型必然得到完全相同结果。
+
+\subsection{落地次序}
+MVP 先部署 Next.js Web、Node.js/TypeScript 模块化主后端、Python 工作流/生成校验工作者、MinerU 解析微服务、PostgreSQL 和 Redis。习题与讲解使用独立内部契约与队列，可按负载再拆为独立进程。PostgreSQL 初期共用实例并按模块控制写入；Redis 不承载唯一业务事实。GPU 负载、权限边界或发布频率达到需要时，再拆分物理服务与存储。
+
+\begin{caution}{避免“多智能体”替代工程设计}
+服务互相调用不等于具备可靠编排；模型自评也不等于完成质量控制。平台按“至少一次可能执行”的现实设计幂等与补偿，不对分布式流程轻率承诺端到端恰好执行一次。
+\end{caution}
+
+% -------------------- 10 --------------------
+\newsec{习题生成与质量控制}
+\subsection{题目蓝图：先定义要检验什么}
+习题生成不是对整份 PDF 直接请求“出十道题”。每次请求先生成可检查的题目蓝图，区分\textbf{资料中的原题提取、平台原创题与 AI 生成练习}，并注明来源权利、用途和校验状态。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{30mm}Y@{}}
+\toprule
+\cth{蓝图字段}&\cth{含义与控制方式}\\\midrule
+学习目标&学科、课程、知识点/技能、前置要求；避免同一题同时模糊考查过多能力\\
+证据范围&允许使用的文档版本与片段；有冲突或依据不足时先返回缺口\\
+认知与题型&记忆、理解、应用、分析；单选、填空、短答等模板由学科包声明支持\\
+数量与时间&题数、预计作答时长、整组练习预算；受计划剩余容量约束\\
+难度&生成时标记为目标难度，须经实际作答数据校准后才形成经验难度\\
+答案与量规&确定答案、可接受变体、评分点、部分得分与不可判定条件\\
+错误选项&围绕真实易错概念设计，检查互斥性、重复选项和题干泄漏答案\\
+使用目的&普通练习、退出测、诊断或模拟；不同用途使用不同发布门槛\\
+溯源与版本&来源片段、生成模型、模板、校验结果、修订号、内容权利与审校人\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{按领域编排不同生成与验证器}
+\textbf{408：}概念辨析检查条件是否完整；算法与机制推演检查中间状态；计算题校验单位、边界条件和答案唯一性。可执行的小型代码或数值验证放入无网络、限资源沙箱，不在业务服务器直接运行模型输出。
+
+\textbf{四六级：}阅读题必须存在材料内依据；干扰项不能同样成立；词汇与翻译题保留合理表达变体。写作任务优先给结构和量规，不把模型拟合分数包装为官方考试分数。听力出题必须以获得使用权的实际音频或明确标注的合成音频为输入。
+
+\textbf{其他学科：}默认从定义、比较、解释和短答开始，按用户资料的范围出题；暂不支持的专业证明、图像诊断或复杂推导明确提示需专业审阅。不能只换学科标签而复用不适用的评分规则。
+
+\begin{insight}{避免泄题与自我证明}
+“教过的例题”“看过答案的练习”和“未见的新题”分别标记。诊断题与教学内容隔离检索，不能把同一道题的解析放进出题或判定用户独立掌握的上下文中。
+\end{insight}
+
+\cont{10 / 习题生成与质量控制（续）}
+\subsection{六道质量门禁}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{门禁}&\cth{检查内容}&\cth{失败处理}\\\midrule
+结构与可答性&字段齐全、题干完整、图表可见、必要条件充分&重建题干或弃用；不要求用户猜条件\\
+答案核验&独立求解、数值/符号/代码检查；不将候选答案交给首轮独立求解器&结论不一致进入人工审校，不按多数票强行判真\\
+依据与引用&答案与知识说明受允许的来源支持，引用能回跳&补充真实依据；不得生成虚构页码\\
+干扰项与歧义&选项互斥、无重复、无多解，语言难度与目标相符&修正选项或改变题型\\
+覆盖与重复&知识覆盖、题型比例、近重复题与同构题族识别&减少重复，防止题海造成虚假掌握\\
+权利与安全&来源用途、过度复刻、敏感内容、提示注入与越权&阻止发布，进入权利/安全工单\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{题目生命周期与用途隔离}
+\textbf{候选草稿}仅在后台保存；\textbf{已基础校验}可以作为标识清楚的生成练习；\textbf{已审校}才能进入公共精选内容；\textbf{已校准}才适合承担更强的诊断用途。校准须结合样本、知识映射、难度与判别表现，不能用“模型自评分高”替代。
+
+基础校验、人工审校和真实作答校准属于不同证据层级。即使采用多个模型，错误仍可能相关，因此多模型一致不能单独视为正确保证。正式诊断优先使用小而可靠的题集。
+
+\subsection{作答、评分与证据形成}
+客观题使用确定性答案版本判分；短答采用量规与依据，必要时给出“待复核”；写作、翻译等连续评价保留维度反馈，不强行折算为二元正确。作答事件保存题目版本、首次作答、提示次数、查看答案情况与用户申诉。
+
+仅在题目有效、作答未泄题且判定可信时，结果才进入正式掌握更新。基础生成练习的低等级反馈可以触发“建议复习”，但不伪装成强诊断结论。用户申诉成功时撤销错误计分、重算相关证据，保留修订记录。
+
+\subsection{失败后的产品体验}
+请求十题只有六题达标时，明确交付六题及未完成原因；提供缩小范围、换题型、稍后重试或申请人工审校入口。系统性失败按公开规则返还对应额度，不收取“重复修复”的不透明费用；用户原始作答和学习进度不能因出题服务故障丢失。
+
+% -------------------- 11 --------------------
+\newsec{讲解内容生成与个性化辅导}
+\subsection{讲解不是资料摘要的同义词}
+讲解服务需区分资料释义、概念教学、例题拆解、错因反馈和复习说明。默认结构为“学习目标与前置知识—核心概念—必要步骤与例子—常见误区—检查问题—来源”。每段标明\textbf{资料支持的内容、基于资料的推导、额外补充}；无依据时说明缺失，不编造文献或页码。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{讲解类型}&\cth{生成策略}&\cth{必须校验}\\\midrule
+概念讲解&按用户基础调节术语和例子；关键定义保留来源用语&定义与适用条件、概念之间的关系\\
+公式 / 算法&解释符号、假设、步骤和小规模实例；保留原图或公式&符号一致、单位、边界条件、推演结果\\
+错题反馈&先定位错误步骤和可能错因，再给适量提示&不把题目错误或评分歧义归因于用户\\
+阅读与语言&给出材料内定位、句法说明和合理表达差异&引文准确，区分语言建议与官方判分\\
+复习讲解&根据历史证据压缩已熟内容，强调薄弱和易混点&依据来自有效证据，而非仅来自用户看过页面\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{微服务编排与三层输出}
+编排器先调用 Retrieval 获取带来源版本的证据包，再调用 Explanation Generator 生成结构化候选；Validation 检查事实支持、内部一致性、公式与引用，合格后由 Publisher 发布。前端可以显示处理进度，但未经校验的确定性答案不以“已确认事实”流式展示。
+
+\textbf{提示层}只给方向与问题；\textbf{标准层}解释核心原理和必要解题步骤；\textbf{深入层}提供推导、反例和迁移应用。用户可选择直接查看完整讲解；系统记录帮助程度用于解释学习证据，而不以强制隐藏答案制造阻碍。
+
+\subsection{与练习、证据和计划联动}
+讲解生成完后，由独立练习请求产生新检查题；正确与否均保存依据，不能把“阅读完成”视为“已掌握”。连续遇到同类困难时，Evidence 服务建议回补先修；Planner 校验后提出任务调整，等待用户确认。音频或视频讲解作为后期渲染服务，输入使用已校验脚本，避免语音/视频环节重新改写事实。
+
+\begin{caution}{解释质量评估}
+分别评估事实正确、来源忠实、适合用户基础、步骤完整与教学负担；不能只依赖满意度。对原文存在争议或多种解释的内容呈现差异与出处，不擅自统一成唯一结论。
+\end{caution}
+
+% -------------------- 12 --------------------
+\newsec{计划引擎与掌握证据}
+\subsection{从考试权重扩展为目标价值}
+原案使用考试权重、掌握缺口、复习到期、紧迫度、容量成本和计划扰动构造效用。\cite{original} 本稿保留该结构，将考试权重推广为可配置的\textbf{目标价值}，用于课程学习、语言技能和成人学习：
+\[
+U_i=w_vV_i+w_gG_i+w_rR_i+w_dD_i-w_cC_i-w_sS_i.
+\]
+$V_i$ 为目标价值，$G_i$ 为证据支持的掌握缺口，$R_i$ 为复习到期程度，$D_i$ 为目标紧迫度，$C_i$ 为投入与认知成本，$S_i$ 为对现有计划的扰动。各因子先归一化，权重按学科包、任务类型及验证结果配置；未有考试依据时不编造“考试权重”。
+
+\subsection{多目标容量与可行性}
+对用户某日 $d$、跨全部目标的待排候选任务集合 $\mathcal{T}^{\mathrm{cand}}$ 联合约束：
+\[
+\sum_{i\in\mathcal{T}^{\mathrm{cand}}}x_{id}\,\widehat t_i\ \leq\ B_d-L_d-H_d,
+\]
+其中 $B_d$ 为用户给定容量，$L_d$ 为已锁定或进行中任务占用，$H_d$ 为缓冲，$\widehat t_i$ 为候选任务估时，$x_{id}\in\{0,1\}$ 表示是否安排。候选集合不含已计入 $L_d$ 的任务，避免重复扣减容量；同一任务服务多个目标时也只安排一次。
+
+当约束不可行时，输出冲突原因以及减少范围、延长周期或增加容量的组合方案；没有用户确认，不自动改变目标截止日。用户可以设置固定优先级与最低维持频率；成熟后再验证更复杂的跨目标优化。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{28mm}Y@{}}
+\toprule
+\cth{稳定性规则}&\cth{执行要求}\\\midrule
+进行中与已完成锁定&保持历史事实，除明确纠错外不改写；当前学习中断由用户触发\\
+近程冻结&冻结窗口内的重大变动需确认；不能因每次模型响应而重排全天\\
+缓冲优先&先使用缓冲与候选任务，减少任务搬移；缓冲比例通过真实偏离数据校准\\
+内容可用性&引用资源失效、题目撤回或解析未完成的任务不能被安排为可执行任务\\
+跨目标协调&共同校验总容量、先修和截止日，避免每科计划各自可行但合并超载\\
+透明变更&展示触发事件、差异、覆盖影响、代价与替代方案；保留确认、拒绝和撤销\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{估时与生成任务的约束}
+学习耗时与解析/生成等待耗时分别统计。排程器优先安排已经可用的学习材料，不把等待 GPU 的时间伪装为有效学习时间；若生成服务延迟，则提供已审校题目、原文阅读或其他可执行任务作为替代。
+
+\cont{12 / 计划引擎与掌握证据（续）}
+\subsection{冷启动证据模型及其边界}
+沿用原案带时间衰减的 Beta 证据累积思路，但明确其首版用途为\textbf{启发式证据估计}，未完成校准前不宣称是精确的掌握概率。\cite{original}
+\[
+\alpha_k=\alpha_0+\sum_j\lambda_k^{\Delta t_j}q_j a_{jk}y_j,\qquad
+\beta_k=\beta_0+\sum_j\lambda_k^{\Delta t_j}q_j a_{jk}(1-y_j),
+\]
+\[
+\widehat p_k=\frac{\alpha_k}{\alpha_k+\beta_k},\qquad
+n^{\mathrm{eff}}_k=\sum_j\lambda_k^{\Delta t_j}q_j a_{jk}.
+\]
+$y_j$ 是适合二元判定的有效作答结果，$q_j$ 为题目与作答证据质量权重，$a_{jk}$ 为题目对知识点的归属权重。多个知识点的权重总和受控，不把一次答对复制成多个独立强证据；重复同构题、提示后作答和看过答案的记录分别降权或排除。
+
+作文、翻译和复杂项目采用独立量规维度，不直接套用二元模型。时间衰减表示证据随时间变弱，不证明用户实际遗忘。界面同时呈现估计、有效证据量、证据等级、最近检验日期与不确定性；没有可靠题目时显示“证据不足”。后续再依据离线校准和线上价值比较知识追踪方案。
+
+\subsection{Plan Patch：机器可校验的变更协议}
+\begin{lstlisting}
+{
+  "proposal_id": "patch_20260907_001",
+  "base_plan_version": 12,
+  "trigger": "capacity_changed",
+  "operations": [
+    {"op": "move", "task_id": "task_017", "to_slot": "slot_023"}
+  ],
+  "constraint_result": {
+    "global_capacity_valid": true,
+    "prerequisites_valid": true,
+    "completed_tasks_locked": true,
+    "resources_ready": true
+  },
+  "requires_user_confirmation": true,
+  "reason_codes": ["WEEKLY_CAPACITY_REDUCED"],
+  "affected_goal_ids": ["goal_408", "goal_cet6"]
+}
+\end{lstlisting}
+\minor{示例是 CanLearn 建议协议，不是可直接投产的完整接口。服务端必须重新计算约束，不能信任请求里自报为 true 的结果。}
+
+确认时执行版本比较与原子提交；基础版本已变化则返回冲突并生成新提案。撤销只影响仍可撤销的未来任务，不删除之后产生的真实作答。大模型只生成可读解释，不直接写数据库、修改约束或绕开用户确认。% -------------------- 13 --------------------
+\newsec{验证体系与指标设计}
+\subsection{北极星指标：保留学习证据，统一统计口径}
+原案以验证学习单元作为北极星。\cite{original} 本稿把\textbf{单次有效验证学习单元记为 VLU}，把\textbf{周统计记为 WVLU}，避免将单元名称和周聚合混用。VLU 同时具备约定任务完成、一次有效退出测或结构化回忆、知识/技能关联、来源可追溯以及可信的结果记录。
+
+VLU 不要求答对，因此它衡量的是有效学习与反馈发生，不等于用户已经掌握。主看“每周活跃学习用户人均 VLU”，同时报告总量、中位数和延迟检验结果。周活跃学习用户按启动实际学习任务定义，不以登录计数；任务拆分、重复刷同题和无质量门禁的生成内容不能刷高指标。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{24mm}YY@{}}
+\toprule
+\cth{层级}&\cth{核心指标}&\cth{必要分组 / 护栏}\\\midrule
+资料激活&上传后首个可用章节率、首个 VLU 完成率&区分公共库与私有资料，区分学科与 PDF 类型\\
+内容质量&引用正确率、题目可用率、讲解事实错误率&基础生成题与审校题分开；错误严重程度单列\\
+持续学习&W1/W4 留存、WVLU、复盘完成与延迟检验&按首个激活周分群；不将同题重复结果视为迁移效果\\
+计划价值&计划完成率、中断后 72 小时恢复率&恢复指重新完成至少一项有效任务，分母是记录中断的用户\\
+用户信任&提案接受/拒绝/撤销、引用打开、纠错解决率&高接受率不自动代表高质量，结合后续执行与访谈\\
+工程可靠性&各步骤成功率、P50/P95 时延、重试与死信&排队和计算时间分开；取消不混入系统失败\\
+经营质量&每 VLU 成本、付费用户边际贡献、退款率&按学科、文档复杂度与重度使用者分组\\
+安全治理&越权事件、删除完成、敏感信息暴露&越权读取与严重泄露作为发布阻断项\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{首轮工程服务目标（建议，非实测承诺）}
+在固定候选部署环境与明确测试并发下，建议将“已通过准入、20 页以内的普通资料，首个可用章节 P95 不超过 180 秒”“已有可用证据的文字讲解 P95 不超过 30 秒”“十题生成及校验 P95 不超过 120 秒”设为首轮体验目标。资源争用与复杂文档单列报告，无法达到时先缩小承诺范围，不隐藏排队时间。
+
+业务硬约束包括已发布引用可追溯、计划容量/锁定规则校验、重复事件不重复计分以及删除后不再被检索。上述硬约束不能用平均可用率抵消。
+
+\cont{13 / 验证体系与指标设计（续）}
+\subsection{分阶段验证与样本设计}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{阶段}&\cth{活动与建议样本}&\cth{进入下一阶段的证据}\\\midrule
+问题发现&建议访谈 36 人，408、四六级、其他学科各 12 人；查看真实资料和中断记录&痛点重复出现，能辨识资料问题与计划问题，不只收集“觉得有用”\\
+礼宾验证&人工辅助完成资料结构化、讲解、练习与恢复；记录人工工时&用户完成首个有效单元，愿意带入自己的资料，关键成本可估算\\
+受邀 Beta&建议先招募 60 人、每组 20 人，持续观察四周；规模用于发现问题而非证明因果&内容与解析质量稳定，用户连续使用，严重安全问题清零后再放量\\
+完整周期&覆盖课程/备考实际周期，开展真实支付与对照实验&延迟检验、持续价值与单位经济支持继续投入\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{首轮产品假设与决策线}
+建议把“完成资料准入或选择公共单元后的首个 VLU 激活率不低于 40\%”“已激活用户 W4 留存不低于 25\%”作为初始决策线，由 R0 明确分母和观测窗口后锁定。这些数字不是行业标准或已有结果；样本较小时需同时报告不确定性，不因超过阈值就宣称产品市场匹配。
+
+计划恢复主要比较中断后的恢复速度、任务完成和用户压力变化；不以重排次数越多越好。其他学科样本须至少覆盖三个学科，单独报告，不以 408 用户的高留存掩盖跨学科流程不可用。
+
+\subsection{效果验证方法}
+先记录用户原有工具与基线，再分离验证三个问题：\textbf{更好的解析}是否提升资料可用性；\textbf{有依据的练习与讲解}是否改善理解与延迟保持；\textbf{恢复型计划}是否提升中断后的执行。不能把三项同时上线的变化全部归因于某个模型或排程器。
+
+条件成熟后采用分层随机或分期上线，对比静态计划与恢复计划，并固定内容和测验质量。实验开始前锁定主要指标、样本量估算、排除条件及分析方法；报告效应量与置信区间。期末或考试成绩可作为辅助信息，但用户自报成绩不能独立证明提分效果。
+
+\begin{insight}{离线基准与线上学习分开验收}
+解析准确不证明生成题正确；生成题正确不证明用户学会；用户喜欢讲解也不证明长期保持。每一层都需要自己的测量口径与失效处理。
+\end{insight}
+
+% -------------------- 14 --------------------
+\newsec{上市策略与增长}
+\subsection{品牌表达与产品入口}
+所有对外名称统一为 \textbf{CanLearn}。408、英语四级、英语六级使用知识库、学科包或学习目标名称呈现，不成为产品品牌后缀。首页主张建议为：“把你的资料，变成学得会、做得完、能恢复的学习过程。”案例传播继续强调真实资料、真实周期、真实结果，保留原案克制和可信赖的基调。\cite{original}
+
+首屏同时提供“选择公共知识库”和“上传我的资料”，避免页面虽然写全学科，却仍强迫所有用户选择 408。不同入口最终进入同一学习空间、证据和计划体系。
+
+\subsection{首发渠道与内容主题}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{30mm}YY@{}}
+\toprule
+\cth{渠道}&\cth{提供的实际价值}&\cth{主要观察}\\\midrule
+长春高校与同学网络&课程资料学习、408 恢复方案、四六级任务安排&真实资料导入、有效学习与复盘，而非仅注册\\
+408 / 四六级社群&使用合法原创样例展示从资料到练习、从中断到恢复&不同目标的激活与留存差异\\
+跨学科课程社群&讲义学习与期末复习样例，突出支持自带资料&未有公共库的学科是否仍能完成闭环\\
+B 站 / 小红书内容&展示一份资料如何定位依据、生成练习并纠错&合格访问、信任反馈与实际使用，不发布虚构提分案例\\
+教师与内容创作者&授权学习包、审校合作与可追溯内容&权利成本、维护成本和用户价值\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{低门槛获客产品}
+\textbf{PDF 学习体检：}用户选取小范围资料，获得章节结构、可用性报告与一份引用清楚的学习单元。\textbf{计划健康检查：}输入任务、截止日与总容量，输出冲突、缓冲和取舍。\textbf{节奏恢复卡：}围绕一次真实中断展示调整前后差异。分享只包含用户明确选择的结果，不默认公开原始资料、私人计划或成绩。
+
+\subsection{触达与持续服务}
+站内任务和可控提醒为基础；后续提供日历订阅与用户选择的邮件等渠道。频率、静默时间、用途和退订分别管理。任务提醒不能把“尚未生成完成”伪装成“今天必须完成”；内容服务延迟时给出可执行替代任务。
+
+\begin{insight}{增长投入的前置条件}
+先证明“用户在无人工陪跑时仍能完成有效学习”和“重度使用成本受控”，再扩大付费投放。公共知识库规模、群成员数或生成量不是扩大投放的充分依据。
+\end{insight}
+
+% -------------------- 15 --------------------
+\newsec{商业模式与单位经济}
+\subsection{权益设计与定价实验}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{25mm}YY@{}}
+\toprule
+\cth{权益层}&\cth{用户价值}&\cth{成本与边界}\\\midrule
+基础体验&公共基础内容、少量资料解析、基础讲解练习、计划与记录&设置清晰试用额度；足以完成一次真实学习闭环\\
+个人进阶&更多私有资料、批量学习包、深度讲解、完整恢复与复盘&按解析、生成、存储等权益计量，避免不受控“无限使用”\\
+高强度学习&更高配额、复杂资料处理、优先队列与阶段报告&模型强度和优先级明示，不以质量较差内容惩罚低档用户\\
+机构 / 合作&授权内容包、审校管理、组织隔离与汇总报告&后期按席位、内容服务或调用规模验证，不提前承诺定制交付\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+定价先用清晰权益的月度方案测试真实支付、续费和退款原因，价格由礼宾成本、用户价值与支付实验共同确定。本稿不虚构最终售价，也不直接沿用海外产品标价推算国内支付意愿。原案中的行动承诺金不作为首发必选机制，避免分散核心价值验证。
+
+\subsection{按整条工作流计算成本}
+\[
+C_{\mathrm{user}}=C_{\mathrm{parse}}+C_{\mathrm{index}}+C_{\mathrm{generate}}+
+C_{\mathrm{validate}}+C_{\mathrm{storage}}+C_{\mathrm{support}}.
+\]
+解析成本包括 CPU/GPU、渲染与 OCR；生成成本包括题目、讲解及有限修复；校验成本包括独立求解与人工审校。存储、下载流量、模型冷启动和失败重试不能从模型中遗漏。公共内容制作与审核成本单独列示，并按合理使用量摊销。
+\[
+\text{单用户边际贡献}=\text{净收入}-C_{\mathrm{user}}-\text{支付及其他可变成本}.
+\]
+\textbf{每个有效学习单元成本}用于比较业务效率，但必须同时观察质量，防止靠减少校验降低账面成本。LTV 只有在留存、续费和贡献趋于稳定时才做外推；不能凭一个月数据直接推算长期盈利。
+
+\subsection{配额、缓存与预算}
+以用户可理解的解析页数、生成次数或学习包说明权益，界面显示预计消耗与剩余额度。按私有权限域缓存同版本解析和通用讲解；优先复用已审校题库，只有真实需求才生成。分别统计轻度、典型和重度用户的 P50/P95 成本，公共批处理放在低优先级队列。
+
+系统错误、取消和质量不合格的额度处理在购买前说明。模型成本或供应商不可用时可以延后生成、降低非核心多媒体形式或建议复用内容，但不能静默放宽题目正确性和引用门禁。
+
+% -------------------- 16 --------------------
+\newsec{内容、数据与 AI 治理}
+\subsection{内容权利矩阵}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{29mm}YY@{}}
+\toprule
+\cth{内容类型}&\cth{允许的产品方式}&\cth{留存证据与限制}\\\midrule
+官方公开信息&必要事实引用与合法来源导航&来源、发布日期、版本；不把公开页面全部视为无版权\\
+团队原创 / 合作内容&按合同发布知识、题目与讲解&作者、合同、审校、允许演绎及再分发范围\\
+开放许可内容&按实际许可存储、改编或分发&许可版本、署名、商业用途和相同方式共享等条件\\
+商业教材 / 题库&有权使用的私有处理或明确授权合作&用户声明不是所有处理行为当然合法的证明；公共发布另行审查\\
+音视频 / 外部课程&合法链接或获得相应使用许可后处理&音频转写、切片、生成与导出分别核验\\
+用户私有资料&隔离存储、检索、引用与删除&默认不公开、不训练、不共享；衍生资产继承访问控制\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+公开传播、复制与改编具有各自的权利要求，私人学习场景也不能自动成为平台再分发商业内容的依据。内容准入、通知处理与合同设计上线前应由相应负责人审查。\cite{copyright}
+
+\subsection{数据最小化与全链路删除}
+学习目的所需的目标、容量、作答与来源信息按最小范围处理；身份信息与学习分析标识分离。对访问、更正、复制、导出与删除请求提供可操作入口。供应商处理地域、留存、训练使用、分包与删除约定在接入前审查。\cite{pipl,datareg}
+
+删除不仅涉及原 PDF，还包括图片、转录、分块、向量索引、缓存、临时产物和包含原文的派生内容。删除请求先立即撤销访问与新任务，再执行在线清理和备份到期清除；对依法必须保留的最小记录说明依据与期限。状态可追踪，并测试取消任务后不会重新写回。
+
+\subsection{生成标识、权限与安全}
+对 AI 讲解、生成练习、音视频及导出内容按适用规则落实显式与隐式标识，并明确服务用途、局限、反馈和申诉方式；备案、安全评估等义务按实际业务情形核验，不把接入其他模型等同于本产品自动合规。\cite{genai,marking}
+
+文件内容作为不可信数据：禁止其中的指令覆盖系统规则或触发越权调用；解析服务不直接暴露公网；对 HTML、公式与代码执行做隔离、清洗和资源限制。检索前、产物展示前与导出前均校验权限，防止只在上传时鉴权。
+
+\begin{caution}{学科开放的安全边界}
+高风险领域仅提供学习辅助，不输出冒充执业判断的建议；未成年人相关功能经专门评估后放行。发布任何新的公开学科包或多模态生成服务时，同步复核权利、标识与数据处理边界。
+\end{caution}
+
+% -------------------- 17 --------------------
+\newsec{产品路线图与阶段闸门}
+路线图沿用原案“先验证、再扩张”的方法，但把私有资料、MinerU 与四六级内容前置。\cite{original} 以下时间是建议的相对排期，实际取决于团队、授权和算力条件；原案未提供既定团队编制或交付日期。
+
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{22mm}L{18mm}YY@{}}
+\toprule
+\cth{阶段}&\cth{参考周期}&\cth{主要交付}&\cth{进入下一阶段的依据}\\\midrule
+R0 / 定义与基准&第 1--2 周&全学科模型、三类用户访谈、合法测试集、许可证清单、MinerU 与生成链路概念验证&资料类型与成本可测；跨学科路径明确；关键风险可处理\\
+R1 / 学习 MVP&第 3--6 周&私有 PDF、引用阅读、基础讲解练习、证据、近期计划与恢复；408/四六级种子包&主要流程端到端跑通，质量与权限门禁通过，三个非首发学科可使用\\
+R2 / 受邀 Beta&第 7--10 周&四周使用观察、纠错传播、题目审校台、队列与成本看板、跨目标总容量&激活、持续使用、解析质量与服务稳定性达到预设线\\
+R3 / 稳定与付费&第 11--14 周&权益实验、复杂资料增强、计划对照验证、写作/翻译反馈试用&真实支付、质量、退款与重度用户贡献支持扩张\\
+R4 / 学科与多模态&闸门后&更多公共包、音频解析、听力与口语、音视频讲解&有合法来源与审校产能，每种新增能力通过专项评测\\
+R5 / 机构合作&闸门后&组织空间、授权、管理视图与报告&个人端价值证据成立，组织权限与采购需求完成验证\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+
+\subsection{不能被后移的工作}
+P0 即建立来源版本、权限、取消/删除、校验状态与基本成本账本；否则后续补治理会涉及全量数据迁移。题目与讲解不可只存展示文本，必须保留结构化内容和来源关系。即使第一批公共内容很小，跨学科数据模型与私有资料入口也应从第一版开始存在。
+
+\subsection{可以按需后移的工作}
+机构视图、复杂图谱可视化、多媒体讲解和重型多集群部署后置；先用简单知识树、明确的候选关系和稳定接口满足核心需求。听力音频管线必须有独立评测，不能因四六级公共库上线就宣称完整听力能力已交付。
+
+\begin{insight}{阶段退出不是按日历自动发生}
+若内容质量、用户价值或边际贡献不达标，应缩小资源包、改变生成策略或继续礼宾验证，而非仅增加题量、模型参数或推广预算。
+\end{insight}
+
+% -------------------- 18 --------------------
+\newsec{项目保障机制与启动工作清单}
+\subsection{职责与关键风险}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{23mm}L{26mm}Y@{}}
+\toprule
+\cth{领域}&\cth{建议责任角色}&\cth{机制与观察信号}\\\midrule
+产品与验证&产品负责人&统一口径、分组漏斗、访谈与实验；防止平台定位回退为单科工具\\
+资料解析&解析/后端负责人&固定版本、回归集、问题页重跑；监控覆盖和来源回跳\\
+习题与讲解&算法/教学负责人&蓝图、独立核验、题库分级；监控错误、歧义与用户申诉\\
+公共内容&学科审校负责人&408、四六级分别负责；按维护能力发布，不靠生成量充数\\
+计划与证据&业务后端负责人&约束测试、证据降级、版本一致性；监控错误计分与计划冲突\\
+编排与成本&平台负责人&超时、限流、幂等、取消、费用预算与死信处理\\
+安全与权利&指定安全/合规角色&内容权利、供应商、许可证、权限测试、删除演练与发布审查\\
+服务与增长&运营负责人&授权触达、真实案例、问题响应与退款体验\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+\minor{这些是职责分工建议，不表示公司已经具备上述岗位；小团队可兼任，但每项应有明确负责人和审批记录。}
+
+\subsection{启动工作清单}
+\begin{enumerate}
+\item 按已确认技术栈建立项目骨架：Next.js Web、Node.js/TypeScript 主后端、Python 工作流、MinerU Adapter、PostgreSQL 迁移与 Redis 基础设施；通过 ADR 固定仍待选择的框架和版本。
+\item 完成品牌与全部入口改名，统一目标、学科包与用户画像；检查导航、文案、价格页和数据字段是否仍写死 408。
+\item 建立 408、四六级与其他学科三组用户清单，收集有权使用的真实 PDF、计划与中断案例。
+\item 固定 MinerU 候选版本、模型与许可快照，完成普通/扫描/公式/表格资料的基准测试。
+\item 打通一条最小链路：资料上传、质检、引用、讲解、练习、作答、证据、计划恢复与撤销。
+\item 并行制作 408 与四六级种子包，建立来源台账、题目分级与人工审校流程。
+\item 建立任务状态、成本、事件、错误和版本字典；测试重复提交、超时、取消、删除与晚到结果。
+\item 按统一脚本对标核心竞品，完成登录后实测；不要将本稿官网核验等同于产品体验评测。
+\item 锁定阶段闸门、责任人与上线清单，再决定扩大自动化、扩科或付费验证。
+\end{enumerate}
+
+\begin{insight}{总体方案}
+CanLearn 以各学科自主学习为产品边界，以 408 与英语四六级公共内容为启动资源，以 MinerU 和可恢复的微服务编排连接资料、讲解、练习和行动；通过真实学习证据与受约束的计划恢复建立长期价值。
+\end{insight}% -------------------- APPENDICES --------------------
+\appendix
+\newsec{关键数据与接口契约}
+\begin{caution}{接口归属}
+下表与 JSON 是由 Node.js/TypeScript 主后端对外提供的 RESTful 业务契约，不是 MinerU 原生 API，也不是已经交付的接口。OpenAPI 文件是前后端的正式契约；MinerU 的具体请求与返回结构由版本化适配器转换，接入时以固定版本的官方文档与契约测试为准。
+\end{caution}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{73mm}Y@{}}
+\toprule
+\cth{建议业务接口}&\cth{职责与关键约束}\\\midrule
+\code{POST /v1/documents}&创建上传会话与文档记录；完成安全检查和权利声明后才能启动解析\\
+\code{POST /v1/documents/{id}/parse-jobs}&提交解析范围、策略与预算；返回 202 和任务标识，不同步等待长任务\\
+\code{GET /v1/jobs/{job_id}}&查询状态、阶段进度、已完成页范围、错误和费用摘要\\
+\code{POST /v1/jobs/{job_id}/cancel}&请求取消；停止后续调度，工作者协作终止，拒收晚到结果\\
+\code{POST /v1/exercise-jobs}&固定资料快照、题型、用途、数量与质量门槛，启动生成和验证\\
+\code{POST /v1/explanation-jobs}&指定知识点、错误记录、教学模式与可引用资料范围\\
+\code{POST /v1/attempts}&记录真实作答、提示使用和耗时，关联题目版本与证据资格\\
+\code{POST /v1/plan-patches/{id}/accept}&校验计划基版本、容量、任务锁与权限后事务提交\\
+\code{DELETE /v1/documents/{id}}&先建立删除标记并撤销访问，再清理文件、索引、缓存和衍生资产\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+所有写接口校验身份、租户与资源权限。请求幂等键、业务版本和工作流标识分别承担去重、并发控制与追踪；不能用前端提交的租户字段替代服务端授权。版本冲突、质量不达标、配额不足与服务故障使用不同错误码，不对所有失败无限重试。
+
+\subsection{来源引用的最小示例}
+\begin{lstlisting}
+{
+  "source_ref": {
+    "document_id": "doc_demo", "document_version": 3,
+    "block_id": "block_027", "pdf_page_index": 8,
+    "printed_page_label": "6",
+    "bbox_normalized": [0.12, 0.18, 0.87, 0.41],
+    "coordinate_system": "top_left_xyxy_0_1"
+  },
+  "scope": "private", "rights_record_id": "rights_demo",
+  "content_hash": "sha256:...", "parser_version": "pinned",
+  "quality_status": "needs_review"
+}
+\end{lstlisting}
+\minor{以上坐标为平台归一化示例，不是对 MinerU 原始字段的直接复制。解析置信、来源可用状态和人工更正记录另行保存；引用展示前仍需进行权限与删除状态检查。}
+
+\newsec{核心事件字典与用户访谈}
+\subsection{核心事件字典（MVP）}
+\begin{tbl}
+\begin{tabularx}{\linewidth}{@{}L{56mm}Y@{}}
+\toprule
+\cth{事件或事件组}&\cth{核心属性与用途}\\\midrule
+\code{goal_created}&学科、目标类型、截止日来源、容量；识别用户场景\\
+\code{document_uploaded}&文档类型、页数、权利记录、私有/公共范围；上传转化\\
+\code{parse_started / parse_finished}&后端、版本、阶段、用时、可用页、失败页、费用；解析质量\\
+\code{parse_review_requested}&问题类型、来源块、更正状态；人工审校与误差回溯\\
+\code{content_indexed}&来源版本、知识映射状态、索引版本；资料可用性\\
+\code{exercise_generated / validated}&题型、用途、来源、质量门槛、失败原因；生成有效率\\
+\code{explanation_generated}&教学模式、引用覆盖、事实校验、费用；讲解质量\\
+\code{plan_generated / accepted}&版本、约束结果、接受延迟；计划质量与激活\\
+\code{task_started / completed}&任务版本、预估/实际分钟、完成证据；执行与 VLU\\
+\code{exit_ticket_submitted}&题目版本、结果、提示使用、评分来源；可信证据\\
+\code{task_skipped / patch_proposed}&原因、变更幅度、约束结果；偏离与恢复\\
+\code{patch_accepted / rejected / undo}&提案、基版本、操作原因；控制权与稳定性\\
+\code{job_cancelled / budget_blocked}&阶段、停止原因、已发生费用；服务体验与预算护栏\\
+\code{reminder_opt_in / opt_out}&通道、目的、频率；授权触达\\
+\code{data_export / delete_completed}&资源范围、衍生清单、状态；用户数据权利\\
+\bottomrule
+\end{tabularx}
+\end{tbl}
+\minor{事件使用伪匿名标识，不包含 PDF 原文、题干全文、完整对话、令牌或签名下载地址；需要抽检的内容通过独立授权审查通道访问。}
+
+\subsection{访谈与可用性测试提纲}
+请用户展示最近一次真实学习目标、资料与计划，说明最近一次中断如何处理；再现场完成“上传一份资料、检查引用、阅读讲解、做一道题、恢复一次计划”的任务。重点追问：哪里不信任解析？什么题算有效练习？哪类变化必须亲自确认？资料、复习与多个目标冲突时如何取舍？哪些价值值得付费？
+
+408、四六级与其他学科采用同一主脚本，但额外检查各自的公式/图表、语言技能或专业术语问题。区分用户口头偏好、实际操作、连续使用和真实支付，保留不成功案例。
+
+% -------------------- SOURCES --------------------
+\clearpage
+\renewcommand{\refname}{研究与资料来源}
+\phantomsection
+\addcontentsline{toc}{section}{研究与资料来源}
+\begin{thebibliography}{99}
+\small
+\setlength{\itemsep}{6pt}
+\setlength{\parskip}{1.5pt}
+\bibitem{original} 长春航萧网络科技有限公司，任宇航：《产品策划案 v1.0》，用户提供的 PDF，共 16 个物理页（正文页码至 15）。原文用于既有定位、学习闭环、规则排程、验证与治理框架；本稿的扩科、技术方案与实验目标另行标明为修订建议。
+
+\sourceentry{moe2025}{教育部：《2025 年全国教育事业发展统计公报》，2026-07-06}{https://www.moe.gov.cn/jyb_sjzl/sjzl_fztjgb/202607/t20260706_1442870.html}
+\sourceentry{digital}{教育部等九部门：《关于加快推进教育数字化的意见》，2025-04}{https://www.moe.gov.cn/srcsite/A01/s7048/202504/t20250416_1187476.html}
+\sourceentry{google_rename}{Google：NotebookLM is now Gemini Notebook，2026-07-16}{https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/}
+\sourceentry{google_study}{Google Workspace Updates：New ways to customize and interact with your content in NotebookLM，2026-03-20}{https://workspaceupdates.googleblog.com/2026/03/new-ways-to-customize-and-interact-with-your-content-in-NotebookLM.html}
+\sourceentry{google_sept}{Google：Sharpen your study routine with new Gemini Notebook tools，2026-09-15}{https://blog.google/innovation-and-ai/products/gemini-notebook/new-study-tools-september-2026/}
+\sourceentry{google_limits}{Google：New flexible usage limits for Gemini Notebook，2026-08-28}{https://blog.google/innovation-and-ai/products/gemini-notebook/new-flexible-usage-limits/}
+\sourceentry{studyfetch}{StudyFetch：官方产品与功能页}{https://www.studyfetch.com/}
+\sourceentry{studyplan}{StudyFetch：Study Schedule Maker}{https://www.studyfetch.com/study-schedule-maker}
+\sourceentry{remnote_guided}{RemNote Help Center：Guided Learn Mode}{https://help.remnote.com/en/articles/15724936-guided-learn-mode}
+\sourceentry{remnote_exam}{RemNote Help Center：Exam Study Plan}{https://help.remnote.com/en/articles/16081995-exam-study-plan}
+\sourceentry{knowt}{Knowt：官方产品与学习工具页}{https://knowt.com/}
+\sourceentry{hyperknow}{Hyperknow：官方产品与功能页}{https://www.hyperknow.io/}
+\sourceentry{chatgpt}{OpenAI：ChatGPT study mode，2025-07-29}{https://openai.com/index/chatgpt-study-mode/}
+\sourceentry{ima}{腾讯 ima：官方产品入口与知识库定位}{https://ima.qq.com/}
+\sourceentry{os408}{408OS：官方使用指南}{https://www.408os.cn/guide/}
+\sourceentry{pilot408}{408 Pilot：官方公开应用介绍页}{https://www.sx01bit.cn/app}
+\sourceentry{cet}{教育部教育考试院：全国大学英语四、六级考试（CET）笔试介绍}{https://cet.neea.edu.cn/xhtml1/folder/16113/1586-1.htm}
+\sourceentry{mineru_readme}{OpenDataLab：MinerU 官方仓库与 README}{https://github.com/opendatalab/MinerU}
+\sourceentry{mineru_release}{OpenDataLab：MinerU 4.0.7 发布页；2026-09-27 检索显示为 Latest}{https://github.com/opendatalab/MinerU/releases/tag/mineru-4.0.7-released}
+\sourceentry{mineru_migration}{MinerU 官方文档：Migrating from 3.x to 4.0}{https://opendatalab.github.io/MinerU/reference/migration_4/}
+\sourceentry{mineru_http}{MinerU 官方文档：V1 HTTP API Walkthrough}{https://opendatalab.github.io/MinerU/usage/http_api/}
+\sourceentry{mineru_cli}{MinerU 官方文档：CLI Tools}{https://opendatalab.github.io/MinerU/usage/cli_tools/}
+\sourceentry{mineru_output}{MinerU 官方文档：Output Formats and Result Contract}{https://opendatalab.github.io/MinerU/reference/output_files/}
+\sourceentry{mineru_docker}{MinerU 官方文档：Docker Deployment}{https://opendatalab.github.io/MinerU/quick_start/docker_deployment/}
+\sourceentry{mineru_license}{MinerU Open Source License：固定至 mineru-4.0.7-released 标签的许可文本}{https://raw.githubusercontent.com/opendatalab/MinerU/mineru-4.0.7-released/LICENSE.md}
+\sourceentry{temporal}{Temporal 官方文档：Activities}{https://docs.temporal.io/activities}
+\sourceentry{temporal_error}{Temporal 官方文档：Python error handling and failure detection}{https://docs.temporal.io/develop/python/best-practices/error-handling}
+\sourceentry{copyright}{全国人大：《中华人民共和国著作权法》，2020 年修正}{https://www.npc.gov.cn/npc/c2/c30834/202011/t20201119_308796.html}
+\sourceentry{pipl}{全国人大：《中华人民共和国个人信息保护法》，2021-08-20}{https://www.npc.gov.cn/c2/c30834/202108/t20210820_313088.html}
+\sourceentry{datareg}{中国政府网：《网络数据安全管理条例》，2024-09 公布}{https://www.gov.cn/zhengce/zhengceku/202409/content_6977767.htm}
+\sourceentry{genai}{国家互联网信息办公室等：《生成式人工智能服务管理暂行办法》，2023-07-13}{https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm}
+\sourceentry{marking}{中国政府网：《人工智能生成合成内容标识办法》，2025-03 公布，2025-09-01 起施行}{https://www.gov.cn/zhengce/zhengceku/202503/content_7014286.htm}
+\end{thebibliography}
+
+\begin{insight}{检索与使用说明}
+网页资料统一检索截止于 \textbf{2026 年 9 月 27 日}。竞品能力为官方网站或官方帮助文档所述，不代表本轮完成付费账户、地区可用性或登录后实测。官方文档未说明的性能、准确率、商业授权和成熟度不作肯定推断。
+
+服务拆分、接口、SLO、样本量、验收阈值、成本结构与路线图属于 CanLearn 规划建议；上线前应完成技术基准、版权与隐私评审、用户验证和经营验证。法规条目为相关事项的核验入口，不替代具体业务的适用性审查。
+\end{insight}
+\vfill
+\begin{center}
+\minor{—— 文档结束 ——\\长春航萧网络科技有限公司\quad /\quad 任宇航\quad /\quad CanLearn v2.1}
+\end{center}
+\end{document}
