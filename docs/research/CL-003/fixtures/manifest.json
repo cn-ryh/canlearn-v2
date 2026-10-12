@@ -1,0 +1,215 @@
+{
+  "version": "1.0",
+  "synthetic": true,
+  "generator_sha256": "19ec7cc855581d4c182b728a3487c7936b3a6ec9c571d6c1c3b967103907f236",
+  "font_sha256": "acb6440a713d880a13a21b468ba7cd43f5a2b2934972e51be791c880730777b8",
+  "samples": [
+    {
+      "id": "D01-stack-v1",
+      "file": "D01-stack-v1.pdf",
+      "sha256": "995d979822bdb580727118776e27b223c7fc439df2d42bcaf8346f93c953dbdb",
+      "pages": 2,
+      "feature": "Chinese two-column / 408",
+      "anchors": [
+        {
+          "id": "L1",
+          "pdf_page": 1,
+          "text": "栈基础：栈遵循后进先出，入栈叫 push，出栈叫 pop。",
+          "bbox_top_left": [40, 96.0, 272.6377952755906, 150.0]
+        },
+        {
+          "id": "L2",
+          "pdf_page": 1,
+          "text": "空栈 pop 不返回元素，报告下溢；容量为 3 的满栈 push 报告上溢。",
+          "bbox_top_left": [40, 161.0, 272.6377952755906, 215.0]
+        },
+        {
+          "id": "R1",
+          "pdf_page": 1,
+          "text": "示例：空栈依次 push A、push B、pop，移出的元素是 B，剩余 A。",
+          "bbox_top_left": [317.6377952755906, 96.0, 550.2755905511812, 150.0]
+        },
+        {
+          "id": "R2",
+          "pdf_page": 1,
+          "text": "队列与栈不同，队列遵循先进先出。不能把二者同名操作混为一谈。",
+          "bbox_top_left": [317.6377952755906, 161.0, 550.2755905511812, 215.0]
+        },
+        {
+          "id": "L3",
+          "pdf_page": 2,
+          "text": "数组栈 top 初始为 -1。push 前检查容量，成功后 top 加 1；pop 成功后 top 减 1。",
+          "bbox_top_left": [40, 96.0, 272.6377952755906, 170.0]
+        },
+        {
+          "id": "R3",
+          "pdf_page": 2,
+          "text": "合法操作示例：容量 3，依次放入 A、B、C，再移出 C。此时 top 为 1，栈中有 A、B。",
+          "bbox_top_left": [317.6377952755906, 96.0, 550.2755905511812, 170.0]
+        }
+      ]
+    },
+    {
+      "id": "D02-motion-v1",
+      "file": "D02-motion-v1.pdf",
+      "sha256": "500a0562246ee1a681a5d7ea35c5552a2282a2528da3fa2b0a3c3278c06c384b",
+      "pages": 2,
+      "feature": "formula / physics / intentional arithmetic error",
+      "anchors": [
+        {
+          "id": "F1",
+          "pdf_page": 1,
+          "text": "一维匀加速直线运动，正方向固定，加速度保持不变，时间 t 从 0 开始。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "F2",
+          "pdf_page": 1,
+          "text": "速度公式：v = v0 + a*t。位移公式：s = v0*t + (1/2)*a*t^2。",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 175.0]
+        },
+        {
+          "id": "F3",
+          "pdf_page": 1,
+          "text": "单位：v0 和 v 用 m/s；a 用 m/s^2；t 用 s；位移 s 用 m。",
+          "bbox_top_left": [40, 186.0, 555.2755905511812, 220.0]
+        },
+        {
+          "id": "F4",
+          "pdf_page": 2,
+          "text": "例题条件：v0 = 2 m/s，a = 3 m/s^2，t = 4 s。末速度 v = 14 m/s。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "F5",
+          "pdf_page": 2,
+          "text": "位移计算：s = 2*4 + (1/2)*3*4^2 = 34 m。",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 175.0]
+        },
+        {
+          "id": "F6",
+          "pdf_page": 2,
+          "text": "校对提示：请依据公式核验每一处算术结果，不盲信数字。",
+          "bbox_top_left": [40, 186.0, 555.2755905511812, 220.0]
+        }
+      ]
+    },
+    {
+      "id": "D02-motion-v2",
+      "file": "D02-motion-v2.pdf",
+      "sha256": "97cfbe551559145edfe6a39103c2576930f0daff496153963de5a2eacb87faa0",
+      "pages": 2,
+      "feature": "corrected version, uploaded only in correction step",
+      "anchors": [
+        {
+          "id": "F1",
+          "pdf_page": 1,
+          "text": "一维匀加速直线运动，正方向固定，加速度保持不变，时间 t 从 0 开始。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "F2",
+          "pdf_page": 1,
+          "text": "速度公式：v = v0 + a*t。位移公式：s = v0*t + (1/2)*a*t^2。",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 175.0]
+        },
+        {
+          "id": "F3",
+          "pdf_page": 1,
+          "text": "单位：v0 和 v 用 m/s；a 用 m/s^2；t 用 s；位移 s 用 m。",
+          "bbox_top_left": [40, 186.0, 555.2755905511812, 220.0]
+        },
+        {
+          "id": "F4",
+          "pdf_page": 2,
+          "text": "例题条件：v0 = 2 m/s，a = 3 m/s^2，t = 4 s。末速度 v = 14 m/s。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "F5",
+          "pdf_page": 2,
+          "text": "位移计算：s = 2*4 + (1/2)*3*4^2 = 32 m。",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 175.0]
+        },
+        {
+          "id": "F6",
+          "pdf_page": 2,
+          "text": "校对提示：请依据公式核验每一处算术结果，不盲信数字。",
+          "bbox_top_left": [40, 186.0, 555.2755905511812, 220.0]
+        }
+      ]
+    },
+    {
+      "id": "D03-reading-v1",
+      "file": "D03-reading-v1.pdf",
+      "sha256": "8aed38dd30880ac84a6dbe51a3f542b1dc1358fcf1e3dd517b81ef2779a25a0a",
+      "pages": 2,
+      "feature": "English reading / CET-style, fictional narrative",
+      "anchors": [
+        {
+          "id": "E1",
+          "pdf_page": 1,
+          "text": "Lina studies at a fictional campus library on Tuesday and Thursday, from 18:00 to 19:00.",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "E2",
+          "pdf_page": 1,
+          "text": "She studies vocabulary on Tuesday and reads science articles on Thursday. She does not study at the library on Friday.",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 195.0]
+        },
+        {
+          "id": "E3",
+          "pdf_page": 2,
+          "text": "Her study partner Omar arrives on Thursday at 18:30 and stays for thirty minutes.",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "E4",
+          "pdf_page": 2,
+          "text": "They check unfamiliar words in the article before discussing its main idea. The text gives no exam score or learning-effect estimate.",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 195.0]
+        }
+      ]
+    },
+    {
+      "id": "D04-economics-v1",
+      "file": "D04-economics-v1.pdf",
+      "sha256": "abf320d60a5e0e12fc608b658c59017833b0ddc195d4565c744700cf7a4b3645",
+      "pages": 2,
+      "feature": "other subject / intentionally missing printed page 41",
+      "anchors": [
+        {
+          "id": "M1",
+          "pdf_page": 1,
+          "text": "原讲义页码 40。以下仅为虚构课堂市场，不描述真实经济数据。价格为 10 时，需求量为 80。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 150.0]
+        },
+        {
+          "id": "M2",
+          "pdf_page": 1,
+          "text": "价格为 12 时，需求量为 60。除此之外没有给出其他价格点。",
+          "bbox_top_left": [40, 161.0, 555.2755905511812, 195.0]
+        },
+        {
+          "id": "M3",
+          "pdf_page": 1,
+          "text": "原讲义完整页序为 40、41、42；本测试文件缺失原页 41，该页的弹性定义和计算不可见。",
+          "bbox_top_left": [40, 206.0, 555.2755905511812, 240.0]
+        },
+        {
+          "id": "M4",
+          "pdf_page": 2,
+          "text": "原讲义页码 42。此课堂示例假定其他因素不变，价格升高时需求量降低。",
+          "bbox_top_left": [40, 96.0, 555.2755905511812, 130.0]
+        },
+        {
+          "id": "M5",
+          "pdf_page": 2,
+          "text": "本模型不说明长期需求，也没有任何供给函数。不能据缺失页编造弹性数值或均衡价格。",
+          "bbox_top_left": [40, 141.0, 555.2755905511812, 175.0]
+        }
+      ]
+    }
+  ]
+}
