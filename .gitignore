@@ -24,6 +24,9 @@ __pycache__/
 .idea/
 .vscode/
 
+# Private user research: completed records, consent and contact mapping
+/research-private/
+
 # Generated artifacts
 docs/*.aux
 docs/*.fdb_latexmk
