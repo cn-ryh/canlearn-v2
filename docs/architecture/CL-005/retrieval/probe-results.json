@@ -1,0 +1,47 @@
+{
+  "scope": "isolated PostgreSQL controls; handcrafted 3D vectors, not semantic evaluation",
+  "postgres": "17.11 (Debian 17.11-1.pgdg12+2)",
+  "pgvector": "0.8.7",
+  "jieba": "0.42.1",
+  "checks": [
+    {
+      "name": "scope-version-quality-purpose-generation-filter",
+      "passed": true,
+      "actual": ["alice-new", "public-approved"]
+    },
+    {
+      "name": "identical-other-user-input-keeps-independent-scope",
+      "passed": true,
+      "actual": ["bob-identical", "public-approved"]
+    },
+    {
+      "name": "unset-or-anonymous-owner-no-private-match",
+      "passed": true,
+      "actual": ["public-approved"]
+    },
+    {
+      "name": "segmented-chinese-lexical-query",
+      "passed": true,
+      "actual": ["alice-new", "public-approved"]
+    },
+    { "name": "raw-simple-config-misses-subphrase", "passed": true, "actual": false },
+    {
+      "name": "interrupted-rebuild-retains-old-published-generation",
+      "passed": true,
+      "actual": ["alice-new", "public-approved"]
+    },
+    {
+      "name": "tombstone-blocks-before-physical-vector-cleanup",
+      "passed": true,
+      "actual": ["public-approved"]
+    },
+    { "name": "rebuilt-index-cannot-resurrect-deleted-resource", "passed": true, "actual": [] },
+    {
+      "name": "non-owner-non-bypassrls-role-blocks-direct-other-user-read",
+      "passed": true,
+      "actual": []
+    },
+    { "name": "transaction-owner-context-not-reused", "passed": true, "actual": "" }
+  ],
+  "no_real_embedding_or_mineru": true
+}

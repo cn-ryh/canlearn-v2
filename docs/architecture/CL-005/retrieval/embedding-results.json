@@ -1,0 +1,216 @@
+{
+  "date": "2026-10-12",
+  "scope": "RTX 4070 synthetic smoke test; each model evaluated in an independent process with cached weights",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4070",
+  "gpu_memory_mib": 12282,
+  "driver": "595.84",
+  "observed_system_memory_gib": 31,
+  "observed_logical_cpus": 44,
+  "existing_gpu_memory_mib_approx": 2494,
+  "torch": "2.8.0+cu128",
+  "sentence_transformers": "5.1.2",
+  "transformers": "4.57.1",
+  "script_sha256": "4ecf6ba3823688c8de128a94b439ea3518ec2c36fc76e101dd53dcf90ad3951d",
+  "models": [
+    {
+      "name": "bge-m3",
+      "repo": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "device": "cuda",
+      "load_seconds": 2.983,
+      "passage_seconds": 0.391,
+      "query_seconds": 0.097,
+      "passage_ms_each": 48.875,
+      "query_ms_each": 6.037,
+      "embedding_dimensions": 1024,
+      "recall": { "recall@1": 0.9375, "recall@3": 1.0, "recall@5": 1.0 },
+      "mrr": 0.9688,
+      "top3": [
+        ["stack", "queue", "retrieval"],
+        ["queue", "stack", "deletion"],
+        ["motion", "queue", "stack"],
+        ["retrieval", "versioning", "privacy"],
+        ["deletion", "retrieval", "privacy"],
+        ["evidence", "versioning", "retrieval"],
+        ["privacy", "evidence", "retrieval"],
+        ["versioning", "evidence", "retrieval"],
+        ["stack", "queue", "deletion"],
+        ["stack", "queue", "deletion"],
+        ["motion", "queue", "stack"],
+        ["retrieval", "versioning", "evidence"],
+        ["deletion", "retrieval", "versioning"],
+        ["evidence", "versioning", "retrieval"],
+        ["privacy", "retrieval", "evidence"],
+        ["versioning", "retrieval", "evidence"]
+      ],
+      "warm_single_query_ms": [43.473, 32.103, 31.893, 32.075, 31.649, 31.632, 31.58, 32.156],
+      "warm_single_query_median_ms": 31.984,
+      "scope_note": "8 original passages / 16 related Chinese and English queries; smoke test, not production benchmark",
+      "peak_cuda_allocated_bytes": 2285875712,
+      "peak_cuda_reserved_bytes": 2298478592,
+      "cache_manifest": [
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/1_Pooling/config.json",
+          "bytes": 191,
+          "sha256": "e54c164a07274f2eb45bb724f54a79d1efcc90c41573887cd9a29aeee0597352"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/README.md",
+          "bytes": 15822,
+          "sha256": "0b81ccf9134e5874d620a86e6905062ea999e779c34eb1a7e65eaeb7fe00e450"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/config.json",
+          "bytes": 687,
+          "sha256": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/config_sentence_transformers.json",
+          "bytes": 123,
+          "sha256": "1eef72430e7194a1e59680e635aed81ffa083f05668dbc5bb1c56c04c0999c38"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/modules.json",
+          "bytes": 349,
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/pytorch_model.bin",
+          "bytes": 2271145830,
+          "sha256": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/sentence_bert_config.json",
+          "bytes": 54,
+          "sha256": "eb9b44b13c0f52a3b3685c3b1cbdea1ba8b04bea123b98f61610048940776eb1"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/sentencepiece.bpe.model",
+          "bytes": 5069051,
+          "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/special_tokens_map.json",
+          "bytes": 964,
+          "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/tokenizer.json",
+          "bytes": 17098108,
+          "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181/tokenizer_config.json",
+          "bytes": 444,
+          "sha256": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+        },
+        {
+          "path": "models--BAAI--bge-m3/snapshots/9a0624b896d81da7492a910ffa53731274b6cf3d/model.safetensors",
+          "bytes": 2271064456,
+          "sha256": "993b2248881724788dcab8c644a91dfd63584b6e5604ff2037cb5541e1e38e7e"
+        }
+      ],
+      "synthetic_only": true
+    },
+    {
+      "name": "multilingual-e5-small",
+      "repo": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "device": "cuda",
+      "load_seconds": 1.526,
+      "passage_seconds": 0.379,
+      "query_seconds": 0.055,
+      "passage_ms_each": 47.381,
+      "query_ms_each": 3.424,
+      "embedding_dimensions": 384,
+      "recall": { "recall@1": 0.875, "recall@3": 1.0, "recall@5": 1.0 },
+      "mrr": 0.9375,
+      "top3": [
+        ["stack", "deletion", "queue"],
+        ["queue", "stack", "deletion"],
+        ["motion", "queue", "stack"],
+        ["retrieval", "privacy", "versioning"],
+        ["deletion", "privacy", "versioning"],
+        ["evidence", "versioning", "retrieval"],
+        ["privacy", "versioning", "retrieval"],
+        ["versioning", "evidence", "retrieval"],
+        ["deletion", "stack", "queue"],
+        ["deletion", "queue", "stack"],
+        ["motion", "queue", "stack"],
+        ["retrieval", "deletion", "privacy"],
+        ["deletion", "versioning", "retrieval"],
+        ["evidence", "versioning", "retrieval"],
+        ["privacy", "retrieval", "deletion"],
+        ["versioning", "retrieval", "evidence"]
+      ],
+      "warm_single_query_ms": [19.146, 14.272, 14.04, 14.282, 13.731, 13.778, 14.051, 13.97],
+      "warm_single_query_median_ms": 14.046,
+      "scope_note": "8 original passages / 16 related Chinese and English queries; smoke test, not production benchmark",
+      "peak_cuda_allocated_bytes": 482052608,
+      "peak_cuda_reserved_bytes": 507510784,
+      "cache_manifest": [
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/1_Pooling/config.json",
+          "bytes": 200,
+          "sha256": "987f7a67a38fa564c849bb5d277c52ab9088a84368fc0be31a354125aebb12a0"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md",
+          "bytes": 497538,
+          "sha256": "0038de97aee16258cecbad7ffda4b4febd6953e747a00e0ddbc8e6ed241e9c1c"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/config.json",
+          "bytes": 655,
+          "sha256": "69137736cab8b8903a07fe8afaafdda25aac55415a12a55d1bffa9f581abf959"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/model.safetensors",
+          "bytes": 470641600,
+          "sha256": "1a55775f53449dac10a2bcbc312469fac40b96d53198c407081a831f81c98477"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/modules.json",
+          "bytes": 387,
+          "sha256": "c6e29747481e8b5dd2b58401966aeac910de39092f90cda9a704b1545f902b04"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/sentence_bert_config.json",
+          "bytes": 57,
+          "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/sentencepiece.bpe.model",
+          "bytes": 5069051,
+          "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/special_tokens_map.json",
+          "bytes": 167,
+          "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/tokenizer.json",
+          "bytes": 17082730,
+          "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+        },
+        {
+          "path": "models--intfloat--multilingual-e5-small/snapshots/614241f622f53c4eeff9890bdc4f31cfecc418b3/tokenizer_config.json",
+          "bytes": 443,
+          "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+        }
+      ],
+      "synthetic_only": true
+    }
+  ],
+  "not_tested": [
+    "MinerU contention",
+    "network/HTTP latency",
+    "long blocks",
+    "300-page parsing or embedding",
+    "CPU inference",
+    "production multitenant authorization",
+    "no-answer calibration"
+  ]
+}

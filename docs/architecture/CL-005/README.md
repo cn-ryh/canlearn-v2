@@ -22,6 +22,7 @@ CL-004 已按用户的 R0 设计验收决定关闭四卡，遗留条件仍从
 | 站点 | cl.hangxiaonet.com，用户确认已备案且可配置 DNS；未核验当前解析/TLS/部署 |
 | 公网连接 | 用户确认固定公网 IP、UDP 被封，选择南京 CPU worker＋宁波受限解析，公网 TCP HTTPS/mTLS，来源 IP 限制 |
 | 镜像入口 | 用户指定 Docker Hub 为 jjs7iczbx3i38wpthb.xuanyuan.run，GHCR 为 jjs7iczbx3i38wpthb-ghcr.xuanyuan.run；已同步项目配置/说明 |
+| 检索与测算 | 用户选择本地多语言 embedding 优先；10人以内、每人5份20–100页，另加300页观察样本，不要求必定解析成功；不是已冻结上传限制 |
 
 地域优先与预算是已确认约束，本文的技术路线仍为建议。已有资源不等于容量、可靠性、删除能力或供应商用途已获准。
 
@@ -30,7 +31,7 @@ CL-004 已按用户的 R0 设计验收决定关闭四卡，遗留条件仍从
 | 子项 | 对应提案 | 推荐方向及理由 | 仍需决定/核验 |
 | --- | --- | --- | --- |
 | CL-005a / #26 | [ADR-0003](../ADR-0003-identity-and-private-storage.md) | 邮箱/密码＋服务端必验邀请码＋邮箱验证；Better Auth 1.7.7 隔离兼容性已通过；腾讯云 SES、南京 COS 私有桶 | 应用正式接入、SES 身份/模板/实际送达、COS 版本/删除/访问能力 |
-| CL-005b / #27 | [ADR-0004](../ADR-0004-retrieval-and-index-boundaries.md) | 优先评估 PostgreSQL＋pgvector 与中文词法检索，减少额外独立服务 | PostgreSQL 扩展可用性、中文分词、embedding 来源与性能基准 |
+| CL-005b / #27 | [ADR-0004](../ADR-0004-retrieval-and-index-boundaries.md) | 本地多语言优先；10项控制原型通过，4070真实模型合成烟测完成，300页夹具已生成 | 长块/多学科/无答案质量、GPU竞争、正式模型选择与主库扩展迁移 |
 | CL-005c / #28 | [ADR-0005](../ADR-0005-model-gateway-and-provider-boundaries.md) | 先比较现有聚合 API 与官方直连，网关按任务路由、统一预算与审批；未核验路径只用合成资料 | 聚合平台及其上游/转发方的地域、留存/训练/分包条件、价格与任务质量 |
 | CL-005d / #29 | [ADR-0006](../ADR-0006-deployment-and-async-coordination.md) | 南京业务面/Temporal/CPU worker，宁波解析；TCP HTTPS/mTLS 已确认，本地握手核验通过；暂不新增独立队列库 | 实际链路/代理/ACL、工作流存储/留存、容量、备份与回滚 |
 
@@ -48,6 +49,7 @@ UDP 被封，选用公网 TCP 443、HTTPS/mTLS 与固定来源 IP 限制；实�
 - [已执行的兼容性与传输验证](validation-record.md)：认证/SDK 9 组检查、本地 mTLS 4 条检查及镜像入口证据。
 - [部署与服务接入清单](deployment-and-service-readiness.md)：已确认拓扑、SES/COS/网络核验顺序及下游任务。
 - [SES 邮件模板](email-templates/README.md)：邮箱验证和密码找回 HTML/Text、合成预览与创建请求体；用户报告已审核，具体交接信息见模板审核记录，真实发送未验证。
+- [检索与 embedding 核验](retrieval/README.md)：10项数据库控制、两个4070真实模型烟测、文件摘要、容量估算与300页原创夹具；尚无MinerU/真实业务测试。
 
 ## 增量成本模型
 
@@ -80,7 +82,7 @@ UDP 被封，选用公网 TCP 443、HTTPS/mTLS 与固定来源 IP 限制；实�
 | D01 服务地域与增量预算 | 大陆优先、¥300/月，已由用户确认 | A（任宇航） | 已明确；实际服务地域仍需逐项核验 |
 | D02 登录及认证组件 | 邮箱/邀请码规则、验证期限、腾讯云 SES 已确认；Better Auth 1.7.7 隔离核验通过，仓库未安装/接入 | A / B | CL-007/101 正式身份契约与实现前 |
 | D03 私有存储/下载与删除 | 已确认资源为南京 COS；建议私有桶经 API 授权读取，配置与能力未验收 | A / B | CL-103/110/116/117 及真实资料接入前 |
-| D04 检索/embedding | 建议先评估 PostgreSQL＋pgvector，中文词法方案待验证 | A / B，C 验证 | CL-006/109 相关模型/实现定稿前 |
+| D04 检索/embedding | 本地多语言优先已确认；控制原型和BGE-M3/E5合成烟测通过，正式模型/索引配置待定 | A / B，C 验证 | CL-006/109 相关模型/实现定稿前 |
 | D05 主模型/外发处理 | 已有聚合 API，真实资料路径未准入；保留桩/合成资料模式 | A / C，相关外部责任人 | 实际外发及对应功能前 |
 | D06 部署/编排/恢复 | 南京 CPU worker＋宁波受限 GPU、公网 HTTPS/mTLS 路线已确认；保留 Temporal，不新增队列库，实际部署/恢复待验证 | A / B，C 验证 | CL-008/013、相应恢复承诺与真实环境接入前 |
 

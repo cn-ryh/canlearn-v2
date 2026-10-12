@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "synthetic": true,
+  "pages": 300,
+  "file": "L300-original-volume-v1.pdf",
+  "sha256": "56ac109a768fe8c63cc34be1f0ac2ef89103d142fc3633a7b2fb7e7afd653933",
+  "size_bytes": 431347,
+  "generator_sha256": "08daaf58a0d7ddc209d2fc9ea467f8b9178b544610ee265f4bbe84ca6951ca34",
+  "font_sha256": "acb6440a713d880a13a21b468ba7cd43f5a2b2934972e51be791c880730777b8",
+  "anchor_pattern": "PAGE-ANCHOR-{page:03d}; one anchor per PDF page",
+  "content": "original, simple text, repeated layout; not a real or complex textbook",
+  "mineru_attempted": false,
+  "parsing_success_required": false,
+  "intended_observations": [
+    "admission/rejection reason and bounded resource use",
+    "page coverage, visible partial/failure state and missing-page accounting",
+    "timeout, cancellation, resume, duplicate submission and cleanup",
+    "index eligibility and source traceability after accepted pages"
+  ]
+}
