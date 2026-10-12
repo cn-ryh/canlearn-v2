@@ -8,3 +8,5 @@
 - 保留用户已有的未提交修改；不要自动提交或推送。
 - 遵循现有 monorepo 和服务边界，不重复初始化工程。
 - 不将密钥、真实用户数据、受限资料或本地环境文件写入记忆。
+- Docker Hub 镜像使用 `jjs7iczbx3i38wpthb.xuanyuan.run`，GHCR 使用
+  `jjs7iczbx3i38wpthb-ghcr.xuanyuan.run`；保留原命名空间、固定标签/摘要，不自动改全局 Docker daemon 配置。

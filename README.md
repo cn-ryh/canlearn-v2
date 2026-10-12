@@ -53,6 +53,12 @@ pnpm dev
 
 MinerU 不随默认 Compose 启动，因为其镜像、模型、解析档位和 GPU 配置需要按目标环境固定。通过 `MINERU_BASE_URL` 接入经过验收的实例。
 
+Docker Hub 镜像默认从 `jjs7iczbx3i38wpthb.xuanyuan.run` 拉取，可通过
+`CANLEARN_DOCKERHUB_REGISTRY` 覆盖前缀（直接访问上游时设为 `docker.io`）。
+官方基础镜像保留 `library/`，例如 `/library/postgres:17-alpine`；其他镜像保留其命名空间。
+后续 GHCR 镜像使用 `jjs7iczbx3i38wpthb-ghcr.xuanyuan.run/<owner>/<image>:<tag>`。
+当前 Compose 没有 GHCR 镜像；镜像入口设置不代表对应标签已拉取或部署验证。
+
 ## 质量检查
 
 ```bash
