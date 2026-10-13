@@ -239,6 +239,12 @@ importers:
       '@types/node':
         specifier: 26.6.3
         version: 26.6.3
+      ajv:
+        specifier: 8.20.0
+        version: 8.20.0
+      ajv-formats:
+        specifier: 3.0.1
+        version: 3.0.1(ajv@8.20.0)
       drizzle-kit:
         specifier: 0.31.11
         version: 0.31.11
@@ -251,6 +257,9 @@ importers:
       vitest:
         specifier: 5.0.2
         version: 5.0.2(@types/node@26.6.3)(vite@8.3.1(@types/node@26.6.3)(esbuild@0.28.2)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.9.1))
+      yaml:
+        specifier: 2.9.1
+        version: 2.9.1
 
   apps/web:
     dependencies:
@@ -4085,8 +4094,7 @@ snapshots:
 
   y18n@5.0.8: {}
 
-  yaml@2.9.1:
-    optional: true
+  yaml@2.9.1: {}
 
   yargs-parser@22.0.0: {}
 

@@ -41,5 +41,8 @@ docs(repo): record repository boundary
 - 前端只访问 CanLearn API，不直连 PostgreSQL、Redis 或 MinerU。
 - Python worker 不绕过主 API 的权限、状态机、配额和发布门禁。
 - 不提交密钥、真实用户数据、受限资料、构建产物或本地环境文件。
+- REST契约的规划操作标`x-implementation-status: planned`；真实控制器接入后按
+  [CL-007准入规则](docs/api/CL-007/drift-and-admission.md)升级为implemented，并补HTTP/Swagger及权限/故障证据。
+  现有API测试只对implemented集合做运行时对齐，规划schema/样例验证不能宣称业务功能通过。
 
 Pull Request 请使用仓库模板，说明变更、验证命令、风险和回滚方式。高风险改动包括权限、删除、数据迁移、工作流状态机、费用账本和公共内容发布。

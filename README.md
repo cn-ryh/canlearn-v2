@@ -14,6 +14,11 @@ CanLearn 是面向自主学习者的资料驱动学习平台。本仓库采用�
 
 详细决策见 [ADR-0001](docs/architecture/ADR-0001-technology-stack.md) 和 [ADR-0002](docs/architecture/ADR-0002-repository-and-deployment-topology.md)。研发、提交、测试和合并规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
+R0当前设计与证据入口：[CL-005选型交接](docs/architecture/CL-005/decision-closeout.md)、
+[CL-006数据模型](docs/architecture/CL-006/README.md)、[CL-009样本准备](docs/benchmarks/CL-009/README.md)。
+设计/隔离实测与真实业务实现、外部签审及部署验收分别记录。
+REST契约与真实健康接口门禁见[CL-007](docs/api/CL-007/README.md)；OpenAPI中的其余业务操作均为规划。
+
 ## 仓库结构
 
 ```text
