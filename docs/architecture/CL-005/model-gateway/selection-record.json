@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-13",
+  "scope": "R0 synthetic model evaluation decision; not deployed routing configuration",
+  "models": {
+    "glm-5.3": {
+      "status": "FAILED",
+      "selection_eligible": false,
+      "allowed_paths": [],
+      "real_data_enabled": false,
+      "decision": "User explicitly excludes this aggregator alias from all candidate and fallback paths",
+      "evidence": {
+        "streaming_matrix_passed": 1,
+        "streaming_matrix_attempted": 18,
+        "streaming_deadlines": 2,
+        "nonstream_4096_and_16384_no_final_answer": true,
+        "results": ["parameter-results.json", "sdk-results.json"]
+      },
+      "historical_positive_smokes_retained": true,
+      "evaluation_scope": "Current aggregator alias, synthetic fixture and quality gate; not a universal claim about the GLM model family"
+    },
+    "deepseek-v4.1-flash": {
+      "status": "SYNTHETIC_BASELINE",
+      "selection_eligible": true,
+      "real_data_enabled": false,
+      "business_evaluation": {
+        "preferred_role": "synthetic_generator",
+        "path_tested": "stream",
+        "schema_prompt_control_initial_valid": 3,
+        "schema_prompt_control_chains_passed": 3,
+        "schema_prompt_control_chains_attempted": 3,
+        "results": ["business-chain-results.json", "business-contract-results.json"],
+        "formal_subject_quality_verified": false
+      }
+    },
+    "minimax-m3": {
+      "status": "NOT_SELECTED_CITATION_COVERAGE",
+      "selection_eligible": false,
+      "allowed_paths": [],
+      "real_data_enabled": false,
+      "evidence": {
+        "streaming_matrix_passed": 1,
+        "streaming_matrix_attempted": 18,
+        "numeric_fields_correct": 18,
+        "source_ids_valid": 1,
+        "nonstream_no_final_answer": 2,
+        "results": "candidate-results.json"
+      },
+      "decision": "Requires citation-coverage repair and separate reevaluation; current candidate/fallback excluded"
+    },
+    "step-5-preview": {
+      "status": "STREAMING_SYNTHETIC_CANDIDATE",
+      "selection_eligible": true,
+      "allowed_paths": ["stream"],
+      "real_data_enabled": false,
+      "evidence": {
+        "streaming_matrix_passed": 18,
+        "streaming_matrix_attempted": 18,
+        "numeric_fields_correct": 18,
+        "source_ids_valid": 18,
+        "nonstream_no_final_answer": 2,
+        "results": "candidate-results.json"
+      },
+      "comparison_baseline": {
+        "temperature": 0.0,
+        "effort": "medium",
+        "max_output_tokens": 16384
+      },
+      "decision": "Streaming only; nonstream disabled in selection proposal, pending real quality and provider admission",
+      "business_evaluation": {
+        "preferred_role": "synthetic_streaming_verifier",
+        "bulk_generation_default": false,
+        "schema_prompt_control_initial_valid": 0,
+        "schema_prompt_control_chains_passed": 3,
+        "schema_prompt_control_chains_attempted": 3,
+        "repairs_used": 3,
+        "schema_prompt_control_no_answer_invalid_json": 1,
+        "schema_prompt_control_bulk_deadline": 1,
+        "format_failure_caveat": "Local stem-length rule was not explicit in first two prompt variants; format counts are not proven model schema violations",
+        "local_rule_prompt_control_passed": 1,
+        "local_rule_prompt_control_attempted": 1,
+        "results": [
+          "business-chain-results.json",
+          "business-contract-results.json",
+          "business-gate-results.json"
+        ],
+        "formal_subject_quality_verified": false
+      }
+    }
+  },
+  "template_policy": {
+    "scope": "Internal synthetic proposal; not deployed gateway configuration",
+    "schema_in_prompt": true,
+    "local_rules_in_prompt": true,
+    "strict_client_validation": true,
+    "automatic_retries": 0,
+    "max_repair_attempts": 1,
+    "max_calls_per_chain": 4
+  }
+}

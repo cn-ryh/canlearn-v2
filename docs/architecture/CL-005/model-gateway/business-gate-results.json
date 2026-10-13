@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-13",
+  "started_at": "2026-10-13T22:26:03.787203+08:00",
+  "scope": "Two-request local-rule alignment audit only; not a new broad matrix",
+  "scripts": {
+    "business_gate_control.py": "1d14e0c5520e529c0d28576256fa8c25aa28e67c08e9298101a099ce37f55354",
+    "business_chain_probe.py": "55889ba0bedd409bbd1200b360a94c1d3827f5c57e57a2cb07fd9aabff09566c"
+  },
+  "quoted_rates_sha256": "6ef3d33107a328558f38fdccfb267d7928879ecfa4121a0fac3a9bc906cc1581",
+  "prior_results_sha256": "9fda743f9fdf8849abb0bd6b2519a62d07ea740884bc94232b5f63a56737677a",
+  "max_requests": 2,
+  "quote_budget_scenario": "5.00",
+  "real_data_enabled": false,
+  "runs": [
+    {
+      "model": "step-5-preview",
+      "stage": "generate",
+      "case": "version_conflict",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "ac28877b137e1e6a64fa4b435dc5ca761cef40468378da81a8b3e0bdeb6e9063",
+      "input_byte_allowance": 6933,
+      "reserved_quote_scenario": "0.0738556",
+      "usage": {
+        "input_tokens": 670,
+        "output_tokens": 1531,
+        "total_tokens": 2201,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 24.225,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 800,
+      "text_sha256": "b4eb58a107cd24962a5c9ec7d06c57ff28a15df2561cbebd118b9769b78a12b0",
+      "estimated_cost": "0.006928",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 28.778,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 384,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 106,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify",
+      "case": "version_conflict",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "e528ce4d9916115db490e9774d8875d950db5d6c4e5f47c26a3f0936705f59f5",
+      "input_byte_allowance": 7676,
+      "reserved_quote_scenario": "0.01633692",
+      "usage": {
+        "input_tokens": 1064,
+        "output_tokens": 933,
+        "total_tokens": 1997,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 7.021,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 61,
+      "text_sha256": "59850879dc319c11fb9619dddefc215ed01234eacd5b651f7680ab701ad83809",
+      "estimated_cost": "0.00108704",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 7.198,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 913,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 19,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    }
+  ],
+  "chains": [
+    {
+      "generator": "step-5-preview",
+      "checker": "deepseek-v4.1-flash",
+      "case": "version_conflict",
+      "raw_generation": {
+        "valid": true,
+        "invalid_question_ids": [],
+        "reason_codes": []
+      },
+      "stem_lengths": [44, 46, 36, 35, 45, 45],
+      "fault_injected": false,
+      "repair_attempts": 0,
+      "initial_checker_agrees": true,
+      "accepted": true
+    }
+  ],
+  "complete": true,
+  "reserved_quote_upper_scenario": "2.15100411",
+  "finished_at": "2026-10-13T22:26:39.925069+08:00"
+}
