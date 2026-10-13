@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-13",
+  "scope": "Existing synthetic fixture SHA, declared requested-page inventory, generator anchors and family split consistency; no parser/quality/human annotation proof",
+  "manifest_sha256": "f6251588f76e1a38dc36fe65d1606b633a254e3f7eed887518b0f7e004eba81a",
+  "script_sha256": "08bd041848ba5c6aa302390563094ffc53e08f84448cff0f8f8a057b9d3f5555",
+  "synthetic_families": 5,
+  "synthetic_files": 6,
+  "synthetic_version_pages": 310,
+  "external_admitted_documents": 0,
+  "external_admitted_pages": 0,
+  "r0_real_sample_target": {
+    "documents": 12,
+    "pages": 120
+  },
+  "human_dual_review": "pending",
+  "checks": [
+    {
+      "sample_id": "D01-stack-v1",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    },
+    {
+      "sample_id": "D02-motion-v1",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    },
+    {
+      "sample_id": "D02-motion-v2",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    },
+    {
+      "sample_id": "D03-reading-v1",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    },
+    {
+      "sample_id": "D04-economics-v1",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    },
+    {
+      "sample_id": "L300-original-volume-v1",
+      "integrity_passed": true,
+      "requested_page_inventory_passed": true,
+      "parser_executed": false,
+      "human_annotation": "pending"
+    }
+  ]
+}
