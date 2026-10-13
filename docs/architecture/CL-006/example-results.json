@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-13",
+  "scope": "Pure-memory design examples; not a SQL, business authorization, deletion or recovery acceptance",
+  "synthetic": true,
+  "fixture_sha256": "96f7b7a152c79a6b07a1f4af3539ec45a516d1c2f24f61024baea8515517ed1a",
+  "script_sha256": "d371a5c813b0f73b3b5ba793415f5a8436bfb8e8df236737e1db779396665e1d",
+  "checks": [
+    {
+      "case": "shared-task-counted-once",
+      "passed": true,
+      "observed": 15
+    },
+    {
+      "case": "capacity-conflict-visible",
+      "passed": true,
+      "observed": {
+        "requested": 35,
+        "limit": 30
+      }
+    },
+    {
+      "case": "duplicate-task-replay-no-extra-charge",
+      "passed": true,
+      "observed": 35
+    },
+    {
+      "case": "new-subject-uses-same-fields",
+      "passed": true,
+      "observed": ["computer-science", "economics", "english", "physics"]
+    },
+    {
+      "case": "same-label-private-public-remain-distinct",
+      "passed": true,
+      "observed": ["PK-PHY", "PK-PUBLIC-PHY"]
+    },
+    {
+      "case": "unrelated-account-does-not-own-space",
+      "passed": true,
+      "observed": {
+        "claimant": "U-B",
+        "owner": "U-A"
+      }
+    },
+    {
+      "case": "mixed-private-public-purpose-intersection",
+      "passed": true,
+      "observed": {
+        "space": "S-A",
+        "purposes": ["practice", "read"]
+      }
+    },
+    {
+      "case": "late-result-after-correction-rejected",
+      "passed": true,
+      "observed": {
+        "input_revision": 1,
+        "current_revision": 2
+      }
+    },
+    {
+      "case": "correction-does-not-rewrite-attempt",
+      "passed": true,
+      "observed": {
+        "id": "ATT-1",
+        "question_version": "QUESTION-v1",
+        "answer_version": "ANSWER-v1",
+        "rubric_version": "RUBRIC-v1",
+        "original_grade_version": "GRADE-v1",
+        "completed": true
+      }
+    },
+    {
+      "case": "deletion-propagates-to-dependent-assets",
+      "passed": true,
+      "observed": [
+        "CHUNK-A",
+        "EVIDENCE-v1",
+        "EXPLANATION-v1",
+        "EXPORT-v1",
+        "FUTURE-TASK",
+        "INDEX-A",
+        "PARSE-A",
+        "QUESTION-v1",
+        "SRC-A-v1"
+      ]
+    },
+    {
+      "case": "late-result-after-deletion-rejected",
+      "passed": true,
+      "observed": {
+        "source_revision": 2,
+        "access_revision": 2,
+        "admission_epoch": 2
+      }
+    },
+    {
+      "case": "old-restore-point-not-opened",
+      "passed": true,
+      "observed": {
+        "restore": 0,
+        "required": 1,
+        "traffic_allowed": false
+      }
+    },
+    {
+      "case": "dependency-cycle-walk-is-bounded",
+      "passed": true,
+      "observed": "visited-set traversal; malformed cycles require review"
+    }
+  ],
+  "passed": 13,
+  "human_non_author_review": "pending"
+}
