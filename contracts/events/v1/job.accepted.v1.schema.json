@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.canlearn.invalid/events/job.accepted.v1",
+  "title": "job.accepted.v1",
+  "$comment": "CL-008 proposal; no live producer/consumer or authorization guarantee",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "schema_version",
+    "aggregate_type",
+    "aggregate_id",
+    "aggregate_revision",
+    "space_id",
+    "actor_ref",
+    "trace_id",
+    "occurred_at",
+    "payload"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "event_type": {
+      "const": "job.accepted.v1"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "aggregate_type": {
+      "const": "job"
+    },
+    "aggregate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "aggregate_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "space_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "actor_ref": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["job_id", "input_snapshot_id", "kind", "admission_epoch"],
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "input_snapshot_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "kind": {
+          "enum": ["parse", "embed", "generate", "validate", "grade", "export", "plan_proposal"]
+        },
+        "admission_epoch": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "resource_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource_type", "resource_id", "version_id"],
+      "properties": {
+        "resource_type": {
+          "enum": [
+            "document",
+            "source_version",
+            "content_revision",
+            "question_version",
+            "explanation_version",
+            "index_generation",
+            "evidence_version",
+            "plan_version",
+            "export_version"
+          ]
+        },
+        "resource_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "version_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  }
+}

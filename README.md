@@ -18,6 +18,8 @@ R0当前设计与证据入口：[CL-005选型交接](docs/architecture/CL-005/de
 [CL-006数据模型](docs/architecture/CL-006/README.md)、[CL-009样本准备](docs/benchmarks/CL-009/README.md)。
 设计/隔离实测与真实业务实现、外部签审及部署验收分别记录。
 REST契约与真实健康接口门禁见[CL-007](docs/api/CL-007/README.md)；OpenAPI中的其余业务操作均为规划。
+Job七状态、事件/Outbox提案与34个可执行故障设计场景见[CL-008](docs/workflow/CL-008/README.md)；
+事件Schema和设计回归接入现有门禁，真实任务/数据库事务/Temporal恢复尚未实现验证。
 
 ## 仓库结构
 

@@ -364,6 +364,42 @@ CL-005/006供应商/真实样本/人工复核条件继续保留；下一依赖�
 “实际负责人、非作者审核人和验收人确认；外部权利/教学签审不可自签”。
 计划按现有证据更新待审核/阻断状态和可访问工件，不擅自记为综合验收完成或关闭。
 
+## PR/Issue交付核验与CL-008设计门禁（2026-10-13，当前最新）
+
+此前五主题＋记忆已推送`origin/docs/cl-005-technical-decisions`，远端与本地
+`fa0b11373720bcebcb1b1631e8e6573a6100af23`一致，推送完整`pnpm verify`通过。
+创建[草稿PR #55](https://github.com/cn-ryh/canlearn-v2/pull/55)，base为已推送但未合main的
+`docs/cl-004-data-governance`，避免重复混入CL-004成果；未向main合并。
+该SHA的GitHub [CI verify](https://github.com/cn-ryh/canlearn-v2/actions/runs/38422860670)实际SUCCESS。
+任务附件工具已调用但未返回确认；不将此写成附件已绑定，PR本身已独立查询确认存在。
+
+已逐卡读取最新正文、保留现有标签/内容并补固定提交工件/PR/验证评论：
+CL-005/006/007的父子13卡（#5/#6/#7/#26–#35）标`status:needs-review`；
+CL-009四卡（#9/#39–#41）标`status:blocked`，外部合法样本0份/0页、真实双标0。
+只勾已交付证据/PR项，非作者/验收项未勾；CL-009实际样本产出项未勾。
+CL-008 #8/#36–#38启动时标`status:in-progress`。重查54卡：仅CL-004四卡CLOSED，其余50OPEN。
+用户本轮授权状态处理，不等同豁免各卡非作者及外部签审条件，没有自动关闭或假指派B/C/D。
+
+随后交付`docs/workflow/CL-008/`a/b/c：七状态转换/不可变终态，PARTIAL_READY为有界尝试结束的
+合格子范围、全blank可解析成功但学习可用0，快照/请求作用域/业务与Temporal/上游ID映射；
+API步骤/预算准入与取消删除/晚到候选门禁、未知调用/费用和中央GPU停止确认分别对账。
+终态后usage可去重更新，取消前合格部分按当前权限可读，删源后全部拒读且历史终态不改。
+Outbox与DB消费效果同事务；外部Temporal启动/信号无法和业务DB原子提交，固定ID/派发意图/回执对账。
+四类planned事件Schema、7正例/19负例及封闭v1升级规则，未引入通用总线或真实producer/consumer。
+34个可执行纯内存故障设计场景覆盖重传/重启/索引丢失/部分页/永久错误/版本与用途撤销/
+取消删除晚到/旧备份隔离/事件重放/冲突usage/GPU租约/审核期限/事务回滚，附下游执行卡映射。
+这些不是实际SQL并发、Temporal故障恢复、外部恰好一次收费、物理停止/清理或真实备份恢复证据。
+
+事件门禁进入现有API Vitest（新增33项），参考模型回归进入workflow pytest（新增35项含源SHA/归档一致性）。
+最终完整`pnpm verify`退出0：API122/Web1/Python36，静态/类型、Redocly、Compose配置与API/Web构建。
+文档模型额外Ruff lint/format通过；源/夹具与结果SHA见`docs/workflow/CL-008/validation-record.json`。
+README/CONTRIBUTING、CL-006/007及两路线图同步；现有业务仍只有健康API/HealthCheckWorkflow、jobs骨架，
+未改业务schema/迁移、OpenAPI操作实现标记、生产依赖或实际运行环境，未新增GPU/平台/云调用。
+首次CL-008推送被源SHA回归拦下：归档前的Ruff上下文与根目录提交钩子不同，格式调整导致旧摘要。
+已统一按根目录钩子格式重建源/结果摘要并修正尚未推送提交，门禁未绕过，实际推送随后重验。
+CL-008待非作者评审；新成果的提交/推送/Issue转待评审结果随后核验。
+下一可独立执行CL-013a合成最小Job纵向链路，真实解析质量仍由CL-009/010合法样本与审核条件约束。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
@@ -380,7 +416,7 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 - Drizzle/PostgreSQL：已有 `jobs` 表及初始 SQL 迁移；任务状态枚举包含 QUEUED、RUNNING、WAITING_REVIEW、PARTIAL_READY、SUCCEEDED、FAILED、CANCELLED。存在表结构不等于任务 API 已实现。
 - `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow 和健康 activity。
 - `compose.yaml`：PostgreSQL、Redis、Temporal、Temporal UI 的本地配置。
-- OpenAPI已有健康接口与27个明确标planned的业务操作提案；运行时仍只有健康业务端点。`contracts/events`只有约定说明，没有真实事件Schema。
+- OpenAPI已有健康接口与27个明确标planned的业务操作提案；运行时仍只有健康业务端点。`contracts/events`有四类planned事件Schema及结构/设计回归，没有真实事件发布/消费。
 - 已配置 Biome、Ruff、mypy、TypeScript、Vitest、pytest、Redocly、GitHub Actions 与 Husky 门禁。
 - 尚无资料上传、MinerU Adapter、真实解析流程、鉴权或学习业务闭环；不要将产品文档、数据库枚举和健康烟测当作已交付功能。
 

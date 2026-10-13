@@ -73,9 +73,10 @@ HTTP条件与受理语义对照：[RFC9110 If-Match](https://httpwg.org/specs/rf
 解析/生成/评分/计划提案/导出/删除返回202，包含JobAccepted、Location和status_url；
 202仅表示受理，最终状态通过本人有权查看的GET /v1/jobs/{jobId}查询。
 不把HTTP200流式片段直接发布给学习路径，不在Task/history/错误保存原文或带签名访问链接。
-Job保持现有七状态；WAITING_REVIEW/PARTIAL_READY表示复核/子范围，不等于全部成功。
+Job保持现有七状态；WAITING_REVIEW表示受控审核等待，PARTIAL_READY表示本次有界尝试以合格子范围结束，
+四种终态不可重开；具体规则为[CL-008a冻结候选](../../workflow/CL-008/job-state-and-admission.md)，人工评审待补。
 usable_result_refs只列已接纳且当前仍有权可读的版本；FAILED/CANCELLED/删源后晚到结果拒收。
-页覆盖分母为所有请求页，success/blank/failed/missing分开记录；具体状态转换由CL-008定稿。
+页覆盖分母为所有请求页，success/blank/failed/missing分开记录；全blank不等于可学习内容。
 Job接受取消与已完成任务竞态在该稿只写接纳约束，不声称上游取消/退款或恰好一次已验证。
 
 列表用limit默认20、上限100和不透明cursor；游标绑定账户、权限域、过滤/排序/快照，
