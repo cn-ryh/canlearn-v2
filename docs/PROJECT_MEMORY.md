@@ -1,6 +1,6 @@
 # CanLearn 项目记忆
 
-最后检查：2026-10-12（UTC）。以下为本地代码、命令验证与 GitHub 远端查询的快照。
+最后检查：2026-10-13（Asia/Shanghai）；早先段落的UTC日期/原始范围保留。以下为带日期的状态快照。
 
 ## 最新收尾状态（2026-10-12，取代下文早先未提交/全部 Open 的快照）
 
@@ -173,6 +173,184 @@ SHA-256、四份相关 Markdown 本地链接和自有文本空白检查通过。
 仅本地提交，CL-005/#27 未验收关闭。下一步先补长块/批量和无答案测试，再按固定 MinerU
 版本与独立环境核验GPU共用；正式质量真值由 CL-009 接续，之后收敛选型并推进模型网关边界。
 
+## CL-005b 补测与 CL-005c 官方SDK/参数核验（2026-10-12，当前最新）
+
+用户要求补长块/批量、无答案/干扰、MinerU共GPU，再收敛ADR并验证聚合Responses；
+随后明确直接使用官方`openai` SDK，输出上限先4096再16,384，并比较temperature/effort。
+当前仍在`docs/cl-005-technical-decisions`，承接本地`bf10df9`；本轮成果未提交/推送，未关闭Issue。
+没有修改实际业务依赖/服务、API/事件/迁移或真实资料准入，不把探针当网关/调度已部署。
+
+4070复用既有独立embedding环境，两个固定revision分别独立进程、float32评测：
+BGE 512/1024/2048 token、batch4吞吐39.156/17.778/7.269块/秒，峰值已分配显存
+2270.16/2366.22/2558.34 MiB；每档60次热短查询约26–27ms中位，非公网/完整服务延迟。
+8个原答案段落＋8个干扰、16个有答案查询＋12个无答案：短文本两模型Top1均12/16、Top3均16/16；
+有答案与无答案Top1分数区间重叠，不设上线余弦拒答阈值。E5两个2255 token输入仅尾部答案不同，
+截断512后input IDs相同、cosine=1.0；长度预算必须包括特殊token和E5前缀。
+内部推荐BGE-M3稠密1024维、512 token目标上限、batch4；1024只作不可拆语义对象例外候选，
+重叠/正式质量/无答案规则交CL-009真实合法样本校准/留出集，不能用重复填充语料冻结质量。
+详细脚本、排序/性能/文件SHA在`docs/architecture/CL-005/retrieval/`。
+
+另建独立MinerU4.0.7环境，torch2.8.0/torchvision0.23.0/transformers5.19.0，不升级embedding环境。
+固定源标签commit `175f031cbcded6b527ddb2045ccec460ffecfa26`，Basic/Torch模型下载核验通过，
+实际HF revision `2b3afb86f4d23fa623f6b2f4b2279ed4ef93a89d`、15文件SHA和完整依赖快照已登记。
+只运行本地Basic、显式全页/新输出目录、600秒截止与768 MiB余量停止；没有远端解析/VLM/辅助LLM。
+300页串行/GPU10秒并发/GPU30秒并发/CPU30秒并发四次解析分别108.345/104.201/100.896/100.948秒，
+均退出0且300锚点保留，无缺失/重复/越界；不是正文/公式质量或V1/取消/重启恢复验收。
+串行查询约10秒到达，实测等待98.304秒；GPU短突发并发峰值整卡5884 MiB（含原有2494），
+热查询约26ms；同模型BGE四线程CPU查询约105ms，解析期间约107ms。建议解析与文档embedding
+先串行，实时查询独立有界排队/预算并继续验证同模型CPU路径，不能用E5查询BGE索引。
+仅Basic/simple合成/短突发，不能外推Standard/VLM、南京4核8G或长期10人负载。
+既有GPU服务未停止，结束GPU回到2494 MiB空闲；测试进程退出，临时回环下载转发和SSH连接已清理，
+隔离环境/模型缓存保留复测。MinerU许可附加条件已读取/登记SHA，CL-010a权利签审仍待完成。
+300页生成manifest改为仅描述生成及独立评测记录入口；两次重建PDF字节/SHA保持原值。
+
+聚合只用原创资料：原始HTTP10次（256上限历史对照）、官方Python SDK2.54.0七次（4096），
+随后16K参数38次，共55次，自动重试均0。SDK直接读取DeepSeek非流式缺`message.status`的文本，
+此前拒收来自原型更严格的消息校验，已修正解读；DeepSeek非流式/结构化/流式均通过简单合成检查。
+GLM4096流式可用，非流式completed但只有reasoning；16K另测low/high非流式仍无最终答案。
+两个不存在的模型负例均HTTP503，SDK分类InternalServerError；没有自动重试/供应商降级。
+16K矩阵为temperature0/0.7/1.0×effort low/medium/high，每模型每组合两次流式，固定随机次序；
+原创版本/审核过滤/算术JSON真值下DeepSeek17/18、GLM1/18，GLM两次120秒期限后费用/停止未知。
+未通过JSON的字段不能解释为已证实算术错误。所有已回执对象未回显temperature/effort/输出上限，
+上游参数实际应用未核验；样本最高已报告输出2293 token，不证明实际能完成16K输出。
+继续内部比较的基线建议DeepSeek＋temperature0.7＋medium（本组2/2、中位3.574秒），不是正式最优结论。
+实际模型回显带`-x`平台标签，法律主体、上游/固定版本/地域/留存/训练/分包/删除条件仍未核验，
+真实资料路径保持禁用，`store:false`不能作为零留存证明。
+
+用户报价人民币每百万token：DeepSeek输入0.25/输出0.88，GLM为5倍即1.25/4.40；缓存单价未知。
+55请求中48有可用usage、35,193 token；已知可定价部分¥0.07574293，若缓存暂按普通输入计费
+为¥0.07870418，两者都不包含7个未知用量（初版拒收丢失3、503两次、流式期限两次），实际扣款未知。
+已修复拒收时丢失有效usage的原型问题，不反推旧请求费用；不按空答案/错误/超时记零。
+SDK/HTTP原型未来输出上限默认16K，可显式重放旧额度；48项本地故障注入与缓存/推理计费检查已通过。
+本轮`pnpm check`退出0：格式/lint/类型、原3项基线单测、OpenAPI与Compose配置通过；
+docs下12份Python的Ruff lint/format、48项原型故障注入、76个本地Markdown链接、
+评测/原型脚本SHA、矩阵38个/费用55个请求计数、夹具生成器/PDF摘要和凭据/私网入口排除检查通过。
+`git diff --check`通过，未改原FONT-NOTICE。没有重跑应用构建或声明正式业务/SDK网关安全验收；
+本轮代码仍在文档探针，不在真实API/worker业务路径，所有成果保持未提交。
+
+## CL-005c GLM失败与MiniMax/Step补测（2026-10-13，当前最新）
+
+用户明确要求把glm-5.3彻底标注失败，并以相同16K输出上限、temperature/effort比较
+minimax-m3与step-5-preview。新增`model-gateway/selection-record.json`将GLM置为FAILED、
+选型资格false、所有路径/备用排除；历史简单流式成功与失败证据保留，不重写结果，未再次调用GLM。
+该结论限定当前聚合别名/配置/合成质量门，不能外推到GLM全家族。
+
+新增`candidate_probe.py`直接复用原`parameter_probe.py`的固定PROMPT/Schema/真值/评估函数，
+旧评估源码未修改；记录提示与三个脚本SHA。官方openai2.54.0、输出上限16384、store:false、
+自动重试0、请求超时60秒/流式120秒检查；temperature0/0.7/1.0×effort low/medium/high，
+每模型每组合两次流式，再各加low/high非流式，共40请求，固定随机种子5005。
+全部完成且有合法usage，没有超时/HTTP错误；新两模型回显给定别名，不证明官方固定上游。
+
+Step流式18/18完整通过严格JSON、四项真值、S1–S5来源集合和增量/最终一致性；
+MiniMax四项数字18/18正确，但完整来源集合仅1/18，严格门禁也仅1/18。
+不能把引用问题写成算术错误或更改来源要求提高通过率。两模型各两次非流式均completed，
+只有reasoning无最终文本。Step仅保留流式合成候选，MiniMax本轮不选入候选/备用；
+DeepSeek继续作为历史合成基线，未部署模型路由或实际网关。
+Step继续比较可从temperature0/medium起步（2/2、总耗时中位6.220秒），high没有新增本轮真值收益，
+部分输出/耗时更高；每格两次不能宣称最优或稳定学科质量。temperature/effort/输出上限均未回显，
+上游参数实际应用未核验；最高已报告输出848token，未验证可实际完成16K输出。
+
+用户新增人民币报价，沿用此前每百万token口径：MiniMax输入1.20/输出5.80/缓存命中0.24，
+Step分别1.20/4.00/0.09。Decimal区分缓存、不重复计算推理费；40请求共25,922token，
+按报价估算MiniMax¥0.05439600、Step¥0.02966000，合计¥0.08405600；不是实际账单。
+新`candidate-cost-results.json`单列此轮，旧55请求/7个未知用量与旧费用工件保持不变。
+完整矩阵/非流式/费用见`docs/architecture/CL-005/model-gateway/candidate-evaluation.md`与
+`candidate-results.json`；已同步ADR-0005和CL-005入口，真实资料处理条件与CL-009质量验证仍待补。
+本轮`pnpm check`退出0；新探针Ruff lint/format通过，离线核验40次组合与汇总、旧提示/源码SHA、
+Decimal费用、FAILED别名在创建客户端前拒绝、MockTransport中SDK实际发送参数均通过。
+83个本地Markdown链接、20份文本的密钥/私网入口模式排除及`git diff --check`通过。
+核验没有新增平台请求，未重跑应用构建或把3项工程基线单测解释为业务网关验收。
+本轮保持分支`docs/cl-005-technical-decisions`、承接`bf10df9`，已有未提交修改全部保留；
+没有提交/推送、远端Issue操作、业务依赖/契约/迁移变更或真实资料调用。
+
+## CL-005收敛、CL-006设计与CL-009准备（2026-10-13，当前最新）
+
+用户明确授权按上轮规划继续并完成全部可执行工作：合成业务链核验、CL-005c/d选型交接、
+CL-006a/b/c数据模型以及CL-009样本/真值准备。本轮不自动提交/推送或关闭Issue，
+保留此前所有未提交修改；业务实现/部署与外部签审仍按证据区分。
+
+新增官方SDK业务链探针，DeepSeek temperature0.7、Step0、effort medium、SSE、输出上限16384、
+重试0、请求60秒/流式120秒检查；混合current/withdrawn来源、无答案和48题三场景，
+生成→跨别名校验→至多一次修复→修复校验。每题本地整数与必要来源集合独立检查，
+48题只是6种固定算术任务重复，不代表真实多学科质量；真正上游独立性未证明。
+首轮24请求最终0/6链；同一Schema写进提示的对照20请求最终6/6，原失败完整保留。
+DeepSeek三场景初稿过门禁，混合版本后注入Q01错误答案/撤回引用，另一别名与本地识别，修复通过。
+Step三场景均用一次修复，无答案初稿JSON失败、48题初稿达120秒期限；不把修复通过当初次可用性。
+复核发现format包含未显式提示的题干10–600字符本地规则；额外2请求把同规则写入提示，
+Step生成/DeepSeek校验通过，无修复。没有改旧grade或统计，不将旧format全部归因模型Schema违规。
+
+合计46新增平台请求，41合法usage、169,372token，最大已报告输出13,480token，
+不证明能完成16K最终文本。5次未知用量为3次期限与2次主动关闭连接，上游停止/计费待对账。
+已知定价部分¥0.22215464；DeepSeek缓存384token单价未知，若按普通输入报价则为¥0.22225064，
+均未计入5次未知调用，不是实际账单。两轮和小对照共用¥5报价情景准入，组合预留情景¥2.15100411，
+输入字节余量不是平台tokenizer/账单上限保证。此前95次/7个未知请求与费用工件保持原值。
+当前合成比较建议DeepSeek生成＋Step流式校验、提示/本地规则一致、严格结构/版本/来源门禁、
+每链至多4次与修复1次；GLM FAILED全路径排除、MiniMax暂不选入保持原决定。
+完整证据见`docs/architecture/CL-005/model-gateway/business-chain-evaluation.md`及三轮结果/独立费用。
+selection-record增加业务角色与模板规则，仍是R0建议，不是已部署网关/账本或真实资料准入。
+
+新增`docs/architecture/CL-005/decision-closeout.md`汇总a/b/c/d结论、失败/退出、G01–G09责任与验收节点；
+同步ADR-0005/0006。南京Web/API/DB/Temporal/CPU worker、宁波受限解析、TCP mTLS/来源限制保持已确认路线。
+共享GPU执行器同时1个解析/文档embedding重任务，内部候选限额全局等待10/账户2，
+实时同BGE CPU查询截止2秒/等待20是待CL-013负载验证的初始提案，未部署或宣称实测容量。
+南京4核8G/真实mTLS/证书ACL/备份恢复/Temporal留存/供应商条款/账单与Q04均留明确责任及放行节点。
+
+新增`docs/architecture/CL-006/`四份设计入口/文档、字段字典与ERD、版本/引用/用途交集、
+更正/撤回/删除传播、API模块权威写入、Job步骤/费用/Outbox与迁移回退约束。
+只提出schema增量演化，没有改现有jobs七状态、业务代码、契约或迁移文件。
+13项纯内存合成设计场景通过，覆盖共享任务容量去重/冲突、私有公共分离、修订/删源晚到拒收、
+依赖闭包/旧恢复水位；不能证明实际SQL锁/权限/物理删除/恢复通过。B非作者人工复核未补造。
+
+新增`docs/benchmarks/CL-009/`准入/分层与逐页引用/双标仲裁协议、空白外部样本/人工标注台账、
+登记与检查脚本。复用原位置6份原创PDF（含更正版）/5家族/310版本页，6份SHA/请求页声明/
+生成器引用/家族切分检查通过，未复制原件或重跑MinerU。300页仅性能，另5小PDF为4家族/10版本页；
+这些不等于真实120页质量基准或真人双标。外部合法样本实际0份/0页，目标12份/120页与真实扫描/
+公式/表格/至少三其他学科、用途核权及人工标注仍由C与指定权利/学科责任人补。
+已同步README、两份路线图和CL-005入口；设计与准备包可供评审，CL-005/006/009未综合验收关闭。
+本轮`pnpm check`退出0；新增13项MockTransport故障检查、CL-006的13项纯内存设计场景、
+CL-009的6份夹具完整性核验通过。模型网关及CL-006/009共15份Python Ruff lint/format通过，
+三轮实测与汇总源码/结果SHA、计数/Decimal费用、175个本地Markdown链接/围栏、44份文本凭据/
+私网入口模式排除、空白人工CSV和`git diff --check`通过。没有重跑业务构建、真实解析/部署或人工签审，
+最后核验没有新增平台请求；所有本轮成果保持未提交，现有分支/未提交内容完整保留。
+
+## CL-007通用REST契约与真实健康漂移门禁（2026-10-13，当前最新）
+
+用户要求按规划继续；本轮完成CL-007a/b/c的可评审契约与工程门禁，正式人工评审仍待补。
+新增`docs/api/CL-007/`通用约定、端点/接纳映射、漂移/增量准入规则、18个原创合成DTO正负例及核验记录。
+按CL-005/006设计定义会话/验证邮箱、服务端空间/父子/用途授权、越域404、最小错误与可重试类别、
+请求键作用域/同键异载荷、强ETag/If-Match/428/412、快照冲突409、分页与202/任务查询/部分可用。
+这些业务规则为规划，没有把空间ID/客户端分数/模型completed当授权或事实。
+HTTP条件/受理语义已读HTTPWG RFC9110、RFC6585与Nest官方测试/Swagger文档作为对照。
+
+`contracts/openapi/canlearn.v1.yaml`扩写为28操作：GET /v1/health标implemented，其余27操作均
+标planned/[规划]。覆盖文档上传/版本/页状态与纠错、parse-jobs、jobs查询/取消/显式重试、
+exercise/explanation-jobs及获准结果、attempts/异步评分、plan-patches/确认/撤销、导出与单Range读取、
+来源/引用/质量/错误/版本等33个schema。所有业务实际路由仍不存在，没有安装认证、模型或MinerU服务，
+未新增业务DB表/迁移或改变jobs七状态。分页/题数/数组限制是初始契约提案，不是实测容量或已冻结上传额度。
+鉴权原生入口、公共编辑/种子、目标/学科包完整CRUD与答案曝光的专门契约由相应功能卡后续补齐；
+该稿是路线图关键接口，不宣称完整MVP API已定义/实现。
+
+实际代码只抽出共享`apps/api/src/application.ts`供启动与测试复用，保留版本/校验/helmet/CORS配置；
+运行时Swagger改为OpenAPI3.1.0并保持只来自已安装控制器。健康返回体保持service/status固定值，
+Swagger补齐类型/必需字段/单值enum/additionalProperties:false、getHealth ID、无会话与implemented标记。
+API devDependencies固定新增ajv8.20.0、ajv-formats3.0.1、yaml2.9.1，锁文件同步；不新增生产依赖。
+
+新`health.contract.test.ts`用同一Nest/Fastify应用inject实际HTTP与/docs-json，没有监听端口。
+实现集合与手写契约比较路径/方法/ID/security/响应码/200 JSON schema；错误响应字段、
+schema变化、漏登记运行路由与误升级planned的负例会失败。27规划路由均实测404，
+33 schema编译/18 DTO样例仅校验结构，不能当鉴权/幂等/取消/删除/评分已验证。
+新增88检查通过：实际健康HTTP/Swagger2、响应字段负例4、漂移/路由/升级负例3、规划404共27、
+schema编译33、DTO18、规划标记1；连同旧健康单测，API89项通过。
+测试经现有pnpm check→API Vitest→CI pnpm verify入口接续，未改CI工作流或执行远端CI。
+新业务端点需扩展非200/请求/媒体/权限/故障检查再升级implemented，当前比较器不冒充全接口覆盖。
+
+完整`pnpm verify`退出0（格式/lint/类型、API89/Web1/Python1测试、Redocly、Compose配置、Web/API构建）。
+另用已编译API复测健康HTTP200/JSON、运行时只列/v1/health与规划parse-jobs404；无DB/Temporal/模型/云调用。
+核验记录`docs/api/CL-007/validation-record.json`登记实际编译响应、8份源/契约/锁/样例SHA与检查范围。
+65本地Markdown链接/围栏、核验SHA/检查计数、9份新增文本密钥/私网入口模式排除、git diff --check通过。
+README/CONTRIBUTING、CL-006入口及两份路线图同步；当前分支/所有既有未提交修改保留，未提交/推送/关闭Issue。
+CL-005/006供应商/真实样本/人工复核条件继续保留；下一依赖为CL-008任务状态机、Outbox/幂等及取消删除原子接纳。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
@@ -189,7 +367,7 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 - Drizzle/PostgreSQL：已有 `jobs` 表及初始 SQL 迁移；任务状态枚举包含 QUEUED、RUNNING、WAITING_REVIEW、PARTIAL_READY、SUCCEEDED、FAILED、CANCELLED。存在表结构不等于任务 API 已实现。
 - `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow 和健康 activity。
 - `compose.yaml`：PostgreSQL、Redis、Temporal、Temporal UI 的本地配置。
-- OpenAPI 当前为健康接口基线；`contracts/events` 只有约定说明，没有真实事件 Schema。
+- OpenAPI已有健康接口与27个明确标planned的业务操作提案；运行时仍只有健康业务端点。`contracts/events`只有约定说明，没有真实事件Schema。
 - 已配置 Biome、Ruff、mypy、TypeScript、Vitest、pytest、Redocly、GitHub Actions 与 Husky 门禁。
 - 尚无资料上传、MinerU Adapter、真实解析流程、鉴权或学习业务闭环；不要将产品文档、数据库枚举和健康烟测当作已交付功能。
 

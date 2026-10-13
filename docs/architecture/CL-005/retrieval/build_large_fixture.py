@@ -99,7 +99,8 @@ def main() -> None:
         "font_sha256": hashlib.sha256(FONT.read_bytes()).hexdigest(),
         "anchor_pattern": "PAGE-ANCHOR-{page:03d}; one anchor per PDF page",
         "content": "original, simple text, repeated layout; not a real or complex textbook",
-        "mineru_attempted": False,
+        "generation_executes_mineru": False,
+        "parsing_observations": "../coexistence-results.json",
         "parsing_success_required": False,
         "intended_observations": [
             "admission/rejection reason and bounded resource use",
