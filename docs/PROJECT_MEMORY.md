@@ -1,6 +1,6 @@
 # CanLearn 项目记忆
 
-最后检查：2026-10-13（Asia/Shanghai）；早先段落的UTC日期/原始范围保留。以下为带日期的状态快照。
+最后检查：2026-10-14（Asia/Shanghai）；早先段落的UTC日期/原始范围保留。以下为带日期的状态快照。
 
 ## 最新收尾状态（2026-10-12，取代下文早先未提交/全部 Open 的快照）
 
@@ -399,6 +399,23 @@ README/CONTRIBUTING、CL-006/007及两路线图同步；现有业务仍只有健
 已统一按根目录钩子格式重建源/结果摘要并修正尚未推送提交，门禁未绕过，实际推送随后重验。
 CL-008待非作者评审；新成果的提交/推送/Issue转待评审结果随后核验。
 下一可独立执行CL-013a合成最小Job纵向链路，真实解析质量仍由CL-009/010合法样本与审核条件约束。
+
+## CL-008推送与Issue状态收尾（2026-10-14，当前最新）
+
+CL-008独立提交`d4a9056a0e7cdcae5cebdbb3329feac548d3c0a4`已推送并经GitHub branch ref与本地HEAD核对。
+摘要门禁发现提交钩子格式上下文差异后已重建修正；未绕过检查。最终推送完整pnpm verify通过
+（API122/Web1/Python36与静态/类型、契约、Compose、构建），[远端CI](https://github.com/cn-ryh/canlearn-v2/actions/runs/38426857590)
+实际SUCCESS。SSH等待期间使用现有认证作单次HTTPS操作，未改全局Git配置、原远端或主机设置。
+[PR #55](https://github.com/cn-ryh/canlearn-v2/pull/55)仍为草稿，标题/说明已按CL-005～008/009准备最终范围更新；
+旧gh pr edit遇到Projects classic查询不兼容，已用认证REST PATCH成功更新并重查，不升级CLI或请求新权限。
+
+CL-008 #8/#36–#38已补固定提交/核验/PR评论并由in-progress转needs-review。
+重查54卡：CL-005～008父子17卡needs-review，CL-009四卡blocked；仅此前CL-004四卡Closed，其余50Open。
+相关子卡只勾已交付证据/PR项，非作者/验收项仍未勾；没有自动关闭、合并main或补造人工签审。
+公开逐卡评论和提交证据集中在`docs/delivery/2026-10-14-r0-contract-delivery.md`。
+本轮代码/契约成果已交付，真实业务/SQL/Temporal/物理清理与恢复仍待CL-013及相应实现卡；
+下一可独立推进CL-013a合成最小Job纵向链路，CL-009真实样本/双标和供应商条件保持原阻断面。
+本段与交付记录另作收尾提交；远端最新HEAD随后核验，不将提交前记忆写成该提交已推送。
 
 ## 定位与依据
 
