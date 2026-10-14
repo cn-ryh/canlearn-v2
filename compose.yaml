@@ -44,10 +44,13 @@ services:
       POSTGRES_USER: ${TEMPORAL_POSTGRES_USER:-temporal}
       POSTGRES_PWD: ${TEMPORAL_POSTGRES_PASSWORD:-temporal_local}
       POSTGRES_SEEDS: postgres
+      # auto-setup skips DB creation when DBNAME equals POSTGRES_USER; roles are separate here.
+      DBNAME: canlearn_temporal
+      VISIBILITY_DBNAME: canlearn_temporal_visibility
     ports:
       - "127.0.0.1:7233:7233"
     healthcheck:
-      test: ["CMD", "temporal", "operator", "cluster", "health"]
+      test: ["CMD", "temporal", "operator", "cluster", "health", "--address", "temporal:7233"]
       interval: 10s
       timeout: 5s
       retries: 15

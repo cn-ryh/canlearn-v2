@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     temporal_task_queue: str = "canlearn-workflows"
     api_internal_url: str = "http://localhost:3001/v1"
     mineru_base_url: str = "http://localhost:8000"
+    canlearn_smoke_enabled: bool = False
+    canlearn_smoke_token: str = ""
 
 
 settings = Settings()

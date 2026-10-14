@@ -41,3 +41,5 @@ jobs:
         run: printf '%s\n' "$PR_TITLE" | pnpm exec commitlint
       - name: Verify repository
         run: pnpm verify
+      - name: Run local synthetic Job integration
+        run: pnpm smoke:test --skip-build

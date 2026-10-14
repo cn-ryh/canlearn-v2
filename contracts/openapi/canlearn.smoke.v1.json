@@ -1,0 +1,438 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CanLearn local synthetic API",
+    "version": "1.0.0",
+    "description": "CL-013a fixed-fixture loopback smoke scope; no production session/resource authorization.",
+    "license": {
+      "name": "Proprietary",
+      "identifier": "Proprietary"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3311"
+    }
+  ],
+  "security": [],
+  "tags": [
+    {
+      "name": "local-synthetic",
+      "description": "仅显式启用的本地原创夹具验证"
+    }
+  ],
+  "paths": {
+    "/v1/smoke/jobs": {
+      "post": {
+        "operationId": "createSmokeJob",
+        "summary": "创建本地合成 Job",
+        "tags": ["local-synthetic"],
+        "security": [],
+        "x-implementation-status": "implemented",
+        "x-runtime-scope": "local-synthetic-only",
+        "responses": {
+          "202": {
+            "description": "任务已持久受理",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Smoke-Client",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["1"]
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSmokeJob"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/smoke/jobs/{id}": {
+      "get": {
+        "operationId": "getSmokeJob",
+        "summary": "查询本地合成 Job",
+        "tags": ["local-synthetic"],
+        "security": [],
+        "x-implementation-status": "implemented",
+        "x-runtime-scope": "local-synthetic-only",
+        "responses": {
+          "200": {
+            "description": "当前合成任务",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/smoke/jobs/{id}/cancel": {
+      "post": {
+        "operationId": "cancelSmokeJob",
+        "summary": "取消本地合成 Job",
+        "tags": ["local-synthetic"],
+        "security": [],
+        "x-implementation-status": "implemented",
+        "x-runtime-scope": "local-synthetic-only",
+        "responses": {
+          "200": {
+            "description": "当前合成任务",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "请求被拒绝或服务暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmokeError"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Smoke-Client",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["1"]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateSmokeJob": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["mode", "delayMs"],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["success", "partial", "blank", "fail"]
+          },
+          "delayMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15000
+          }
+        }
+      },
+      "SmokeJob": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "status",
+          "snapshotId",
+          "traceId",
+          "workflowId",
+          "revision",
+          "epoch",
+          "terminationState",
+          "failureCode",
+          "result",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["synthetic_parse"]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "QUEUED",
+              "RUNNING",
+              "WAITING_REVIEW",
+              "PARTIAL_READY",
+              "SUCCEEDED",
+              "FAILED",
+              "CANCELLED"
+            ]
+          },
+          "snapshotId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "traceId": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{32}$"
+          },
+          "workflowId": {
+            "type": "string",
+            "pattern": "^cl-job/[0-9a-f-]{36}$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "epoch": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "terminationState": {
+            "type": "string",
+            "enum": ["not_requested", "requested", "confirmed"]
+          },
+          "failureCode": {
+            "enum": [null, "PERMANENT_ERROR"]
+          },
+          "result": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["fixtureId", "pages"],
+                "properties": {
+                  "fixtureId": {
+                    "type": "string",
+                    "enum": ["cl013-original-v1"]
+                  },
+                  "pages": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["pageIndex", "status"],
+                      "properties": {
+                        "pageIndex": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 3
+                        },
+                        "status": {
+                          "enum": ["success", "blank", "failed", "missing"]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "delivery": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["eventId", "state", "attempts", "lastErrorCode"],
+              "properties": {
+                "eventId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "state": {
+                  "enum": ["pending", "claimed", "sent", "quarantined"]
+                },
+                "attempts": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "lastErrorCode": {
+                  "enum": [null, "SMOKE_DISPATCH_UNCONFIRMED"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "SmokeError": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["statusCode", "message", "error"],
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "message": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

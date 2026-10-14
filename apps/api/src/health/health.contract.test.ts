@@ -119,6 +119,13 @@ describe("Implemented REST contract and runtime Swagger", () => {
     expect(healthValidator(response.json())).toBe(true);
   });
 
+  it("keeps local synthetic and internal routes absent by default", async () => {
+    expect((await app.inject({ method: "POST", url: "/v1/smoke/jobs" })).statusCode).toBe(404);
+    expect(
+      (await app.inject({ method: "POST", url: "/v1/internal/smoke/outbox/claim" })).statusCode,
+    ).toBe(404);
+  });
+
   it("aligns implemented paths, operation IDs, security, status codes and response schemas", () => {
     expect(runtime.openapi).toBe("3.1.0");
     assertAlignment(contract, runtime);

@@ -3,13 +3,13 @@ import { type NestApplicationOptions, ValidationPipe, VersioningType } from "@ne
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { AppModule } from "./app.module.js";
+import { createAppModule } from "./app.module.js";
 
 export async function createApplication(
   options: NestApplicationOptions = { bufferLogs: true },
 ): Promise<NestFastifyApplication> {
   const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
+    createAppModule(),
     new FastifyAdapter(),
     options,
   );

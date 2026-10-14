@@ -11,6 +11,7 @@ dependencies = [
 
 [project.scripts]
 canlearn-worker = "canlearn_workflow.worker:run"
+canlearn-smoke-dispatcher = "canlearn_workflow.smoke_dispatcher:run"
 
 [dependency-groups]
 dev = [

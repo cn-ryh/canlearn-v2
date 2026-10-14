@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.canlearn.invalid/events/job.accepted.v1",
   "title": "job.accepted.v1",
-  "$comment": "CL-008 proposal; no live producer/consumer or authorization guarantee",
+  "$comment": "CL-008 production proposal; CL-013a local synthetic transport only; no production authorization guarantee",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -21,7 +21,7 @@ const validators = new Map(
   catalog.events.map((entry) => [entry.event_type, ajv.compile(load(entry.schema_file))]),
 );
 
-describe("CL-008 proposed event schemas; no live event transport", () => {
+describe("CL-008 production event proposals; local synthetic transport is verified separately", () => {
   it("uses only existing terminal Job states without expanding the database enum", () => {
     expect(jobStatus.enumValues).toEqual([
       "QUEUED",
