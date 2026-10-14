@@ -161,7 +161,7 @@ export class SmokeController {
   @HttpCode(202)
   @ApiOperation({ operationId: "createSmokeJob", summary: "创建本地合成 Job" })
   @ApiHeader({
-    name: "Idempotency-Key",
+    name: "idempotency-key",
     required: true,
     schema: { type: "string", format: "uuid" },
   })

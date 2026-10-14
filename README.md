@@ -22,6 +22,8 @@ Job七状态、事件/Outbox提案与34个可执行故障设计场景见[CL-008]
 事件Schema和设计回归接入现有门禁。
 [CL-013a 合成 Job](docs/integration/CL-013a/README.md)已补默认关闭的本地 Web/API/PostgreSQL/Temporal 链路、
 取消/回执/SQL 回滚与重启验证；生产资源授权、真实解析/模型和完整删除恢复仍待后续验收。
+[CL-013b/c 门禁包](docs/integration/CL-013bc/README.md)补真实响应/事件破坏探针、升级兼容迁移验证、
+密钥/依赖扫描与版本固定；镜像漏洞保留报告及处置期限，交付状态见门禁包记录。
 
 ## 仓库结构
 
@@ -75,6 +77,8 @@ pnpm check   # 格式、静态检查、类型、单元测试、契约和 Compose
 pnpm build   # 所有可构建工作区
 pnpm verify  # 完整合并前门禁：check + build
 pnpm smoke:test --skip-build # 真实隔离基础设施的合成 Job 集成验证
+pnpm security:scan # 密钥/依赖阻断；固定镜像扫描和残余项报告（Linux x86_64）
+pnpm security:probes # 不存在的密钥与漏洞锁文件受控探针
 ```
 
 TypeScript/JavaScript 使用 Biome，不重复引入 ESLint；Python 使用 Ruff 与 mypy。安装依赖后，Husky 会自动启用暂存区检查、提交信息检查和推送前完整验证。

@@ -19,6 +19,44 @@ from temporalio.worker import Replayer
 
 RECORDS: list[dict[str, Any]] = []
 JOB_IDS: list[str] = []
+HTTP_OBSERVATIONS: list[dict[str, Any]] = []
+
+
+async def observe_http(response: httpx.Response) -> None:
+    if response.request.url.path.startswith("/v1/smoke/jobs"):
+        await response.aread()
+        # Only fixed synthetic public responses; never capture internal credentials/headers.
+        HTTP_OBSERVATIONS.append(
+            {
+                "path": response.request.url.path,
+                "method": response.request.method,
+                "status": response.status_code,
+                "contentType": response.headers.get("content-type", ""),
+                "body": response.json(),
+            }
+        )
+
+
+def contract_cli(script: str, path: Path, rejected: bool = False) -> str:
+    result = subprocess.run(
+        [
+            "pnpm",
+            "--filter",
+            "@canlearn/api",
+            "exec",
+            "tsx",
+            f"src/smoke/{script}.ts",
+            str(path),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert (result.returncode != 0) if rejected else (result.returncode == 0), (
+        f"{script} gate exit mismatch"
+    )
+    return result.stdout
 
 
 def manifest(mode: str) -> list[dict[str, Any]]:
@@ -98,7 +136,10 @@ async def main() -> None:
     env = environment()
     async with (
         httpx.AsyncClient(
-            base_url="http://127.0.0.1:3311/v1", timeout=10, trust_env=False
+            base_url="http://127.0.0.1:3311/v1",
+            timeout=10,
+            trust_env=False,
+            event_hooks={"response": [observe_http]},
         ) as api,
         httpx.AsyncClient(
             base_url="http://127.0.0.1:3310", timeout=10, trust_env=False
@@ -151,6 +192,34 @@ async def main() -> None:
             return {"snapshotId": job["snapshotId"], "epoch": job["epoch"]}
 
         record("compiled Web smoke page", (await web.get("/smoke")).status_code == 200)
+        # Exercise every public status reachable from a loopback socket, including capacity 503.
+        unknown = str(uuid4())
+        for method, path, headers, expected in (
+            ("GET", "/smoke/jobs/not-a-uuid", {}, 400),
+            ("GET", f"/smoke/jobs/{unknown}", {}, 404),
+            ("POST", "/smoke/jobs/not-a-uuid/cancel", marker, 400),
+            ("POST", f"/smoke/jobs/{unknown}/cancel", marker, 404),
+            ("POST", f"/smoke/jobs/{unknown}/cancel", {}, 403),
+            ("POST", "/smoke/jobs", {}, 403),
+        ):
+            response = await api.request(method, path, headers=headers)
+            assert response.status_code == expected
+        stop("dispatcher")
+        capacity_jobs = [await create(delay=0) for _ in range(10)]
+        capacity = await api.post(
+            "/smoke/jobs",
+            json={"mode": "success", "delayMs": 0},
+            headers={**marker, "idempotency-key": str(uuid4())},
+        )
+        record(
+            "real capacity admission returns documented 503",
+            capacity.status_code == 503,
+        )
+        for job in capacity_jobs:
+            assert (
+                await api.post(f"/smoke/jobs/{job['id']}/cancel", headers=marker)
+            ).status_code == 200
+        start("dispatcher")
         success_key = str(uuid4())
         success = await create(key=success_key, via_web=True)
         record(
@@ -177,6 +246,12 @@ async def main() -> None:
         record(
             "same key/different semantic payload rejected", conflict.status_code == 409
         )
+        api_conflict = await api.post(
+            "/smoke/jobs",
+            json={"mode": "fail", "delayMs": 500},
+            headers={**marker, "idempotency-key": success_key},
+        )
+        assert api_conflict.status_code == 409
         for name, response in [
             (
                 "arbitrary content rejected",
@@ -486,6 +561,29 @@ async def main() -> None:
         )
         record("actual persisted event envelopes pass closed CL-008 schemas", True)
 
+        http_path = RUNTIME / "http-observations.json"
+        http_path.write_text(json.dumps(HTTP_OBSERVATIONS))
+        http_summary = json.loads(contract_cli("validate-http", http_path))
+        record(
+            "all actual public response bodies/statuses/media pass handwritten OpenAPI",
+            True,
+        )
+        mutated_http = json.loads(http_path.read_text())
+        next(row for row in mutated_http if row["status"] < 300)["body"].pop("status")
+        http_fault = RUNTIME / "http-mutated.json"
+        http_fault.write_text(json.dumps(mutated_http))
+        contract_cli("validate-http", http_fault, rejected=True)
+        record(
+            "removing a field from a captured real Job response makes the gate fail",
+            True,
+        )
+        mutated_events = [row["event"] for row in rows]
+        mutated_events[0].pop("schema_version")
+        event_fault = RUNTIME / "events-mutated.json"
+        event_fault.write_text(json.dumps(mutated_events))
+        contract_cli("validate-events", event_fault, rejected=True)
+        record("removing a field from a persisted real event makes the gate fail", True)
+
     record_path = Path(
         os.environ.get("CANLEARN_SMOKE_RECORD", RUNTIME / "integration-results.json")
     )
@@ -496,6 +594,7 @@ async def main() -> None:
                 "scope": "real local Web/API/PostgreSQL/Temporal with deterministic synthetic worker",
                 "passed": len(RECORDS),
                 "checks": RECORDS,
+                "http_contract": http_summary,
                 "replay_history_sha256": hashlib.sha256(
                     history.to_json().encode()
                 ).hexdigest(),

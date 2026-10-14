@@ -5,6 +5,7 @@ import { Ajv2020 } from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createApplication } from "../application.js";
+import { operationShape, validateHttp } from "../contracts/smoke-http.js";
 import { fixtureResult } from "./smoke.fixture.js";
 import { SmokeService } from "./smoke.service.js";
 
@@ -64,6 +65,7 @@ describe("Local synthetic HTTP/Swagger contract (service stub; no DB/Temporal ev
         methods as Record<string, Record<string, unknown>>,
       )) {
         const actual = live.paths[path][method];
+        expect(operationShape(actual, live)).toEqual(operationShape(expected));
         expect(actual.operationId).toBe(expected.operationId);
         expect(actual["x-runtime-scope"]).toBe("local-synthetic-only");
         expect(actual["x-implementation-status"]).toBe("implemented");
@@ -151,5 +153,35 @@ describe("Local synthetic HTTP/Swagger contract (service stub; no DB/Temporal ev
   it("detects response drift and extra result content", () => {
     expect(jobValidator({ ...job, status: "RESURRECTED" })).toBe(false);
     expect(jobValidator({ ...job, result: { ...job.result, rawText: "forbidden" } })).toBe(false);
+  });
+
+  it.each(["parameters", "security", "requestBody", "responses"])(
+    "detects changed Swagger %s constraints",
+    async (field) => {
+      const live = (await app.inject({ method: "GET", url: "/docs-json" })).json();
+      const actual = structuredClone(live.paths["/v1/smoke/jobs"].post);
+      actual[field] =
+        field === "security" ? [{ UnexpectedSession: [] }] : field === "parameters" ? [] : {};
+      expect(operationShape(actual, live)).not.toEqual(
+        operationShape(document.paths["/v1/smoke/jobs"].post),
+      );
+    },
+  );
+  it("validates the defensive non-loopback GET error body through the real guard", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: `/v1/smoke/jobs/${key}`,
+      remoteAddress: "192.0.2.1",
+    });
+    expect(response.statusCode).toBe(403);
+    expect(() =>
+      validateHttp({
+        path: `/v1/smoke/jobs/${key}`,
+        method: "GET",
+        status: response.statusCode,
+        contentType: String(response.headers["content-type"]),
+        body: response.json(),
+      }),
+    ).not.toThrow();
   });
 });

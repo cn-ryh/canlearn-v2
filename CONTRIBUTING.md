@@ -49,5 +49,9 @@ docs(repo): record repository boundary
 - [CL-013a](docs/integration/CL-013a/README.md)提供默认关闭的本地合成路由与真实SQL/Temporal烟测。
   合成OpenAPI独立声明运行范围，生产规划端点不因此升级。CI在`pnpm verify`后执行
   `pnpm smoke:test --skip-build`；禁止将合成停止/重试证据外推到付费调用、GPU或生产权限。
+- [CL-013b/c](docs/integration/CL-013bc/README.md)将完整公共响应/错误 Schema、实际事件破坏探针、
+  迁移升级/失败回滚接入 CI；`pnpm verify`另检查版本、既有迁移不可变和 schema 漂移。
+  `pnpm security:scan`扫描历史/当前文件密钥、全部锁定依赖及镜像；密钥与依赖 HIGH/CRITICAL 阻断。
+  镜像现为有期限的报告模式，不能据此声明安全通过；规则、职责和精确人工例外见门禁包。
 
 Pull Request 请使用仓库模板，说明变更、验证命令、风险和回滚方式。高风险改动包括权限、删除、数据迁移、工作流状态机、费用账本和公共内容发布。

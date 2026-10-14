@@ -1,0 +1,182 @@
+{
+  "recorded_at": "2026-10-14T10:24:32.228023+00:00",
+  "scope": "CL-013b/c local engineering validation; synthetic data only; no production security or human review acceptance",
+  "base_commit": "f9c50c4e8dcc76d6489596011aafe6920301680c",
+  "worktree_changes_committed": false,
+  "github_updated": false,
+  "new_github_ci_executed": false,
+  "commands": [
+    {
+      "command": "pnpm install --frozen-lockfile",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm verify",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm smoke:test --skip-build",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm security:scan",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm security:probes",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/quality_policy.py --base origin/docs/cl-004-data-governance",
+      "exit_code": 0
+    }
+  ],
+  "unit_tests": {
+    "api": 143,
+    "web": 9,
+    "workflow": 43,
+    "quality_fault_probes": 14
+  },
+  "integration_checks": 35,
+  "migration_checks": 7,
+  "security_probes": 2,
+  "http_contract": {
+    "observations": 144,
+    "coverage": [
+      "get /v1/smoke/jobs/{id} 200",
+      "get /v1/smoke/jobs/{id} 400",
+      "get /v1/smoke/jobs/{id} 404",
+      "post /v1/smoke/jobs 202",
+      "post /v1/smoke/jobs 400",
+      "post /v1/smoke/jobs 403",
+      "post /v1/smoke/jobs 409",
+      "post /v1/smoke/jobs 503",
+      "post /v1/smoke/jobs/{id}/cancel 200",
+      "post /v1/smoke/jobs/{id}/cancel 400",
+      "post /v1/smoke/jobs/{id}/cancel 403",
+      "post /v1/smoke/jobs/{id}/cancel 404"
+    ]
+  },
+  "dependency_packages": {
+    "uv": 31,
+    "pnpm": 403
+  },
+  "dependency_high_critical_blockers": 0,
+  "image_mode": "report-only",
+  "image_high_critical_findings": 226,
+  "image_policy": {
+    "mode": "report-only",
+    "triage_due": "2026-10-21",
+    "owner_roles": ["A", "B"],
+    "reason": "Upstream bundled components have known HIGH/CRITICAL findings; no risk exception has been approved. Report scan failures block now; unresolved HIGH/CRITICAL findings block after triage_due."
+  },
+  "scanner_database": {
+    "Version": "0.75.0",
+    "VulnerabilityDB": {
+      "Version": 2,
+      "NextUpdate": "2026-10-15T07:11:52.271767002Z",
+      "UpdatedAt": "2026-10-14T07:11:52.271767627Z",
+      "DownloadedAt": "2026-10-14T10:04:31.389974768Z"
+    }
+  },
+  "source_sha256": {
+    ".github/workflows/ci.yml": "74cd3d9b354f777ef7ff2ec3442da8f2dd3dcc75bb99d04812a0eb21c9d414df",
+    "apps/api/drizzle.config.ts": "cfd22f15afeb720f0b1bd24b9f53711ce52bf6dce1f5baf80a6d57d77fd38140",
+    "apps/api/drizzle/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "apps/api/drizzle/0000_eminent_liz_osborn.sql": "9fabceb9ab4e38867d3a3c8872c6ea86aa8a99a7bf80d612af144980be1744b5",
+    "apps/api/drizzle/0001_sweet_nicolaos.sql": "0ba7283bc7dc74ac7128b7f2e00f2dafa437ac2e349430d489ef6f7b881632d3",
+    "apps/api/drizzle/meta/0000_snapshot.json": "2b1cf46ef8927c60c91937c9167ca49aa66a27b540cb0cf0f66c7df37c483245",
+    "apps/api/drizzle/meta/0001_snapshot.json": "5503926090aefca04de592844d57661a58ab9ff4e2389286cb0dbfa6e0d83078",
+    "apps/api/drizzle/meta/_journal.json": "bebdecb58217dd029a13d3a1e9f49210e3332ef85904ccc36fe08f495095f16c",
+    "apps/api/package.json": "ad53f1b1298b809059ecfdd92a610e63426e8f9e51b4ccc0c9b77aa3a3b12efb",
+    "apps/api/src/app.module.ts": "2f191465160df92f614b2b8d3ac3dab86d346999d9c057d39c5f3d242af11711",
+    "apps/api/src/application.ts": "a5fef314c8e06db9a52dabf4393db8d68232c9bbc2f51a3f3b5167daab056526",
+    "apps/api/src/contracts/events.contract.test.ts": "90ac6dbc29ffbd06a970cb89c7ada6c0295b476fce7487742a5f99bcf64b9128",
+    "apps/api/src/contracts/smoke-http.ts": "701c51fd637de3457b5ec1279f75a97a770ad36e9c751d53fee2c6538813daa3",
+    "apps/api/src/database/check-schema.ts": "911d26d37ab655fa2416e97e29e7a5bcfd8d88cb2e94111308f3260227823185",
+    "apps/api/src/database/client.ts": "1285de76732f56a6e248c4b45e66c4d98c97a3cc54049c36dd0c5079e252e4e2",
+    "apps/api/src/database/migrate.ts": "5c383987701beafa4ff789d132cb3a88a47ab277dffe88186ca53802a513e864",
+    "apps/api/src/database/schema.ts": "5857f83307dd64ea3c3bcc14b761b3603702704c6d50d304482fe401ad37fc68",
+    "apps/api/src/database/verify-migrations.ts": "25144eaf92a03dbadc169af14a029f4c09bd6fd91af7571aa829c30ab5a31488",
+    "apps/api/src/health/health.contract.test.ts": "1fe1ec903e7cc19c5ea97bda2417fe5818f7e01344842bb1ad4d04adef5fa837",
+    "apps/api/src/health/health.controller.test.ts": "b045a42a3afe0f6c9998da73ec0e44e8858f43f7174230f62399881acc7cd476",
+    "apps/api/src/health/health.controller.ts": "9225e123337ff7a465159477b2e13f80e6587bc8adb54df4c7f923374d91bdc4",
+    "apps/api/src/main.ts": "7e5937544d474fba88df1f2f8e1a5d8a3392d5b2e98a2489d21d34def60a6a46",
+    "apps/api/src/smoke/smoke.contract.test.ts": "42a01cb679ef4b9df3c95308fec03cc0157461ccd97cb63e1a9ef326295a4eaa",
+    "apps/api/src/smoke/smoke.controller.ts": "e1e58f2f2c58dae41dbb9271ae3e80ba7216b286f3e117e5899e975b3c277446",
+    "apps/api/src/smoke/smoke.dto.ts": "067a4e3ef0e287bda77d36dc50dc61719e0f6a33371626c8547ed99307a8db6f",
+    "apps/api/src/smoke/smoke.fixture.ts": "c234543afdac80a63447b7f01963ff3072a91d6d71363db5643b7b846d3600b4",
+    "apps/api/src/smoke/smoke.guard.ts": "bb7e3196c50045934d53a8d19b9155a9f52c669fc8e7eba7ebf1d05001b7bb2f",
+    "apps/api/src/smoke/smoke.module.ts": "1667e0cd32bb5da437e06fd0ae7a2af5bee990f2c32807b1441b6aa37acf3ba2",
+    "apps/api/src/smoke/smoke.service.ts": "a5bfbde3ebd7ab12fd237f3149f5a243da8d0758f30cba519866f3d32aa0c894",
+    "apps/api/src/smoke/validate-events.ts": "3272f43ae90f7aea3b3f47246c9d4c6cf6a32cf5b82decc3573868146535f6b6",
+    "apps/api/src/smoke/validate-http.ts": "0a17378160990ea8bb2a255a6620a4fbd91c69b091530274b98f6e7d514314c9",
+    "apps/api/tsconfig.build.json": "9ca7d7cb85f39eb76d3f65193647a5915e5af838a70d2ad85d99d9bec78f3b35",
+    "apps/api/tsconfig.json": "babcb23ee4b0d8eb8325ba4515f885fc51b822820b79b71480aebccb06b878ab",
+    "apps/web/next-env.d.ts": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b",
+    "apps/web/next.config.ts": "c5efcdb15ee66db5a3a749082d8a2d68abdd0555ce251baee0e3fd920b4c55b5",
+    "apps/web/package.json": "c6df04b3d76e52c3a70da1487389073379e786b905447cfbf9b63c5267c62fc4",
+    "apps/web/src/app/api/smoke/[[...segments]]/route.ts": "6d7aab298c4ece72e8624bd5dfae80ad91f55374b05ba29be873e49fc95b16df",
+    "apps/web/src/app/layout.tsx": "cf47237d2052875c8b3fba4daa1335e2261958bda746eaa70df688f186400dcc",
+    "apps/web/src/app/page.test.tsx": "e116d93560a288d95f2a99ff1c7bff317d385705211cc7ffafd32cc68c9f7eca",
+    "apps/web/src/app/page.tsx": "505388111421533c5e38d6e904cee59c57a33b7b37d64c7639d9bf625a9ba8f9",
+    "apps/web/src/app/smoke/page.tsx": "ddaefb99b6754a90ed5812b7e3bdfce04d9b0b59c1bb0eaf4af9862bb044694f",
+    "apps/web/src/app/smoke/smoke-panel.tsx": "1c217c56f1df331dee219404e51f1eebff8050626d78e05600a12ca47c8be1ad",
+    "apps/web/src/app/styles.css": "8b258fe040bd0252b8de39beef0a54122ab23c0b04059910ce86837e2e8c29df",
+    "apps/web/src/lib/smoke-proxy.test.ts": "8a58020a5efa5db8534452d681ecbaa4fa986947ea5a417f8be8b1905f9abbe9",
+    "apps/web/src/lib/smoke-proxy.ts": "36cbb3cf91c64c1ed69de4801ad39ab0427eb0d04b63a580bea9e0c8497c4fa5",
+    "apps/web/tsconfig.json": "519ceb3d55d6b058c40599079370b4e0068739d5a1875cb5e51989de4092bc3e",
+    "apps/workflow/pyproject.toml": "4012051836e8925ffc2de7495fbbd7ef70005f54c2b95fd90b323ad4efefd7b5",
+    "apps/workflow/src/canlearn_workflow/__init__.py": "8fcc223c245d9634daa0a00531742adca17584e594c5ce05664c24d4496df4ed",
+    "apps/workflow/src/canlearn_workflow/activities.py": "bea00462e944eccb280358d0bb9aac7fc3c2bda725b64cc51a1b52b724801af3",
+    "apps/workflow/src/canlearn_workflow/settings.py": "264a2b79dea57da84aaf14bf25b9760d27d188f7785bea2ff90c79c142440d14",
+    "apps/workflow/src/canlearn_workflow/smoke.py": "67b75107848d0a38c73731f73f3572560c0b50e6d795a98d65277536a53e6618",
+    "apps/workflow/src/canlearn_workflow/smoke_dispatcher.py": "cecef0d9caa31cbf8db1a9b7914f07b0683ca82d579360fc5fd52c493bfcdbf3",
+    "apps/workflow/src/canlearn_workflow/worker.py": "27dbca386ae8c8963a97c852cb145e486e4f6f9e4b6b9d8ea9fc2a922b1bd4c7",
+    "apps/workflow/src/canlearn_workflow/workflows.py": "3da88864154a0d6260a00fa3365a69abc3521dc0d5c2bb444646e974beb25cb6",
+    "apps/workflow/tests/test_activities.py": "d83fef22404077bb021419a1e222eb1aebe10c5faddc9017216c3bc615db091a",
+    "apps/workflow/tests/test_cl008_reference.py": "38b60371742de53b55022071abb9ec346ae7c20166f0eec6ef81e107ff9f0e3a",
+    "apps/workflow/tests/test_smoke_activities.py": "867605730b59239d7d906451cfeb9fa1213443139de2eb9705eff998b6a215ff",
+    "apps/workflow/uv.lock": "eb00f0b793b7c36f99395a0b1684c796e6ad3cff3bd0b06c1c653e6c9f1e4fc8",
+    "biome.json": "cbd1ae7748e5f61885ca4a4d03882bb0f6df6bff2b234e710c81eb1a8d9030df",
+    "compose.smoke.yaml": "c9609c1c938da9c96c81dbcb4b7f3e7c11603664263c009052ff3d53ec381a59",
+    "compose.yaml": "6028f2ab709a835db93400507046768aa4c841529f029e59f305c344a2580e42",
+    "contracts/events/README.md": "a3df0a5d6271d06c17bfbd49687141741af7210841fbd63ecff1be13a1c453ef",
+    "contracts/events/catalog.json": "c2a1491ce9278f1cf1aace922bfcdbd5ee6acfd6a31449e193e85d87ae13d178",
+    "contracts/events/fixtures/examples.json": "774d0955b9789a16738a9754ca44e919e4f39760129ddb918da870c9d0a6a0bf",
+    "contracts/events/v1/job.accepted.v1.schema.json": "c88fd6c2dd77b740952643327ca1de0c9fdeb67f983d47e14c0fe30f33730dc1",
+    "contracts/events/v1/job.cancel_requested.v1.schema.json": "759b6df364c4ae048dfbccf94ea06ab3be1fe3cce7af969f6d4eab121320462a",
+    "contracts/events/v1/job.finalized.v1.schema.json": "634b591526e6ecfc66afdeb30d35bf5b3588881dcfc8174049cc4548596e1dd7",
+    "contracts/events/v1/resource.invalidated.v1.schema.json": "dc8616cf5d730ffb94cf4c5fbc6745eef57f5c729cb035adf80e60ce8454ebe5",
+    "contracts/openapi/canlearn.smoke.v1.json": "7f4a1c5c38e041b59b0af9b5347727dd9c58481648245ad3bafb5c2fe8520934",
+    "contracts/openapi/canlearn.v1.yaml": "0735adad531cfbca2ec2394928b30e58720ec3fa1818cfd341e938698eece2ad",
+    "package.json": "f6440a3c7213cb643847038eadc0cac02366e31e15960e502ec278e26ea3a4a1",
+    "packages/config/package.json": "ad31fd9884058213c8259dc4c0e851f04211ca1b5a4a524190ab97320e54a83c",
+    "packages/config/tsconfig.base.json": "264c0cb9ab5131fc82ea6e7dfa0982fe78dd957b505f818580bef1dc1884e8c4",
+    "pnpm-lock.yaml": "5def58d2b7e7b63b496f4d4b7bad83b841fad7e023c799ebc98c5d7055e0c7e1",
+    "pnpm-workspace.yaml": "c3ffc32827cc64d82bbd7ab24bd7eb5b2ff3c752e0d5de2115f5824bbdd5abdf",
+    "scripts/quality_policy.py": "61a61da358554f7d8151ef3471e60932dc01e61f4fe834d3cd0ca603d55c2b93",
+    "scripts/security_scan.py": "b70b3b21ad2f302be0f9ce45551352222e30bdfbea1c8fcd93bbc0ae93247bf2",
+    "scripts/security_tools.py": "d3ea97b181b1aa981599b93cb8f078c544ce70818dee9a87d751fc561007fa0a",
+    "scripts/smoke_browser.cjs": "24b8ce2cc34aa9aba628389090d983a92efde7936fc2d9867a644ad0883d3da4",
+    "scripts/smoke_integration.py": "2aeafdbd32ccabfb864b27db901cfaabb7854672544f5858e336bf30e8bee845",
+    "scripts/smoke_runtime.py": "e99c6a854fda43856a11c38aac09d5ddef9f85c60b0cd67fb4fe961bf6b68b6e",
+    "scripts/test_quality_gates.py": "cf4f0bdedbd7f870afad2c5d105defeefefdaf364222d36541035dde71419162",
+    "security/exceptions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "security/image-policy.json": "30741e18d02b79e5745fd35a307872e8e19b77687abc146f97f75031598b39be",
+    "security/migration-baseline.json": "985bee7680266e25a7a7c2bc46282399751a1f117dcc5d19ea9a25fe62a8b8ff",
+    "security/tools.json": "d1fc2e2b950e30a7c2660ad5f4ca435203aab1481c109d8fb683632121e889c9"
+  },
+  "evidence_sha256": {
+    "integration-results.json": "379a2f03fac4d31e528c7e286e3b38a977939d3555c8e01bfcc87386ae829e54",
+    "migration-results.json": "a0bd0090cc4f567786f90c2716f700220f46ab29f92d13ff7806e8cd0e2173e8",
+    "security-summary.json": "ab1e7b68e86e5c604db60df82c0f7612f0f1ef7afb0503776943a487c584aeb1",
+    "security-probes.json": "7b7946a938ac91ecd7e9a78005e58fc6951483fe28ab6dc1ddf9c2d81acce3ee"
+  },
+  "limits": [
+    "No new GitHub CI run; existing PR checks apply to the base commit only",
+    "Image findings are report-only until the explicit triage deadline, not accepted exceptions",
+    "CL-009 real samples/double annotation and non-author acceptance remain open",
+    "No real MinerU/model/GPU/cloud calls; no production authorization or deletion recovery acceptance"
+  ]
+}

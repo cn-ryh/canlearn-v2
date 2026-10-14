@@ -239,6 +239,24 @@ def main() -> None:
     elif args.action == "test":
         try:
             up(args.skip_build)
+            migration_env = {
+                **environment(),
+                "CANLEARN_MIGRATION_TEST_URL": environment()["DATABASE_URL"],
+                "CANLEARN_MIGRATION_RECORD": str(RUNTIME / "migration-results.json"),
+            }
+            subprocess.run(
+                [
+                    "pnpm",
+                    "--filter",
+                    "@canlearn/api",
+                    "exec",
+                    "tsx",
+                    "src/database/verify-migrations.ts",
+                ],
+                cwd=ROOT,
+                env=migration_env,
+                check=True,
+            )
             run(
                 [
                     "uv",
