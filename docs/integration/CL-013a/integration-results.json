@@ -1,0 +1,214 @@
+{
+  "recorded_at": "2026-10-14T03:00:23.160959+00:00",
+  "scope": "real local Web/API/PostgreSQL/Temporal with deterministic synthetic worker",
+  "passed": 31,
+  "checks": [
+    {
+      "name": "compiled Web smoke page",
+      "passed": true
+    },
+    {
+      "name": "Web proxy \u2192 real API \u2192 durable QUEUED",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "QUEUED"
+    },
+    {
+      "name": "eight concurrent requests preserve one Job/snapshot",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "QUEUED"
+    },
+    {
+      "name": "same key/different semantic payload rejected",
+      "passed": true
+    },
+    {
+      "name": "arbitrary content rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign Web Origin rejected",
+      "passed": true
+    },
+    {
+      "name": "internal callback without service credential rejected",
+      "passed": true
+    },
+    {
+      "name": "real Temporal/worker completes three-page fixture",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "completed Job remains immutable on cancellation",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "duplicate completion receipt produces no second effect",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "conflicting manifest rejected",
+      "passed": true
+    },
+    {
+      "name": "partial fixture reaches PARTIAL_READY with exact page coverage",
+      "passed": true,
+      "job_id": "56a91038-2055-4ad5-afc1-547de94d664c",
+      "trace_id": "e51a107be398eb1b507a2a2e1e4533ac",
+      "snapshot_id": "9b9cd042-9914-4452-9f97-33e360281321",
+      "status": "PARTIAL_READY"
+    },
+    {
+      "name": "blank fixture reaches SUCCEEDED with exact page coverage",
+      "passed": true,
+      "job_id": "51cb1a5e-4612-43e4-b9f3-e54ddb4487a2",
+      "trace_id": "9796d5c727bfd727d31058fea22d3005",
+      "snapshot_id": "dfd436cc-a48b-4acc-9738-a8a53d527d17",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "fail fixture reaches FAILED with exact page coverage",
+      "passed": true,
+      "job_id": "48443bf3-529b-4d64-a0e8-1e69f4f3d463",
+      "trace_id": "c79d87aa8dd2816e59e9e95a59a96ba4",
+      "snapshot_id": "77c53797-5c63-42c8-8e0e-f3c53fd225ee",
+      "status": "FAILED"
+    },
+    {
+      "name": "Web cancellation commits logical CANCELLED",
+      "passed": true,
+      "job_id": "688fbf3b-4292-46a4-a701-7c63dd6fbf98",
+      "trace_id": "3ddc27c2ea0cbaa0653f3906d13beebb",
+      "snapshot_id": "ead7c2ea-33e4-4dae-9dbc-b67e44ffde49",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "synthetic computation stop confirmed by worker",
+      "passed": true,
+      "job_id": "688fbf3b-4292-46a4-a701-7c63dd6fbf98",
+      "trace_id": "3ddc27c2ea0cbaa0653f3906d13beebb",
+      "snapshot_id": "ead7c2ea-33e4-4dae-9dbc-b67e44ffde49",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "late pre-cancellation completion rejected",
+      "passed": true
+    },
+    {
+      "name": "repeat cancellation preserves epoch/revision",
+      "passed": true,
+      "job_id": "688fbf3b-4292-46a4-a701-7c63dd6fbf98",
+      "trace_id": "3ddc27c2ea0cbaa0653f3906d13beebb",
+      "snapshot_id": "ead7c2ea-33e4-4dae-9dbc-b67e44ffde49",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "SIGKILL worker \u2192 heartbeat timeout \u2192 activity retry",
+      "passed": true,
+      "job_id": "d08ca36d-9dbb-480a-9773-a5f1ea7860c8",
+      "trace_id": "b50e42c74173d5ac7f88dd450bb98913",
+      "snapshot_id": "b3d52b67-48d8-4590-8426-b5a1f3f967a7",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "completed real workflow history replays deterministically",
+      "passed": true,
+      "job_id": "d08ca36d-9dbb-480a-9773-a5f1ea7860c8",
+      "trace_id": "b50e42c74173d5ac7f88dd450bb98913",
+      "snapshot_id": "b3d52b67-48d8-4590-8426-b5a1f3f967a7",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "API restart preserves QUEUED Job and Outbox",
+      "passed": true,
+      "job_id": "fa57c4c6-69cd-4f6a-8639-7af5f4b99f23",
+      "trace_id": "a1c4ae73e4ed0df9f572abbfbca583c7",
+      "snapshot_id": "616b6fc3-ad83-46e1-86dd-317738c00e27",
+      "status": "QUEUED"
+    },
+    {
+      "name": "request key survives API restart",
+      "passed": true,
+      "job_id": "fa57c4c6-69cd-4f6a-8639-7af5f4b99f23",
+      "trace_id": "a1c4ae73e4ed0df9f572abbfbca583c7",
+      "snapshot_id": "616b6fc3-ad83-46e1-86dd-317738c00e27",
+      "status": "QUEUED"
+    },
+    {
+      "name": "expired dispatcher claim cannot commit ACK",
+      "passed": true
+    },
+    {
+      "name": "lost start ACK reconciles the original Temporal run",
+      "passed": true,
+      "job_id": "fa57c4c6-69cd-4f6a-8639-7af5f4b99f23",
+      "trace_id": "a1c4ae73e4ed0df9f572abbfbca583c7",
+      "snapshot_id": "616b6fc3-ad83-46e1-86dd-317738c00e27",
+      "status": "QUEUED"
+    },
+    {
+      "name": "SQL failure rolls back result/terminal/finalized event together",
+      "passed": true,
+      "job_id": "baa45780-8174-4d2f-86a4-aff0a3da968f",
+      "trace_id": "7b323e782d3a357191da50e59c046d17",
+      "snapshot_id": "91ffd621-2a7f-4020-953d-33ae1bf63897",
+      "status": "RUNNING"
+    },
+    {
+      "name": "same receipt safely completes after SQL rollback",
+      "passed": true,
+      "job_id": "baa45780-8174-4d2f-86a4-aff0a3da968f",
+      "trace_id": "7b323e782d3a357191da50e59c046d17",
+      "snapshot_id": "91ffd621-2a7f-4020-953d-33ae1bf63897",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "concurrent SQL completion/cancellation has one immutable terminal",
+      "passed": true,
+      "job_id": "216a2d77-1414-4458-921e-decb12b9e1b9",
+      "trace_id": "43a85845d6377ac5130c52d9d4dc9232",
+      "snapshot_id": "52337e36-d61e-486a-bff8-e6ada531ee9e",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "full stack stop/start preserves Job/snapshot/result",
+      "passed": true,
+      "job_id": "dedff731-6298-4378-b20c-248eb983a310",
+      "trace_id": "0b5fa9dfb258dc12462ca3043baf2f4e",
+      "snapshot_id": "642add7c-7241-4fed-b41d-767d0de5e963",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "real Outbox stores only the three selected event families",
+      "passed": true
+    },
+    {
+      "name": "every synthetic Job has exactly one accepted event",
+      "passed": true
+    },
+    {
+      "name": "actual persisted event envelopes pass closed CL-008 schemas",
+      "passed": true
+    }
+  ],
+  "replay_history_sha256": "fcd8bf4a640056dd2ed68d6259417bdcf06ee6a29eeb554ac7139f91978dd7f0",
+  "replay_history_events": 8,
+  "external_model_mineru_gpu_cloud_calls": 0
+}

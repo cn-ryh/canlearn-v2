@@ -1,0 +1,200 @@
+{
+  "recorded_at": "2026-10-14T12:41:56.257997+00:00",
+  "scope": "original fixtures only; real Basic/GPU V1 through SSH loopback + main API/SQL/Temporal; no production network or human quality acceptance",
+  "passed": 26,
+  "checks": [
+    {
+      "name": "genuine fixed-version V1 health and three output capabilities",
+      "passed": true
+    },
+    {
+      "name": "GPU free-memory guard preserves existing workloads",
+      "passed": true
+    },
+    {
+      "name": "same request key including UUID case preserves Job and snapshot",
+      "passed": true,
+      "job_id": "92c52337-cf16-478f-8844-3cb1babc33d5",
+      "snapshot_id": "bf32a763-12b4-4d7c-b001-7595e4c32722",
+      "upstream_job_id": null,
+      "status": "QUEUED"
+    },
+    {
+      "name": "semantic request-key conflict rejected",
+      "passed": true
+    },
+    {
+      "name": "API → durable Job → Temporal → actual Basic V1 → API receipt",
+      "passed": true,
+      "job_id": "92c52337-cf16-478f-8844-3cb1babc33d5",
+      "snapshot_id": "bf32a763-12b4-4d7c-b001-7595e4c32722",
+      "upstream_job_id": "job_300681969beac928add03735",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "three bounded downloads have verified digest/byte references",
+      "passed": true,
+      "job_id": "92c52337-cf16-478f-8844-3cb1babc33d5",
+      "snapshot_id": "bf32a763-12b4-4d7c-b001-7595e4c32722",
+      "upstream_job_id": "job_300681969beac928add03735",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "duplicate parser receipt has no second effect",
+      "passed": true,
+      "job_id": "92c52337-cf16-478f-8844-3cb1babc33d5",
+      "snapshot_id": "bf32a763-12b4-4d7c-b001-7595e4c32722",
+      "upstream_job_id": "job_300681969beac928add03735",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "conflicting terminal parser receipt rejected",
+      "passed": true
+    },
+    {
+      "name": "real parser workflow history replays and contains no tokens",
+      "passed": true
+    },
+    {
+      "name": "API restart preserves parser snapshot/upstream/result mapping",
+      "passed": true,
+      "job_id": "92c52337-cf16-478f-8844-3cb1babc33d5",
+      "snapshot_id": "bf32a763-12b4-4d7c-b001-7595e4c32722",
+      "upstream_job_id": "job_300681969beac928add03735",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "bounded poll timeout returns without recreating/canceling upstream",
+      "passed": true
+    },
+    {
+      "name": "timed-out Job remains RUNNING with its durable upstream ID",
+      "passed": true,
+      "job_id": "de52cf2f-10a2-45cf-9be9-e17791ec069f",
+      "snapshot_id": "22b32cac-de37-46cf-851e-10f3ad6f3105",
+      "upstream_job_id": "job_813367636806a40a26905bed",
+      "status": "RUNNING"
+    },
+    {
+      "name": "explicit resume keeps input snapshot and upstream ID",
+      "passed": true,
+      "job_id": "de52cf2f-10a2-45cf-9be9-e17791ec069f",
+      "snapshot_id": "22b32cac-de37-46cf-851e-10f3ad6f3105",
+      "upstream_job_id": "job_813367636806a40a26905bed",
+      "status": "RUNNING"
+    },
+    {
+      "name": "cancellation target is actually queued upstream",
+      "passed": true
+    },
+    {
+      "name": "logical cancellation rejects publication and upstream queued task cancels",
+      "passed": true,
+      "job_id": "de52cf2f-10a2-45cf-9be9-e17791ec069f",
+      "snapshot_id": "22b32cac-de37-46cf-851e-10f3ad6f3105",
+      "upstream_job_id": "job_813367636806a40a26905bed",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "controlled late old-epoch receipt is fenced after cancellation",
+      "passed": true
+    },
+    {
+      "name": "SIGKILL worker resumes original upstream task without new parse creation",
+      "passed": true,
+      "job_id": "29e749bc-2d3e-4d77-be27-7096726cf5b9",
+      "snapshot_id": "8454a22f-4e0e-4fe4-9603-0d4696634149",
+      "upstream_job_id": "job_f31a2a696e1a723887a63c88",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "explicit 1-300 result has complete unique physical page indices",
+      "passed": true,
+      "job_id": "29e749bc-2d3e-4d77-be27-7096726cf5b9",
+      "snapshot_id": "8454a22f-4e0e-4fe4-9603-0d4696634149",
+      "upstream_job_id": "job_f31a2a696e1a723887a63c88",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "300 original page anchors survive exactly once; no quality-rate claim",
+      "passed": true
+    },
+    {
+      "name": "recovered actual 300-page workflow history replays",
+      "passed": true
+    },
+    {
+      "name": "actual MinerU restart loses old V1 resource index",
+      "passed": true
+    },
+    {
+      "name": "platform retains mapping/snapshot and reports UPSTREAM_LOST without recreate",
+      "passed": true,
+      "job_id": "3814f24a-430b-439d-9106-7ce6d6588584",
+      "snapshot_id": "28c2a056-baaf-4871-9f3b-1ce35479ad38",
+      "upstream_job_id": "job_6cccd9c6469ce742e3568b5b",
+      "status": "FAILED"
+    },
+    {
+      "name": "successful real upstream POST with lost ACK becomes CREATE_UNKNOWN",
+      "passed": true
+    },
+    {
+      "name": "unknown creation is never automatically retried or falsely published",
+      "passed": true,
+      "job_id": "95a00214-7c09-4ced-9b4b-6ddb0b504f61",
+      "snapshot_id": "3ac5c0db-a35b-46a3-84cc-9e0563d61e91",
+      "upstream_job_id": null,
+      "status": "FAILED"
+    },
+    {
+      "name": "lost-ACK upstream computation actually completed while platform withheld result",
+      "passed": true
+    },
+    {
+      "name": "fixed remote package source/model hashes verified",
+      "passed": true
+    }
+  ],
+  "health": {
+    "status": "ok",
+    "version": "4.0.7",
+    "features": {
+      "webhook": false,
+      "output_formats": ["markdown", "middle_json", "structured_content", "zip"],
+      "sources": ["file_id", "url", "inline"]
+    }
+  },
+  "gpu_before": {
+    "used_mib": 2518,
+    "free_mib": 9359,
+    "utilization_percent": 0
+  },
+  "gpu_after": {
+    "used_mib": 3013,
+    "free_mib": 8864,
+    "utilization_percent": 0
+  },
+  "provenance": {
+    "versions": {
+      "mineru": "4.0.7",
+      "docvortex": "0.5.16",
+      "torch": "2.8.0",
+      "transformers": "5.19.0"
+    },
+    "fixed_source_verified": true,
+    "model_hashes_verified": true,
+    "model_file_count": 15,
+    "guard": {
+      "samples": 461,
+      "peak_used_mib": 3583,
+      "min_free_mib": 8294,
+      "triggered": false
+    },
+    "source_sha256": "333b94786cd651cce6bed0dbbca0874ad80a8e960719a95f805bacb572d410fa"
+  },
+  "history_sha256": "af79510cb12782ce98b09197355b76856c3d22ecd56dabc057243f8410e7b588",
+  "real_human_quality_verified": false,
+  "external_model_api_cloud_calls": 0,
+  "physical_active_job_stop_verified": false
+}

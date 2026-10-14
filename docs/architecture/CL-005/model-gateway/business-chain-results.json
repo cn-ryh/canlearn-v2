@@ -1,0 +1,1754 @@
+{
+  "date": "2026-10-13",
+  "started_at": "2026-10-13T21:56:45.492017+08:00",
+  "scope": "Synthetic SDK experiment; not deployed gateway, scheduling, ledger, or independent upstream proof",
+  "openai": "2.54.0",
+  "script_sha256": "55889ba0bedd409bbd1200b360a94c1d3827f5c57e57a2cb07fd9aabff09566c",
+  "quoted_rates_sha256": "6ef3d33107a328558f38fdccfb267d7928879ecfa4121a0fac3a9bc906cc1581",
+  "max_requests": 26,
+  "quote_budget_scenario": "5.00",
+  "real_data_enabled": false,
+  "runs": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "generate",
+      "case": "version_conflict",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "fd3c63ec9ca2bff33bf5a7551679d284dc2232922e3b66a1cd5397ca899532ca",
+      "input_byte_allowance": 6109,
+      "reserved_quote_scenario": "0.01594517",
+      "usage": {
+        "input_tokens": 460,
+        "output_tokens": 2842,
+        "total_tokens": 3302,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 13.343,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 1440,
+      "text_sha256": "964d736603fcf67a8aee659cf263e20838cdee20e410d1e41d6fa15d34ecf13a",
+      "estimated_cost": "0.00261596",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 15.434,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 2160,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 681,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "verify",
+      "case": "version_conflict",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "1ef2708460d75b44f71ec68fa3ac98ed5af8a028d86362f14b8bf5720ca5a1fc",
+      "input_byte_allowance": 7897,
+      "reserved_quote_scenario": "0.0750124",
+      "usage": {
+        "input_tokens": 1092,
+        "output_tokens": 741,
+        "total_tokens": 1833,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 21.351,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 61,
+      "text_sha256": "59850879dc319c11fb9619dddefc215ed01234eacd5b651f7680ab701ad83809",
+      "estimated_cost": "0.0042744",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 21.533,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 174,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 1,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "repair",
+      "case": "version_conflict",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "8a39c6d7e24764ff1a200600a22ce091e0b062fb57718ce11fd9a52f264ec5f6",
+      "input_byte_allowance": 8307,
+      "reserved_quote_scenario": "0.01649467",
+      "usage": {
+        "input_tokens": 1141,
+        "output_tokens": 6603,
+        "total_tokens": 7744,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 37.45,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 1440,
+      "text_sha256": "964d736603fcf67a8aee659cf263e20838cdee20e410d1e41d6fa15d34ecf13a",
+      "estimated_cost": "0.00609589",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 39.544,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 5921,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 681,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "verify_repair",
+      "case": "version_conflict",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "1ef2708460d75b44f71ec68fa3ac98ed5af8a028d86362f14b8bf5720ca5a1fc",
+      "input_byte_allowance": 7897,
+      "reserved_quote_scenario": "0.0750124",
+      "usage": {
+        "input_tokens": 1092,
+        "output_tokens": 552,
+        "total_tokens": 1644,
+        "cached_tokens": 1024,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 21.301,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 66,
+      "text_sha256": "5f7cf54ba63f54dd7f6136c8f5341a80ea8609730d751bc4ee787dc5da9688ed",
+      "estimated_cost": "0.00238176",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 21.54,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 165,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 6,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "generate",
+      "case": "no_answer",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "0be685bd509db99b96fe6ba2a3297e43c1b48583d790cde1f416f6a4fa6bb62c",
+      "input_byte_allowance": 5900,
+      "reserved_quote_scenario": "0.01589292",
+      "usage": {
+        "input_tokens": 381,
+        "output_tokens": 340,
+        "total_tokens": 721,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 3.062,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 80,
+      "text_sha256": "ff20e1347cf9da8a94602d67f3285dcce08f769e2de9852aa0fb711adb8350a8",
+      "estimated_cost": "0.00039445",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 3.188,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 316,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 23,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "verify",
+      "case": "no_answer",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "eb8c73b97382898a27e63bcf175542999f8e60605b4e63d4c8fe78699a64129c",
+      "input_byte_allowance": 5803,
+      "reserved_quote_scenario": "0.0724996",
+      "usage": {
+        "input_tokens": 412,
+        "output_tokens": 4596,
+        "total_tokens": 5008,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 90.458,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 95,
+      "text_sha256": "2d35a93b017695aadb15ab33ff1b08f6c88766027acbb358651586dd366f8841",
+      "estimated_cost": "0.0188784",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 90.878,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 2098,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 7,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "generate",
+      "case": "batch48",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "f1b94ad97e3c9bfacd536b281059d160a57fd34d5f2ad7bab7dfefc00ae53865",
+      "input_byte_allowance": 8305,
+      "reserved_quote_scenario": "0.01649417",
+      "usage": {
+        "input_tokens": 1229,
+        "output_tokens": 8314,
+        "total_tokens": 9543,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 18.705,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 9536,
+      "text_sha256": "a11f4a53f59878dd0b65e8925bbc4d68211d4335b733c8b7c9b64881257a8a6e",
+      "estimated_cost": "0.00762357",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 31.866,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 3642,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 4671,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "verify",
+      "case": "batch48",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "eb23c1226dbf43b385767b11d17fe1067aedeefede135e7eb52965b0fec1d04f",
+      "input_byte_allowance": 21631,
+      "reserved_quote_scenario": "0.0914932",
+      "usage": {
+        "input_tokens": 5564,
+        "output_tokens": 872,
+        "total_tokens": 6436,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 47.24,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 74,
+      "text_sha256": "9826811fc377dc9111cce0fd1fe35284b151165dd87c8d49d7414fa58f1e91c0",
+      "estimated_cost": "0.0101648",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 48.978,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 343,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 5,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "repair",
+      "case": "batch48",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "35a95e8dc585c96734514b9e5151e0d1e2d28b77ddc216bfb590f2e504fc7a44",
+      "input_byte_allowance": 22370,
+      "reserved_quote_scenario": "0.02001042",
+      "usage": {
+        "input_tokens": 5802,
+        "output_tokens": 13480,
+        "total_tokens": 19282,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 54.435,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 9557,
+      "text_sha256": "e99f119cbd9267f63b75ab249f92f532135d37b0b8982b0cfc068a7f7a80c2ba",
+      "estimated_cost": "0.0133129",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 67.506,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 8800,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 4679,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "verify_repair",
+      "case": "batch48",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "8a1c2c5a6230c56b7f057b663ff2c2ecaae1e097fe84b055d5bc025d9b374d1a",
+      "input_byte_allowance": 21650,
+      "reserved_quote_scenario": "0.091516",
+      "usage": {
+        "input_tokens": 5571,
+        "output_tokens": 395,
+        "total_tokens": 5966,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 11.502,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 61,
+      "text_sha256": "59850879dc319c11fb9619dddefc215ed01234eacd5b651f7680ab701ad83809",
+      "estimated_cost": "0.0082652",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 11.848,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 138,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 5,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "close_stream",
+      "case": "intentional_close",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "f1b94ad97e3c9bfacd536b281059d160a57fd34d5f2ad7bab7dfefc00ae53865",
+      "input_byte_allowance": 8305,
+      "reserved_quote_scenario": "0.01649417",
+      "usage": null,
+      "transport_valid": false,
+      "first_text_seconds": 13.491,
+      "category": "client_closed_after_first_text",
+      "upstream_stop_verified": false,
+      "estimated_cost": null,
+      "currency": "CNY",
+      "billing_verified": false,
+      "elapsed_seconds": 13.492,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 2221,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 1,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "generate",
+      "case": "version_conflict",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "fd3c63ec9ca2bff33bf5a7551679d284dc2232922e3b66a1cd5397ca899532ca",
+      "input_byte_allowance": 6109,
+      "reserved_quote_scenario": "0.0728668",
+      "usage": {
+        "input_tokens": 451,
+        "output_tokens": 1534,
+        "total_tokens": 1985,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 36.57,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 930,
+      "text_sha256": "489283f89a4825d74cb57cca2fb3c53db7c0ee3982a10812f1aa1edb2b0d01ca",
+      "estimated_cost": "0.0066772",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 43.111,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 357,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 117,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify",
+      "case": "version_conflict",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "9be4bb547073d7a44009a6dae6be9d3db1e4281ac4b60cf7276b47de94508d2f",
+      "input_byte_allowance": 7457,
+      "reserved_quote_scenario": "0.01628217",
+      "usage": {
+        "input_tokens": 999,
+        "output_tokens": 2760,
+        "total_tokens": 3759,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 16.756,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 66,
+      "text_sha256": "5f7cf54ba63f54dd7f6136c8f5341a80ea8609730d751bc4ee787dc5da9688ed",
+      "estimated_cost": "0.00267855",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 16.888,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 2739,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 20,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "repair",
+      "case": "version_conflict",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "f7a652e508b8fabeee2cf50e78f40361b5a4ad296490b741a2f37e26f46e65c5",
+      "input_byte_allowance": 7902,
+      "reserved_quote_scenario": "0.0750184",
+      "usage": null,
+      "transport_valid": false,
+      "category": "transport_outcome_unknown",
+      "estimated_cost": null,
+      "currency": "CNY",
+      "billing_verified": false,
+      "elapsed_seconds": 120.129,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 1,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 1097
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify_repair",
+      "case": "version_conflict",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "2a0c5233293abfc58d75b1e042da628d77797e326b2e0da606dd14f24c9ca69a",
+      "input_byte_allowance": 5931,
+      "reserved_quote_scenario": "0.01590067",
+      "usage": {
+        "input_tokens": 477,
+        "output_tokens": 6049,
+        "total_tokens": 6526,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 36.641,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 100,
+      "text_sha256": "cd7a2690a0a7163f55ae4e74a1af6971525a76e77804a32609970309db413358",
+      "estimated_cost": "0.00544237",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 36.849,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 6014,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 34,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "generate",
+      "case": "no_answer",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "0be685bd509db99b96fe6ba2a3297e43c1b48583d790cde1f416f6a4fa6bb62c",
+      "input_byte_allowance": 5900,
+      "reserved_quote_scenario": "0.072616",
+      "usage": {
+        "input_tokens": 372,
+        "output_tokens": 315,
+        "total_tokens": 687,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 8.831,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "invalid_json",
+      "final_text_characters": 105,
+      "text_sha256": "0407fd2af55c5ace9cdd847226eb8fcdc8c06e4ed0e1c4b6c3a0fc7172538f75",
+      "estimated_cost": "0.0017064",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 9.421,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 96,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 9,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify",
+      "case": "no_answer",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "48c07de35357fca1f174465377c23678fc6824c5f5ff01d203addff8e4ccf4e7",
+      "input_byte_allowance": 5722,
+      "reserved_quote_scenario": "0.01584842",
+      "usage": {
+        "input_tokens": 398,
+        "output_tokens": 838,
+        "total_tokens": 1236,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 6.315,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 87,
+      "text_sha256": "94c0f440a336defc27bf288bb287e8587eb7eab66a4f7b114c76f852eaac6481",
+      "estimated_cost": "0.00083694",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 6.581,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 810,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 27,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "repair",
+      "case": "no_answer",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "e4e9435f44dbb0432b5bb5acf59fe22c3a13e2a17f5c0f902ac984138728f5af",
+      "input_byte_allowance": 6132,
+      "reserved_quote_scenario": "0.0728944",
+      "usage": {
+        "input_tokens": 429,
+        "output_tokens": 338,
+        "total_tokens": 767,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 31.041,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 80,
+      "text_sha256": "ff20e1347cf9da8a94602d67f3285dcce08f769e2de9852aa0fb711adb8350a8",
+      "estimated_cost": "0.0018668",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 31.186,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 77,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 1,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify_repair",
+      "case": "no_answer",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "eb8c73b97382898a27e63bcf175542999f8e60605b4e63d4c8fe78699a64129c",
+      "input_byte_allowance": 5803,
+      "reserved_quote_scenario": "0.01586867",
+      "usage": {
+        "input_tokens": 421,
+        "output_tokens": 6453,
+        "total_tokens": 6874,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 39.248,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 59,
+      "text_sha256": "b4d169a75133fbd5ada5ae348c5349c7194ca3103588eaa706d326d117bc6d3a",
+      "estimated_cost": "0.00578389",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 39.427,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 6433,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 19,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "generate",
+      "case": "batch48",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "f1b94ad97e3c9bfacd536b281059d160a57fd34d5f2ad7bab7dfefc00ae53865",
+      "input_byte_allowance": 8305,
+      "reserved_quote_scenario": "0.075502",
+      "usage": null,
+      "transport_valid": false,
+      "first_text_seconds": 57.44,
+      "category": "transport_outcome_unknown",
+      "estimated_cost": null,
+      "currency": "CNY",
+      "billing_verified": false,
+      "elapsed_seconds": 120.78,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 623,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 1,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 583
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify",
+      "case": "batch48",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "37b77590ab673cda1fde6ea460a738f92ea7ea4b908f9cfc5524c835d4b61ba0",
+      "input_byte_allowance": 8127,
+      "reserved_quote_scenario": "0.01644967",
+      "usage": {
+        "input_tokens": 1246,
+        "output_tokens": 7757,
+        "total_tokens": 9003,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 51.123,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 100,
+      "text_sha256": "cd7a2690a0a7163f55ae4e74a1af6971525a76e77804a32609970309db413358",
+      "estimated_cost": "0.00713766",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 51.4,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 7722,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 34,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "repair",
+      "case": "batch48",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "4aef93d732a6acb18e3f151ceb66af70fe77d5da17fbbb01883abdb61098c4d0",
+      "input_byte_allowance": 8537,
+      "reserved_quote_scenario": "0.0757804",
+      "usage": {
+        "input_tokens": 1277,
+        "output_tokens": 5269,
+        "total_tokens": 6546,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 45.787,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 7272,
+      "text_sha256": "add935be44253bfe9539e1c776df34ec379b59a2140c1303ea600f34603362f6",
+      "estimated_cost": "0.0226084",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes",
+      "elapsed_seconds": 117.359,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 588,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 877,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "stage": "verify_repair",
+      "case": "batch48",
+      "temperature": 0.7,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "03d6a59010094999e1b69897fbec14ccb3ae2f23e348f88625a54927445801b0",
+      "input_byte_allowance": 21367,
+      "reserved_quote_scenario": "0.01975967",
+      "usage": {
+        "input_tokens": 5494,
+        "output_tokens": 1646,
+        "total_tokens": 7140,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "transport_valid": true,
+      "first_text_seconds": 10.761,
+      "status": "completed",
+      "response_model": "deepseek-v4.1-flash-x",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "parameter_echo": {
+        "temperature": null,
+        "effort": null,
+        "max_output_tokens": null
+      },
+      "category": "completed",
+      "final_text_characters": 61,
+      "text_sha256": "59850879dc319c11fb9619dddefc215ed01234eacd5b651f7680ab701ad83809",
+      "estimated_cost": "0.00282198",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12",
+      "elapsed_seconds": 11.008,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 1626,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 19,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      }
+    },
+    {
+      "model": "step-5-preview",
+      "stage": "close_stream",
+      "case": "intentional_close",
+      "temperature": 0.0,
+      "effort": "medium",
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "prompt_sha256": "f1b94ad97e3c9bfacd536b281059d160a57fd34d5f2ad7bab7dfefc00ae53865",
+      "input_byte_allowance": 8305,
+      "reserved_quote_scenario": "0.075502",
+      "usage": null,
+      "transport_valid": false,
+      "first_text_seconds": 64.857,
+      "category": "client_closed_after_first_text",
+      "upstream_stop_verified": false,
+      "estimated_cost": null,
+      "currency": "CNY",
+      "billing_verified": false,
+      "elapsed_seconds": 64.857,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 718,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 1,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 1
+      }
+    }
+  ],
+  "chains": [
+    {
+      "generator": "deepseek-v4.1-flash",
+      "checker": "step-5-preview",
+      "case": "version_conflict",
+      "raw_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "fault_injected": false,
+      "repair_attempts": 1,
+      "accepted": false,
+      "initial_checker_agrees": false,
+      "repaired_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "final_checker_agrees": false
+    },
+    {
+      "generator": "deepseek-v4.1-flash",
+      "checker": "step-5-preview",
+      "case": "no_answer",
+      "raw_generation": {
+        "valid": true,
+        "invalid_question_ids": [],
+        "reason_codes": []
+      },
+      "fault_injected": false,
+      "repair_attempts": 0,
+      "accepted": false,
+      "initial_checker_agrees": false
+    },
+    {
+      "generator": "deepseek-v4.1-flash",
+      "checker": "step-5-preview",
+      "case": "batch48",
+      "raw_generation": {
+        "valid": false,
+        "invalid_question_ids": [
+          "Q01",
+          "Q02",
+          "Q03",
+          "Q04",
+          "Q05",
+          "Q06",
+          "Q07",
+          "Q08",
+          "Q09",
+          "Q10",
+          "Q11",
+          "Q12",
+          "Q13",
+          "Q14",
+          "Q15",
+          "Q16",
+          "Q17",
+          "Q18",
+          "Q19",
+          "Q20",
+          "Q21",
+          "Q22",
+          "Q23",
+          "Q24",
+          "Q25",
+          "Q26",
+          "Q27",
+          "Q28",
+          "Q29",
+          "Q30",
+          "Q31",
+          "Q32",
+          "Q33",
+          "Q34",
+          "Q35",
+          "Q36",
+          "Q37",
+          "Q38",
+          "Q39",
+          "Q40",
+          "Q41",
+          "Q42",
+          "Q43",
+          "Q44",
+          "Q45",
+          "Q46",
+          "Q47",
+          "Q48"
+        ],
+        "reason_codes": ["format"]
+      },
+      "fault_injected": false,
+      "repair_attempts": 1,
+      "accepted": false,
+      "initial_checker_agrees": false,
+      "repaired_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "final_checker_agrees": false
+    },
+    {
+      "generator": "step-5-preview",
+      "checker": "deepseek-v4.1-flash",
+      "case": "version_conflict",
+      "raw_generation": {
+        "valid": false,
+        "invalid_question_ids": ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06"],
+        "reason_codes": ["format"]
+      },
+      "fault_injected": false,
+      "repair_attempts": 1,
+      "accepted": false,
+      "initial_checker_agrees": false,
+      "repaired_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "final_checker_agrees": false
+    },
+    {
+      "generator": "step-5-preview",
+      "checker": "deepseek-v4.1-flash",
+      "case": "no_answer",
+      "raw_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "fault_injected": false,
+      "repair_attempts": 1,
+      "accepted": false,
+      "initial_checker_agrees": false,
+      "repaired_generation": {
+        "valid": true,
+        "invalid_question_ids": [],
+        "reason_codes": []
+      },
+      "final_checker_agrees": false
+    },
+    {
+      "generator": "step-5-preview",
+      "checker": "deepseek-v4.1-flash",
+      "case": "batch48",
+      "raw_generation": {
+        "valid": false,
+        "invalid_question_ids": ["ALL"],
+        "reason_codes": ["format"]
+      },
+      "fault_injected": false,
+      "repair_attempts": 1,
+      "accepted": false,
+      "initial_checker_agrees": false,
+      "repaired_generation": {
+        "valid": false,
+        "invalid_question_ids": [
+          "Q01",
+          "Q02",
+          "Q03",
+          "Q04",
+          "Q05",
+          "Q06",
+          "Q07",
+          "Q08",
+          "Q09",
+          "Q10",
+          "Q11",
+          "Q12",
+          "Q13",
+          "Q14",
+          "Q15",
+          "Q16",
+          "Q17",
+          "Q18",
+          "Q19",
+          "Q20",
+          "Q21",
+          "Q22",
+          "Q23",
+          "Q24",
+          "Q25",
+          "Q26",
+          "Q27",
+          "Q28",
+          "Q29",
+          "Q30",
+          "Q31",
+          "Q32",
+          "Q33",
+          "Q34",
+          "Q35",
+          "Q36",
+          "Q37",
+          "Q38",
+          "Q39",
+          "Q40",
+          "Q41",
+          "Q42",
+          "Q43",
+          "Q44",
+          "Q45",
+          "Q46",
+          "Q47",
+          "Q48"
+        ],
+        "reason_codes": ["format"]
+      },
+      "final_checker_agrees": false
+    }
+  ],
+  "complete": true,
+  "reserved_quote_upper_scenario": "1.12715439",
+  "finished_at": "2026-10-13T22:14:00.504733+08:00"
+}

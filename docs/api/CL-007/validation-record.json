@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-13",
+  "scope": "CL-007 proposed business contract plus actual health-only HTTP/Swagger verification; not business security/transaction/worker acceptance",
+  "files": {
+    "contracts/openapi/canlearn.v1.yaml": "0735adad531cfbca2ec2394928b30e58720ec3fa1818cfd341e938698eece2ad",
+    "apps/api/src/application.ts": "9211b42afd85181af613a0332e3ffc11f32f24265e0ae0e1a1f19935d22d7cb6",
+    "apps/api/src/main.ts": "f46e160b101a8a1dbcf627213b0d457a83a93d7e2b678970525d2fc94e5ef4a6",
+    "apps/api/src/health/health.controller.ts": "9225e123337ff7a465159477b2e13f80e6587bc8adb54df4c7f923374d91bdc4",
+    "apps/api/src/health/health.contract.test.ts": "3327c87862843ecfa75dea03f63f315227777ea6df27461d28b5996628de10c1",
+    "docs/api/CL-007/contract-examples.json": "0348ed2e64481b16e0f912547125985eca5a74e8ae34579954e45ac58b68f158",
+    "apps/api/package.json": "ad53f1b1298b809059ecfdd92a610e63426e8f9e51b4ccc0c9b77aa3a3b12efb",
+    "pnpm-lock.yaml": "cfb0e3f904377f968798d63fe4a67361ffb6c0912abdbeabfc1fcbea08fcdfe3"
+  },
+  "compiled_runtime_probe": {
+    "scope": "Compiled API application via Fastify inject; no listening socket, DB, workflow, model or cloud calls",
+    "health": {
+      "status_code": 200,
+      "content_type": "application/json; charset=utf-8",
+      "body": {
+        "service": "canlearn-api",
+        "status": "ok"
+      }
+    },
+    "runtime_openapi": "3.1.0",
+    "runtime_paths": ["/v1/health"],
+    "planned_parse_job_status": 404
+  },
+  "contract_operations": {
+    "implemented": 1,
+    "planned": 27
+  },
+  "tests": {
+    "api_total_passed": 89,
+    "existing_controller_unit": 1,
+    "new_contract_checks_passed": 88,
+    "new_checks_breakdown": {
+      "actual_health_http_and_swagger": 2,
+      "response_field_corruption": 4,
+      "schema_route_promotion_mutations": 3,
+      "planned_route_absence": 27,
+      "schema_compile_only": 33,
+      "synthetic_dto_only": 18,
+      "planned_metadata": 1
+    }
+  },
+  "commands": [
+    {
+      "command": "pnpm --filter @canlearn/api typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm --filter @canlearn/api test",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm verify",
+      "exit_code": 0
+    }
+  ],
+  "ci_workflow_modified": false,
+  "remote_ci_executed": false,
+  "human_review": "pending",
+  "business_endpoints_implemented": false,
+  "automatic_commit_or_push": false
+}

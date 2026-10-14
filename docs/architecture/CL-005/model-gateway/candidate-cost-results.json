@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-13",
+  "scope": "Additional candidates only; historical 55 requests remain in cost-results.json",
+  "currency": "CNY",
+  "request_count": 40,
+  "requests_without_usable_usage": 0,
+  "quoted_rates_sha256": "6ef3d33107a328558f38fdccfb267d7928879ecfa4121a0fac3a9bc906cc1581",
+  "groups": [
+    {
+      "model": "minimax-m3",
+      "requests": 20,
+      "requests_with_valid_usage": 20,
+      "tokens": 15840,
+      "estimated_cost_from_user_quote": "0.05439600",
+      "billing_verified": false
+    },
+    {
+      "model": "step-5-preview",
+      "requests": 20,
+      "requests_with_valid_usage": 20,
+      "tokens": 10082,
+      "estimated_cost_from_user_quote": "0.0296600",
+      "billing_verified": false
+    }
+  ],
+  "estimated_cost_from_user_quote": "0.08405600",
+  "actual_total_charge": null,
+  "billing_verified": false,
+  "unit": "CNY per million tokens, using prior shared unit confirmed as assumption in commentary"
+}

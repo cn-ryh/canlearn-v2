@@ -1,0 +1,20 @@
+{
+  "scope": "local original-fixture parser probe only",
+  "fixtures": {
+    "reading": {
+      "path": "docs/research/CL-003/fixtures/D03-reading-v1.pdf",
+      "pages": 2,
+      "sha256": "8aed38dd30880ac84a6dbe51a3f542b1dc1358fcf1e3dd517b81ef2779a25a0a"
+    },
+    "stack": {
+      "path": "docs/research/CL-003/fixtures/D01-stack-v1.pdf",
+      "pages": 2,
+      "sha256": "995d979822bdb580727118776e27b223c7fc439df2d42bcaf8346f93c953dbdb"
+    },
+    "volume300": {
+      "path": "docs/architecture/CL-005/retrieval/fixtures/L300-original-volume-v1.pdf",
+      "pages": 300,
+      "sha256": "56ac109a768fe8c63cc34be1f0ac2ef89103d142fc3633a7b2fb7e7afd653933"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "recorded_at": "2026-10-13T23:55:43+08:00",
+  "scope": "CL-008 proposed contracts and pure-memory design regressions; no SQL/Temporal/provider/physical deletion or recovery validation",
+  "files": {
+    "apps/api/src/contracts/events.contract.test.ts": "676ce9397ec3917762534b605ea8ee5956b8b8ca7c4cdc50953434edcbedc2b9",
+    "apps/workflow/tests/test_cl008_reference.py": "38b60371742de53b55022071abb9ec346ae7c20166f0eec6ef81e107ff9f0e3a",
+    "contracts/events/catalog.json": "c2a1491ce9278f1cf1aace922bfcdbd5ee6acfd6a31449e193e85d87ae13d178",
+    "contracts/events/fixtures/examples.json": "774d0955b9789a16738a9754ca44e919e4f39760129ddb918da870c9d0a6a0bf",
+    "contracts/events/v1/job.accepted.v1.schema.json": "eecdbce8745eb31091c4576476d7d4be887d2897bbc18f26d9dec82c880cc30d",
+    "contracts/events/v1/job.cancel_requested.v1.schema.json": "343b9259ef4520d8b9a0386d8a62c3c5f91a505f4609792daccbf28fc8eb4a8b",
+    "contracts/events/v1/job.finalized.v1.schema.json": "a55c64429cbd9bd4544f60c078afb8fdbda4beb46e896f8a9d9f0a31a8157b2d",
+    "contracts/events/v1/resource.invalidated.v1.schema.json": "dc8616cf5d730ffb94cf4c5fbc6745eef57f5c729cb035adf80e60ce8454ebe5",
+    "docs/workflow/CL-008/README.md": "a5491928d24cd4a5fde1059eccfb0a3e3e368d7fa83582df3b53718f2148758f",
+    "docs/workflow/CL-008/events-and-outbox.md": "c612a6a42b264ee1e0ff4206c8b94733b7d3275bf96a17e6a0cbba402b1a14eb",
+    "docs/workflow/CL-008/example-results.json": "d4e2c656308503b45cc60f93ee3d1f74984b6f486bd17aff8d512163aded5f2a",
+    "docs/workflow/CL-008/failure-and-recovery.md": "7f54b80290ecbe32203c330c0196678f5f92c9257ba26a0fa8e10cbbcd278bf5",
+    "docs/workflow/CL-008/job-state-and-admission.md": "07568ac5b81b8d92649878aedf9723874b80146fc9d0fd35d4216e9337c38d20",
+    "docs/workflow/CL-008/job_model.py": "8b048333095772b1647af217e6326d302714da55d65198484b99a36587018e6b",
+    "docs/workflow/CL-008/scenarios.json": "2e9a233fab7418c6f84d5e05b4e94b45cdb346a24e5b9f143db5dff8fdf7863d"
+  },
+  "checks": {
+    "reference_scenarios_passed": 34,
+    "event_schemas": 4,
+    "event_examples": {
+      "positive": 7,
+      "negative": 19
+    },
+    "api_event_tests_passed": 33,
+    "workflow_reference_tests_passed": 35,
+    "pnpm_verify": {
+      "exit_code": 0,
+      "api_tests": 122,
+      "web_tests": 1,
+      "workflow_tests": 36,
+      "includes": [
+        "Biome/Ruff",
+        "TypeScript/mypy",
+        "Vitest/pytest",
+        "Redocly",
+        "Compose config",
+        "API/Web build"
+      ]
+    },
+    "extra_python_ruff": {
+      "lint_exit_code": 0,
+      "format_exit_code": 0
+    }
+  },
+  "implementation": {
+    "business_job_api": false,
+    "business_workflow": false,
+    "outbox_sql": false,
+    "live_event_transport": false,
+    "event_catalog_status": "planned",
+    "database_enum_changed": false,
+    "new_dependencies": false
+  },
+  "human_review": "pending",
+  "remote_ci_for_cl008": "not_yet_run_at_record_creation",
+  "limitations": [
+    "Sequential in-memory actions model ordering and rollback, not real database locks/concurrent execution.",
+    "Reference integer units are known accounting observations, not full cost or RMB rates.",
+    "Usage and cancellation do not prove provider stop or zero cost.",
+    "Restoration actions model isolation/deletion policy; no real backup or external copy cleanup tested."
+  ]
+}

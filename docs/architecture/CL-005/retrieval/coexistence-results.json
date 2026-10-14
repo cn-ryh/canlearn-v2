@@ -1,0 +1,5242 @@
+{
+  "date": "2026-10-12",
+  "scope": "Isolated MinerU 4.0.7 Basic/Torch CLI; synthetic 300-page native PDF; serial/short query bursts; not Standard/VLM, production scheduler or real document quality",
+  "mineru_version": "4.0.7",
+  "source_tag": "mineru-4.0.7-released",
+  "source_commit": "175f031cbcded6b527ddb2045ccec460ffecfa26",
+  "model_revision": "2b3afb86f4d23fa623f6b2f4b2279ed4ef93a89d",
+  "tier": "basic",
+  "small_backend": "torch",
+  "ocr_mode": "auto",
+  "page_range": "all",
+  "timeout_seconds": 600,
+  "min_free_mib": 768,
+  "omp_num_threads": 4,
+  "mkl_num_threads": 4,
+  "fixture_sha256": "56ac109a768fe8c63cc34be1f0ac2ef89103d142fc3633a7b2fb7e7afd653933",
+  "dependency_snapshot_sha256": "db0224e900d385c8518e79e34ef623b57f8cccb1e71fcf6dedf1b9c8ef08fa0a",
+  "model_files": [
+    {
+      "file": ".locks/MinerU-4_models_torch.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "MinerU-4_models_torch/Layout/PP-DocLayoutV2/.mineru_complete",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "MinerU-4_models_torch/Layout/PP-DocLayoutV2/config.json",
+      "bytes": 3787,
+      "sha256": "18a696b54c64c4fa582afcd3a41407c4b65a99dc7ab187ad2fed8af8e4128ad8"
+    },
+    {
+      "file": "MinerU-4_models_torch/Layout/PP-DocLayoutV2/inference.yml",
+      "bytes": 1482,
+      "sha256": "93100e0fb2cd76b9d246a853deea85e191d8333b2cfca7be76e82e4c4ebfa819"
+    },
+    {
+      "file": "MinerU-4_models_torch/Layout/PP-DocLayoutV2/model.safetensors",
+      "bytes": 214798436,
+      "sha256": "e60f3725aeedc88fd319416ef166bda79171a41516a301c27cab9132dc2739d2"
+    },
+    {
+      "file": "MinerU-4_models_torch/Layout/PP-DocLayoutV2/preprocessor_config.json",
+      "bytes": 575,
+      "sha256": "56281a70c931a291dcaf653605fb4df713fd823f65e939aecd6005c26346a103"
+    },
+    {
+      "file": "MinerU-4_models_torch/MFR/pp_formulanet_plus_m/PP-FormulaNet_plus-M.pth",
+      "bytes": 617465525,
+      "sha256": "bd9d40fd9c7759805e93cb54f14f5e91448a80b14aadc2bfb25c4c948b2974e8"
+    },
+    {
+      "file": "MinerU-4_models_torch/MFR/pp_formulanet_plus_m/PP-FormulaNet_plus-M_inference.yml",
+      "bytes": 2243888,
+      "sha256": "e57ba132b657d08d52d6c19bee94f1eefe12190fddc23e9b1f6a54b8f31e051f"
+    },
+    {
+      "file": "MinerU-4_models_torch/OCR/paddleocr/.mineru_complete",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "MinerU-4_models_torch/OCR/paddleocr/ch_PP-OCRv6_small_rec_infer.safetensors",
+      "bytes": 21204736,
+      "sha256": "f65a332afe5aa663f0b9d5706f4ae8457b5b4058a842d5c1eb22df505c27d642"
+    },
+    {
+      "file": "MinerU-4_models_torch/OCR/paddleocr/ch_PP-OCRv6_tiny_det_infer.safetensors",
+      "bytes": 1786412,
+      "sha256": "cae3c88d2a9902fd0293e6b17990428f54bfa7ec98f800a4368e95423a754d16"
+    },
+    {
+      "file": "MinerU-4_models_torch/OCR/paddleocr/seal_PP-OCRv4_det_infer.pth",
+      "bytes": 14506268,
+      "sha256": "a7777ca66448ab90948ce5a3257e4c959d6eacf0489fbadd5133dbe8f89662ae"
+    },
+    {
+      "file": "MinerU-4_models_torch/Table/PP-LCNet_x1_0_table_cls.onnx",
+      "bytes": 6776877,
+      "sha256": "c84bf1d79c1c74d534b5b12adb14dd12151c42f7ae3e4be4f1042b830f80b949"
+    },
+    {
+      "file": "MinerU-4_models_torch/Table/slanet-plus.onnx",
+      "bytes": 7758305,
+      "sha256": "d57a942af6a2f57d6a4a0372573c696a2379bf5857c45e2ac69993f3b334514b"
+    },
+    {
+      "file": "MinerU-4_models_torch/Table/unet.onnx",
+      "bytes": 8335007,
+      "sha256": "0ea48d3a17e35ef5c2e498a5e799566073234d39b1079ca21d9f4fafe73c6d20"
+    }
+  ],
+  "source_license_sha256": "2d9aeb5d15159329a20dd804f251c64860ba954fbd26ec02f802220e6d71cf5c",
+  "observations": [
+    {
+      "mode": "serial",
+      "parse": {
+        "version": "4.0.7",
+        "script_sha256": "fcfbb7b6cb56b87bab1ac3946593f59a85a3e6814e87eb92fdff142474e23d08",
+        "gpu_baseline": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "samples": [
+          {
+            "elapsed_seconds": 0.0,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 0.53,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.06,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.58,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.11,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.64,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.17,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.7,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.23,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.76,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.28,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.81,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.34,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.86,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.4,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.93,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 8.46,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 8.99,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 9.52,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.04,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 4
+          },
+          {
+            "elapsed_seconds": 10.57,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.1,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.62,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.15,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.68,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 13.2,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 13.73,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 14.26,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 14.79,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 15.31,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 15.84,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 16.37,
+            "used_mib": 2895,
+            "free_mib": 8982,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 16.89,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 4
+          },
+          {
+            "elapsed_seconds": 17.42,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 17.95,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 18.48,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.01,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.54,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.06,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.59,
+            "used_mib": 2977,
+            "free_mib": 8900,
+            "utilization_percent": 2
+          },
+          {
+            "elapsed_seconds": 21.12,
+            "used_mib": 3391,
+            "free_mib": 8486,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 21.65,
+            "used_mib": 3401,
+            "free_mib": 8476,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.18,
+            "used_mib": 3401,
+            "free_mib": 8476,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.7,
+            "used_mib": 3413,
+            "free_mib": 8464,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 23.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 23.77,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 30
+          },
+          {
+            "elapsed_seconds": 24.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 24.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 25.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 25.89,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 33
+          },
+          {
+            "elapsed_seconds": 26.41,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 26.94,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 27.47,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 28.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 28.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.64,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.69,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 32.22,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 32.75,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 33.28,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 33.81,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 34.34,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 34.87,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 35.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 35.93,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 36.45,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 36.98,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 37.51,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.04,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 40.15,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 40.68,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 41.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 41.74,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 34
+          },
+          {
+            "elapsed_seconds": 42.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 42.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 43.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 44
+          },
+          {
+            "elapsed_seconds": 43.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 44.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 44.92,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 43
+          },
+          {
+            "elapsed_seconds": 45.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 6
+          },
+          {
+            "elapsed_seconds": 45.98,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 46.51,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.04,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.15,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.68,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 50.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 50.74,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 51.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 51.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 52.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 52.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 53.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 53.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 1
+          },
+          {
+            "elapsed_seconds": 54.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 54.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 55.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.07,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.13,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.66,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 59.19,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 59.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 60.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 60.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 46
+          },
+          {
+            "elapsed_seconds": 61.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 61.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 62.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 62.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 63.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 63.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 64.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.01,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.54,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 68.18,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 68.71,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 69.24,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 69.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 70.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 70.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 71.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 71.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 72.41,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 72.94,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 74.52,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 76.11,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 76.64,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 77.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 77.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 78.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 78.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 79.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 32
+          },
+          {
+            "elapsed_seconds": 79.82,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 80.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 80.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 81.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 81.93,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 83.51,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.04,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 85.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 85.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 86.16,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 86.68,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 87.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 87.75,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 88.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 88.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 91.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 91.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 92.5,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 38
+          },
+          {
+            "elapsed_seconds": 93.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 93.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 94.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 94.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 95.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 95.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 96.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 96.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 98.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 15
+          },
+          {
+            "elapsed_seconds": 98.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 11
+          },
+          {
+            "elapsed_seconds": 99.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 99.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 100.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 14
+          },
+          {
+            "elapsed_seconds": 100.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 101.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 102.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 102.55,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 103.07,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 103.6,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 104.13,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 104.65,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 105.18,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 105.71,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 106.24,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 106.76,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 107.29,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 107.82,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          }
+        ],
+        "stop_reason": null,
+        "query_started": true,
+        "query_mode": "serial",
+        "query_arrival_seconds": 10.042,
+        "parse_seconds": 108.345,
+        "query_started_seconds": 108.346,
+        "observed_query_queue_wait_seconds": 98.304,
+        "parse_exit_code": 0,
+        "query_exit_code": 0,
+        "coverage": {
+          "expected_pages": 300,
+          "observed_anchor_count": 300,
+          "missing_anchors": [],
+          "unexpected_anchors": [],
+          "duplicate_anchors": [],
+          "exports": [
+            {
+              "file": "volume.md",
+              "bytes": 457510,
+              "sha256": "c03f795fa87657f22092d9ff8b99f8a81a25108955fb2aba9ff5fb3591ba3036"
+            }
+          ],
+          "full_text_quality_verified": false,
+          "note": "Anchor survival only; independently reconcile V1 result page manifest in CL-010"
+        },
+        "gpu_after_children_exit": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "serial_query_wait_bound_seconds": 108.345,
+        "note": "Queue wait is an isolated supervisor observation, not a deployed API/Temporal queue. Full request latency also includes model load and inference. GPU peak is a 0.5s sampled lower bound."
+      },
+      "query": {
+        "model": "bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "device": "cuda",
+        "dtype": "torch.float32",
+        "torch": "2.8.0+cu128",
+        "load_seconds": 3.237,
+        "fixture_sha256": "e6092db392059d1690568229ada892d25b66895dffd45ce43c3f8e0275fac927",
+        "script_sha256": "f66c4871363f3d7bf4a96e772a3aefc079c6cb138af2e1202713ede482f121bd",
+        "gpu_before_load": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "scope": "synthetic dense retrieval; encode includes tokenization/pooling/normalization; no network or DB",
+        "benchmarks": [],
+        "quality": [],
+        "queries": {
+          "latency_ms": {
+            "n": 60,
+            "median": 26.94,
+            "p95_nearest_rank": 27.609,
+            "max": 28.579,
+            "samples": [
+              28.579, 26.806, 26.323, 26.224, 26.187, 25.983, 25.96, 25.91, 26.45, 26.12, 26.101,
+              27.609, 27.49, 27.814, 27.498, 27.227, 27.151, 27.138, 27.164, 27.021, 27.099, 26.194,
+              25.975, 25.961, 26.005, 26.022, 26.174, 26.03, 26.815, 26.905, 25.97, 27.191, 27.087,
+              27.042, 27.125, 27.704, 27.072, 27.161, 27.113, 27.102, 27.404, 26.285, 26.074,
+              26.058, 26.094, 26.142, 26.332, 26.152, 26.123, 25.995, 25.938, 27.195, 27.127,
+              27.011, 26.975, 27.129, 27.164, 27.042, 27.123, 27.045
+            ]
+          },
+          "window_seconds": 1.762,
+          "gpu_samples": [
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 6
+            },
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 18
+            },
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 16
+            },
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 14
+            },
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 13
+            },
+            {
+              "used_mib": 4875,
+              "free_mib": 7002,
+              "utilization_percent": 17
+            }
+          ]
+        },
+        "gpu_before_exit": {
+          "used_mib": 4875,
+          "free_mib": 7002,
+          "utilization_percent": 15
+        }
+      },
+      "sampled_device_peak_mib": 3503
+    },
+    {
+      "mode": "concurrent-gpu",
+      "parse": {
+        "version": "4.0.7",
+        "script_sha256": "fcfbb7b6cb56b87bab1ac3946593f59a85a3e6814e87eb92fdff142474e23d08",
+        "gpu_baseline": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "samples": [
+          {
+            "elapsed_seconds": 0.0,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 0.53,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.06,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.58,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.11,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.64,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.17,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.7,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.23,
+            "used_mib": 2653,
+            "free_mib": 9224,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.75,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.28,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.81,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.34,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.87,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.39,
+            "used_mib": 2895,
+            "free_mib": 8982,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.92,
+            "used_mib": 2947,
+            "free_mib": 8930,
+            "utilization_percent": 5
+          },
+          {
+            "elapsed_seconds": 8.45,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 8.98,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 9.51,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.03,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.56,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.09,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.62,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.15,
+            "used_mib": 3059,
+            "free_mib": 8818,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.68,
+            "used_mib": 3409,
+            "free_mib": 8468,
+            "utilization_percent": 2
+          },
+          {
+            "elapsed_seconds": 13.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 13.74,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 14.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 14.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 15.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 32
+          },
+          {
+            "elapsed_seconds": 15.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 16.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 16.92,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 14
+          },
+          {
+            "elapsed_seconds": 17.45,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 17.98,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 28
+          },
+          {
+            "elapsed_seconds": 18.56,
+            "used_mib": 4640,
+            "free_mib": 7236,
+            "utilization_percent": 3
+          },
+          {
+            "elapsed_seconds": 19.09,
+            "used_mib": 5724,
+            "free_mib": 6152,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 19.62,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 5
+          },
+          {
+            "elapsed_seconds": 20.15,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 20.68,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 21.21,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 11
+          },
+          {
+            "elapsed_seconds": 21.74,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.26,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 23.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 23.85,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 2
+          },
+          {
+            "elapsed_seconds": 24.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 24.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 25.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 25.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 26.5,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 27.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 27.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 28.09,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 28.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 32.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 32.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 33.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 33.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 33
+          },
+          {
+            "elapsed_seconds": 34.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 34.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 35.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 32
+          },
+          {
+            "elapsed_seconds": 36.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 36.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 37.07,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 37.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 38.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.66,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.19,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 40.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 40.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 41.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 41.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 42.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 42.89,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 43.42,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 43.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 44.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 45.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 45.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 46.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 46.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 47.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.18,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 50.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 50.81,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 51.34,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 51.87,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 30
+          },
+          {
+            "elapsed_seconds": 52.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 52.93,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 53.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 34
+          },
+          {
+            "elapsed_seconds": 53.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 54.52,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 55.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 32
+          },
+          {
+            "elapsed_seconds": 55.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 56.11,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 56.64,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.69,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.22,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.75,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 59.28,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 59.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 60.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 60.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 61.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 61.92,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 62.45,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 62.98,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 63.51,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 64.04,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 14
+          },
+          {
+            "elapsed_seconds": 64.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 65.09,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.15,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 68.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 68.79,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 69.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 90
+          },
+          {
+            "elapsed_seconds": 69.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 70.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 70.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 71.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 71.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 33
+          },
+          {
+            "elapsed_seconds": 72.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 73.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 73.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 74.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 74.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 77.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 77.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 78.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 78.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 79.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 79.89,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 80.42,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 80.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 81.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 82.01,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 82.54,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 14
+          },
+          {
+            "elapsed_seconds": 83.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 83.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 85.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 85.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 86.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 86.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 87.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 43
+          },
+          {
+            "elapsed_seconds": 87.82,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 88.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 88.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 89.41,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 89.94,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 90.47,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 91.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 91.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 92.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 92.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 93.11,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 93.64,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 4
+          },
+          {
+            "elapsed_seconds": 94.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 94.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 95.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 95.77,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 10
+          },
+          {
+            "elapsed_seconds": 96.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 96.82,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.93,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.46,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.98,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 100.51,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 101.04,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 101.57,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 102.09,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 102.62,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 103.14,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 103.67,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          }
+        ],
+        "stop_reason": null,
+        "query_started": true,
+        "query_mode": "concurrent",
+        "query_arrival_seconds": 10.035,
+        "query_started_seconds": 10.03,
+        "observed_query_queue_wait_seconds": -0.0,
+        "parse_seconds": 104.201,
+        "parse_exit_code": 0,
+        "query_exit_code": 0,
+        "coverage": {
+          "expected_pages": 300,
+          "observed_anchor_count": 300,
+          "missing_anchors": [],
+          "unexpected_anchors": [],
+          "duplicate_anchors": [],
+          "exports": [
+            {
+              "file": "volume.md",
+              "bytes": 457510,
+              "sha256": "c03f795fa87657f22092d9ff8b99f8a81a25108955fb2aba9ff5fb3591ba3036"
+            }
+          ],
+          "full_text_quality_verified": false,
+          "note": "Anchor survival only; independently reconcile V1 result page manifest in CL-010"
+        },
+        "gpu_after_children_exit": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "serial_query_wait_bound_seconds": 104.201,
+        "note": "Queue wait is an isolated supervisor observation, not a deployed API/Temporal queue. Full request latency also includes model load and inference. GPU peak is a 0.5s sampled lower bound."
+      },
+      "query": {
+        "model": "bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "device": "cuda",
+        "dtype": "torch.float32",
+        "torch": "2.8.0+cu128",
+        "load_seconds": 3.301,
+        "fixture_sha256": "e6092db392059d1690568229ada892d25b66895dffd45ce43c3f8e0275fac927",
+        "script_sha256": "f66c4871363f3d7bf4a96e772a3aefc079c6cb138af2e1202713ede482f121bd",
+        "gpu_before_load": {
+          "used_mib": 3503,
+          "free_mib": 8374,
+          "utilization_percent": 26
+        },
+        "scope": "synthetic dense retrieval; encode includes tokenization/pooling/normalization; no network or DB",
+        "benchmarks": [],
+        "quality": [],
+        "queries": {
+          "latency_ms": {
+            "n": 60,
+            "median": 25.526,
+            "p95_nearest_rank": 26.29,
+            "max": 26.872,
+            "samples": [
+              26.726, 26.872, 26.018, 25.814, 25.59, 25.647, 25.551, 25.532, 26.079, 25.668, 25.683,
+              26.115, 25.981, 25.674, 25.857, 25.547, 25.475, 25.466, 25.475, 25.52, 25.483, 26.004,
+              25.574, 25.481, 25.445, 25.496, 26.157, 25.472, 25.443, 25.477, 25.442, 26.29, 26.716,
+              25.538, 25.555, 25.599, 25.44, 25.467, 25.561, 25.48, 25.44, 25.945, 25.623, 25.553,
+              25.472, 25.498, 25.446, 25.415, 25.352, 25.471, 25.364, 25.92, 25.505, 25.517, 25.429,
+              25.423, 25.624, 25.489, 25.419, 25.426
+            ]
+          },
+          "window_seconds": 1.703,
+          "gpu_samples": [
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 5
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 14
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 17
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 17
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 17
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 18
+            }
+          ]
+        },
+        "gpu_before_exit": {
+          "used_mib": 5884,
+          "free_mib": 5992,
+          "utilization_percent": 17
+        }
+      },
+      "sampled_device_peak_mib": 5884
+    },
+    {
+      "mode": "concurrent-gpu-later",
+      "parse": {
+        "version": "4.0.7",
+        "script_sha256": "fcfbb7b6cb56b87bab1ac3946593f59a85a3e6814e87eb92fdff142474e23d08",
+        "gpu_baseline": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "samples": [
+          {
+            "elapsed_seconds": 0.0,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 0.53,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.06,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.58,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.11,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.64,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.17,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.7,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.23,
+            "used_mib": 2508,
+            "free_mib": 9368,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.78,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.31,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.84,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.37,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.9,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.43,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.95,
+            "used_mib": 2895,
+            "free_mib": 8982,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 8.48,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 9.01,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 9.56,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.09,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.62,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.15,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.68,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.21,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 12.73,
+            "used_mib": 3391,
+            "free_mib": 8486,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 13.26,
+            "used_mib": 3413,
+            "free_mib": 8464,
+            "utilization_percent": 5
+          },
+          {
+            "elapsed_seconds": 13.79,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 14.32,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 14.85,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 15.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 15.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 38
+          },
+          {
+            "elapsed_seconds": 16.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 28
+          },
+          {
+            "elapsed_seconds": 16.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 17.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 18.04,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 18.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.09,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 21.19,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 21.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 23.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 7
+          },
+          {
+            "elapsed_seconds": 23.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 24.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 24.89,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 25.42,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 25.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 26.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 27.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 27.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 28.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 28.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.15,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 31.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 32.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 32.79,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 34
+          },
+          {
+            "elapsed_seconds": 33.32,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 33.85,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 34.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 34.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 35.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 35.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 38
+          },
+          {
+            "elapsed_seconds": 36.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 37.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 1
+          },
+          {
+            "elapsed_seconds": 37.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.14,
+            "used_mib": 5164,
+            "free_mib": 6712,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 39.67,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 1
+          },
+          {
+            "elapsed_seconds": 40.2,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 40.73,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 11
+          },
+          {
+            "elapsed_seconds": 41.26,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 41.79,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 8
+          },
+          {
+            "elapsed_seconds": 42.32,
+            "used_mib": 5884,
+            "free_mib": 5992,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 42.85,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 43.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 43.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 44.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 44.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 15
+          },
+          {
+            "elapsed_seconds": 45.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 46.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 46.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.66,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.19,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 49.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 50.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 50.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 42
+          },
+          {
+            "elapsed_seconds": 51.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 51.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 52.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 52.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 53.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 53.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 54.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 55.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 55.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.13,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.18,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.71,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 59.24,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 59.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 60.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 60.81,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 61.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 61.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 62.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 62.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 63.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 63.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 64.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 68.16,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 68.69,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 69.22,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 69.75,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 46
+          },
+          {
+            "elapsed_seconds": 70.28,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 70.81,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 71.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 71.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 72.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 72.93,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 74.52,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 77.16,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 77.68,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 78.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 78.74,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 79.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 79.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 80.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 80.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 81.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 4
+          },
+          {
+            "elapsed_seconds": 81.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 83.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 85.07,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 85.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 86.13,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 86.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 87.18,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 44
+          },
+          {
+            "elapsed_seconds": 87.71,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 43
+          },
+          {
+            "elapsed_seconds": 88.23,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 88.76,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.29,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.82,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.87,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 91.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 11
+          },
+          {
+            "elapsed_seconds": 91.93,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 92.46,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 92.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 93.52,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 94.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 94.57,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 95.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 95.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 96.15,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 10
+          },
+          {
+            "elapsed_seconds": 96.68,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.21,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.73,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.26,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.79,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.31,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.84,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 100.37,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          }
+        ],
+        "stop_reason": null,
+        "query_started": true,
+        "query_mode": "concurrent",
+        "query_arrival_seconds": 30.147,
+        "query_started_seconds": 30.15,
+        "observed_query_queue_wait_seconds": 0.0,
+        "parse_seconds": 100.896,
+        "parse_exit_code": 0,
+        "query_exit_code": 0,
+        "coverage": {
+          "expected_pages": 300,
+          "observed_anchor_count": 300,
+          "missing_anchors": [],
+          "unexpected_anchors": [],
+          "duplicate_anchors": [],
+          "exports": [
+            {
+              "file": "volume.md",
+              "bytes": 457510,
+              "sha256": "c03f795fa87657f22092d9ff8b99f8a81a25108955fb2aba9ff5fb3591ba3036"
+            }
+          ],
+          "full_text_quality_verified": false,
+          "note": "Anchor survival only; independently reconcile V1 result page manifest in CL-010"
+        },
+        "gpu_after_children_exit": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 10
+        },
+        "serial_query_wait_bound_seconds": 100.896,
+        "note": "Queue wait is an isolated supervisor observation, not a deployed API/Temporal queue. Full request latency also includes model load and inference. GPU peak is a 0.5s sampled lower bound."
+      },
+      "query": {
+        "model": "bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "device": "cuda",
+        "dtype": "torch.float32",
+        "torch": "2.8.0+cu128",
+        "load_seconds": 3.273,
+        "fixture_sha256": "e6092db392059d1690568229ada892d25b66895dffd45ce43c3f8e0275fac927",
+        "script_sha256": "f66c4871363f3d7bf4a96e772a3aefc079c6cb138af2e1202713ede482f121bd",
+        "gpu_before_load": {
+          "used_mib": 3503,
+          "free_mib": 8374,
+          "utilization_percent": 21
+        },
+        "scope": "synthetic dense retrieval; encode includes tokenization/pooling/normalization; no network or DB",
+        "benchmarks": [],
+        "quality": [],
+        "queries": {
+          "latency_ms": {
+            "n": 60,
+            "median": 26.527,
+            "p95_nearest_rank": 27.275,
+            "max": 29.381,
+            "samples": [
+              27.552, 27.268, 26.67, 26.556, 26.325, 26.425, 26.405, 26.31, 27.149, 26.356, 26.421,
+              26.861, 26.8, 26.471, 26.733, 26.607, 26.542, 26.657, 26.525, 26.477, 26.474, 27.275,
+              26.727, 26.686, 26.705, 26.721, 26.684, 26.624, 26.653, 26.581, 26.682, 27.025, 26.57,
+              26.52, 26.424, 26.46, 26.348, 26.366, 26.39, 26.223, 26.275, 26.785, 26.449, 26.353,
+              26.336, 26.3, 26.363, 26.39, 26.358, 26.302, 29.381, 27.74, 26.675, 26.601, 26.467,
+              26.53, 26.552, 26.426, 26.408, 26.369
+            ]
+          },
+          "window_seconds": 1.763,
+          "gpu_samples": [
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 5
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 17
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 16
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 16
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 18
+            },
+            {
+              "used_mib": 5884,
+              "free_mib": 5992,
+              "utilization_percent": 17
+            }
+          ]
+        },
+        "gpu_before_exit": {
+          "used_mib": 5884,
+          "free_mib": 5992,
+          "utilization_percent": 16
+        }
+      },
+      "sampled_device_peak_mib": 5884
+    },
+    {
+      "mode": "concurrent-cpu",
+      "parse": {
+        "version": "4.0.7",
+        "script_sha256": "fcfbb7b6cb56b87bab1ac3946593f59a85a3e6814e87eb92fdff142474e23d08",
+        "gpu_baseline": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "samples": [
+          {
+            "elapsed_seconds": 0.0,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 0.53,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.06,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 1.59,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.12,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 2.64,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.17,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 3.7,
+            "used_mib": 2494,
+            "free_mib": 9383,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 4.23,
+            "used_mib": 2653,
+            "free_mib": 9224,
+            "utilization_percent": 1
+          },
+          {
+            "elapsed_seconds": 4.76,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.28,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 5.81,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.34,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 6.87,
+            "used_mib": 2707,
+            "free_mib": 9170,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.39,
+            "used_mib": 2895,
+            "free_mib": 8982,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 7.92,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 10
+          },
+          {
+            "elapsed_seconds": 8.45,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 8.98,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 9.5,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.03,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 10.56,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.09,
+            "used_mib": 2973,
+            "free_mib": 8904,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 11.62,
+            "used_mib": 2977,
+            "free_mib": 8900,
+            "utilization_percent": 2
+          },
+          {
+            "elapsed_seconds": 12.14,
+            "used_mib": 3401,
+            "free_mib": 8476,
+            "utilization_percent": 11
+          },
+          {
+            "elapsed_seconds": 12.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 13.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 30
+          },
+          {
+            "elapsed_seconds": 13.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 14.27,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 14.8,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 15.33,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 42
+          },
+          {
+            "elapsed_seconds": 15.86,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 16.39,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 16.92,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 17.45,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 17.98,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 18.51,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 19.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.09,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 20.62,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 21.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 21.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 22.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 65
+          },
+          {
+            "elapsed_seconds": 22.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 3
+          },
+          {
+            "elapsed_seconds": 23.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 23.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 27
+          },
+          {
+            "elapsed_seconds": 24.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 24.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 25.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 25.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 26.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 26.96,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 27.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 28.01,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 28.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.06,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 29.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 30.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 31.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 31.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 32.24,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 38
+          },
+          {
+            "elapsed_seconds": 32.77,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 33.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 36
+          },
+          {
+            "elapsed_seconds": 33.82,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 34.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 34.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 35.41,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 35.94,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 36.47,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 36.99,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 37.52,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 38.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.11,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 39.64,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 40.17,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 40.7,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 41.24,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 41.77,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 42.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 42.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 43.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 43.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 44.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 44.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 45.5,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 46.03,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 46.56,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.09,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 47.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 48.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 60
+          },
+          {
+            "elapsed_seconds": 49.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 41
+          },
+          {
+            "elapsed_seconds": 49.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 37
+          },
+          {
+            "elapsed_seconds": 50.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 50.79,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 51.32,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 51.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 52.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 52.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 53.42,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 53.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 54.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 55.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 55.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.05,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 56.58,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.1,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 57.63,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.16,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 58.68,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 59.21,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 59.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 60.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 60.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 61.3,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 61.83,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 62.35,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 62.88,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 63.4,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 63.92,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 64.45,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 64.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 65.5,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 66.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 67.61,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 39
+          },
+          {
+            "elapsed_seconds": 68.14,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 68.67,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 69.2,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 29
+          },
+          {
+            "elapsed_seconds": 69.73,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 25
+          },
+          {
+            "elapsed_seconds": 70.26,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 40
+          },
+          {
+            "elapsed_seconds": 70.79,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 71.32,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 46
+          },
+          {
+            "elapsed_seconds": 71.85,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 72.38,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 72.91,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.44,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 73.97,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 74.49,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.02,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 75.55,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.08,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 76.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 77.13,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 77.66,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 78.19,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 78.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 23
+          },
+          {
+            "elapsed_seconds": 79.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 79.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 19
+          },
+          {
+            "elapsed_seconds": 80.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 80.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 81.36,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 81.89,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.41,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 82.94,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 83.47,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 84.0,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 16
+          },
+          {
+            "elapsed_seconds": 84.53,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 35
+          },
+          {
+            "elapsed_seconds": 85.07,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 26
+          },
+          {
+            "elapsed_seconds": 85.6,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 38
+          },
+          {
+            "elapsed_seconds": 86.13,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 31
+          },
+          {
+            "elapsed_seconds": 86.65,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 21
+          },
+          {
+            "elapsed_seconds": 87.18,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 34
+          },
+          {
+            "elapsed_seconds": 87.72,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 88.25,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 88.78,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.31,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 89.84,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.37,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 90.9,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 17
+          },
+          {
+            "elapsed_seconds": 91.43,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 24
+          },
+          {
+            "elapsed_seconds": 91.95,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 20
+          },
+          {
+            "elapsed_seconds": 92.48,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 22
+          },
+          {
+            "elapsed_seconds": 93.01,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 18
+          },
+          {
+            "elapsed_seconds": 93.54,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 14
+          },
+          {
+            "elapsed_seconds": 94.07,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 94.59,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 95.12,
+            "used_mib": 3503,
+            "free_mib": 8374,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 95.65,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 96.18,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 96.71,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.24,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 97.77,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.3,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 98.82,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.35,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 99.89,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          },
+          {
+            "elapsed_seconds": 100.42,
+            "used_mib": 2989,
+            "free_mib": 8888,
+            "utilization_percent": 0
+          }
+        ],
+        "stop_reason": null,
+        "query_started": true,
+        "query_mode": "concurrent",
+        "query_arrival_seconds": 30.116,
+        "query_started_seconds": 30.12,
+        "observed_query_queue_wait_seconds": -0.0,
+        "parse_seconds": 100.948,
+        "parse_exit_code": 0,
+        "query_exit_code": 0,
+        "coverage": {
+          "expected_pages": 300,
+          "observed_anchor_count": 300,
+          "missing_anchors": [],
+          "unexpected_anchors": [],
+          "duplicate_anchors": [],
+          "exports": [
+            {
+              "file": "volume.md",
+              "bytes": 457510,
+              "sha256": "c03f795fa87657f22092d9ff8b99f8a81a25108955fb2aba9ff5fb3591ba3036"
+            }
+          ],
+          "full_text_quality_verified": false,
+          "note": "Anchor survival only; independently reconcile V1 result page manifest in CL-010"
+        },
+        "gpu_after_children_exit": {
+          "used_mib": 2494,
+          "free_mib": 9383,
+          "utilization_percent": 0
+        },
+        "serial_query_wait_bound_seconds": 100.948,
+        "note": "Queue wait is an isolated supervisor observation, not a deployed API/Temporal queue. Full request latency also includes model load and inference. GPU peak is a 0.5s sampled lower bound."
+      },
+      "query": {
+        "model": "bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "device": "cpu",
+        "dtype": "torch.float32",
+        "torch": "2.8.0+cu128",
+        "load_seconds": 2.46,
+        "fixture_sha256": "e6092db392059d1690568229ada892d25b66895dffd45ce43c3f8e0275fac927",
+        "script_sha256": "f66c4871363f3d7bf4a96e772a3aefc079c6cb138af2e1202713ede482f121bd",
+        "gpu_before_load": null,
+        "scope": "synthetic dense retrieval; encode includes tokenization/pooling/normalization; no network or DB",
+        "benchmarks": [],
+        "quality": [],
+        "queries": {
+          "latency_ms": {
+            "n": 60,
+            "median": 106.735,
+            "p95_nearest_rank": 115.22,
+            "max": 119.65,
+            "samples": [
+              91.504, 93.591, 88.882, 104.475, 102.378, 101.404, 103.832, 108.06, 112.217, 111.84,
+              100.263, 110.298, 104.918, 106.684, 116.392, 117.709, 105.524, 108.215, 102.194,
+              112.255, 106.787, 94.822, 97.248, 100.927, 104.617, 119.65, 99.52, 111.783, 104.239,
+              106.517, 114.837, 115.22, 107.434, 107.07, 99.692, 110.627, 102.046, 102.482, 105.75,
+              108.781, 114.245, 111.942, 97.929, 109.62, 102.984, 107.644, 113.671, 112.816,
+              102.056, 107.122, 109.462, 109.428, 99.526, 100.604, 105.191, 108.772, 110.661,
+              110.549, 98.377, 106.838
+            ]
+          },
+          "window_seconds": 6.362,
+          "gpu_samples": []
+        },
+        "gpu_before_exit": null
+      },
+      "sampled_device_peak_mib": 3503
+    }
+  ],
+  "real_data_enabled": false,
+  "formal_cancel_recovery_v1_validation": false
+}

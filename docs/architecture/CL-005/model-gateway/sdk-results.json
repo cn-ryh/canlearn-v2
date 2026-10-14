@@ -1,0 +1,378 @@
+{
+  "date": "2026-10-12",
+  "scope": "Official Python SDK direct aggregator synthetic probes; no raw HTTP normalization applied",
+  "openai": "2.54.0",
+  "script_sha256": "43f185caedfa55a82e82db006be2cdfb85515d4e917d720d26218eaaf1d72356",
+  "max_retries": 0,
+  "timeout_seconds": 60,
+  "request_count": 7,
+  "runs": [
+    {
+      "requested_model": "deepseek-v4.1-flash",
+      "stream": false,
+      "strict_schema": false,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "response_model": "deepseek-v4.1-flash-x",
+      "status": "completed",
+      "sdk_output_text_available": true,
+      "text_characters": 37,
+      "text_sha256": "8588967f07f682efabee25f07c0703448e9680b9cf2a9957fdf0a55323f584be",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "absent_or_other",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "message_status_fields_present": [false],
+      "message_status_values": [null],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "670a717ff24c2d24729bf8d4213c0e2c3a92eba1479856c052c4c446e2f3b102",
+      "usage": {
+        "input_tokens": 52,
+        "output_tokens": 17,
+        "total_tokens": 69,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": true,
+      "candidate_available": true,
+      "validated_synthetic_answer": {
+        "answer": "后进先出",
+        "source_id": "S1"
+      },
+      "category": "completed_candidate",
+      "http_status": 200,
+      "elapsed_seconds": 3.261,
+      "estimated_cost": "0.00002796",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12"
+    },
+    {
+      "requested_model": "deepseek-v4.1-flash",
+      "stream": false,
+      "strict_schema": true,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "response_model": "deepseek-v4.1-flash-x",
+      "status": "completed",
+      "sdk_output_text_available": true,
+      "text_characters": 37,
+      "text_sha256": "8588967f07f682efabee25f07c0703448e9680b9cf2a9957fdf0a55323f584be",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "absent_or_other",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "message_status_fields_present": [false],
+      "message_status_values": [null],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "81edce845a040e101dd4a0df6d5864bbb4ba43b2b0716882320aae0ca123fa81",
+      "usage": {
+        "input_tokens": 52,
+        "output_tokens": 17,
+        "total_tokens": 69,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": true,
+      "candidate_available": true,
+      "validated_synthetic_answer": {
+        "answer": "后进先出",
+        "source_id": "S1"
+      },
+      "category": "completed_candidate",
+      "http_status": 200,
+      "elapsed_seconds": 1.773,
+      "estimated_cost": "0.00002796",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12"
+    },
+    {
+      "requested_model": "deepseek-v4.1-flash",
+      "stream": true,
+      "strict_schema": false,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 1,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 17,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.output_item.done": 1,
+        "response.completed": 1
+      },
+      "terminal_received": true,
+      "response_model": "deepseek-v4.1-flash-x",
+      "status": "completed",
+      "sdk_output_text_available": true,
+      "text_characters": 37,
+      "text_sha256": "8588967f07f682efabee25f07c0703448e9680b9cf2a9957fdf0a55323f584be",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "message_status_fields_present": [true],
+      "message_status_values": ["completed"],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "d25fbaf156621814a0398f9c9cfcae214540f46e1764d3b3b4d08cda34ba425d",
+      "usage": {
+        "input_tokens": 52,
+        "output_tokens": 17,
+        "total_tokens": 69,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": true,
+      "candidate_available": true,
+      "validated_synthetic_answer": {
+        "answer": "后进先出",
+        "source_id": "S1"
+      },
+      "category": "completed_candidate",
+      "delta_matches_final_text": true,
+      "http_status": 200,
+      "elapsed_seconds": 1.614,
+      "estimated_cost": "0.00002796",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12"
+    },
+    {
+      "requested_model": "glm-5.3",
+      "stream": false,
+      "strict_schema": false,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "response_model": "glm-5.3",
+      "status": "completed",
+      "sdk_output_text_available": false,
+      "text_characters": 0,
+      "text_sha256": null,
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "message_status_fields_present": [],
+      "message_status_values": [],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "954ee917e56a4f32e826b092ab96939c69262ad8e6afd26f264027e0111b13fe",
+      "usage": {
+        "input_tokens": 58,
+        "output_tokens": 159,
+        "total_tokens": 217,
+        "cached_tokens": 53,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": false,
+      "candidate_available": false,
+      "validated_synthetic_answer": null,
+      "category": "synthetic_format_or_answer_failure",
+      "http_status": 200,
+      "elapsed_seconds": 4.235,
+      "estimated_cost": null,
+      "known_components_cost": "0.00070585",
+      "cached_tokens_unpriced": 53,
+      "estimated_cost_if_cached_billed_as_input": "0.00077210",
+      "cost_state": "cached_rate_unknown",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+    },
+    {
+      "requested_model": "glm-5.3",
+      "stream": false,
+      "strict_schema": true,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "response_model": "glm-5.3",
+      "status": "completed",
+      "sdk_output_text_available": false,
+      "text_characters": 0,
+      "text_sha256": null,
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "message_status_fields_present": [],
+      "message_status_values": [],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "bd6ade2c27c37912f5280d832c2efd67f7d166c9ff2bf897befa98103a606839",
+      "usage": {
+        "input_tokens": 58,
+        "output_tokens": 166,
+        "total_tokens": 224,
+        "cached_tokens": 53,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": false,
+      "candidate_available": false,
+      "validated_synthetic_answer": null,
+      "category": "synthetic_format_or_answer_failure",
+      "http_status": 200,
+      "elapsed_seconds": 4.655,
+      "estimated_cost": null,
+      "known_components_cost": "0.00073665",
+      "cached_tokens_unpriced": 53,
+      "estimated_cost_if_cached_billed_as_input": "0.00080290",
+      "cost_state": "cached_rate_unknown",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+    },
+    {
+      "requested_model": "glm-5.3",
+      "stream": true,
+      "strict_schema": false,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 70,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 4,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "terminal_received": true,
+      "response_model": "glm-5.3",
+      "status": "completed",
+      "sdk_output_text_available": true,
+      "text_characters": 34,
+      "text_sha256": "e19410a9134129ff0be880350c1baa146b866d012b7ba0c0f1eb05177329a77f",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "message_status_fields_present": [true],
+      "message_status_values": ["completed"],
+      "store_echo": null,
+      "zero_retention_verified": false,
+      "response_id_sha256": "1e7358073d71b95b51793b0e8b88cce2cc658313ba57f82b1ac16174273ec680",
+      "usage": {
+        "input_tokens": 58,
+        "output_tokens": 205,
+        "total_tokens": 263,
+        "cached_tokens": 54,
+        "reasoning_tokens": 0
+      },
+      "incomplete_reason": null,
+      "synthetic_answer_valid": true,
+      "candidate_available": true,
+      "validated_synthetic_answer": {
+        "answer": "后进先出",
+        "source_id": "S1"
+      },
+      "category": "completed_candidate",
+      "delta_matches_final_text": true,
+      "http_status": 200,
+      "elapsed_seconds": 5.698,
+      "estimated_cost": null,
+      "known_components_cost": "0.000907",
+      "cached_tokens_unpriced": 54,
+      "estimated_cost_if_cached_billed_as_input": "0.0009745",
+      "cost_state": "cached_rate_unknown",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+    },
+    {
+      "requested_model": "canlearn-cl005-nonexistent-model",
+      "stream": false,
+      "strict_schema": false,
+      "max_output_tokens": 4096,
+      "retry_attempts": 0,
+      "real_data_enabled": false,
+      "candidate_available": false,
+      "category": "sdk_http_error",
+      "sdk_error_type": "InternalServerError",
+      "http_status": 503,
+      "usage": null,
+      "elapsed_seconds": 0.004,
+      "estimated_cost": null,
+      "currency": null,
+      "billing_verified": false
+    }
+  ],
+  "real_data_enabled": false
+}

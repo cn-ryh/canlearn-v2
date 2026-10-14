@@ -27,5 +27,11 @@
       "quoteStyle": "double",
       "semicolons": "always"
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["apps/api/src/**"],
+      "javascript": { "parser": { "unsafeParameterDecoratorsEnabled": true } }
+    }
+  ]
 }

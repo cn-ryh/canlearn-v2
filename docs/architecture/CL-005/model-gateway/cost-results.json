@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-12",
+  "currency": "CNY",
+  "price_evidence": "user quoted rates; no bill queried; cached unit price unknown",
+  "quoted_rates_sha256": "cd9ed8f05f4535d35bc8924b19fc00349d10f7ea92da2be41c2c259fefa3a523",
+  "groups": [
+    {
+      "group": "raw_http",
+      "requests": 10,
+      "requests_with_valid_usage": 6,
+      "requests_without_usable_usage": 4,
+      "observed_tokens": 993,
+      "cached_tokens_unpriced": 161,
+      "known_priced_components_sum": "0.00279293",
+      "sum_if_cached_input_billed_at_standard_input_rate": "0.00299418"
+    },
+    {
+      "group": "sdk_4096",
+      "requests": 7,
+      "requests_with_valid_usage": 6,
+      "requests_without_usable_usage": 1,
+      "observed_tokens": 911,
+      "cached_tokens_unpriced": 160,
+      "known_priced_components_sum": "0.00243338",
+      "sum_if_cached_input_billed_at_standard_input_rate": "0.00263338"
+    },
+    {
+      "group": "sdk_parameter_16384",
+      "requests": 38,
+      "requests_with_valid_usage": 36,
+      "requests_without_usable_usage": 2,
+      "observed_tokens": 33289,
+      "cached_tokens_unpriced": 2048,
+      "known_priced_components_sum": "0.07051662",
+      "sum_if_cached_input_billed_at_standard_input_rate": "0.07307662"
+    }
+  ],
+  "actual_total_charge": null,
+  "billing_verified": false,
+  "request_count": 55,
+  "requests_without_usable_usage": 7,
+  "known_priced_components_sum": "0.07574293",
+  "sum_if_cached_input_billed_at_standard_input_rate": "0.07870418",
+  "unknown_usage_breakdown": {
+    "initial_rejected_usage_not_preserved": 3,
+    "nonexistent_model_HTTP503": 2,
+    "parameter_stream_deadline_120_seconds": 2
+  }
+}

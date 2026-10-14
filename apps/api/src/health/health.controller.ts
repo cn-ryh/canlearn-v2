@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { ApiExtension, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 export interface HealthResponse {
   service: "canlearn-api";
@@ -10,10 +10,18 @@ export interface HealthResponse {
 @Controller({ path: "health", version: "1" })
 export class HealthController {
   @Get()
+  @ApiOperation({ operationId: "getHealth", summary: "Check the API process", security: [] })
+  @ApiExtension("x-implementation-status", "implemented")
   @ApiOkResponse({
+    description: "The API process is healthy.",
     schema: {
-      example: { service: "canlearn-api", status: "ok" },
-      properties: { service: { type: "string" }, status: { type: "string" } },
+      type: "object",
+      additionalProperties: false,
+      required: ["service", "status"],
+      properties: {
+        service: { type: "string", enum: ["canlearn-api"] },
+        status: { type: "string", enum: ["ok"] },
+      },
     },
   })
   getHealth(): HealthResponse {

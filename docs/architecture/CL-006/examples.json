@@ -1,0 +1,82 @@
+{
+  "synthetic": true,
+  "scope": "Pure-memory design examples; no real accounts, business writes or SQL transactions",
+  "spaces": [
+    { "id": "S-A", "kind": "private", "owner": "U-A" },
+    { "id": "S-B", "kind": "private", "owner": "U-B" },
+    { "id": "C-1", "kind": "candidate", "owner": null },
+    { "id": "P-1", "kind": "published", "owner": null }
+  ],
+  "packages": [
+    { "id": "PK-CS", "space": "S-A", "label": "算法基础", "subject": "computer-science" },
+    { "id": "PK-EN", "space": "S-A", "label": "英语阅读", "subject": "english" },
+    { "id": "PK-PHY", "space": "S-A", "label": "基础物理", "subject": "physics" },
+    { "id": "PK-ECON", "space": "S-A", "label": "经济学", "subject": "economics" },
+    { "id": "PK-PUBLIC-PHY", "space": "P-1", "label": "基础物理", "subject": "physics" }
+  ],
+  "capacity": { "account": "U-A", "timezone": "Asia/Shanghai", "daily_minutes": 30 },
+  "tasks": [
+    {
+      "id": "T-SHARED",
+      "occurrence_key": "O-1",
+      "account": "U-A",
+      "minutes": 15,
+      "goals": ["G-CS", "G-EN"]
+    },
+    { "id": "T-PHY", "occurrence_key": "O-2", "account": "U-A", "minutes": 20, "goals": ["G-PHY"] }
+  ],
+  "source_snapshots": [
+    {
+      "id": "SRC-A-v1",
+      "space": "S-A",
+      "revision": 1,
+      "state": "superseded",
+      "purposes": ["read", "practice"]
+    },
+    {
+      "id": "SRC-A-v2",
+      "space": "S-A",
+      "revision": 2,
+      "state": "current",
+      "purposes": ["read", "practice"]
+    },
+    {
+      "id": "SRC-B-v1",
+      "space": "S-A",
+      "revision": 1,
+      "state": "current",
+      "purposes": ["read", "practice"]
+    },
+    {
+      "id": "PUB-v1",
+      "space": "P-1",
+      "revision": 1,
+      "state": "current",
+      "purposes": ["read", "practice", "publish"]
+    }
+  ],
+  "dependencies": [
+    { "upstream": "SRC-A-v1", "downstream": "PARSE-A" },
+    { "upstream": "PARSE-A", "downstream": "CHUNK-A" },
+    { "upstream": "CHUNK-A", "downstream": "INDEX-A" },
+    { "upstream": "CHUNK-A", "downstream": "QUESTION-v1" },
+    { "upstream": "SRC-B-v1", "downstream": "QUESTION-v1" },
+    { "upstream": "QUESTION-v1", "downstream": "EXPLANATION-v1" },
+    { "upstream": "QUESTION-v1", "downstream": "EVIDENCE-v1" },
+    { "upstream": "EVIDENCE-v1", "downstream": "FUTURE-TASK" },
+    { "upstream": "QUESTION-v1", "downstream": "EXPORT-v1" }
+  ],
+  "attempt": {
+    "id": "ATT-1",
+    "question_version": "QUESTION-v1",
+    "answer_version": "ANSWER-v1",
+    "rubric_version": "RUBRIC-v1",
+    "original_grade_version": "GRADE-v1",
+    "completed": true
+  },
+  "job_snapshot": { "source_revision": 1, "access_revision": 1, "admission_epoch": 1 },
+  "current_after_correction": { "source_revision": 2, "access_revision": 1, "admission_epoch": 1 },
+  "current_after_deletion": { "source_revision": 2, "access_revision": 2, "admission_epoch": 2 },
+  "old_restore_watermark": 0,
+  "latest_deletion_watermark": 1
+}

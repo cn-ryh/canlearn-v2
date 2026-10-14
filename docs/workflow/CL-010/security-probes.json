@@ -1,0 +1,9 @@
+{
+  "recorded_at": "2026-10-14T13:02:52.044875+00:00",
+  "passed": 2,
+  "checks": [
+    "constructed nonexistent secret rejected with redacted output",
+    "real advisory DB identifies controlled vulnerable dependency and blocks"
+  ],
+  "real_secrets_or_installed_vulnerable_packages": 0
+}

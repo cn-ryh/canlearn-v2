@@ -9,25 +9,31 @@
   },
   "scripts": {
     "build": "pnpm -r --if-present build",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:unit && pnpm contracts:check && pnpm compose:check",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:unit && pnpm contracts:check && pnpm compose:check && pnpm quality:check",
     "compose:check": "docker compose config --quiet",
-    "contracts:check": "redocly lint contracts/openapi/canlearn.v1.yaml",
+    "contracts:check": "redocly lint contracts/openapi/canlearn.v1.yaml contracts/openapi/canlearn.smoke.v1.json",
     "dev": "concurrently --names web,api,workflow --prefix-colors cyan,green,yellow \"pnpm dev:web\" \"pnpm dev:api\" \"pnpm dev:workflow\"",
     "dev:api": "pnpm --filter @canlearn/api dev",
     "dev:web": "pnpm --filter @canlearn/web dev",
     "dev:workflow": "cd apps/workflow && uv run canlearn-worker",
-    "format": "biome format --write . && cd apps/workflow && uv run ruff format .",
-    "format:check": "biome format . && cd apps/workflow && uv run ruff format --check .",
+    "format": "biome format --write . && uv run --project apps/workflow ruff format apps/workflow scripts",
+    "format:check": "biome format . && uv run --project apps/workflow ruff format --check apps/workflow scripts",
     "infra:down": "docker compose down",
     "infra:up": "docker compose up -d postgres redis temporal temporal-ui",
     "lint": "pnpm lint:ts && pnpm lint:python",
-    "lint:python": "cd apps/workflow && uv run ruff check .",
+    "lint:python": "uv run --project apps/workflow ruff check apps/workflow scripts",
     "lint:ts": "biome lint .",
     "prepare": "husky",
     "test": "pnpm test:unit",
     "test:unit": "pnpm -r --if-present test && cd apps/workflow && uv run pytest",
     "typecheck": "pnpm -r --if-present typecheck && cd apps/workflow && uv run mypy src",
-    "verify": "pnpm check && pnpm build"
+    "verify": "pnpm check && pnpm build",
+    "smoke:up": "python3 scripts/smoke_runtime.py up",
+    "smoke:down": "python3 scripts/smoke_runtime.py down",
+    "smoke:test": "python3 scripts/smoke_runtime.py test",
+    "quality:check": "python3 scripts/quality_policy.py && pnpm --filter @canlearn/api exec tsx src/database/check-schema.ts && uv run --project apps/workflow pytest scripts/test_quality_gates.py",
+    "security:scan": "python3 scripts/security_scan.py scan --images",
+    "security:probes": "python3 scripts/security_scan.py probes"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css}": [
@@ -46,7 +52,7 @@
     "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "21.2.3",
     "@redocly/cli": "2.55.0",
-    "concurrently": "10.0.5",
+    "concurrently": "10.0.6",
     "husky": "9.1.7",
     "lint-staged": "17.6.0"
   }

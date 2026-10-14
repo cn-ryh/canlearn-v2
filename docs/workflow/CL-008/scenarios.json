@@ -1,0 +1,1369 @@
+{
+  "scope": "synthetic reference actions, not real protocol payloads",
+  "cases": [
+    {
+      "id": "F01-network-retransmission",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "submit"
+        },
+        {
+          "op": "submit"
+        }
+      ],
+      "expected": {
+        "job_count": 1,
+        "calls": 0,
+        "outbox_count": 1
+      }
+    },
+    {
+      "id": "F02-request-key-conflict",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "submit",
+          "pages": [1, 2],
+          "reject": "IDEMPOTENCY_CONFLICT"
+        }
+      ],
+      "expected": {
+        "job_count": 1
+      }
+    },
+    {
+      "id": "F03-request-scope-isolation",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "scope": "space-B/actor-B/parse/source-B"
+        }
+      ],
+      "expected": {
+        "job_count": 2
+      }
+    },
+    {
+      "id": "F04-admission-dedup",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "admit",
+          "config": "different",
+          "reject": "ADMISSION_CONFLICT"
+        }
+      ],
+      "expected": {
+        "calls": 0,
+        "jobs": {
+          "J1": {
+            "status": "RUNNING"
+          }
+        }
+      }
+    },
+    {
+      "id": "F05-timeout-unknown",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "timeout"
+        },
+        {
+          "op": "call",
+          "reject": "JOB_CLOSED"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "retry-A",
+          "parent": "J1",
+          "reject": "RETRY_NOT_ALLOWED"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 0,
+        "executor_busy": true,
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "cost_state": "unknown_pending_reconciliation"
+          }
+        }
+      }
+    },
+    {
+      "id": "F06-upstream-index-loss",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "upstream_index_lost"
+        },
+        {
+          "op": "restart_worker"
+        },
+        {
+          "op": "call",
+          "reject": "JOB_CLOSED"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "failure": "UPSTREAM_UNKNOWN",
+            "cost_state": "unknown_pending_reconciliation"
+          }
+        }
+      }
+    },
+    {
+      "id": "F07-worker-restart",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "restart_worker"
+        },
+        {
+          "op": "call",
+          "reject": "RECONCILIATION_REQUIRED"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "confirm_stopped"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 7,
+        "executor_busy": false,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "publications": 1,
+            "usable_pages": [1]
+          }
+        }
+      }
+    },
+    {
+      "id": "F08-partial-pages",
+      "actions": [
+        {
+          "op": "submit",
+          "pages": [1, 2, 3, 4]
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish",
+          "pages": {
+            "1": "success",
+            "2": "blank",
+            "3": "failed",
+            "4": "missing"
+          }
+        },
+        {
+          "op": "finish"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "status": "PARTIAL_READY",
+            "usable_pages": [1],
+            "page_states": {
+              "1": "success",
+              "2": "blank",
+              "3": "failed",
+              "4": "missing"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "F09-blank-is-not-failure",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish",
+          "pages": {
+            "1": "blank"
+          }
+        },
+        {
+          "op": "finish"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "usable_pages": [],
+            "page_states": {
+              "1": "blank"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "F10-permanent-error",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "fail"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "retry-A",
+          "parent": "J1",
+          "reject": "RETRY_NOT_ALLOWED"
+        }
+      ],
+      "expected": {
+        "job_count": 1,
+        "calls": 0,
+        "jobs": {
+          "J1": {
+            "status": "FAILED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F11-source-correction",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "invalidate",
+          "reason": "corrected"
+        },
+        {
+          "op": "publish",
+          "reject": "SNAPSHOT_CONFLICT"
+        },
+        {
+          "op": "fail",
+          "reason": "VERSION_CONFLICT"
+        },
+        {
+          "op": "submit"
+        }
+      ],
+      "expected": {
+        "job_count": 1,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "publications": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "F12-access-revision",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "invalidate",
+          "reason": "access_revoked"
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "fail",
+          "reason": "VERSION_CONFLICT"
+        },
+        {
+          "op": "submit",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "job_count": 1,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "publications": 0
+          }
+        },
+        "purpose_allowed": false
+      }
+    },
+    {
+      "id": "F13-rights-withdrawal",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "invalidate",
+          "reason": "withdrawn"
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "fail",
+          "reason": "VERSION_CONFLICT"
+        },
+        {
+          "op": "submit",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "job_count": 1,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "publications": 0
+          }
+        },
+        "purpose_allowed": false
+      }
+    },
+    {
+      "id": "F14-cancel-late-result",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "cancel"
+        },
+        {
+          "op": "cancel",
+          "expect": {
+            "jobs": {
+              "J1": {
+                "epoch": 2,
+                "cost_state": "unknown_pending_reconciliation"
+              }
+            }
+          }
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish",
+          "reject": "JOB_CLOSED"
+        },
+        {
+          "op": "admit",
+          "step": "repair:1",
+          "reject": "JOB_CLOSED"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "observed",
+            "publications": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "F15-delete-late-result",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "invalidate",
+          "reason": "deleted"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "fresh-key",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "blocked": true,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "visible_pages": [],
+            "publications": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "F16-publish-before-cancel",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "cancel"
+        },
+        {
+          "op": "publish",
+          "reject": "JOB_CLOSED"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "visible_pages": [1],
+            "publications": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "F17-delete-after-success",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "invalidate",
+          "reason": "deleted"
+        }
+      ],
+      "expected": {
+        "blocked": true,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "visible_pages": [],
+            "publications": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "F18-old-backup-restore",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "backup"
+        },
+        {
+          "op": "invalidate",
+          "reason": "deleted"
+        },
+        {
+          "op": "restore"
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "apply_deletion_ledger",
+          "available": false,
+          "reject": "LATEST_LEDGER_REQUIRED",
+          "expect": {
+            "restore_isolated": true
+          }
+        },
+        {
+          "op": "apply_deletion_ledger"
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "blocked": true,
+        "restore_isolated": false,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "visible_pages": [],
+            "publications": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "F19-outbox-consumer-crashes",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "dispatch",
+          "crash_after_send": true
+        },
+        {
+          "op": "dispatch"
+        },
+        {
+          "op": "consume",
+          "crash_before_commit": true,
+          "expect": {
+            "effect_count": 0
+          }
+        },
+        {
+          "op": "consume"
+        },
+        {
+          "op": "consume"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "outbox_count": 2,
+        "delivery_count": 3,
+        "effect_count": 2,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "publications": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "F20-reordered-event-after-delete",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "invalidate",
+          "reason": "deleted"
+        },
+        {
+          "op": "dispatch"
+        },
+        {
+          "op": "consume"
+        },
+        {
+          "op": "publish",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 7,
+        "effect_count": 3,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "visible_pages": []
+          }
+        }
+      }
+    },
+    {
+      "id": "F21-incomplete-page-manifest",
+      "actions": [
+        {
+          "op": "submit",
+          "pages": [1, 2]
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "publish",
+          "pages": {
+            "1": "success"
+          },
+          "reject": "PAGE_MANIFEST_INCOMPLETE"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "publications": 0,
+            "usable_pages": []
+          }
+        }
+      }
+    },
+    {
+      "id": "F22-publication-payload-conflict",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "publish",
+          "pages": {
+            "1": "blank"
+          },
+          "reject": "PUBLICATION_CONFLICT"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "publications": 1,
+            "usable_pages": [1]
+          }
+        }
+      }
+    },
+    {
+      "id": "F23-usage-conflict",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "usage",
+          "units": 9,
+          "reject": "USAGE_CONFLICT"
+        }
+      ],
+      "expected": {
+        "known_charge_units": 7,
+        "disputed_count": 1,
+        "jobs": {
+          "J1": {
+            "cost_state": "unknown_pending_reconciliation"
+          }
+        }
+      }
+    },
+    {
+      "id": "F24-lease-expiry-not-gpu-exit",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "cancel"
+        },
+        {
+          "op": "lease_expired"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "new-job"
+        },
+        {
+          "op": "start",
+          "job": "J2"
+        },
+        {
+          "op": "admit",
+          "job": "J2"
+        },
+        {
+          "op": "call",
+          "job": "J2",
+          "reject": "EXECUTOR_BUSY"
+        },
+        {
+          "op": "confirm_stopped"
+        },
+        {
+          "op": "call",
+          "job": "J2"
+        }
+      ],
+      "expected": {
+        "calls": 2,
+        "executor_busy": true,
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED"
+          },
+          "J2": {
+            "status": "RUNNING"
+          }
+        }
+      }
+    },
+    {
+      "id": "F25-review-gate",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "wait_review"
+        },
+        {
+          "op": "admit",
+          "reject": "NOT_RUNNING"
+        },
+        {
+          "op": "approve"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F26-stale-review",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "wait_review"
+        },
+        {
+          "op": "invalidate",
+          "reason": "corrected"
+        },
+        {
+          "op": "approve",
+          "reject": "SNAPSHOT_CONFLICT"
+        },
+        {
+          "op": "fail",
+          "reason": "VERSION_CONFLICT"
+        }
+      ],
+      "expected": {
+        "calls": 0,
+        "jobs": {
+          "J1": {
+            "status": "FAILED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F27-terminal-immutable",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish"
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "cancel"
+        },
+        {
+          "op": "start",
+          "reject": "JOB_CLOSED"
+        }
+      ],
+      "expected": {
+        "outbox_count": 2,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "F28-explicit-known-retry",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "fail",
+          "reason": "KNOWN_TRANSIENT",
+          "retryable": true
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "retry-A",
+          "parent": "J1"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "retry-A",
+          "parent": "J1"
+        }
+      ],
+      "expected": {
+        "job_count": 2,
+        "calls": 0,
+        "jobs": {
+          "J1": {
+            "status": "FAILED"
+          },
+          "J2": {
+            "status": "QUEUED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F29-candidate-wrong-epoch",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "publish",
+          "epoch": 2,
+          "reject": "ADMISSION_REVOKED"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "publications": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "F30-review-deadline",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "wait_review"
+        },
+        {
+          "op": "fail",
+          "reason": "REVIEW_DEADLINE"
+        }
+      ],
+      "expected": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F31-publication-transaction-rollback",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish_and_finish",
+          "crash_before_commit": true,
+          "expect": {
+            "jobs": {
+              "J1": {
+                "status": "RUNNING",
+                "publications": 0
+              }
+            },
+            "outbox_count": 1
+          }
+        },
+        {
+          "op": "publish_and_finish"
+        }
+      ],
+      "expected": {
+        "calls": 1,
+        "known_charge_units": 7,
+        "outbox_count": 2,
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "publications": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "F32-partial-retry-child",
+      "actions": [
+        {
+          "op": "submit",
+          "pages": [1, 2]
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "admit"
+        },
+        {
+          "op": "call"
+        },
+        {
+          "op": "usage",
+          "units": 7
+        },
+        {
+          "op": "publish",
+          "pages": {
+            "1": "success",
+            "2": "failed"
+          }
+        },
+        {
+          "op": "finish"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "retry-A",
+          "parent": "J1",
+          "pages": [2]
+        }
+      ],
+      "expected": {
+        "job_count": 2,
+        "calls": 1,
+        "jobs": {
+          "J1": {
+            "status": "PARTIAL_READY",
+            "usable_pages": [1]
+          },
+          "J2": {
+            "status": "QUEUED"
+          }
+        }
+      }
+    },
+    {
+      "id": "F33-revocation-blocks-new-admission",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "invalidate",
+          "reason": "withdrawn"
+        },
+        {
+          "op": "admit",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "fresh-after-revocation",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "calls": 0,
+        "job_count": 1,
+        "purpose_allowed": false
+      }
+    },
+    {
+      "id": "F34-revocation-blocks-new-admission",
+      "actions": [
+        {
+          "op": "submit"
+        },
+        {
+          "op": "start"
+        },
+        {
+          "op": "invalidate",
+          "reason": "access_revoked"
+        },
+        {
+          "op": "admit",
+          "reject": "SOURCE_BLOCKED"
+        },
+        {
+          "op": "submit",
+          "job": "J2",
+          "key": "fresh-after-revocation",
+          "reject": "SOURCE_BLOCKED"
+        }
+      ],
+      "expected": {
+        "calls": 0,
+        "job_count": 1,
+        "purpose_allowed": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "date": "2026-10-13",
+  "synthetic": true,
+  "scope": "Planned DTO schema-only examples, no authorization/transaction/deletion/worker execution",
+  "cases": [
+    {
+      "name": "explicit-all-pages",
+      "schema": "ParseRequest",
+      "value": {
+        "source_version_id": "00000000-0000-4000-8000-000000000001",
+        "page_selection": {
+          "mode": "all"
+        },
+        "parse_profile_id": "00000000-0000-4000-8000-000000000002"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "selected-pages",
+      "schema": "ParseRequest",
+      "value": {
+        "source_version_id": "00000000-0000-4000-8000-000000000001",
+        "page_selection": {
+          "mode": "selected",
+          "pdf_page_indices": [1, 2, 300]
+        },
+        "parse_profile_id": "00000000-0000-4000-8000-000000000002"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-empty-selection",
+      "schema": "ParseRequest",
+      "value": {
+        "source_version_id": "00000000-0000-4000-8000-000000000001",
+        "page_selection": {
+          "mode": "selected",
+          "pdf_page_indices": []
+        },
+        "parse_profile_id": "00000000-0000-4000-8000-000000000002"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-duplicate-pages",
+      "schema": "ParseRequest",
+      "value": {
+        "source_version_id": "00000000-0000-4000-8000-000000000001",
+        "page_selection": {
+          "mode": "selected",
+          "pdf_page_indices": [1, 1]
+        },
+        "parse_profile_id": "00000000-0000-4000-8000-000000000002"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-arbitrary-upstream-url",
+      "schema": "ParseRequest",
+      "value": {
+        "source_version_id": "00000000-0000-4000-8000-000000000001",
+        "page_selection": {
+          "mode": "all"
+        },
+        "parse_profile_id": "00000000-0000-4000-8000-000000000002",
+        "url": "https://synthetic.invalid/input.pdf"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "practice-generation",
+      "schema": "GenerationRequest",
+      "value": {
+        "source_version_ids": ["00000000-0000-4000-8000-000000000001"],
+        "content_revision_ids": ["00000000-0000-4000-8000-000000000002"],
+        "question_types": ["single_choice", "short_answer"],
+        "count": 6,
+        "purpose": "practice"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-count-over-contract-limit",
+      "schema": "GenerationRequest",
+      "value": {
+        "source_version_ids": ["00000000-0000-4000-8000-000000000001"],
+        "content_revision_ids": ["00000000-0000-4000-8000-000000000002"],
+        "question_types": ["short_answer"],
+        "count": 51,
+        "purpose": "practice"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-diagnostic-shortcut",
+      "schema": "GenerationRequest",
+      "value": {
+        "source_version_ids": ["00000000-0000-4000-8000-000000000001"],
+        "content_revision_ids": ["00000000-0000-4000-8000-000000000002"],
+        "question_types": ["short_answer"],
+        "count": 6,
+        "purpose": "diagnostic"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "record-original-attempt",
+      "schema": "AttemptRequest",
+      "value": {
+        "question_version_id": "00000000-0000-4000-8000-000000000001",
+        "response": {
+          "type": "short_answer",
+          "text": "原创合成作答：后进先出。"
+        }
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-client-score",
+      "schema": "AttemptRequest",
+      "value": {
+        "question_version_id": "00000000-0000-4000-8000-000000000001",
+        "response": {
+          "type": "short_answer",
+          "text": "原创作答"
+        },
+        "score": 100
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-missing-answer",
+      "schema": "AttemptRequest",
+      "value": {
+        "question_version_id": "00000000-0000-4000-8000-000000000001",
+        "response": {
+          "type": "short_answer"
+        }
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "create-proposal-with-base",
+      "schema": "PlanPatchRequest",
+      "value": {
+        "base_plan_version_id": "00000000-0000-4000-8000-000000000001",
+        "capacity_revision": 1,
+        "goal_revision": 2,
+        "evidence_revision": 3,
+        "requested_total_minutes": 30,
+        "reason": "原创合成：减少本周可用时间"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-proposal-without-base",
+      "schema": "PlanPatchRequest",
+      "value": {
+        "capacity_revision": 1,
+        "goal_revision": 2,
+        "evidence_revision": 3,
+        "requested_total_minutes": 30,
+        "reason": "原创合成"
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "confirm-specific-patch",
+      "schema": "ConfirmPlanRequest",
+      "value": {
+        "patch_id": "00000000-0000-4000-8000-000000000002"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-client-plan-overwrite",
+      "schema": "ConfirmPlanRequest",
+      "value": {
+        "patch_id": "00000000-0000-4000-8000-000000000002",
+        "tasks": []
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "scoped-export",
+      "schema": "ExportRequest",
+      "value": {
+        "resources": [
+          {
+            "resource_type": "document",
+            "resource_id": "00000000-0000-4000-8000-000000000001",
+            "version_id": "00000000-0000-4000-8000-000000000002"
+          }
+        ],
+        "format": "zip"
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "unknown-cost-is-not-retryable",
+      "schema": "ErrorEnvelope",
+      "value": {
+        "error": {
+          "code": "UPSTREAM_OUTCOME_UNKNOWN",
+          "message": "结果待对账，请查看现有任务。",
+          "request_id": "00000000-0000-4000-8000-000000000003",
+          "retryable": false
+        }
+      },
+      "valid": true,
+      "scope": "schema_only; no business API called"
+    },
+    {
+      "name": "reject-error-with-raw-input",
+      "schema": "ErrorEnvelope",
+      "value": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "输入不合法",
+          "request_id": "00000000-0000-4000-8000-000000000003",
+          "retryable": false,
+          "raw_payload": "do not log or reflect arbitrary input"
+        }
+      },
+      "valid": false,
+      "scope": "schema_only; no business API called"
+    }
+  ]
+}
