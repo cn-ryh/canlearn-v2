@@ -19,7 +19,9 @@ R0当前设计与证据入口：[CL-005选型交接](docs/architecture/CL-005/de
 设计/隔离实测与真实业务实现、外部签审及部署验收分别记录。
 REST契约与真实健康接口门禁见[CL-007](docs/api/CL-007/README.md)；OpenAPI中的其余业务操作均为规划。
 Job七状态、事件/Outbox提案与34个可执行故障设计场景见[CL-008](docs/workflow/CL-008/README.md)；
-事件Schema和设计回归接入现有门禁，真实任务/数据库事务/Temporal恢复尚未实现验证。
+事件Schema和设计回归接入现有门禁。
+[CL-013a 合成 Job](docs/integration/CL-013a/README.md)已补默认关闭的本地 Web/API/PostgreSQL/Temporal 链路、
+取消/回执/SQL 回滚与重启验证；生产资源授权、真实解析/模型和完整删除恢复仍待后续验收。
 
 ## 仓库结构
 
@@ -72,6 +74,7 @@ Docker Hub 镜像默认从 `jjs7iczbx3i38wpthb.xuanyuan.run` 拉取，可通过
 pnpm check   # 格式、静态检查、类型、单元测试、契约和 Compose
 pnpm build   # 所有可构建工作区
 pnpm verify  # 完整合并前门禁：check + build
+pnpm smoke:test --skip-build # 真实隔离基础设施的合成 Job 集成验证
 ```
 
 TypeScript/JavaScript 使用 Biome，不重复引入 ESLint；Python 使用 Ruff 与 mypy。安装依赖后，Husky 会自动启用暂存区检查、提交信息检查和推送前完整验证。

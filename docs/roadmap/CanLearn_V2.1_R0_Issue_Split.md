@@ -241,6 +241,9 @@ R1A/R1B规划OpenAPI与合成正负例，实际健康HTTP/Swagger对齐及漂移
 ## CL-013 父卡：集成环境与质量门（B 主责）
 
 ### CL-013a `[P0][B→C 审核]` 用现有基础设施跑通可重建的最小纵向链路
+2026-10-14交付[合成链路与复现手册](../integration/CL-013a/README.md)：真实Web/API/SQL/Temporal，
+默认关闭的固定夹具模拟worker；31项集成检查及单元/契约门禁，非作者/实际验收待补。
+
 - **目标/产出：** 在现有 Compose、迁移、API 健康路由与 Temporal 健康工作流上补合法夹具的 Web→API→**模拟 job**→worker 链路及启动手册；不需要生产级 MinerU/AI。
 - **依赖：** CL-005d、CL-008a。**验收/证据：** 新成员按 README/独立说明能复现、停止和重启；提供 job/trace ID 与预期状态；若环境/真实 worker 不可用，标注桩边界及阻断原因而非声称真实文档解析成功。
 

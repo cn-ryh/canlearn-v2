@@ -1,7 +1,11 @@
 # Event contracts
 
 2026-10-13：CL-008 提案交付四类封闭 JSON Schema 2020-12，
-[catalog.json](catalog.json) 全部标 `planned`；没有真实 producer、dispatcher、consumer 或 Outbox 表。
+[catalog.json](catalog.json) 的生产实现全部标 `planned`；当日尚无实际事件传输。
+
+2026-10-14：[CL-013a](../../docs/integration/CL-013a/README.md)在默认关闭的本地合成范围中
+实现 accepted/finalized/cancel_requested 三类 producer、PostgreSQL smoke_outbox 与 API→Temporal dispatcher，
+真实持久事件经过同一封闭Schema检查。resource.invalidated、生产授权/总线/完整Inbox仍未实现。
 
 | 类型 | Schema |
 | --- | --- |
@@ -20,4 +24,4 @@
 封闭v1改变字段需新版本及消费者先行兼容；未知版本隔离，禁止网络加载Schema。
 详细语义与升级/失败规则见 [CL-008b](../../docs/workflow/CL-008/events-and-outbox.md)，
 取消/删源及恢复例见 [CL-008](../../docs/workflow/CL-008/README.md)。
-沿用 Temporal 和计划中的 PostgreSQL Outbox，不新增通用事件总线。
+沿用 Temporal 和 PostgreSQL Outbox；生产方案与本地合成表分别记录，不新增通用事件总线。

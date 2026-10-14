@@ -46,5 +46,8 @@ docs(repo): record repository boundary
   现有API测试只对implemented集合做运行时对齐，规划schema/样例验证不能宣称业务功能通过。
 - [CL-008事件](contracts/events/README.md)均为planned；修改封闭Schema需按版本策略升级并维护正负夹具。
   事件结构与纯内存状态设计回归随`pnpm verify`执行，不能代替真实SQL/Temporal/费用或删除验证。
+- [CL-013a](docs/integration/CL-013a/README.md)提供默认关闭的本地合成路由与真实SQL/Temporal烟测。
+  合成OpenAPI独立声明运行范围，生产规划端点不因此升级。CI在`pnpm verify`后执行
+  `pnpm smoke:test --skip-build`；禁止将合成停止/重试证据外推到付费调用、GPU或生产权限。
 
 Pull Request 请使用仓库模板，说明变更、验证命令、风险和回滚方式。高风险改动包括权限、删除、数据迁移、工作流状态机、费用账本和公共内容发布。

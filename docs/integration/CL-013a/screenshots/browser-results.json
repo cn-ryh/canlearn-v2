@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-10-14T02:55:37.883Z",
+  "playwright": "1.56.1",
+  "chromium": "141.0.7390.37",
+  "passed": 7,
+  "checks": [
+    "browser creates and polls a successful real Job",
+    "same-key button preserves Job ID",
+    "partial result and page statuses render",
+    "390px mobile layout has no horizontal overflow",
+    "browser cancellation reaches confirmed synthetic stop",
+    "manual refresh preserves cancellation",
+    "no browser page errors"
+  ]
+}

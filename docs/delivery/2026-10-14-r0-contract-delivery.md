@@ -60,7 +60,7 @@ GPU停止、物理删除、费用账单或备份恢复。见[CL-008验证记录]
 
 ## 下一实现入口
 
-CL-013a #47：按[CL-008恢复矩阵](../workflow/CL-008/failure-and-recovery.md)实现现有
-API→业务DB→Temporal→worker的合成最小Job纵向链路，随后CL-013b #48扩展真实契约/故障门禁。
+CL-013a #50：按[CL-008恢复矩阵](../workflow/CL-008/failure-and-recovery.md)实现现有
+API→业务DB→Temporal→worker的合成最小Job纵向链路，随后CL-013b #51扩展真实契约/故障门禁。
 CL-009/010合法样本/质量/许可与CL-014放行保持独立条件；不能将本包通过写成真实资料或生产准入。
 任务附件工具调用未返回确认，PR链接与GitHub记录可独立访问，不宣称附件绑定成功。

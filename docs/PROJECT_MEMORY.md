@@ -417,6 +417,36 @@ CL-008 #8/#36–#38已补固定提交/核验/PR评论并由in-progress转needs-r
 下一可独立推进CL-013a合成最小Job纵向链路，CL-009真实样本/双标和供应商条件保持原阻断面。
 本段与交付记录另作收尾提交；远端最新HEAD随后核验，不将提交前记忆写成该提交已推送。
 
+## CL-013a 合成 Job 实施与本地验收（2026-10-14，当前最新）
+
+用户确认本轮规划，授权实施、分批提交/推送至既有草稿PR #55、更新证据/Issue状态并等待最新CI。
+未授权合并main或豁免非作者/外部验收条件；开工工作区干净，基线ec72dc8。
+
+已实现默认关闭的Web→API→PostgreSQL Job/Outbox→Temporal→Python worker→API接纳回执→Web查询。
+合成入口使用固定原创三页状态夹具，API启用时强制回环监听，内部回执需随机服务token，
+Web代理限制同源与固定本机路由且不传内部凭据。生产会话/资料授权、MinerU、模型/GPU/云路径未接入。
+独立canlearn.smoke.v1.json覆盖三条真实合成操作；生产27条规划接口仍planned。
+新增smoke_jobs/smoke_outbox增量迁移，既有jobs七状态不改；WAITING_REVIEW保留设计，未实现审校。
+固定workflow ID/快照、请求键与回执去重、取消epoch、终态/结果/Outbox同事务、lease及启动ACK对账已落实。
+生产四类事件保持planned，其中三类已有本地合成producer/dispatcher与实际持久Schema证据；失效/删除未实现。
+
+本地完整pnpm verify退出0：API138/Web9/Python43，格式/lint/类型、两份OpenAPI、Compose及API/Web构建。
+31项真实集成检查退出0，另以空隔离卷再次从迁移开始验证同31项：并发同键、异载荷、四种页结果、
+取消/停止/晚到、worker SIGKILL/heartbeat重试、实际history重放、API重启、启动ACK丢失/过期claim、
+SQL故障同事务回滚、接纳与取消实际并发、全栈停止重启、19个持久事件与唯一受理。均只针对免费合成模拟。
+7项Chromium真实按钮/轮询/取消/刷新/移动端无横向溢出检查通过；截图只含合成引用，Playwright1.56.1位于仓库外。
+复现手册/范围/回退见docs/integration/CL-013a，验证记录含源码摘要、Job/trace ID和镜像摘要。
+
+首次实际启动定位并修复Temporal同名角色导致跳过建库、CLI健康检查错误目的地；保持账号分离，
+DBNAME现为canlearn_temporal/visibility独立库。首次运行修复SDK Run ID为UUID v7但回执仅接受v4、
+workflow sandbox导入HTTPX，以及Next规范化URL导致同源检查误拒和空取消请求错误JSON Content-Type。
+所有失败后完成复验，不跳过门禁。CL-008执行映射CL-013a/b/c纠正为#50/#51/#52。
+
+自动集成接入CI中pnpm verify后的同一smoke:test；真实远端结果待本轮推送后核验，不以本地结果代替。
+本轮不宣称生产鉴权、完整Inbox/admission/预算/供应商恰好一次、GPU停止、物理删除、旧备份恢复或R0放行。
+非作者审核/真实样本双标仍待补。合成环境由独立canlearn-cl013项目管理；测试结束自动停止本轮进程/容器，
+主项目和用户.env/daemon/远端主机均未修改。成果本地已可供评审，提交/推送/Issue实际状态随后核验。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
@@ -428,12 +458,12 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 ## 已实现的工程基线
 
 - 单一 Git monorepo，各应用独立构建和部署。
-- `apps/web`：Next.js/React/TypeScript，只有项目基线首页。
+- `apps/web`：Next.js/React/TypeScript，基线首页及默认关闭的CL-013a合成验证页/固定API代理。
 - `apps/api`：NestJS/Fastify/TypeScript，已注册健康接口 `GET /v1/health`，Swagger UI 为 `/docs`。
 - Drizzle/PostgreSQL：已有 `jobs` 表及初始 SQL 迁移；任务状态枚举包含 QUEUED、RUNNING、WAITING_REVIEW、PARTIAL_READY、SUCCEEDED、FAILED、CANCELLED。存在表结构不等于任务 API 已实现。
-- `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow 和健康 activity。
+- `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow；显式启用时注册合成Job workflow/activity及独立Outbox dispatcher。
 - `compose.yaml`：PostgreSQL、Redis、Temporal、Temporal UI 的本地配置。
-- OpenAPI已有健康接口与27个明确标planned的业务操作提案；运行时仍只有健康业务端点。`contracts/events`有四类planned事件Schema及结构/设计回归，没有真实事件发布/消费。
+- 生产OpenAPI为健康接口及27个planned业务提案；默认运行时仅健康，CL-013a启用后另有独立本地合成契约。四类生产事件planned，其中三类已有合成Outbox/dispatcher验证，资源失效未实现。
 - 已配置 Biome、Ruff、mypy、TypeScript、Vitest、pytest、Redocly、GitHub Actions 与 Husky 门禁。
 - 尚无资料上传、MinerU Adapter、真实解析流程、鉴权或学习业务闭环；不要将产品文档、数据库枚举和健康烟测当作已交付功能。
 
