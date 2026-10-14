@@ -447,6 +447,23 @@ workflow sandbox导入HTTPX，以及Next规范化URL导致同源检查误拒和�
 非作者审核/真实样本双标仍待补。合成环境由独立canlearn-cl013项目管理；测试结束自动停止本轮进程/容器，
 主项目和用户.env/daemon/远端主机均未修改。成果本地已可供评审，提交/推送/Issue实际状态随后核验。
 
+## CL-013a 推送、CI 与 Issue 收尾（2026-10-14，当前最新）
+
+实际分批提交并推送bfde0f13f7f490dadd13c3ffc2155d011fe800bc（实现）和
+cd59e4c70aeaa8ce8d769abee9628c7cdb0d262c（证据/手册），branch ref、PR head与本地HEAD已核对。
+cd59e4c的[GitHub CI](https://github.com/cn-ryh/canlearn-v2/actions/runs/38504533988)实际SUCCESS，
+完整verify和新真实合成集成步骤均成功。PR #55仍Open/draft，标题与说明已收敛为R0契约及合成集成最终范围。
+本地完整门禁API138/Web9/Python43、空隔离卷31项集成及7项真实浏览器交互均通过。
+42个源码SHA（同时和实现提交内容对比）、4个工件SHA、81个Markdown本地链接/围栏、
+新增内容凭据模式检查与git diff --check通过，提交/推送钩子门禁保留。
+
+CL-013a #50已补固定工件/提交/CI评论并标needs-review，父卡#13标in-progress；均Open。
+只勾证据与PR项，实际负责人/非作者/验收项未勾。原17张待评审仍Open，加#50后共18张needs-review，
+CL-009四张blocked仍Open；重查54卡为4Closed/50Open，未合main或关闭新增卡。
+公开交付证据见docs/delivery/2026-10-14-cl013a-delivery.md。全部本轮运行进程与隔离容器/网络已停止，
+合成数据卷与私有runtime保留；用户环境/全局daemon/远端主机未变。
+本段另作收尾提交，最新末尾提交/CI以PR Checks和最终查询为准，不在提交前声称该提交已获CI通过。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
