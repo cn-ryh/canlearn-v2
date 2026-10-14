@@ -53,5 +53,9 @@ docs(repo): record repository boundary
   迁移升级/失败回滚接入 CI；`pnpm verify`另检查版本、既有迁移不可变和 schema 漂移。
   `pnpm security:scan`扫描历史/当前文件密钥、全部锁定依赖及镜像；密钥与依赖 HIGH/CRITICAL 阻断。
   镜像现为有期限的报告模式，不能据此声明安全通过；规则、职责和精确人工例外见门禁包。
+- [CL-010](docs/workflow/CL-010/README.md)提供独立 MinerU V1 Adapter 与默认关闭的原创夹具探针。
+  私有 API/worker 双开关同时启用，主 API 唯一写库；生产业务契约不因此升级。
+  实际 GPU/服务重启测试由操作者在自己的隔离实例执行，不要求公共 CI 访问 GPU 或凭据。
+  创建结果未知不能自动重做；恢复查询原上游任务，逻辑取消不能当物理 GPU 停止证据。
 
 Pull Request 请使用仓库模板，说明变更、验证命令、风险和回滚方式。高风险改动包括权限、删除、数据迁移、工作流状态机、费用账本和公共内容发布。

@@ -1,0 +1,42 @@
+{
+  "reviewed_at": "2026-10-14",
+  "binaries": [
+    {
+      "binary": "gosu",
+      "sha256": "52c8749d0142edd234e9d6bd5237dff2d81e71f43537e2f4f66f75dd4b243dd0",
+      "go_version": "go1.24.6",
+      "module_lines": ["path\tgithub.com/tianon/gosu", "mod\tgithub.com/tianon/gosu\tv1.19.0"],
+      "symbol_scan_available": true,
+      "crypto_tls_symbol_count": 0,
+      "grpc_server_symbol_count": 0
+    },
+    {
+      "binary": "tctl",
+      "sha256": "48d07b607837dd8574b1887073927f6847f63d4ed55e04d339883ebc167cd3dc",
+      "go_version": "go1.25.11",
+      "module_lines": [
+        "path\tgithub.com/temporalio/tctl/cmd/tctl",
+        "mod\tgithub.com/temporalio/tctl\t(devel)",
+        "dep\tgo.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc\tv0.36.4\th1:PRXhsszxTt5bbPriTjmaweWUsAnJYeWBhUMLRetUgBU=",
+        "dep\tgoogle.golang.org/grpc\tv1.56.3\th1:8I4C0Yq1EjstUzUJzpcRVbuYA2mODtEmpWiQoN/b2nc="
+      ],
+      "symbol_scan_available": true,
+      "crypto_tls_symbol_count": 701,
+      "grpc_server_symbol_count": 40
+    },
+    {
+      "binary": "tctl-authorization-plugin",
+      "sha256": "8abec8ae6324d1876051f3afd56778a066db32422271b576d11801b9fc8b07c2",
+      "go_version": "go1.25.11",
+      "module_lines": [
+        "path\tgithub.com/temporalio/tctl/cmd/plugins/tctl-authorization-plugin",
+        "mod\tgithub.com/temporalio/tctl\t(devel)",
+        "dep\tgoogle.golang.org/grpc\tv1.56.3\th1:8I4C0Yq1EjstUzUJzpcRVbuYA2mODtEmpWiQoN/b2nc="
+      ],
+      "symbol_scan_available": true,
+      "crypto_tls_symbol_count": 698,
+      "grpc_server_symbol_count": 40
+    }
+  ],
+  "approved_exceptions": []
+}

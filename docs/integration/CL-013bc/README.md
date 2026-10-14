@@ -3,6 +3,7 @@
 2026-10-14（UTC）· [CL-013b #51](https://github.com/cn-ryh/canlearn-v2/issues/51)、
 [CL-013c #52](https://github.com/cn-ryh/canlearn-v2/issues/52)，承接 [CL-013a](../CL-013a/README.md)。
 本包初次归档为本地实现与验证交付；当时没有提交、推送或更新 GitHub，PR #55 的既有 CI 不代表本轮代码。
+随后授权交付的提交、真实 GitHub CI 与 Issue 记录见[收尾](../../delivery/2026-10-14-cl013bc-delivery.md)。
 非作者审核和实际验收继续待补，Issue 保持 Open。用户延期真人标注，CL-009 仍待合法真实样本与独立双标。
 
 ## 复现

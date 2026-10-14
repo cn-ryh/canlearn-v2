@@ -51,3 +51,22 @@ export const smokeOutbox = pgTable("smoke_outbox", {
   lastErrorCode: text("last_error_code"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+// CL-010 isolated parser probe: reference-only checkpoints; no production resource authorization.
+export const mineruProbeJobs = pgTable("mineru_probe_jobs", {
+  jobId: uuid("job_id")
+    .primaryKey()
+    .references(() => jobs.id),
+  requestKey: uuid("request_key").unique().notNull(),
+  requestHash: text("request_hash").notNull(),
+  snapshotId: uuid("snapshot_id").notNull(),
+  traceId: text("trace_id").notNull(),
+  epoch: integer("epoch").default(1).notNull(),
+  revision: integer("revision").default(1).notNull(),
+  phase: text("phase").default("new").notNull(),
+  fileId: text("file_id"),
+  upstreamJobId: text("upstream_job_id"),
+  receiptHash: text("receipt_hash"),
+  failureCode: text("failure_code"),
+  terminationState: text("termination_state").default("not_requested").notNull(),
+});

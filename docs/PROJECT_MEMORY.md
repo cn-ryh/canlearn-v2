@@ -509,6 +509,37 @@ Hatchling1.32.4固定，项目仍用pnpm12.4.2/uv0.12.15/Python3.12。
 开工保留上轮全部未提交成果；86个源码及4个证据SHA复核一致，基线仍f9c50c4。
 真人标注继续延期，真实质量/正式部署验收条件保留。实际提交/CI/远端状态随后记录。
 
+## CL-013b/c 远端交付与 CL-010 真实工程验证（2026-10-14 UTC）
+
+- CL-013b/c 已提交/推送 `6714527940187c8c4d0d7f448d35871a43cea41f`；
+  [GitHub CI](https://github.com/cn-ryh/canlearn-v2/actions/runs/38560276486) verify/security 成功。
+  #51/#52 已附固定提交/CI/证据，均 Open/needs-review，人工确认项未勾；
+  [交付记录](delivery/2026-10-14-cl013bc-delivery.md)保留原始归档范围。
+- [CL-010](workflow/CL-010/README.md)新增有界真实 V1 Adapter、默认关闭的私有主 API/SQL/Temporal 探针，
+  0002 仅增 `mineru_probe_jobs`，既有迁移不改；主 API 是业务库唯一写者。
+  双开关显式启用，固定原创 PDF/SHA/全页范围；探针不用生产上传入口/Outbox/私有对象存储。
+- 复用独立 MinerU 4.0.7 / DocVortex 0.5.16 / torch 2.8.0 环境，核对固定官方源码、
+  模型 revision 与 15 文件 SHA，记录 137 个实际安装包版本及许可/NOTICE 快照。
+  未选择 MinerU 部署镜像摘要，未代签外部权利；许可在线署名/关联方商业门槛和依赖分发核验仍待审核。
+- 真实 Flash/CPU 两页直接 V1 下载；Basic/4070 经 SSH 回环接入实际主 API/DB/Temporal，
+  [26 项集成](workflow/CL-010/integration-results.json)通过。300 页索引完整且唯一锚点各一次，
+  worker SIGKILL 后查询原上游任务；API 重启保留输入/映射，history replay 通过。
+  真正排队任务取消、旧 epoch 回执 409；running GPU 物理停止未验收。
+- 真实 MinerU 进程重启导致旧 V1 job 404，平台保留映射并 FAILED/UPSTREAM_LOST；
+  故障中继丢弃真实成功创建的 ACK，平台 FAILED/CREATE_UNKNOWN、不自动重建或发布，
+  上游实际 completed。另有真实未带凭据 401、旧 file_parse 404；22 项协议负例单测与实测分开记录。
+- 本地 `pnpm verify` 已通过：API149/Web9/Python65、14 项质量故障检查、类型/契约/构建。
+  [35 项合成回归](workflow/CL-010/synthetic-regression-results.json)与
+  [7 项真实迁移](workflow/CL-010/migration-regression-results.json)通过，兼容 0002；最终源码/CI 随收尾记录。
+- 仅停止本次自有解析进程/转发/guard 和隔离本地栈，未停止既有 GPU 工作。
+  461 次 guard 采样，峰值使用 3583 MiB、最低空闲 8294 MiB；清理后使用 2518/空闲 9359 MiB 回到前值。
+  隔离模型/环境缓存保留复现，私有连接/凭据未入库；用户 `.env` 与全局 daemon 未改。
+- [镜像初步核对](workflow/CL-010/image-critical-triage.md)绑定三个真实二进制 SHA：
+  gosu 无 crypto/tls 符号；旧 tctl 两文件有 gRPC server 符号但当前 bootstrap 未调用。
+  不把可达性推断当签审/豁免，223 HIGH/3 CRITICAL 报告与 10 月 21 日期限保留，人工例外仍空。
+- 真人标注继续延期，CL-009 四卡 blocked；CL-010c、多类别真实质量/留出集、正式网络/mTLS、
+  生产派发与 R0 放行条件仍保留。#42/#43 本轮远端证据与最终推送结果在交付记录补充，不自动关闭。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
@@ -523,7 +554,7 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 - `apps/web`：Next.js/React/TypeScript，基线首页及默认关闭的CL-013a合成验证页/固定API代理。
 - `apps/api`：NestJS/Fastify/TypeScript，已注册健康接口 `GET /v1/health`，Swagger UI 为 `/docs`。
 - Drizzle/PostgreSQL：已有 `jobs` 表及初始 SQL 迁移；任务状态枚举包含 QUEUED、RUNNING、WAITING_REVIEW、PARTIAL_READY、SUCCEEDED、FAILED、CANCELLED。存在表结构不等于任务 API 已实现。
-- `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow；显式启用时注册合成Job workflow/activity及独立Outbox dispatcher。
+- `apps/workflow`：Python/Temporal worker、HealthCheckWorkflow；显式启用时注册合成Job workflow/activity及独立Outbox dispatcher；双开关时另有真实 MinerU 原创夹具探针。
 - `compose.yaml`：PostgreSQL、Redis、Temporal、Temporal UI 的本地配置。
 - 生产OpenAPI为健康接口及27个planned业务提案；默认运行时仅健康，CL-013a启用后另有独立本地合成契约。四类生产事件planned，其中三类已有合成Outbox/dispatcher验证，资源失效未实现。
 - 已配置 Biome、Ruff、mypy、TypeScript、Vitest、pytest、Redocly、GitHub Actions 与 Husky 门禁。

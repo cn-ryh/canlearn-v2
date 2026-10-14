@@ -1,5 +1,6 @@
 """Fault probes for CI guard behavior, using disposable copies and no private samples."""
 
+import json
 import shutil
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
@@ -29,7 +30,8 @@ def test_destructive_or_incompatible_sql_blocks(sql: str) -> None:
 def test_applied_migration_change_blocks(tmp_path: Path) -> None:
     shutil.copytree(ROOT / "apps/api/drizzle", tmp_path / "apps/api/drizzle")
     shutil.copytree(ROOT / "security", tmp_path / "security")
-    migration = next((tmp_path / "apps/api/drizzle").glob("*.sql"))
+    frozen = json.loads((tmp_path / "security/migration-baseline.json").read_text())
+    migration = tmp_path / next(name for name in frozen if name.endswith(".sql"))
     migration.write_text(migration.read_text() + "\n-- controlled drift\n")
     with pytest.raises(ValueError, match="Applied migration"):
         check_migrations(tmp_path)

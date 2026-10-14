@@ -120,6 +120,9 @@ describe("Implemented REST contract and runtime Swagger", () => {
   });
 
   it("keeps local synthetic and internal routes absent by default", async () => {
+    expect(
+      (await app.inject({ method: "POST", url: "/v1/internal/mineru-probe/jobs" })).statusCode,
+    ).toBe(404);
     expect((await app.inject({ method: "POST", url: "/v1/smoke/jobs" })).statusCode).toBe(404);
     expect(
       (await app.inject({ method: "POST", url: "/v1/internal/smoke/outbox/claim" })).statusCode,

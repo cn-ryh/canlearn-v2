@@ -15,6 +15,13 @@
       "when": 1791945071765,
       "tag": "0001_sweet_nicolaos",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791979990169,
+      "tag": "0002_rich_lake",
+      "breakpoints": true
     }
   ]
 }

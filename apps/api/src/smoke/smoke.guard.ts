@@ -20,7 +20,7 @@ export class SmokeGuard implements CanActivate {
     if (!["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(request.ip)) {
       throw new ForbiddenException("SMOKE_LOOPBACK_REQUIRED");
     }
-    if (request.url.startsWith("/v1/internal/smoke/")) {
+    if (request.url.startsWith("/v1/internal/")) {
       const expected = process.env.CANLEARN_SMOKE_TOKEN ?? "";
       const provided = request.headers["x-smoke-token"];
       const supplied = Buffer.from(typeof provided === "string" ? provided : "");
