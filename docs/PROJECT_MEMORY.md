@@ -540,6 +540,18 @@ Hatchling1.32.4固定，项目仍用pnpm12.4.2/uv0.12.15/Python3.12。
 - 真人标注继续延期，CL-009 四卡 blocked；CL-010c、多类别真实质量/留出集、正式网络/mTLS、
   生产派发与 R0 放行条件仍保留。#42/#43 本轮远端证据与最终推送结果在交付记录补充，不自动关闭。
 
+### CL-010 远端收尾（2026-10-14 UTC）
+
+实现/证据 `ff50a322128f6aad6c9dd8ef350e1a9280e1c363` 已推送到草稿 PR #55；
+[CI](https://github.com/cn-ryh/canlearn-v2/actions/runs/38569024939) verify/security 成功，
+推送钩子完整 `pnpm verify` 通过，源码/工件 SHA 未被提交钩子改变。
+最终本地密钥/依赖/镜像扫描及2项扫描负例通过；镜像残余项仍报告，不视为安全验收。
+另以没有 contracts/fixtures 的临时已构建API布局实测默认关闭健康接口200，进程已停止。
+#42/#43 已附固定提交/CI/实测，Open/needs-review、人工确认未勾；#10 Open/in-progress，
+#13及其三子卡Open/needs-review。54卡仍50 Open/4 Closed，23待评审、4 blocked，未关闭新卡。
+详见[CL-010交付及Issue证据](delivery/2026-10-14-cl010-delivery.md)。
+本段随收尾提交，最终 docs HEAD 的 CI 在 PR Checks/最终查询核对，不回写自引用 SHA。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
