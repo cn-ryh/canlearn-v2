@@ -1,0 +1,8 @@
+as_of_date,primary_group,subject,level,target,invited,eligible,consented,completed,material_verified,gap,status,notes
+,all,all,all,36,0,0,0,0,0,36,pending,"初始模板；无真实招募记录"
+,408,408,all,12,0,0,0,0,0,12,pending,"初始模板；按实际准备阶段补充偏差"
+,CET,CET,all,12,0,0,0,0,0,12,pending,"初始模板；执行时拆分四级/六级并合计"
+,other,all,all,12,0,0,0,0,0,12,pending,"初始模板；至少覆盖数学/物理/化学"
+,other,mathematics,all,4,0,0,0,0,0,4,pending,"建议覆盖目标；非代表性配额"
+,other,physics,all,4,0,0,0,0,0,4,pending,"建议覆盖目标；非代表性配额"
+,other,chemistry,all,4,0,0,0,0,0,4,pending,"建议覆盖目标；非代表性配额"
