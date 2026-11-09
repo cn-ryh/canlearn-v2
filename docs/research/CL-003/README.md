@@ -12,6 +12,7 @@ D 执行，C 复核资料/评分，A 审核可比性；真实成员沿用角色�
 
 ## 工件与执行
 
+- [CL-003a 固定集与锁定评分](benchmark-fixtures-and-scoring.md)：样本权利/限制、九个固定问题、统一截止日、两小时容量差分及不可随表现调整的评分表。
 - [资料说明与真值](corpus-and-ground-truth.md)：只将指定 PDF 输入竞品，不上传答案、manifest 或评审文档。
 - [固定任务与评分](protocol-and-rubric.md)：v1.0 候选协议须在首轮前由 D/C 记录确认；后续修改须升版本并重跑所有对象。
 - [公开信息初筛](official-sources-and-results.md)：官网说明与实测分开；读取公开页面不是一轮产品对标。
