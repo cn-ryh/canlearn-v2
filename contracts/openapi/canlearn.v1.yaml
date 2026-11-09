@@ -2,18 +2,1674 @@ openapi: 3.1.0
 info:
   title: CanLearn API
   version: 1.0.0
-  description: RESTful business contract for the CanLearn MVP.
+  description: "R0 contract: only GET /v1/health is implemented. All other operations are explicitly
+    PLANNED; no business, authentication, worker or deletion service is delivered by this document."
   license:
     name: Proprietary
     identifier: Proprietary
 servers:
   - url: http://localhost:3001
+    description: Local development; does not establish production readiness.
+tags:
+  - name: health
+    description: Implemented process health
+  - name: documents
+    description: Planned private source/version/page operations
+  - name: jobs
+    description: Planned asynchronous jobs
+  - name: learning
+    description: Planned practice and immutable attempts
+  - name: planning
+    description: Planned user-confirmed plans
+  - name: exports
+    description: Planned authorized exports
+security:
+  - SessionCookie: []
 paths:
+  /v1/documents:
+    get:
+      operationId: listDocuments
+      summary: "[规划] List authorized documents"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/SpaceFilter"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: 规划接口：List authorized documents
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentList"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+    post:
+      operationId: uploadDocument
+      summary: "[规划] Upload a private PDF and register its first version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "201":
+          description: 规划接口：Upload a private PDF and register its first version
+          headers:
+            Location:
+              description: Created resource path.
+              schema:
+                type: string
+                minLength: 1
+                maxLength: 512
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UploadDocument"
+  /v1/documents/{documentId}:
+    get:
+      operationId: getDocument
+      summary: "[规划] Read document metadata"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read document metadata
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+    delete:
+      operationId: deleteDocument
+      summary: "[规划] Block access and accept full deletion"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "202":
+          description: 规划接口：Block access and accept full deletion
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+  /v1/documents/{documentId}/versions:
+    post:
+      operationId: uploadSourceVersion
+      summary: "[规划] Register a replacement source version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "201":
+          description: 规划接口：Register a replacement source version
+          headers:
+            Location:
+              description: Created resource path.
+              schema:
+                type: string
+                minLength: 1
+                maxLength: 512
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceVersion"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UploadVersion"
+  /v1/documents/{documentId}/versions/{versionId}:
+    get:
+      operationId: getSourceVersion
+      summary: "[规划] Read a source version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: versionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read a source version
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceVersion"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/documents/{documentId}/versions/{versionId}/pages:
+    get:
+      operationId: listPageResults
+      summary: "[规划] Read all requested page states"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: versionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read all requested page states
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResultList"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/documents/{documentId}/versions/{versionId}/pages/{pageIndex}:
+    get:
+      operationId: getPageResult
+      summary: "[规划] Read an authorized page and its quality state"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: versionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: pageIndex
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: 规划接口：Read an authorized page and its quality state
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResult"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+    patch:
+      operationId: correctPage
+      summary: "[规划] Create a content correction revision"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - documents
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: versionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - name: pageIndex
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: integer
+            minimum: 1
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "200":
+          description: 规划接口：Create a content correction revision
+          headers:
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResult"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrectPage"
+  /v1/parse-jobs:
+    post:
+      operationId: createParseJob
+      summary: "[规划] Accept explicit-page parsing"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - jobs
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Accept explicit-page parsing
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParseRequest"
+  /v1/jobs:
+    get:
+      operationId: listJobs
+      summary: "[规划] List current-account tasks"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - jobs
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: 规划接口：List current-account tasks
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobList"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/jobs/{jobId}:
+    get:
+      operationId: getJob
+      summary: "[规划] Read task status and only admitted results"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - jobs
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read task status and only admitted results
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/jobs/{jobId}/cancel:
+    post:
+      operationId: cancelJob
+      summary: "[规划] Accept cancellation and stop new step admission"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - jobs
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "200":
+          description: 规划：already terminal; no new work.
+          headers:
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "202":
+          description: 规划接口：Accept cancellation and stop new step admission
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelRequest"
+  /v1/jobs/{jobId}/retries:
+    post:
+      operationId: retryJob
+      summary: "[规划] Create an explicitly authorized retry job"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - jobs
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "202":
+          description: 规划接口：Create an explicitly authorized retry job
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+  /v1/exercise-jobs:
+    post:
+      operationId: createExerciseJob
+      summary: "[规划] Accept source-bound practice generation"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Accept source-bound practice generation
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerationRequest"
+  /v1/explanation-jobs:
+    post:
+      operationId: createExplanationJob
+      summary: "[规划] Accept evidence-bound explanation"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Accept evidence-bound explanation
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExplanationRequest"
+  /v1/questions/{questionVersionId}:
+    get:
+      operationId: getQuestion
+      summary: "[规划] Read an admitted question version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: questionVersionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read an admitted question version
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/attempts:
+    post:
+      operationId: submitAttempt
+      summary: "[规划] Record an attempt and accept grading"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Record an attempt and accept grading
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AttemptRequest"
+  /v1/attempts/{attemptId}:
+    get:
+      operationId: getAttempt
+      summary: "[规划] Read immutable attempt and grading state"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: attemptId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read immutable attempt and grading state
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attempt"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/plan-patches:
+    post:
+      operationId: createPlanPatch
+      summary: "[规划] Accept a proposal without altering the confirmed plan"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - planning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Accept a proposal without altering the confirmed plan
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanPatchRequest"
+  /v1/plan-patches/{patchId}:
+    get:
+      operationId: getPlanPatch
+      summary: "[规划] Read proposal differences and conflicts"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - planning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: patchId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read proposal differences and conflicts
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanPatch"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/plans/{planId}:
+    get:
+      operationId: getPlan
+      summary: "[规划] Read the confirmed plan version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - planning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read the confirmed plan version
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanVersion"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+  /v1/plans/{planId}/confirmations:
+    post:
+      operationId: confirmPlanPatch
+      summary: "[规划] Confirm a proposal against current plan versions"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - planning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "201":
+          description: 规划接口：Confirm a proposal against current plan versions
+          headers:
+            Location:
+              description: Created resource path.
+              schema:
+                type: string
+                minLength: 1
+                maxLength: 512
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanVersion"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmPlanRequest"
+  /v1/plans/{planId}/reversions:
+    post:
+      operationId: revertPlan
+      summary: "[规划] Create a reversal version preserving completed facts"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - planning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/IfMatch"
+      responses:
+        "201":
+          description: 规划接口：Create a reversal version preserving completed facts
+          headers:
+            Location:
+              description: Created resource path.
+              schema:
+                type: string
+                minLength: 1
+                maxLength: 512
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanVersion"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "412":
+          $ref: "#/components/responses/Error412"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "428":
+          $ref: "#/components/responses/Error428"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      x-precondition-target: current source/version/page/job/plan aggregate addressed by this operation;
+        see CL-007 endpoint map
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevertPlanRequest"
+  /v1/export-jobs:
+    post:
+      operationId: createExportJob
+      summary: "[规划] Accept an authorized version snapshot export"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - exports
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/CsrfToken"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: 规划接口：Accept an authorized version snapshot export
+          headers:
+            Location:
+              description: Owner-authorized task status path.
+              schema:
+                type: string
+                pattern: ^/v1/jobs/[0-9a-f-]{36}$
+            Idempotency-Replayed:
+              description: Same authorized request already accepted; no new work.
+              schema:
+                type: boolean
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobAccepted"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
+      x-idempotency-scope: account + operationId + authorized resource scope; payload and preconditions included
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExportRequest"
+  /v1/exports/{exportId}/content:
+    get:
+      operationId: downloadExport
+      summary: "[规划] Read an admitted export through the API"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - exports
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - $ref: "#/components/parameters/Range"
+        - name: exportId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划：authorized export bytes.
+          headers:
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "206":
+          description: 规划：single-range response.
+          headers:
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Content-Range:
+              description: Selected bytes and authorized total size.
+              schema:
+                type: string
+                pattern: ^bytes [0-9]+-[0-9]+/[0-9]+$
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "416":
+          $ref: "#/components/responses/Error416"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
   /v1/health:
     get:
       operationId: getHealth
       summary: Check the API process
+      tags:
+        - health
       security: []
+      x-implementation-status: implemented
       responses:
         "200":
           description: The API process is healthy.
@@ -21,16 +1677,1214 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthResponse"
+              example:
+                service: canlearn-api
+                status: ok
+  /v1/explanations/{explanationVersionId}:
+    get:
+      operationId: getExplanation
+      summary: "[规划] Read an admitted explanation version"
+      description: 尚未实现。会话/验证邮箱＋服务端资源授权/用途校验；仅向已授权请求人返回最小资源。流程与错误细则见docs/api/CL-007。
+      tags:
+        - learning
+      x-implementation-status: planned
+      x-permission: server-resolved account/space/resource/purpose; foreign private resource returns 404
+      parameters:
+        - name: explanationVersionId
+          in: path
+          required: true
+          description: 规划：服务端解析父子关系及当前授权。
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: 规划接口：Read an admitted explanation version
+          headers:
+            ETag:
+              description: Strong target-resource version token.
+              schema:
+                type: string
+                minLength: 3
+                maxLength: 128
+            Cache-Control:
+              description: Private responses use no-store.
+              schema:
+                type: string
+                enum:
+                  - no-store
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Explanation"
+        "400":
+          $ref: "#/components/responses/Error400"
+        "401":
+          $ref: "#/components/responses/Error401"
+        "403":
+          $ref: "#/components/responses/Error403"
+        "404":
+          $ref: "#/components/responses/Error404"
+        "409":
+          $ref: "#/components/responses/Error409"
+        "410":
+          $ref: "#/components/responses/Error410"
+        "422":
+          $ref: "#/components/responses/Error422"
+        "429":
+          $ref: "#/components/responses/Error429"
+        "503":
+          $ref: "#/components/responses/Error503"
 components:
+  securitySchemes:
+    SessionCookie:
+      type: apiKey
+      in: cookie
+      name: __Host-canlearn.session_token
+      description: Proposed secure server session; not implemented. Cookie name/config to be bound during
+        Better Auth integration.
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: 规划：随机请求键，按账户/操作/资源域绑定；同键异载荷拒绝。不是授权凭据。
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 128
+    CsrfToken:
+      name: X-CSRF-Token
+      in: header
+      required: true
+      description: 规划：受控浏览器会话的CSRF令牌；另核可信Origin。
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 256
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: 规划：读取目标资源得到的单个强ETag；不接受弱标签或通配符作为版本覆盖。
+      schema:
+        type: string
+        pattern: ^"[A-Za-z0-9:_-]+"$
+    Limit:
+      name: limit
+      in: query
+      description: 规划：分页条数。
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Cursor:
+      name: cursor
+      in: query
+      description: 规划：不透明游标，绑定账户/权限域/过滤及快照。
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 512
+    SpaceFilter:
+      name: space_id
+      in: query
+      required: true
+      description: 规划：仅过滤已授权空间；此ID不产生授权。
+      schema:
+        type: string
+        format: uuid
+    Range:
+      name: Range
+      in: header
+      description: 规划：仅单个字节范围；仍需当前资源授权。
+      schema:
+        type: string
+        pattern: ^bytes=[0-9]*-[0-9]*$
+  responses:
+    Error400:
+      description: Invalid input.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error401:
+      description: No valid session.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error403:
+      description: Operation or purpose forbidden.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error404:
+      description: Resource absent or not visible.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error409:
+      description: Business conflict; do not blindly repeat a paid request.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error410:
+      description: Authorized owner sees an unavailable resource.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error412:
+      description: Strong ETag precondition failed.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error416:
+      description: Byte range not satisfiable.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error422:
+      description: Request does not satisfy semantic constraints.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error428:
+      description: Required version condition missing.
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error429:
+      description: Rate or capacity limit reached.
+      headers:
+        Retry-After:
+          description: Seconds to wait; retry only when error.retryable is true.
+          schema:
+            type: integer
+            minimum: 1
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
+    Error503:
+      description: Temporarily unavailable; accepted jobs must be queried.
+      headers:
+        Retry-After:
+          description: Seconds to wait; retry only when error.retryable is true.
+          schema:
+            type: integer
+            minimum: 1
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorEnvelope"
   schemas:
     HealthResponse:
       type: object
       additionalProperties: false
-      required: [service, status]
+      required:
+        - service
+        - status
       properties:
         service:
           type: string
-          const: canlearn-api
+          enum:
+            - canlearn-api
         status:
           type: string
-          const: ok
+          enum:
+            - ok
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - message
+        - request_id
+        - retryable
+      properties:
+        code:
+          type: string
+          enum:
+            - INVALID_INPUT
+            - UNAUTHENTICATED
+            - EMAIL_UNVERIFIED
+            - FORBIDDEN
+            - NOT_FOUND
+            - RESOURCE_GONE
+            - IDEMPOTENCY_KEY_REUSED
+            - IDEMPOTENCY_IN_PROGRESS
+            - VERSION_CONFLICT
+            - PRECONDITION_REQUIRED
+            - PRECONDITION_FAILED
+            - QUOTA_EXCEEDED
+            - BUDGET_EXHAUSTED
+            - QUALITY_NOT_READY
+            - INSUFFICIENT_EVIDENCE
+            - JOB_NOT_RETRYABLE
+            - UPSTREAM_OUTCOME_UNKNOWN
+            - PROVIDER_NOT_ADMITTED
+            - TEMPORARILY_UNAVAILABLE
+            - RANGE_NOT_SATISFIABLE
+        message:
+          type: string
+          minLength: 1
+          maxLength: 256
+        request_id:
+          type: string
+          format: uuid
+        retryable:
+          type: boolean
+        field_errors:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - pointer
+              - code
+            properties:
+              pointer:
+                type: string
+                minLength: 1
+                maxLength: 128
+              code:
+                type: string
+                enum:
+                  - required
+                  - type
+                  - range
+                  - unknown_field
+                  - format
+          minItems: 0
+          maxItems: 20
+    ErrorEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+    VersionRef:
+      type: object
+      additionalProperties: false
+      required:
+        - resource_type
+        - resource_id
+        - version_id
+      properties:
+        resource_id:
+          type: string
+          format: uuid
+        version_id:
+          type: string
+          format: uuid
+        resource_type:
+          type: string
+          enum:
+            - document
+            - source_version
+            - page_result
+            - question
+            - explanation
+            - attempt
+            - plan_patch
+            - plan
+            - export
+    PageSelection:
+      oneOf:
+        - type: object
+          additionalProperties: false
+          required:
+            - mode
+          properties:
+            mode:
+              type: string
+              enum:
+                - all
+        - type: object
+          additionalProperties: false
+          required:
+            - mode
+            - pdf_page_indices
+          properties:
+            mode:
+              type: string
+              enum:
+                - selected
+            pdf_page_indices:
+              type: array
+              items:
+                type: integer
+                minimum: 1
+              minItems: 1
+              maxItems: 10000
+              uniqueItems: true
+    Citation:
+      type: object
+      additionalProperties: false
+      required:
+        - source_version_id
+        - content_revision_id
+        - pdf_page_index
+        - printed_page_label
+        - region_id
+        - coordinate_system
+        - bbox
+      properties:
+        source_version_id:
+          type: string
+          format: uuid
+        content_revision_id:
+          type: string
+          format: uuid
+        pdf_page_index:
+          type: integer
+          minimum: 1
+        printed_page_label:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 32
+            - type: "null"
+        region_id:
+          type: string
+          format: uuid
+        coordinate_system:
+          type: string
+          enum:
+            - normalized_top_left
+        bbox:
+          type: array
+          items:
+            type: number
+            minimum: 0
+            maximum: 1
+          minItems: 4
+          maxItems: 4
+    Document:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - space_id
+        - current_version_id
+        - revision
+        - title
+        - state
+        - page_count
+      properties:
+        id:
+          type: string
+          format: uuid
+        space_id:
+          type: string
+          format: uuid
+        current_version_id:
+          type: string
+          format: uuid
+        revision:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+          minLength: 1
+          maxLength: 256
+        state:
+          type: string
+          enum:
+            - ready_for_parse
+            - processing
+            - available
+            - partial
+            - blocked
+            - deleting
+        page_count:
+          oneOf:
+            - type: integer
+              minimum: 1
+            - type: "null"
+    SourceVersion:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - document_id
+        - space_id
+        - revision
+        - sha256
+        - page_count
+        - state
+      properties:
+        id:
+          type: string
+          format: uuid
+        document_id:
+          type: string
+          format: uuid
+        space_id:
+          type: string
+          format: uuid
+        revision:
+          type: integer
+          minimum: 1
+        sha256:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+        page_count:
+          type: integer
+          minimum: 1
+        state:
+          type: string
+          enum:
+            - current
+            - superseded
+            - withdrawn
+            - blocked
+            - deleting
+    UploadDocument:
+      type: object
+      additionalProperties: false
+      required:
+        - space_id
+        - title
+        - file
+        - rights_declaration
+      properties:
+        space_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          minLength: 1
+          maxLength: 256
+        file:
+          type: string
+          format: binary
+        rights_declaration:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    UploadVersion:
+      type: object
+      additionalProperties: false
+      required:
+        - file
+        - rights_declaration
+      properties:
+        file:
+          type: string
+          format: binary
+        rights_declaration:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    PageResult:
+      type: object
+      additionalProperties: false
+      required:
+        - source_version_id
+        - pdf_page_index
+        - revision
+        - state
+        - quality_state
+        - printed_page_label
+        - text
+      properties:
+        source_version_id:
+          type: string
+          format: uuid
+        pdf_page_index:
+          type: integer
+          minimum: 1
+        revision:
+          type: integer
+          minimum: 1
+        state:
+          type: string
+          enum:
+            - success
+            - blank
+            - failed
+            - missing
+        quality_state:
+          type: string
+          enum:
+            - pending
+            - usable
+            - needs_review
+            - failed
+        printed_page_label:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 32
+            - type: "null"
+        text:
+          oneOf:
+            - type: string
+              minLength: 0
+              maxLength: 200000
+            - type: "null"
+    CorrectPage:
+      type: object
+      additionalProperties: false
+      required:
+        - base_parse_run_id
+        - text
+        - reason
+      properties:
+        base_parse_run_id:
+          type: string
+          format: uuid
+        text:
+          type: string
+          minLength: 0
+          maxLength: 200000
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 256
+    ParseRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - source_version_id
+        - page_selection
+        - parse_profile_id
+      properties:
+        source_version_id:
+          type: string
+          format: uuid
+        page_selection:
+          $ref: "#/components/schemas/PageSelection"
+        parse_profile_id:
+          type: string
+          format: uuid
+    Job:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - kind
+        - status
+        - revision
+        - cancel_requested
+        - usable_result_refs
+        - progress
+        - cost_state
+        - failure
+      properties:
+        id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+          enum:
+            - parse
+            - exercise
+            - explanation
+            - grade
+            - plan_patch
+            - export
+            - delete
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - RUNNING
+            - WAITING_REVIEW
+            - PARTIAL_READY
+            - SUCCEEDED
+            - FAILED
+            - CANCELLED
+        revision:
+          type: integer
+          minimum: 1
+        cancel_requested:
+          type: boolean
+        usable_result_refs:
+          type: array
+          items:
+            $ref: "#/components/schemas/VersionRef"
+          minItems: 0
+          maxItems: 100
+        progress:
+          type: object
+          additionalProperties: false
+          required:
+            - requested
+            - completed
+            - failed
+            - missing
+          properties:
+            requested:
+              type: integer
+              minimum: 0
+            completed:
+              type: integer
+              minimum: 0
+            failed:
+              type: integer
+              minimum: 0
+            missing:
+              type: integer
+              minimum: 0
+        cost_state:
+          type: string
+          enum:
+            - reserved
+            - observed
+            - unknown_pending_reconciliation
+            - reconciled
+        failure:
+          oneOf:
+            - $ref: "#/components/schemas/Error"
+            - type: "null"
+    JobAccepted:
+      type: object
+      additionalProperties: false
+      required:
+        - job
+        - status_url
+        - accepted_resource_id
+      properties:
+        job:
+          $ref: "#/components/schemas/Job"
+        status_url:
+          type: string
+          pattern: ^/v1/jobs/[0-9a-f-]{36}$
+        accepted_resource_id:
+          oneOf:
+            - type: string
+              format: uuid
+            - type: "null"
+    CancelRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - reason
+      properties:
+        reason:
+          type: string
+          enum:
+            - user_requested
+    GenerationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - source_version_ids
+        - content_revision_ids
+        - question_types
+        - count
+        - purpose
+      properties:
+        source_version_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        content_revision_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        question_types:
+          type: array
+          items:
+            type: string
+            enum:
+              - single_choice
+              - fill_blank
+              - short_answer
+          minItems: 1
+          maxItems: 3
+          uniqueItems: true
+        count:
+          type: integer
+          minimum: 1
+          maximum: 50
+        purpose:
+          type: string
+          enum:
+            - practice
+    ExplanationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - source_version_ids
+        - content_revision_ids
+        - topic
+        - purpose
+      properties:
+        source_version_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        content_revision_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        topic:
+          type: string
+          minLength: 1
+          maxLength: 512
+        purpose:
+          type: string
+          enum:
+            - practice
+    Question:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - version_id
+        - question_type
+        - stem
+        - answer_version_id
+        - rubric_version_id
+        - citations
+        - quality_state
+        - options
+      properties:
+        id:
+          type: string
+          format: uuid
+        version_id:
+          type: string
+          format: uuid
+        question_type:
+          type: string
+          enum:
+            - single_choice
+            - fill_blank
+            - short_answer
+        stem:
+          type: string
+          minLength: 1
+          maxLength: 20000
+        answer_version_id:
+          type: string
+          format: uuid
+        rubric_version_id:
+          type: string
+          format: uuid
+        citations:
+          type: array
+          items:
+            $ref: "#/components/schemas/Citation"
+          minItems: 1
+          maxItems: 100
+        quality_state:
+          type: string
+          enum:
+            - candidate
+            - validated_practice
+            - reviewed_diagnostic
+        options:
+          type: array
+          minItems: 0
+          maxItems: 10
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - id
+              - text
+            properties:
+              id:
+                type: string
+                format: uuid
+              text:
+                type: string
+                minLength: 1
+                maxLength: 4000
+    AttemptAnswer:
+      oneOf:
+        - type: object
+          additionalProperties: false
+          required:
+            - type
+            - choice_id
+          properties:
+            type:
+              type: string
+              enum:
+                - single_choice
+            choice_id:
+              type: string
+              format: uuid
+        - type: object
+          additionalProperties: false
+          required:
+            - type
+            - text
+          properties:
+            type:
+              type: string
+              enum:
+                - fill_blank
+                - short_answer
+            text:
+              type: string
+              minLength: 1
+              maxLength: 4000
+    AttemptRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - question_version_id
+        - response
+      properties:
+        question_version_id:
+          type: string
+          format: uuid
+        response:
+          $ref: "#/components/schemas/AttemptAnswer"
+    Attempt:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - question_version_id
+        - answer_version_id
+        - rubric_version_id
+        - state
+        - grade_version_id
+        - feedback
+        - citations
+      properties:
+        id:
+          type: string
+          format: uuid
+        question_version_id:
+          type: string
+          format: uuid
+        answer_version_id:
+          type: string
+          format: uuid
+        rubric_version_id:
+          type: string
+          format: uuid
+        state:
+          type: string
+          enum:
+            - recorded
+            - grading
+            - graded
+            - needs_review
+        grade_version_id:
+          oneOf:
+            - type: string
+              format: uuid
+            - type: "null"
+        feedback:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 20000
+            - type: "null"
+        citations:
+          type: array
+          items:
+            $ref: "#/components/schemas/Citation"
+          minItems: 0
+          maxItems: 100
+    PlanPatchRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - base_plan_version_id
+        - capacity_revision
+        - goal_revision
+        - evidence_revision
+        - requested_total_minutes
+        - reason
+      properties:
+        base_plan_version_id:
+          type: string
+          format: uuid
+        capacity_revision:
+          type: integer
+          minimum: 1
+        goal_revision:
+          type: integer
+          minimum: 1
+        evidence_revision:
+          type: integer
+          minimum: 1
+        requested_total_minutes:
+          type: integer
+          minimum: 0
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 512
+    PlanTask:
+      type: object
+      additionalProperties: false
+      required:
+        - occurrence_key
+        - estimated_minutes
+        - goal_ids
+        - completed
+      properties:
+        occurrence_key:
+          type: string
+          format: uuid
+        estimated_minutes:
+          type: integer
+          minimum: 1
+        goal_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        completed:
+          type: boolean
+    PlanPatch:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - base_plan_version_id
+        - capacity_revision
+        - goal_revision
+        - evidence_revision
+        - state
+        - tasks
+        - total_minutes
+        - conflicts
+      properties:
+        id:
+          type: string
+          format: uuid
+        base_plan_version_id:
+          type: string
+          format: uuid
+        capacity_revision:
+          type: integer
+          minimum: 1
+        goal_revision:
+          type: integer
+          minimum: 1
+        evidence_revision:
+          type: integer
+          minimum: 1
+        state:
+          type: string
+          enum:
+            - proposed
+            - confirmed
+            - rejected
+            - invalidated
+        tasks:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlanTask"
+          minItems: 0
+          maxItems: 1000
+        total_minutes:
+          type: integer
+          minimum: 0
+        conflicts:
+          type: array
+          items:
+            type: string
+            enum:
+              - capacity
+              - source
+              - version
+              - completed_task
+          minItems: 0
+          maxItems: 4
+          uniqueItems: true
+    PlanVersion:
+      type: object
+      additionalProperties: false
+      required:
+        - plan_id
+        - version_id
+        - revision
+        - tasks
+        - total_minutes
+      properties:
+        plan_id:
+          type: string
+          format: uuid
+        version_id:
+          type: string
+          format: uuid
+        revision:
+          type: integer
+          minimum: 1
+        tasks:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlanTask"
+          minItems: 0
+          maxItems: 1000
+        total_minutes:
+          type: integer
+          minimum: 0
+    ConfirmPlanRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - patch_id
+      properties:
+        patch_id:
+          type: string
+          format: uuid
+    RevertPlanRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - target_plan_version_id
+      properties:
+        target_plan_version_id:
+          type: string
+          format: uuid
+    ExportRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - resources
+        - format
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: "#/components/schemas/VersionRef"
+          minItems: 1
+          maxItems: 100
+          uniqueItems: true
+        format:
+          type: string
+          enum:
+            - zip
+    DocumentList:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+        - next_cursor
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Document"
+          minItems: 0
+          maxItems: 100
+        next_cursor:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 512
+            - type: "null"
+    PageResultList:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+        - next_cursor
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageResult"
+          minItems: 0
+          maxItems: 100
+        next_cursor:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 512
+            - type: "null"
+    JobList:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+        - next_cursor
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Job"
+          minItems: 0
+          maxItems: 100
+        next_cursor:
+          oneOf:
+            - type: string
+              minLength: 1
+              maxLength: 512
+            - type: "null"
+    Explanation:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - version_id
+        - text
+        - citations
+        - quality_state
+      properties:
+        id:
+          type: string
+          format: uuid
+        version_id:
+          type: string
+          format: uuid
+        text:
+          type: string
+          minLength: 1
+          maxLength: 40000
+        citations:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: "#/components/schemas/Citation"
+        quality_state:
+          type: string
+          enum:
+            - candidate
+            - validated_practice

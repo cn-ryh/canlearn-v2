@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-10-14",
+  "runs": [
+    {
+      "tier": "basic",
+      "fixture_id": "reading",
+      "fixture_sha256": "8aed38dd30880ac84a6dbe51a3f542b1dc1358fcf1e3dd517b81ef2779a25a0a",
+      "outputs": [
+        {
+          "format": "markdown",
+          "bytes": 446,
+          "sha256": "1351816287379930141e4151113ce7b7296de424c7b7e93853a019c2e31b036b",
+          "source_output_file_id": "file-2d13c1740ee9371f26dfb225"
+        },
+        {
+          "format": "middle_json",
+          "bytes": 2582,
+          "sha256": "5bf8fee72ca9bd7af0be83fd2c2e4aa613c0758583c30c5a0277dd022fbc0aef",
+          "source_output_file_id": "file-8b4a2dd2a7c5e34c1aa32af4"
+        },
+        {
+          "format": "structured_content",
+          "bytes": 2183,
+          "sha256": "9434810d3716612e944018a1c392e985f5bf95e32e0816b56e43f90cc9b52e95",
+          "source_output_file_id": "file-c147e006437c07f5c0f6641b"
+        }
+      ],
+      "scope": "actual V1 downloaded bytes; Basic via CanLearn Job; Flash direct client only; no quality comparison"
+    },
+    {
+      "tier": "flash",
+      "fixture_id": "reading",
+      "fixture_sha256": "8aed38dd30880ac84a6dbe51a3f542b1dc1358fcf1e3dd517b81ef2779a25a0a",
+      "outputs": [
+        {
+          "format": "middle_json",
+          "bytes": 2810,
+          "sha256": "cd0c419ec909a99cd0dfc7e1260c66f0c79d7ec45383d2f3a2b64b0a354a95a3",
+          "source_output_file_id": "file-2b17425b52aeda60a22c2b1e"
+        },
+        {
+          "format": "structured_content",
+          "bytes": 2325,
+          "sha256": "75b1dfca6f0d21d60a326738ab11fe25befcb7ac025051f2054de37c43285a63",
+          "source_output_file_id": "file-e306af586dcb485555442e5f"
+        },
+        {
+          "format": "markdown",
+          "bytes": 446,
+          "sha256": "1351816287379930141e4151113ce7b7296de424c7b7e93853a019c2e31b036b",
+          "source_output_file_id": "file-e318e34c6709ab2aa7ebf81a"
+        }
+      ],
+      "scope": "actual V1 downloaded bytes; Basic via CanLearn Job; Flash direct client only; no quality comparison"
+    }
+  ]
+}

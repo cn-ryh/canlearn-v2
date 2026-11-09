@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-14T12:43:44.472Z",
+  "scope": "disposable PostgreSQL; synthetic legacy rows; no production rollback",
+  "passed": 7,
+  "checks": [
+    "fresh database applies all committed migrations",
+    "0000 to current upgrade preserves the complete legacy Job row",
+    "legacy writer and reader remain compatible after expansion",
+    "repeated migration is a no-op for schema and migration journal",
+    "fresh and upgraded database schemas converge",
+    "real PostgreSQL foreign key rejects orphan synthetic metadata",
+    "incompatible NOT NULL migration fails and rolls back DDL/data/journal"
+  ]
+}

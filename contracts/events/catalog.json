@@ -1,0 +1,30 @@
+{
+  "contract_version": 1,
+  "implementation_status": "planned",
+  "events": [
+    {
+      "event_type": "job.accepted.v1",
+      "schema_version": 1,
+      "implementation_status": "planned",
+      "schema_file": "v1/job.accepted.v1.schema.json"
+    },
+    {
+      "event_type": "job.finalized.v1",
+      "schema_version": 1,
+      "implementation_status": "planned",
+      "schema_file": "v1/job.finalized.v1.schema.json"
+    },
+    {
+      "event_type": "job.cancel_requested.v1",
+      "schema_version": 1,
+      "implementation_status": "planned",
+      "schema_file": "v1/job.cancel_requested.v1.schema.json"
+    },
+    {
+      "event_type": "resource.invalidated.v1",
+      "schema_version": 1,
+      "implementation_status": "planned",
+      "schema_file": "v1/resource.invalidated.v1.schema.json"
+    }
+  ]
+}

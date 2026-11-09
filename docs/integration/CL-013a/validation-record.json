@@ -1,0 +1,105 @@
+{
+  "recorded_on": "2026-10-14",
+  "code_commit": "bfde0f13f7f490dadd13c3ffc2155d011fe800bc",
+  "scope": "CL-013a real local Web/API/PostgreSQL/Temporal with fixed synthetic activity; no production authorization, document parsing or paid provider execution",
+  "commands": [
+    {
+      "command": "pnpm verify",
+      "exit_code": 0,
+      "api_tests": 138,
+      "web_tests": 9,
+      "python_tests": 43,
+      "openapi_documents": 2,
+      "builds": ["api", "web"]
+    },
+    {
+      "command": "python3 scripts/smoke_runtime.py test --skip-build",
+      "exit_code": 0,
+      "checks": 31,
+      "fresh_isolated_volume": true,
+      "includes_stop_start": true
+    },
+    {
+      "command": "node scripts/smoke_browser.cjs (external Playwright 1.56.1)",
+      "exit_code": 0,
+      "checks": 7
+    }
+  ],
+  "images": [
+    {
+      "image": "jjs7iczbx3i38wpthb.xuanyuan.run/library/postgres:17-alpine",
+      "observed_digest": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24"
+    },
+    {
+      "image": "jjs7iczbx3i38wpthb.xuanyuan.run/temporalio/auto-setup:1.29.7",
+      "observed_digest": "sha256:f14912b699cf73015ad5c4fc18d522d4b014db90e794039214dfb7c022c2644f"
+    },
+    {
+      "image": "jjs7iczbx3i38wpthb.xuanyuan.run/temporalio/ui:2.54.1",
+      "observed_digest": "sha256:ff0943fe532b8e33c46cd28b29e81e0ce0b6f55b9ee50a38ef1b437cc4de3fa5"
+    }
+  ],
+  "source_sha256": {
+    ".env.example": "40c40ccad183f35c7783994de9f661a87f87c52fa92e85c90a0c2fea5ebd30a3",
+    ".github/workflows/ci.yml": "3eb80bf97b4369cfafb1b175bda7dd18a21a9865fc5a0d2a4badbd9a1095489f",
+    "apps/api/drizzle/0001_sweet_nicolaos.sql": "0ba7283bc7dc74ac7128b7f2e00f2dafa437ac2e349430d489ef6f7b881632d3",
+    "apps/api/drizzle/meta/0001_snapshot.json": "5503926090aefca04de592844d57661a58ab9ff4e2389286cb0dbfa6e0d83078",
+    "apps/api/drizzle/meta/_journal.json": "bebdecb58217dd029a13d3a1e9f49210e3332ef85904ccc36fe08f495095f16c",
+    "apps/api/src/app.module.ts": "2f191465160df92f614b2b8d3ac3dab86d346999d9c057d39c5f3d242af11711",
+    "apps/api/src/application.ts": "a5fef314c8e06db9a52dabf4393db8d68232c9bbc2f51a3f3b5167daab056526",
+    "apps/api/src/contracts/events.contract.test.ts": "90ac6dbc29ffbd06a970cb89c7ada6c0295b476fce7487742a5f99bcf64b9128",
+    "apps/api/src/database/schema.ts": "5857f83307dd64ea3c3bcc14b761b3603702704c6d50d304482fe401ad37fc68",
+    "apps/api/src/health/health.contract.test.ts": "1fe1ec903e7cc19c5ea97bda2417fe5818f7e01344842bb1ad4d04adef5fa837",
+    "apps/api/src/main.ts": "7e5937544d474fba88df1f2f8e1a5d8a3392d5b2e98a2489d21d34def60a6a46",
+    "apps/api/src/smoke/smoke.contract.test.ts": "f3acc59ac731ac0cbd82fbf76ab0b811e8d55febb57d7996d5e7193e6f52a489",
+    "apps/api/src/smoke/smoke.controller.ts": "720894d02f76f57281e397e6b22f396e7d1283ba7c6d4b2e11f7f685dc24dcc0",
+    "apps/api/src/smoke/smoke.dto.ts": "067a4e3ef0e287bda77d36dc50dc61719e0f6a33371626c8547ed99307a8db6f",
+    "apps/api/src/smoke/smoke.fixture.ts": "c234543afdac80a63447b7f01963ff3072a91d6d71363db5643b7b846d3600b4",
+    "apps/api/src/smoke/smoke.guard.ts": "bb7e3196c50045934d53a8d19b9155a9f52c669fc8e7eba7ebf1d05001b7bb2f",
+    "apps/api/src/smoke/smoke.module.ts": "1667e0cd32bb5da437e06fd0ae7a2af5bee990f2c32807b1441b6aa37acf3ba2",
+    "apps/api/src/smoke/smoke.service.ts": "a5bfbde3ebd7ab12fd237f3149f5a243da8d0758f30cba519866f3d32aa0c894",
+    "apps/api/src/smoke/validate-events.ts": "3272f43ae90f7aea3b3f47246c9d4c6cf6a32cf5b82decc3573868146535f6b6",
+    "apps/web/src/app/api/smoke/[[...segments]]/route.ts": "6d7aab298c4ece72e8624bd5dfae80ad91f55374b05ba29be873e49fc95b16df",
+    "apps/web/src/app/smoke/page.tsx": "ddaefb99b6754a90ed5812b7e3bdfce04d9b0b59c1bb0eaf4af9862bb044694f",
+    "apps/web/src/app/smoke/smoke-panel.tsx": "1c217c56f1df331dee219404e51f1eebff8050626d78e05600a12ca47c8be1ad",
+    "apps/web/src/app/styles.css": "8b258fe040bd0252b8de39beef0a54122ab23c0b04059910ce86837e2e8c29df",
+    "apps/web/src/lib/smoke-proxy.test.ts": "8a58020a5efa5db8534452d681ecbaa4fa986947ea5a417f8be8b1905f9abbe9",
+    "apps/web/src/lib/smoke-proxy.ts": "36cbb3cf91c64c1ed69de4801ad39ab0427eb0d04b63a580bea9e0c8497c4fa5",
+    "apps/workflow/pyproject.toml": "6276b3491f9ca208e39f4ad2de5c130f2565c130dfd386ec924248ac71dde66a",
+    "apps/workflow/src/canlearn_workflow/settings.py": "264a2b79dea57da84aaf14bf25b9760d27d188f7785bea2ff90c79c142440d14",
+    "apps/workflow/src/canlearn_workflow/smoke.py": "67b75107848d0a38c73731f73f3572560c0b50e6d795a98d65277536a53e6618",
+    "apps/workflow/src/canlearn_workflow/smoke_dispatcher.py": "cecef0d9caa31cbf8db1a9b7914f07b0683ca82d579360fc5fd52c493bfcdbf3",
+    "apps/workflow/src/canlearn_workflow/worker.py": "27dbca386ae8c8963a97c852cb145e486e4f6f9e4b6b9d8ea9fc2a922b1bd4c7",
+    "apps/workflow/tests/test_smoke_activities.py": "867605730b59239d7d906451cfeb9fa1213443139de2eb9705eff998b6a215ff",
+    "biome.json": "cbd1ae7748e5f61885ca4a4d03882bb0f6df6bff2b234e710c81eb1a8d9030df",
+    "compose.smoke.yaml": "c9609c1c938da9c96c81dbcb4b7f3e7c11603664263c009052ff3d53ec381a59",
+    "compose.yaml": "616b71fa24da554de767ce11182f99a7d5d4f64f76a82f433da2c062b3fc537a",
+    "contracts/events/v1/job.accepted.v1.schema.json": "c88fd6c2dd77b740952643327ca1de0c9fdeb67f983d47e14c0fe30f33730dc1",
+    "contracts/events/v1/job.cancel_requested.v1.schema.json": "759b6df364c4ae048dfbccf94ea06ab3be1fe3cce7af969f6d4eab121320462a",
+    "contracts/events/v1/job.finalized.v1.schema.json": "634b591526e6ecfc66afdeb30d35bf5b3588881dcfc8174049cc4548596e1dd7",
+    "contracts/openapi/canlearn.smoke.v1.json": "7f4a1c5c38e041b59b0af9b5347727dd9c58481648245ad3bafb5c2fe8520934",
+    "package.json": "469b35444767d4ee4f36a2118f5bc6bd660dc85ea6e0c2e6d3747eb46ea829fe",
+    "scripts/smoke_browser.cjs": "24b8ce2cc34aa9aba628389090d983a92efde7936fc2d9867a644ad0883d3da4",
+    "scripts/smoke_integration.py": "921295326cbdc247b329da7ee4ea9e9da3241db4cdcc6996f8f2df4349640bba",
+    "scripts/smoke_runtime.py": "ba3fabfa3d2baeda24805472989043c78b474c52ca4f4eeb111aca4b22f95421"
+  },
+  "evidence_sha256": {
+    "integration-results.json": "30e837449e16f83dc75b12c54954b4809deb3d43a94e8fd23df57926f78a0639",
+    "screenshots/browser-results.json": "4373eec7d009792ab7d1a9819e1a409c163515200dd94063e22b2f513155d476",
+    "screenshots/success-desktop.png": "84dfeb1073f5268a1d7d1525f7f91d1ca30822006591e75850cdb1a5af797011",
+    "screenshots/partial-mobile.png": "838c3e020213e1515272ceff2abeb33216795af02e564fede6e68a6fbe49e496"
+  },
+  "external_model_mineru_gpu_cloud_calls": 0,
+  "cleanup": "Both integration runs exited 0; final run stopped its four managed host processes and removed its three Compose containers/network. Only the isolated synthetic volume and private runtime are retained.",
+  "remaining": [
+    "non-author/actual acceptance review",
+    "production identity/resource/rights admission and budgets",
+    "complete Inbox and production event transport",
+    "paid call/fee/GPU stop reconciliation",
+    "resource invalidation/deletion/physical cleanup/backup recovery",
+    "WAITING_REVIEW and manual content review",
+    "CL-013b/c comprehensive gates",
+    "CL-009 lawful external samples and real double annotation"
+  ],
+  "github_delivery": "PR #55 remains draft; current push and CI evidence are recorded separately after verification."
+}

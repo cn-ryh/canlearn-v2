@@ -1,0 +1,13 @@
+{
+  "passed": 2,
+  "checks": [
+    {
+      "name": "unauthenticated V1 upload rejected",
+      "status": 401
+    },
+    {
+      "name": "legacy file_parse absent",
+      "status": 404
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-13",
+  "scope": "Business-chain first run, explicit-schema control and optional local-rule audit; prior 95 calls excluded",
+  "sources": [
+    {
+      "file": "business-chain-results.json",
+      "sha256": "13e848f1a08be117189db8ce3abcb3d8d68910eb209f11533ec25c4065d4eff2",
+      "requests": 24,
+      "chains_accepted": 0,
+      "chains_attempted": 6,
+      "categories": {
+        "completed": 19,
+        "client_closed_after_first_text": 2,
+        "transport_outcome_unknown": 2,
+        "invalid_json": 1
+      },
+      "max_reported_output_tokens": 13480,
+      "chains": [
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "version_conflict",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 98.051
+        },
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "no_answer",
+          "raw_valid": true,
+          "fault_injected": false,
+          "repair_attempts": 0,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 94.066
+        },
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "batch48",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 160.198
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "version_conflict",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 216.977
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "no_answer",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 86.615
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "batch48",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": false,
+          "elapsed_seconds": 300.547
+        }
+      ]
+    },
+    {
+      "file": "business-contract-results.json",
+      "sha256": "9fda743f9fdf8849abb0bd6b2519a62d07ea740884bc94232b5f63a56737677a",
+      "requests": 20,
+      "chains_accepted": 6,
+      "chains_attempted": 6,
+      "categories": {
+        "completed": 18,
+        "invalid_json": 1,
+        "transport_outcome_unknown": 1
+      },
+      "max_reported_output_tokens": 6428,
+      "chains": [
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "version_conflict",
+          "raw_valid": true,
+          "fault_injected": true,
+          "repair_attempts": 1,
+          "initial_checker_agrees": true,
+          "accepted": true,
+          "elapsed_seconds": 40.259
+        },
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "no_answer",
+          "raw_valid": true,
+          "fault_injected": false,
+          "repair_attempts": 0,
+          "initial_checker_agrees": true,
+          "accepted": true,
+          "elapsed_seconds": 33.542
+        },
+        {
+          "generator": "deepseek-v4.1-flash",
+          "case": "batch48",
+          "raw_valid": true,
+          "fault_injected": false,
+          "repair_attempts": 0,
+          "initial_checker_agrees": true,
+          "accepted": true,
+          "elapsed_seconds": 32.71
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "version_conflict",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": true,
+          "elapsed_seconds": 71.015
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "no_answer",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": true,
+          "elapsed_seconds": 84.063
+        },
+        {
+          "generator": "step-5-preview",
+          "case": "batch48",
+          "raw_valid": false,
+          "fault_injected": false,
+          "repair_attempts": 1,
+          "initial_checker_agrees": false,
+          "accepted": true,
+          "elapsed_seconds": 245.835
+        }
+      ]
+    },
+    {
+      "file": "business-gate-results.json",
+      "sha256": "f58fae5b024f2b072a85cf2e5cdef9ebcf12f9536074dbe5bbc21f1654f5609a",
+      "requests": 2,
+      "chains_accepted": 1,
+      "chains_attempted": 1,
+      "categories": {
+        "completed": 2
+      },
+      "max_reported_output_tokens": 1531,
+      "chains": [
+        {
+          "generator": "step-5-preview",
+          "case": "version_conflict",
+          "raw_valid": true,
+          "fault_injected": false,
+          "repair_attempts": 0,
+          "initial_checker_agrees": true,
+          "accepted": true,
+          "elapsed_seconds": 35.976
+        }
+      ]
+    }
+  ],
+  "request_count": 46,
+  "requests_without_usable_usage": 5,
+  "reported_total_tokens": 169372,
+  "groups": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "requests": 23,
+      "requests_with_valid_usage": 22,
+      "requests_without_usable_usage": 1,
+      "reported_tokens": 111610,
+      "cached_input_tokens": 384,
+      "cached_tokens_without_quote": 384,
+      "known_priced_components_CNY": "0.07686208",
+      "scenario_unknown_cache_as_normal_input_CNY": "0.07695808"
+    },
+    {
+      "model": "step-5-preview",
+      "requests": 23,
+      "requests_with_valid_usage": 19,
+      "requests_without_usable_usage": 4,
+      "reported_tokens": 57762,
+      "cached_input_tokens": 1024,
+      "cached_tokens_without_quote": 0,
+      "known_priced_components_CNY": "0.14529256",
+      "scenario_unknown_cache_as_normal_input_CNY": "0.14529256"
+    }
+  ],
+  "known_priced_components_CNY": "0.22215464",
+  "scenario_unknown_cache_as_normal_input_CNY": "0.22225064",
+  "actual_total_charge": null,
+  "billing_verified": false,
+  "quoted_rates_sha256": "6ef3d33107a328558f38fdccfb267d7928879ecfa4121a0fac3a9bc906cc1581",
+  "summary_script_sha256": "11bbdccc9bfbefa2e17e0cc1bce7cf845936f903415ac0ad3a2268318cff449b",
+  "combined_reservation_scenario_CNY": "2.15100411",
+  "reservation_budget_scenario_CNY": "5.00"
+}

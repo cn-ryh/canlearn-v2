@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-14",
+  "mineru_source_commit": "175f031cbcded6b527ddb2045ccec460ffecfa26",
+  "docvortex_source_commit": "fb59f89dcb4f76dd1adbb3c84bd8dfd51a982c16",
+  "model_revision": "2b3afb86f4d23fa623f6b2f4b2279ed4ef93a89d",
+  "source_files": [
+    {
+      "path": "LICENSE.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/LICENSE.md",
+      "sha256": "2d9aeb5d15159329a20dd804f251c64860ba954fbd26ec02f802220e6d71cf5c"
+    },
+    {
+      "path": "docs/en/usage/http_api.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/docs/en/usage/http_api.md",
+      "sha256": "15a16496a3a8489c9b8e74f9c66732a6c7a13a67db88cd4e1262cff428d545e1"
+    },
+    {
+      "path": "docs/next/api/health-models.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/docs/next/api/health-models.md",
+      "sha256": "22bb9118c0b57e0357ab29fb8a05e806e51e6dd94f2855c2481978232dce2f5e"
+    },
+    {
+      "path": "docs/next/api/parse-jobs.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/docs/next/api/parse-jobs.md",
+      "sha256": "42a56a2c4c916e392d1992d67fb0d11b33eb2ab478cae3e66e4ec1aa24cdefd4"
+    },
+    {
+      "path": "docs/next/api/uploads-files.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/docs/next/api/uploads-files.md",
+      "sha256": "6331081ded4f663b5a4c918956ce0ccbf0577ddd75f6ea949c31279d8d346ef5"
+    },
+    {
+      "path": "docs/next/cli/mineru-kit-api-server.md",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/docs/next/cli/mineru-kit-api-server.md",
+      "sha256": "746fa389fca5edb9b2c8e55e6453b4c455a2b26c7138b7837f40d7d40b11c019"
+    },
+    {
+      "path": "mineru/kit/commands/api_server.py",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/mineru/kit/commands/api_server.py",
+      "sha256": "396c164a6df4d35d543a9b74c2cb5379182a27dc17949b6b79fdeeab19f72810"
+    },
+    {
+      "path": "mineru/parser/api_client.py",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/mineru/parser/api_client.py",
+      "sha256": "afc9c6a4dd08635ada918adaea8fc6c5a340116815e6014eaad281b0183d3b62"
+    },
+    {
+      "path": "mineru/parser/api_server.py",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/mineru/parser/api_server.py",
+      "sha256": "333b94786cd651cce6bed0dbbca0874ad80a8e960719a95f805bacb572d410fa"
+    },
+    {
+      "path": "pyproject.toml",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/pyproject.toml",
+      "sha256": "c1e4e1bbf2cf6d6450b7d25aeefdc490f4be35b3f8611d8812e56ce031351959"
+    },
+    {
+      "path": "tests/unittest/test_http_api_example_script.py",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/tests/unittest/test_http_api_example_script.py",
+      "sha256": "f19bcea3d8506b5f6558e5cead48f2d9c2fdc5939d9040c7f0e87bdcecd52c1c"
+    },
+    {
+      "path": "tests/unittest/test_v1_router.py",
+      "source_url": "https://raw.githubusercontent.com/opendatalab/MinerU/175f031cbcded6b527ddb2045ccec460ffecfa26/tests/unittest/test_v1_router.py",
+      "sha256": "5368b500237d94a8fd281c8fb70c73d22f36e53bb589a4b370e416be26c863a8"
+    }
+  ],
+  "container_image_selected": false,
+  "rights_owner_signoff": false
+}

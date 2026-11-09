@@ -1,0 +1,38 @@
+{
+  "scope": "reconstructed request-shape example from the executed client and archived genuine Basic preflight response; not packet capture; Authorization omitted",
+  "upload": {
+    "method": "POST",
+    "path": "/v1/uploads",
+    "body": {
+      "filename": "D03-reading-v1.pdf",
+      "bytes": 7952,
+      "mime_type": "application/pdf",
+      "purpose": "parse",
+      "sha256sum": "8aed38dd30880ac84a6dbe51a3f542b1dc1358fcf1e3dd517b81ef2779a25a0a"
+    }
+  },
+  "create": {
+    "method": "POST",
+    "path": "/v1/parse/jobs",
+    "expected_status": 202,
+    "body": {
+      "files": [
+        {
+          "source": {
+            "type": "file_id",
+            "file_id": "file-533c4418913b1c84f5ad3a8d"
+          },
+          "page_range": "1-2"
+        }
+      ],
+      "tier": "basic",
+      "ocr_mode": "auto",
+      "output_formats": ["markdown", "middle_json", "structured_content"]
+    }
+  },
+  "poll": {
+    "method": "GET",
+    "path": "/v1/parse/jobs/job_9505884c360525ff221dd84c"
+  },
+  "response_file": "basic-response.json"
+}

@@ -58,3 +58,63 @@ li + li {
   font-family: ui-monospace, monospace;
   font-size: 0.85rem;
 }
+
+.smoke-page {
+  padding: 4rem 0;
+}
+.smoke-page h1 {
+  max-width: none;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1.15;
+}
+.smoke-controls label {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+}
+.smoke-controls input,
+.smoke-controls select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #b9cdd4;
+  border-radius: 8px;
+  font: inherit;
+}
+.smoke-actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.smoke-actions button {
+  background: #147d86;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  padding: 0.8rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+.smoke-actions button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.smoke-facts dt {
+  color: #526a78;
+  margin-top: 0.8rem;
+}
+.smoke-facts dd {
+  margin: 0.25rem 0;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+.smoke-status {
+  font-weight: 700;
+  color: #147d86;
+}
+.smoke-error {
+  color: #922c2c;
+  background: #fff0f0;
+  border-radius: 8px;
+  padding: 1rem;
+}

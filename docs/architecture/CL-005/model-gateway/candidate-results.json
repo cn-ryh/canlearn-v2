@@ -1,0 +1,3176 @@
+{
+  "date": "2026-10-13",
+  "started_at": "2026-10-13T21:22:05.664551+08:00",
+  "scope": "Additional aliases; same frozen synthetic fixture, SDK, 16K output cap and streaming criteria; two nonstream probes per model",
+  "openai": "2.54.0",
+  "seed": 5005,
+  "max_requests": 40,
+  "scripts": {
+    "candidate_probe.py": "1a2cc06fac9cdc4caf2a7eb33bb0b1d580e058e14fce475e33acbc424120c25a",
+    "parameter_probe.py": "104b112aa744e72808fda19ea0681668dcde31db5e923ebe01fc48cebfd32ef2",
+    "responses_probe.py": "be37d4babd66e7d7ee07e02cfe2d6da10eee383975b36786f70daa3d3b2a497b"
+  },
+  "prompt_sha256": "f3de046b02818f1a821fd00eb2154db09ce0e528c80fb3cd5d473e834196e19d",
+  "output_cap": 16384,
+  "max_retries": 0,
+  "timeout_seconds": 60,
+  "stream_deadline_seconds": 120,
+  "runs": [
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 103,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 8.161,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 344,
+        "total_tokens": 528,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 8.726,
+      "estimated_cost": "0.0015968",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 127,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 9,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.078,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 484,
+        "total_tokens": 823,
+        "cached_tokens": 128,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 119,
+      "delta_matches_final_text": true,
+      "text_sha256": "a50d1d59cae83c5d3bf1eefae0ea0bf5adc565fc3e105b15d54cedcabf651c4a",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.412,
+      "estimated_cost": "0.00309112",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 90,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 13,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.892,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 311,
+        "total_tokens": 505,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 6.564,
+      "estimated_cost": "0.0014768",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 112,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.515,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 452,
+        "total_tokens": 791,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 109,
+      "delta_matches_final_text": true,
+      "text_sha256": "fc59a4c700588c818a4329eecfd2faa3f5a6f6d91c2baf3ae1b7b331105401a7",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.037,
+      "estimated_cost": "0.00270392",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 93,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 7,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.16,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 359,
+        "total_tokens": 698,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 109,
+      "delta_matches_final_text": true,
+      "text_sha256": "fc59a4c700588c818a4329eecfd2faa3f5a6f6d91c2baf3ae1b7b331105401a7",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.532,
+      "estimated_cost": "0.00216452",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 83,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.268,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 248,
+        "total_tokens": 432,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.939,
+      "estimated_cost": "0.0012128",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 130,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 13,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 9.588,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 480,
+        "total_tokens": 664,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 10.263,
+      "estimated_cost": "0.0021408",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 85,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.301,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 292,
+        "total_tokens": 486,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.876,
+      "estimated_cost": "0.0014008",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 167,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.915,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 648,
+        "total_tokens": 987,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "fb2580defb1e8cd65202c570c13724429a388c1d45483589dd31d989c8aadd45",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.213,
+      "estimated_cost": "0.00384072",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 75,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.099,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 242,
+        "total_tokens": 436,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.613,
+      "estimated_cost": "0.0012008",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 86,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.465,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 365,
+        "total_tokens": 704,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "fb2580defb1e8cd65202c570c13724429a388c1d45483589dd31d989c8aadd45",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.724,
+      "estimated_cost": "0.00219932",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 85,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 6.949,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 279,
+        "total_tokens": 473,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 7.538,
+      "estimated_cost": "0.0013488",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 99,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 13,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 10.03,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 302,
+        "total_tokens": 496,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 10.585,
+      "estimated_cost": "0.0014408",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 69,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 2.415,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 287,
+        "total_tokens": 626,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "050dd1ac868c52788ca309302e0464afe5db69b9523bf77ce9f77ee4cb11f974",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 2.794,
+      "estimated_cost": "0.00174692",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 82,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 2.701,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 358,
+        "total_tokens": 697,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "fb2580defb1e8cd65202c570c13724429a388c1d45483589dd31d989c8aadd45",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.179,
+      "estimated_cost": "0.00215872",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 163,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 10,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.599,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 679,
+        "total_tokens": 1018,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.133,
+      "estimated_cost": "0.00402052",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 77,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 10,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 2.765,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 325,
+        "total_tokens": 664,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 123,
+      "delta_matches_final_text": true,
+      "text_sha256": "15d0bb7b647d4ddd57e751c57e1cdfb920fe44263f94ebec481e689494bd60e2",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.185,
+      "estimated_cost": "0.00196732",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 85,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 7.984,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 294,
+        "total_tokens": 488,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 8.452,
+      "estimated_cost": "0.0014088",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 103,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 2.943,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 443,
+        "total_tokens": 782,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "050dd1ac868c52788ca309302e0464afe5db69b9523bf77ce9f77ee4cb11f974",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.231,
+      "estimated_cost": "0.00265172",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 109,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 7.536,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 339,
+        "total_tokens": 533,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 8.14,
+      "estimated_cost": "0.0015888",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 99,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 8.305,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 300,
+        "total_tokens": 494,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 8.94,
+      "estimated_cost": "0.0014328",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 78,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.627,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 225,
+        "total_tokens": 419,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 6.278,
+      "estimated_cost": "0.0011328",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 76,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 13,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.82,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 241,
+        "total_tokens": 435,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.448,
+      "estimated_cost": "0.0011968",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 126,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 8.943,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 447,
+        "total_tokens": 631,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 9.585,
+      "estimated_cost": "0.0020088",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 74,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 11,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 6.697,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 228,
+        "total_tokens": 422,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 7.34,
+      "estimated_cost": "0.0011448",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 80,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 5.139,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 253,
+        "total_tokens": 447,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 5.723,
+      "estimated_cost": "0.0012448",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 143,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 6.866,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 530,
+        "total_tokens": 869,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 115,
+      "delta_matches_final_text": true,
+      "text_sha256": "9cc108351dcc9891da7e1bb3b1e735d9a14d31d8eda3f6b7d4f175d6fbad486d",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 7.157,
+      "estimated_cost": "0.00315632",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 132,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.146,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 506,
+        "total_tokens": 845,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "050dd1ac868c52788ca309302e0464afe5db69b9523bf77ce9f77ee4cb11f974",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.555,
+      "estimated_cost": "0.00301712",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "medium",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 160,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 7,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.31,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 606,
+        "total_tokens": 945,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 109,
+      "delta_matches_final_text": true,
+      "text_sha256": "fc59a4c700588c818a4329eecfd2faa3f5a6f6d91c2baf3ae1b7b331105401a7",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.689,
+      "estimated_cost": "0.00359712",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 114,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 10,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 4.756,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 467,
+        "total_tokens": 806,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 119,
+      "delta_matches_final_text": true,
+      "text_sha256": "a50d1d59cae83c5d3bf1eefae0ea0bf5adc565fc3e105b15d54cedcabf651c4a",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 5.154,
+      "estimated_cost": "0.00279092",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 95,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 9,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.175,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 367,
+        "total_tokens": 706,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "050dd1ac868c52788ca309302e0464afe5db69b9523bf77ce9f77ee4cb11f974",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.722,
+      "estimated_cost": "0.00221092",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "high",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 210,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 22.654,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 571,
+        "total_tokens": 755,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 23.319,
+      "estimated_cost": "0.0025048",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "high",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 71,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 12,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 7.894,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 225,
+        "total_tokens": 409,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": true,
+      "synthetic_answer_valid": true,
+      "final_text_characters": 126,
+      "delta_matches_final_text": true,
+      "text_sha256": "3c8421a13532390149311616baadb7afab46a84d92f7bcaf8c33cea899cdfc61",
+      "validated_synthetic_answer": {
+        "total_pages": 44,
+        "generated_questions": 132,
+        "eligible_questions": 123,
+        "minimum_days": 9,
+        "source_ids": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "candidate_available": true,
+      "category": "completed_candidate",
+      "elapsed_seconds": 8.394,
+      "estimated_cost": "0.0011208",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "medium",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 79,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 10,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.761,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 338,
+        "total_tokens": 677,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 119,
+      "delta_matches_final_text": true,
+      "text_sha256": "bdb5a722ecc8ed06e25ad039c65a16a61cd27b523f3dc0dd458e6e26292c0f64",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 4.51,
+      "estimated_cost": "0.00204272",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 108,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.303,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 423,
+        "total_tokens": 762,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 111,
+      "delta_matches_final_text": true,
+      "text_sha256": "050dd1ac868c52788ca309302e0464afe5db69b9523bf77ce9f77ee4cb11f974",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.677,
+      "estimated_cost": "0.00253572",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "low",
+      "repeat": 2,
+      "stream": true,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {
+        "response.created": 1,
+        "response.output_item.added": 2,
+        "response.reasoning_summary_part.added": 1,
+        "response.reasoning_summary_text.delta": 74,
+        "response.reasoning_summary_text.done": 1,
+        "response.reasoning_summary_part.done": 1,
+        "response.output_item.done": 2,
+        "response.content_part.added": 1,
+        "response.output_text.delta": 8,
+        "response.output_text.done": 1,
+        "response.content_part.done": 1,
+        "response.completed": 1
+      },
+      "first_text_seconds": 3.129,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 2,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "completed",
+            "content_types": null
+          },
+          {
+            "type": "message",
+            "role": "assistant",
+            "status": "completed",
+            "content_types": ["output_text"]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 308,
+        "total_tokens": 647,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 4,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 113,
+      "delta_matches_final_text": true,
+      "text_sha256": "7e5e271cc72e839f276a83c5bc2dc0b11bf7c1175bd736195fd0d20f71e9374c",
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "synthetic_format_or_answer_failure",
+      "elapsed_seconds": 3.636,
+      "estimated_cost": "0.00186872",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": false,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {},
+      "first_text_seconds": null,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 848,
+        "total_tokens": 1187,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 0,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 0,
+      "delta_matches_final_text": true,
+      "text_sha256": null,
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "no_final_text",
+      "elapsed_seconds": 7.198,
+      "estimated_cost": "0.00500072",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": false,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {},
+      "first_text_seconds": null,
+      "status": "completed",
+      "response_model": "minimax-m3",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 339,
+        "output_tokens": 267,
+        "total_tokens": 606,
+        "cached_tokens": 338,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 0,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 0,
+      "delta_matches_final_text": true,
+      "text_sha256": null,
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "no_final_text",
+      "elapsed_seconds": 2.908,
+      "estimated_cost": "0.00163092",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "low",
+      "repeat": 1,
+      "stream": false,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {},
+      "first_text_seconds": null,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 299,
+        "total_tokens": 493,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 0,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 0,
+      "delta_matches_final_text": true,
+      "text_sha256": null,
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "no_final_text",
+      "elapsed_seconds": 6.065,
+      "estimated_cost": "0.0014288",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "high",
+      "repeat": 1,
+      "stream": false,
+      "max_output_tokens": 16384,
+      "automatic_retries": 0,
+      "real_data_enabled": false,
+      "http_status": 200,
+      "event_counts": {},
+      "first_text_seconds": null,
+      "status": "completed",
+      "response_model": "step-5-preview",
+      "output_shape": {
+        "output_array": true,
+        "output_items": 1,
+        "items": [
+          {
+            "type": "reasoning",
+            "role": "absent_or_other",
+            "status": "absent_or_other",
+            "content_types": null
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 352,
+        "total_tokens": 536,
+        "cached_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "temperature_echo": null,
+      "effort_echo": null,
+      "max_output_tokens_echo": null,
+      "numeric_score_out_of_4": 0,
+      "source_ids_valid": false,
+      "synthetic_answer_valid": false,
+      "final_text_characters": 0,
+      "delta_matches_final_text": true,
+      "text_sha256": null,
+      "validated_synthetic_answer": null,
+      "candidate_available": false,
+      "category": "no_final_text",
+      "elapsed_seconds": 7.865,
+      "estimated_cost": "0.0016288",
+      "cost_state": "estimated_from_quote",
+      "currency": "CNY",
+      "billing_verified": false,
+      "price_evidence": "user-quote-2026-10-13-per-million-as-prior-quotes"
+    }
+  ],
+  "complete": true,
+  "real_data_enabled": false,
+  "upstream_parameter_application_verified": false,
+  "finished_at": "2026-10-13T21:26:17.218042+08:00",
+  "summary": [
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 3.821,
+      "output_tokens": [484, 443],
+      "first_text_median_seconds": 3.511
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 5.833,
+      "output_tokens": [530, 338],
+      "first_text_median_seconds": 5.313
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.0,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 3.87,
+      "output_tokens": [325, 506],
+      "first_text_median_seconds": 3.455
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 3.608,
+      "output_tokens": [452, 358],
+      "first_text_median_seconds": 3.108
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 4.111,
+      "output_tokens": [359, 606],
+      "first_text_median_seconds": 3.735
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 0.7,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 4.439,
+      "output_tokens": [365, 467],
+      "first_text_median_seconds": 4.111
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 3.657,
+      "output_tokens": [423, 308],
+      "first_text_median_seconds": 3.216
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 0,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 0,
+      "elapsed_median_seconds": 3.968,
+      "output_tokens": [648, 367],
+      "first_text_median_seconds": 3.545
+    },
+    {
+      "model": "minimax-m3",
+      "temperature": 1.0,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 1,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 1,
+      "elapsed_median_seconds": 3.963,
+      "output_tokens": [287, 679],
+      "first_text_median_seconds": 3.507
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 7.209,
+      "output_tokens": [339, 225],
+      "first_text_median_seconds": 6.582
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 6.22,
+      "output_tokens": [311, 292],
+      "first_text_median_seconds": 5.597
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.0,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 7.762,
+      "output_tokens": [248, 447],
+      "first_text_median_seconds": 7.105
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 7.194,
+      "output_tokens": [300, 241],
+      "first_text_median_seconds": 6.562
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 6.531,
+      "output_tokens": [228, 253],
+      "first_text_median_seconds": 5.918
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 0.7,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 16.023,
+      "output_tokens": [344, 571],
+      "first_text_median_seconds": 15.407
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "low",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 8.099,
+      "output_tokens": [242, 302],
+      "first_text_median_seconds": 7.564
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "medium",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 7.995,
+      "output_tokens": [279, 294],
+      "first_text_median_seconds": 7.466
+    },
+    {
+      "model": "step-5-preview",
+      "temperature": 1.0,
+      "effort": "high",
+      "attempts": 2,
+      "accepted": 2,
+      "four_numbers_correct": 2,
+      "source_ids_valid": 2,
+      "elapsed_median_seconds": 9.329,
+      "output_tokens": [480, 225],
+      "first_text_median_seconds": 8.741
+    }
+  ],
+  "by_effort": [
+    {
+      "model": "minimax-m3",
+      "effort": "low",
+      "accepted": 0,
+      "attempts": 6,
+      "elapsed_median_seconds": 3.657,
+      "output_tokens_median": 433.0
+    },
+    {
+      "model": "minimax-m3",
+      "effort": "medium",
+      "accepted": 0,
+      "attempts": 6,
+      "elapsed_median_seconds": 4.361,
+      "output_tokens_median": 448.5
+    },
+    {
+      "model": "minimax-m3",
+      "effort": "high",
+      "accepted": 1,
+      "attempts": 6,
+      "elapsed_median_seconds": 4.139,
+      "output_tokens_median": 416.0
+    },
+    {
+      "model": "step-5-preview",
+      "effort": "low",
+      "accepted": 6,
+      "attempts": 6,
+      "elapsed_median_seconds": 7.209,
+      "output_tokens_median": 271.0
+    },
+    {
+      "model": "step-5-preview",
+      "effort": "medium",
+      "accepted": 6,
+      "attempts": 6,
+      "elapsed_median_seconds": 6.952,
+      "output_tokens_median": 285.5
+    },
+    {
+      "model": "step-5-preview",
+      "effort": "high",
+      "accepted": 6,
+      "attempts": 6,
+      "elapsed_median_seconds": 9.155,
+      "output_tokens_median": 395.5
+    }
+  ],
+  "parameters_echoed": {
+    "temperature_echo": false,
+    "effort_echo": false,
+    "max_output_tokens_echo": false
+  },
+  "quoted_rates_sha256": "6ef3d33107a328558f38fdccfb267d7928879ecfa4121a0fac3a9bc906cc1581"
+}

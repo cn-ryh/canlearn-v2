@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-14",
+  "total": 54,
+  "open": 50,
+  "closed": 4,
+  "needs_review": 23,
+  "blocked": 4,
+  "selected": [
+    {
+      "number": 9,
+      "state": "open",
+      "labels": ["area:quality", "phase:R0", "priority:P0", "status:blocked"]
+    },
+    {
+      "number": 10,
+      "state": "open",
+      "labels": ["area:workflow", "phase:R0", "priority:P0", "status:in-progress"]
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "labels": ["area:platform", "phase:R0", "priority:P0", "status:needs-review"]
+    },
+    {
+      "number": 39,
+      "state": "open",
+      "labels": ["area:quality", "phase:R0", "priority:P0", "status:blocked"]
+    },
+    {
+      "number": 40,
+      "state": "open",
+      "labels": ["area:quality", "phase:R0", "priority:P0", "status:blocked"]
+    },
+    {
+      "number": 41,
+      "state": "open",
+      "labels": ["area:quality", "phase:R0", "priority:P0", "status:blocked"]
+    },
+    {
+      "number": 42,
+      "state": "open",
+      "labels": ["area:workflow", "phase:R0", "priority:P0", "status:needs-review"]
+    },
+    {
+      "number": 43,
+      "state": "open",
+      "labels": ["area:workflow", "phase:R0", "priority:P0", "status:needs-review"]
+    },
+    {
+      "number": 44,
+      "state": "open",
+      "labels": ["area:workflow", "phase:R0", "priority:P0"]
+    },
+    {
+      "number": 50,
+      "state": "open",
+      "labels": ["area:platform", "phase:R0", "priority:P0", "status:needs-review"]
+    },
+    {
+      "number": 51,
+      "state": "open",
+      "labels": ["area:platform", "phase:R0", "priority:P0", "status:needs-review"]
+    },
+    {
+      "number": 52,
+      "state": "open",
+      "labels": ["area:platform", "phase:R0", "priority:P0", "status:needs-review"]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "package": "mineru",
+    "version": "4.0.7",
+    "path": "mineru-4.0.7.dist-info/licenses/LICENSE.md",
+    "snapshot_file": "mineru-LICENSE.md",
+    "sha256": "2d9aeb5d15159329a20dd804f251c64860ba954fbd26ec02f802220e6d71cf5c"
+  },
+  {
+    "package": "docvortex",
+    "version": "0.5.16",
+    "path": "docvortex-0.5.16.dist-info/licenses/LICENSE.md",
+    "snapshot_file": "docvortex-LICENSE.md",
+    "sha256": "ff54576f0fa4b4a677eaf63497a546d78502398d6c9dddb0984cfa02e5294d3b"
+  },
+  {
+    "package": "docvortex",
+    "version": "0.5.16",
+    "path": "docvortex/resources/fonts/NOTICE",
+    "snapshot_file": "docvortex-NOTICE",
+    "sha256": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a"
+  }
+]

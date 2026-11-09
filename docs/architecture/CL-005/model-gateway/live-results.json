@@ -1,0 +1,346 @@
+{
+  "date": "2026-10-12",
+  "scope": "Original raw HTTP aggregator synthetic probes; initial six, two diagnostics, one explicit compatibility validation, one nonexistent-model negative",
+  "request_count": 10,
+  "max_output_tokens_each": 256,
+  "automatic_retries": 0,
+  "price_evidence": "User quote, not supplier billing; cached price unknown",
+  "quoted_rates_sha256": "cd9ed8f05f4535d35bc8924b19fc00349d10f7ea92da2be41c2c259fefa3a523",
+  "phases": [
+    {
+      "scope": "live synthetic probe",
+      "script_sha256": "3fdeb1d9b8f0ab2d2639dc48fd569a624083c70e6275d34a36acce6f3db9c083",
+      "max_paid_requests": 6,
+      "runs": [
+        {
+          "requested_model": "deepseek-v4.1-flash",
+          "stream": false,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "candidate_available": false,
+          "category": "unexpected_output_item",
+          "cost_state": "unknown_pending_reconciliation",
+          "elapsed_seconds": 2.87,
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false
+        },
+        {
+          "requested_model": "deepseek-v4.1-flash",
+          "stream": false,
+          "strict_schema": true,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "candidate_available": false,
+          "category": "unexpected_output_item",
+          "cost_state": "unknown_pending_reconciliation",
+          "elapsed_seconds": 1.325,
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false
+        },
+        {
+          "requested_model": "deepseek-v4.1-flash",
+          "stream": true,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "status": "completed",
+          "response_model": "deepseek-v4.1-flash-x",
+          "response_id_sha256": "70d0a5f5df5822c00b9a0cb0d3d6612e3981ff16cbc2535c4f9ee030dd08a220",
+          "usage": {
+            "input_tokens": 52,
+            "output_tokens": 17,
+            "total_tokens": 69,
+            "cached_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "estimated_from_quote",
+          "candidate_available": true,
+          "category": "completed_candidate",
+          "store_echo": null,
+          "zero_retention_verified": false,
+          "text_sha256": "8588967f07f682efabee25f07c0703448e9680b9cf2a9957fdf0a55323f584be",
+          "text_characters": 37,
+          "sse_events": 24,
+          "sse_duplicates_ignored": 0,
+          "estimated_cost": "0.00002796",
+          "currency": "CNY",
+          "billing_verified": false,
+          "synthetic_answer_valid": true,
+          "elapsed_seconds": 1.456,
+          "price_evidence": "user-quote-2026-10-12"
+        },
+        {
+          "requested_model": "glm-5.3",
+          "stream": false,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "status": "incomplete",
+          "response_model": "glm-5.3",
+          "response_id_sha256": "1639aed0df12854f74487e46dc37b77f6539cbdef06dce3bb52f3fc4033521d0",
+          "usage": {
+            "input_tokens": 58,
+            "output_tokens": 256,
+            "total_tokens": 314,
+            "cached_tokens": 53,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "cached_rate_unknown",
+          "candidate_available": false,
+          "category": "incomplete",
+          "store_echo": null,
+          "zero_retention_verified": false,
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false,
+          "elapsed_seconds": 5.416,
+          "known_components_cost": "0.00113265",
+          "cached_tokens_unpriced": 53,
+          "estimated_cost_if_cached_billed_as_input": "0.00119890",
+          "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+        },
+        {
+          "requested_model": "glm-5.3",
+          "stream": false,
+          "strict_schema": true,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "candidate_available": false,
+          "category": "empty_completed_output",
+          "cost_state": "unknown_pending_reconciliation",
+          "elapsed_seconds": 3.904,
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false
+        },
+        {
+          "requested_model": "glm-5.3",
+          "stream": true,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "status": "completed",
+          "response_model": "glm-5.3",
+          "response_id_sha256": "504dc042a3438656ebcdb54b06310d753c3b8fe3b05559f067aa5a21c0b8f6a7",
+          "usage": {
+            "input_tokens": 58,
+            "output_tokens": 156,
+            "total_tokens": 214,
+            "cached_tokens": 53,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "cached_rate_unknown",
+          "candidate_available": false,
+          "category": "synthetic_quality_failure",
+          "store_echo": null,
+          "zero_retention_verified": false,
+          "text_sha256": "e7fba70c707a6d646d155158c6fb751e8e8142df561611b8d074075283d8e295",
+          "text_characters": 150,
+          "sse_events": 71,
+          "sse_duplicates_ignored": 0,
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false,
+          "synthetic_answer_valid": false,
+          "elapsed_seconds": 4.075,
+          "known_components_cost": "0.00069265",
+          "cached_tokens_unpriced": 53,
+          "estimated_cost_if_cached_billed_as_input": "0.00075890",
+          "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+        }
+      ],
+      "real_data_enabled": false
+    },
+    {
+      "scope": "Two bounded nonstream diagnostic requests after initial six probes",
+      "script_sha256": "0e9ec7439fb57a7b76a47b80c8d950015c8a70d86198a9e87b61075fc0e38f08",
+      "runs": [
+        {
+          "requested_model": "deepseek-v4.1-flash",
+          "stream": false,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "output_shape": {
+            "output_array": true,
+            "output_items": 1,
+            "items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "status": "absent_or_other",
+                "content_types": ["output_text"]
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 52,
+            "output_tokens": 17,
+            "total_tokens": 69,
+            "cached_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "estimated_from_quote",
+          "estimated_cost": "0.00002796",
+          "currency": "CNY",
+          "billing_verified": false,
+          "candidate_available": false,
+          "category": "unexpected_output_item",
+          "elapsed_seconds": 2.268,
+          "price_evidence": "user-quote-2026-10-12"
+        },
+        {
+          "requested_model": "glm-5.3",
+          "stream": false,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "http_status": 200,
+          "request_id_sha256": null,
+          "output_shape": {
+            "output_array": true,
+            "output_items": 1,
+            "items": [
+              {
+                "type": "reasoning",
+                "role": "absent_or_other",
+                "status": "absent_or_other",
+                "content_types": null
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 58,
+            "output_tokens": 200,
+            "total_tokens": 258,
+            "cached_tokens": 55,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "cached_rate_unknown",
+          "estimated_cost": null,
+          "currency": "CNY",
+          "billing_verified": false,
+          "candidate_available": false,
+          "category": "empty_completed_output",
+          "elapsed_seconds": 4.318,
+          "known_components_cost": "0.00088375",
+          "cached_tokens_unpriced": 55,
+          "estimated_cost_if_cached_billed_as_input": "0.00095250",
+          "price_evidence": "user-quote-2026-10-12-five-times-deepseek"
+        }
+      ],
+      "real_data_enabled": false
+    },
+    {
+      "scope": "One explicit DeepSeek message-status compatibility/profile validation; synthetic strict-schema task",
+      "script_sha256": "38a8e6eee826c8392bb54f7654651b38c91f5c873c7d3ce05349d93054ce2cc0",
+      "runs": [
+        {
+          "requested_model": "deepseek-v4.1-flash",
+          "stream": false,
+          "strict_schema": true,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "normalization_profile": "completed_message_status_optional",
+          "http_status": 200,
+          "request_id_sha256": null,
+          "output_shape": {
+            "output_array": true,
+            "output_items": 1,
+            "items": [
+              {
+                "type": "message",
+                "role": "assistant",
+                "status": "absent_or_other",
+                "content_types": ["output_text"]
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 52,
+            "output_tokens": 17,
+            "total_tokens": 69,
+            "cached_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost_state": "estimated_from_quote",
+          "estimated_cost": "0.00002796",
+          "currency": "CNY",
+          "billing_verified": false,
+          "price_evidence": "user-quote-2026-10-12",
+          "status": "completed",
+          "response_model": "deepseek-v4.1-flash-x",
+          "response_id_sha256": "1f9726c8341471928bd34530961c40dc2c5a7423e9cfdfa77b4bfba4f9303592",
+          "candidate_available": true,
+          "compatibility_warnings": ["message_status_inferred_from_completed_envelope"],
+          "category": "completed_candidate",
+          "store_echo": null,
+          "zero_retention_verified": false,
+          "text_sha256": "8588967f07f682efabee25f07c0703448e9680b9cf2a9957fdf0a55323f584be",
+          "text_characters": 37,
+          "synthetic_answer_valid": true,
+          "elapsed_seconds": 2.582
+        }
+      ],
+      "real_data_enabled": false
+    },
+    {
+      "scope": "One bounded nonexistent-model negative request to verify real HTTP error classification; no retry or fallback",
+      "script_sha256": "38a8e6eee826c8392bb54f7654651b38c91f5c873c7d3ce05349d93054ce2cc0",
+      "runs": [
+        {
+          "requested_model": "canlearn-cl005-nonexistent-model",
+          "stream": false,
+          "strict_schema": false,
+          "retry_attempts": 0,
+          "supplier_admitted_for_real_data": false,
+          "normalization_profile": "strict",
+          "http_status": 503,
+          "request_id_sha256": null,
+          "candidate_available": false,
+          "category": "provider_http_error",
+          "cost_state": "unknown_pending_reconciliation",
+          "retry_after_seconds": null,
+          "elapsed_seconds": 0.748,
+          "estimated_cost": null,
+          "currency": null,
+          "billing_verified": false
+        }
+      ],
+      "real_data_enabled": false
+    }
+  ],
+  "cost_summary": {
+    "currency": "CNY",
+    "requests_with_valid_usage": 6,
+    "requests_without_usable_usage": 4,
+    "initial_rejected_usage_not_preserved": 3,
+    "negative_error_no_usage": 1,
+    "observed_tokens": 993,
+    "known_priced_components_sum": "0.00279293",
+    "sum_if_cached_input_billed_at_standard_input_rate": "0.00299418",
+    "unpriced_cached_tokens": 161,
+    "actual_total_charge": null,
+    "billing_verified": false,
+    "note": "Both sums omit unknown usage; second sum assumes cache billed at ordinary input price. Three initial rejected responses lost usage; subsequent prototype fixed that loss."
+  },
+  "real_data_enabled": false,
+  "supplier_identity_upstream_data_terms_verified": false
+}

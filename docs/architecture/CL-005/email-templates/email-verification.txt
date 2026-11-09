@@ -1,0 +1,13 @@
+验证你的 CanLearn 邮箱
+
+欢迎使用 CanLearn。请验证邮箱，完成受邀注册：
+
+{{verification_url}}
+
+链接有效期为 1 小时。若已过期，请重新发起验证。
+
+如果你没有注册 CanLearn，请忽略此邮件。
+此邮件由系统发送，请勿直接回复。
+
+CanLearn
+https://cl.hangxiaonet.com

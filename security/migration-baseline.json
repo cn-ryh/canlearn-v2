@@ -1,0 +1,6 @@
+{
+  "apps/api/drizzle/0000_eminent_liz_osborn.sql": "9fabceb9ab4e38867d3a3c8872c6ea86aa8a99a7bf80d612af144980be1744b5",
+  "apps/api/drizzle/0001_sweet_nicolaos.sql": "0ba7283bc7dc74ac7128b7f2e00f2dafa437ac2e349430d489ef6f7b881632d3",
+  "apps/api/drizzle/meta/0000_snapshot.json": "2b1cf46ef8927c60c91937c9167ca49aa66a27b540cb0cf0f66c7df37c483245",
+  "apps/api/drizzle/meta/0001_snapshot.json": "5503926090aefca04de592844d57661a58ab9ff4e2389286cb0dbfa6e0d83078"
+}

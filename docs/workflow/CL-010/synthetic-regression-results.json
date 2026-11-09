@@ -1,0 +1,247 @@
+{
+  "recorded_at": "2026-10-14T12:44:49.555858+00:00",
+  "scope": "real local Web/API/PostgreSQL/Temporal with deterministic synthetic worker",
+  "passed": 35,
+  "checks": [
+    {
+      "name": "compiled Web smoke page",
+      "passed": true
+    },
+    {
+      "name": "real capacity admission returns documented 503",
+      "passed": true
+    },
+    {
+      "name": "Web proxy \u2192 real API \u2192 durable QUEUED",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "QUEUED"
+    },
+    {
+      "name": "eight concurrent requests preserve one Job/snapshot",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "QUEUED"
+    },
+    {
+      "name": "same key/different semantic payload rejected",
+      "passed": true
+    },
+    {
+      "name": "arbitrary content rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign Web Origin rejected",
+      "passed": true
+    },
+    {
+      "name": "internal callback without service credential rejected",
+      "passed": true
+    },
+    {
+      "name": "real Temporal/worker completes three-page fixture",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "completed Job remains immutable on cancellation",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "duplicate completion receipt produces no second effect",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "conflicting manifest rejected",
+      "passed": true
+    },
+    {
+      "name": "partial fixture reaches PARTIAL_READY with exact page coverage",
+      "passed": true,
+      "job_id": "f20f6996-b731-4079-8110-e8bbdf5b477b",
+      "trace_id": "64755355e3e4ab4c95ea508d993e9c28",
+      "snapshot_id": "3a392154-b297-470c-a544-b66f1dc1074b",
+      "status": "PARTIAL_READY"
+    },
+    {
+      "name": "blank fixture reaches SUCCEEDED with exact page coverage",
+      "passed": true,
+      "job_id": "fdbbe60e-87f4-43fa-8a5c-e6c1333eb99a",
+      "trace_id": "cb73a484497116956a19d2a6ebfc5a69",
+      "snapshot_id": "e4a43d25-e518-46a9-bcaa-8d3c48cffe75",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "fail fixture reaches FAILED with exact page coverage",
+      "passed": true,
+      "job_id": "a356c5d3-9517-40dc-87bf-34422a0be1d2",
+      "trace_id": "68131f66dcfc11d6d91ac04ae249ab31",
+      "snapshot_id": "340414a5-6709-4a8d-90cc-afb8649e4485",
+      "status": "FAILED"
+    },
+    {
+      "name": "Web cancellation commits logical CANCELLED",
+      "passed": true,
+      "job_id": "4fc459a0-08f4-4353-8317-db93c65726f3",
+      "trace_id": "f2a7291901caf83a1f64be78988c03fa",
+      "snapshot_id": "b61cc14d-f4ca-4316-9c9d-099c7d906446",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "synthetic computation stop confirmed by worker",
+      "passed": true,
+      "job_id": "4fc459a0-08f4-4353-8317-db93c65726f3",
+      "trace_id": "f2a7291901caf83a1f64be78988c03fa",
+      "snapshot_id": "b61cc14d-f4ca-4316-9c9d-099c7d906446",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "late pre-cancellation completion rejected",
+      "passed": true
+    },
+    {
+      "name": "repeat cancellation preserves epoch/revision",
+      "passed": true,
+      "job_id": "4fc459a0-08f4-4353-8317-db93c65726f3",
+      "trace_id": "f2a7291901caf83a1f64be78988c03fa",
+      "snapshot_id": "b61cc14d-f4ca-4316-9c9d-099c7d906446",
+      "status": "CANCELLED"
+    },
+    {
+      "name": "SIGKILL worker \u2192 heartbeat timeout \u2192 activity retry",
+      "passed": true,
+      "job_id": "5553c72c-4720-4b86-8792-4b5e3e2e5f32",
+      "trace_id": "1a678596b7955b2ea9005db12b079c1b",
+      "snapshot_id": "b612d2fd-bc73-444f-9ec1-8dc9de643694",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "completed real workflow history replays deterministically",
+      "passed": true,
+      "job_id": "5553c72c-4720-4b86-8792-4b5e3e2e5f32",
+      "trace_id": "1a678596b7955b2ea9005db12b079c1b",
+      "snapshot_id": "b612d2fd-bc73-444f-9ec1-8dc9de643694",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "API restart preserves QUEUED Job and Outbox",
+      "passed": true,
+      "job_id": "561078e2-20db-43ee-b92d-b14dc7388472",
+      "trace_id": "82f295031a39a4327362c45135d802bc",
+      "snapshot_id": "a64cd5ed-7c36-4d9e-8bdf-97483e644a28",
+      "status": "QUEUED"
+    },
+    {
+      "name": "request key survives API restart",
+      "passed": true,
+      "job_id": "561078e2-20db-43ee-b92d-b14dc7388472",
+      "trace_id": "82f295031a39a4327362c45135d802bc",
+      "snapshot_id": "a64cd5ed-7c36-4d9e-8bdf-97483e644a28",
+      "status": "QUEUED"
+    },
+    {
+      "name": "expired dispatcher claim cannot commit ACK",
+      "passed": true
+    },
+    {
+      "name": "lost start ACK reconciles the original Temporal run",
+      "passed": true,
+      "job_id": "561078e2-20db-43ee-b92d-b14dc7388472",
+      "trace_id": "82f295031a39a4327362c45135d802bc",
+      "snapshot_id": "a64cd5ed-7c36-4d9e-8bdf-97483e644a28",
+      "status": "QUEUED"
+    },
+    {
+      "name": "SQL failure rolls back result/terminal/finalized event together",
+      "passed": true,
+      "job_id": "ff86a595-2179-48ae-ac13-757d3d3acde8",
+      "trace_id": "c6f833e353d1c138f9786a13390baa19",
+      "snapshot_id": "949e8607-e50c-47e9-b3ee-23cae2dabca0",
+      "status": "RUNNING"
+    },
+    {
+      "name": "same receipt safely completes after SQL rollback",
+      "passed": true,
+      "job_id": "ff86a595-2179-48ae-ac13-757d3d3acde8",
+      "trace_id": "c6f833e353d1c138f9786a13390baa19",
+      "snapshot_id": "949e8607-e50c-47e9-b3ee-23cae2dabca0",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "concurrent SQL completion/cancellation has one immutable terminal",
+      "passed": true,
+      "job_id": "10ded5ee-65f3-41c8-a32c-682521cd49e5",
+      "trace_id": "62d445c08fe0169e321c2f163fded097",
+      "snapshot_id": "887e446c-3f18-4b16-afb0-a95c24c108d5",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "full stack stop/start preserves Job/snapshot/result",
+      "passed": true,
+      "job_id": "56866e6f-54c7-4006-a2b7-638d40b996ec",
+      "trace_id": "1d7193751fe97957c48816d89bef7110",
+      "snapshot_id": "94b0339b-ff0a-4b44-9274-f88754ced66c",
+      "status": "SUCCEEDED"
+    },
+    {
+      "name": "real Outbox stores only the three selected event families",
+      "passed": true
+    },
+    {
+      "name": "every synthetic Job has exactly one accepted event",
+      "passed": true
+    },
+    {
+      "name": "actual persisted event envelopes pass closed CL-008 schemas",
+      "passed": true
+    },
+    {
+      "name": "all actual public response bodies/statuses/media pass handwritten OpenAPI",
+      "passed": true
+    },
+    {
+      "name": "removing a field from a captured real Job response makes the gate fail",
+      "passed": true
+    },
+    {
+      "name": "removing a field from a persisted real event makes the gate fail",
+      "passed": true
+    }
+  ],
+  "http_contract": {
+    "observations": 140,
+    "coverage": [
+      "get /v1/smoke/jobs/{id} 200",
+      "get /v1/smoke/jobs/{id} 400",
+      "get /v1/smoke/jobs/{id} 404",
+      "post /v1/smoke/jobs 202",
+      "post /v1/smoke/jobs 400",
+      "post /v1/smoke/jobs 403",
+      "post /v1/smoke/jobs 409",
+      "post /v1/smoke/jobs 503",
+      "post /v1/smoke/jobs/{id}/cancel 200",
+      "post /v1/smoke/jobs/{id}/cancel 400",
+      "post /v1/smoke/jobs/{id}/cancel 403",
+      "post /v1/smoke/jobs/{id}/cancel 404"
+    ]
+  },
+  "replay_history_sha256": "a3d7d9e75386105c0c42407572b98c0bc1549f10a0782ef690bc3ff02aefeb20",
+  "replay_history_events": 8,
+  "external_model_mineru_gpu_cloud_calls": 0
+}

@@ -1,0 +1,703 @@
+{
+  "scope": "original synthetic schema positives and negatives; no live events",
+  "cases": [
+    {
+      "name": "accepted",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "completion",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000002",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "SUCCEEDED",
+          "admission_epoch": 1,
+          "result_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "cost_state": "observed",
+          "failure_code": null
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "partial",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000003",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "PARTIAL_READY",
+          "admission_epoch": 1,
+          "result_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "cost_state": "unknown_pending_reconciliation",
+          "failure_code": null
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "cancel",
+      "event_type": "job.cancel_requested.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000004",
+        "event_type": "job.cancel_requested.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "operation_id": "00000000-0000-4000-8000-000000000060",
+          "admission_epoch": 2,
+          "reason_code": "user_cancel",
+          "termination_state": "requested"
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "delete",
+      "event_type": "resource.invalidated.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000005",
+        "event_type": "resource.invalidated.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "resource_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "reason_code": "deleted",
+          "resource_revision": 2,
+          "deletion_case_id": "00000000-0000-4000-8000-000000000070",
+          "deletion_watermark": 1
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "correction",
+      "event_type": "resource.invalidated.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000006",
+        "event_type": "resource.invalidated.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "resource_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "reason_code": "corrected",
+          "resource_revision": 2,
+          "deletion_case_id": null,
+          "deletion_watermark": null
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "failed-unknown",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000007",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "FAILED",
+          "admission_epoch": 1,
+          "result_refs": [],
+          "cost_state": "unknown_pending_reconciliation",
+          "failure_code": "UPSTREAM_UNKNOWN"
+        }
+      },
+      "valid": true
+    },
+    {
+      "name": "missing-space",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "bad-time",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "yesterday",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "bad-uuid",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "job-A",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "unknown-version",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 2,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "unknown-type",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v9",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "raw-text",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1,
+          "text": "original synthetic content"
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "credential-field",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1,
+          "api_key": "SYNTHETIC_PLACEHOLDER"
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "url-field",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1,
+          "download_url": "https://example.invalid/download?signature=SYNTHETIC"
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "extra-envelope-field",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        },
+        "raw_response": "synthetic"
+      },
+      "valid": false
+    },
+    {
+      "name": "nonterminal-finalized",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000002",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "RUNNING",
+          "admission_epoch": 1,
+          "result_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "cost_state": "observed",
+          "failure_code": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "empty-partial",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000003",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "PARTIAL_READY",
+          "admission_epoch": 1,
+          "result_refs": [],
+          "cost_state": "unknown_pending_reconciliation",
+          "failure_code": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "unrevoked-epoch",
+      "event_type": "job.cancel_requested.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000004",
+        "event_type": "job.cancel_requested.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "operation_id": "00000000-0000-4000-8000-000000000060",
+          "admission_epoch": 1,
+          "reason_code": "user_cancel",
+          "termination_state": "requested"
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "deletion-no-watermark",
+      "event_type": "resource.invalidated.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000005",
+        "event_type": "resource.invalidated.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "resource_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "reason_code": "deleted",
+          "resource_revision": 2,
+          "deletion_case_id": "00000000-0000-4000-8000-000000000070",
+          "deletion_watermark": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "deletion-no-case",
+      "event_type": "resource.invalidated.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000005",
+        "event_type": "resource.invalidated.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "resource_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "reason_code": "deleted",
+          "resource_revision": 2,
+          "deletion_case_id": null,
+          "deletion_watermark": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "correction-has-deletion-watermark",
+      "event_type": "resource.invalidated.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000006",
+        "event_type": "resource.invalidated.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "resource_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "reason_code": "corrected",
+          "resource_revision": 2,
+          "deletion_case_id": null,
+          "deletion_watermark": 1
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "failed-without-code",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000007",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "FAILED",
+          "admission_epoch": 1,
+          "result_refs": [],
+          "cost_state": "unknown_pending_reconciliation",
+          "failure_code": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "duplicate-result-reference",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000002",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "SUCCEEDED",
+          "admission_epoch": 1,
+          "result_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            },
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041"
+            }
+          ],
+          "cost_state": "observed",
+          "failure_code": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "reference-content-leak",
+      "event_type": "job.finalized.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000002",
+        "event_type": "job.finalized.v1",
+        "schema_version": 1,
+        "aggregate_type": "job",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "status": "SUCCEEDED",
+          "admission_epoch": 1,
+          "result_refs": [
+            {
+              "resource_type": "content_revision",
+              "resource_id": "00000000-0000-4000-8000-000000000040",
+              "version_id": "00000000-0000-4000-8000-000000000041",
+              "text": "synthetic text"
+            }
+          ],
+          "cost_state": "observed",
+          "failure_code": null
+        }
+      },
+      "valid": false
+    },
+    {
+      "name": "mismatched-aggregate-type",
+      "event_type": "job.accepted.v1",
+      "value": {
+        "event_id": "00000000-0000-4000-8000-000000000001",
+        "event_type": "job.accepted.v1",
+        "schema_version": 1,
+        "aggregate_type": "resource",
+        "aggregate_id": "00000000-0000-4000-8000-000000000010",
+        "aggregate_revision": 2,
+        "space_id": "00000000-0000-4000-8000-000000000020",
+        "actor_ref": "00000000-0000-4000-8000-000000000030",
+        "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "occurred_at": "2026-10-13T15:45:00Z",
+        "payload": {
+          "job_id": "00000000-0000-4000-8000-000000000010",
+          "input_snapshot_id": "00000000-0000-4000-8000-000000000050",
+          "kind": "parse",
+          "admission_epoch": 1
+        }
+      },
+      "valid": false
+    }
+  ]
+}

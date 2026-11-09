@@ -1,0 +1,6 @@
+{
+  "mode": "report-only",
+  "triage_due": "2026-10-21",
+  "owner_roles": ["A", "B"],
+  "reason": "Upstream bundled components have known HIGH/CRITICAL findings; no risk exception has been approved. Report scan failures block now; unresolved HIGH/CRITICAL findings block after triage_due."
+}

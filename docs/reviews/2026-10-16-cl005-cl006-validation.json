@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-16",
+  "baseline_commit": "d08251d4be8953f65003917576c8f1bfa71a3f76",
+  "scope": "Review revisions only; planning reference and counterexamples are pure-memory; no production DDL/API/gateway/scheduler or recovery deployment",
+  "pnpm_verify_exit_code": 0,
+  "checks": {
+    "api_tests": 149,
+    "web_tests": 9,
+    "workflow_tests": 66,
+    "quality_fault_tests": 14,
+    "cl006_design_examples": 42,
+    "cl006_original_examples": 13,
+    "cl006_review_counterexamples": 29,
+    "validator_challenge_inputs": 12,
+    "validator_strata_counts": {
+      "correct": 3,
+      "wrong_answer": 3,
+      "wrong_citation": 3,
+      "insufficient_evidence": 3
+    },
+    "validator_model_quality_measured": false,
+    "model_calls": 0,
+    "remote_experiments": 0,
+    "human_final_acceptance": "R0 revisions accepted and closure authorized by user reporting independent reviewer approval; external/production signoff remains separate"
+  },
+  "issue_body_updates": [
+    {
+      "issue": 30,
+      "state": "open",
+      "labels": ["area:api", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/30",
+      "updated_at": "2026-10-16T03:45:07Z",
+      "actual_human_acceptance_recorded": false
+    },
+    {
+      "issue": 28,
+      "state": "open",
+      "labels": ["area:decision", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/28",
+      "updated_at": "2026-10-16T03:45:09Z",
+      "actual_human_acceptance_recorded": false
+    },
+    {
+      "issue": 29,
+      "state": "open",
+      "labels": ["area:decision", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/29",
+      "updated_at": "2026-10-16T03:45:11Z",
+      "actual_human_acceptance_recorded": false
+    }
+  ],
+  "source_and_document_sha256": {
+    "apps/workflow/tests/test_cl006_reference.py": "18469580b05aed313eef2ed4f9fbbf374f4d0e99c5821f9690a420764fe14bf7",
+    "docs/PROJECT_MEMORY.md": "34484e261463b1b8463a2d123540f8d9795fa913c81864d242a557ce40648e5c",
+    "docs/architecture/ADR-0005-model-gateway-and-provider-boundaries.md": "05d7c699e509ead81f84f9d0ef1865cd619969f0dfbfbbaad865412e2f61d318",
+    "docs/architecture/ADR-0006-deployment-and-async-coordination.md": "1462a68da2ad5e36bc11f4edcae4566b2ebd771b5332effef332acb1c745f419",
+    "docs/architecture/CL-005/README.md": "866c23847137572850e0fc26cd926e954553203cb9a8d9e62012e7a4d8beff21",
+    "docs/architecture/CL-005/decision-closeout.md": "f22af24d2c8b8690f28fcad2d5116fff0428bc2e44bc81b7243392fa1b9cea6a",
+    "docs/architecture/CL-005/deployment-and-service-readiness.md": "8dc3c25c91cf449891f65049d985d4b1e62d71fed95a588016a42c3b9ca65fd7",
+    "docs/architecture/CL-005/internal-operations-contract.md": "3f560dfb6009470b703ee9e339d562a2113cc6b07732e01dbb7861e409366e46",
+    "docs/architecture/CL-005/model-gateway/admission-and-unknown-calls.md": "4713b75f861f8852c40f5fa7df5470537fbd453d6a8e7d50a4b3653ceaa68a10",
+    "docs/architecture/CL-005/model-gateway/business-chain-evaluation.md": "6cacb3bde5e91fdb50b76f625fcb1c5d5a59f66433749d22f177babce67153b8",
+    "docs/architecture/CL-005/model-gateway/selection-record.json": "d38740d578449eb0eec2c37c98657788699ff553bc5f5e9ceca2c472a16f4723",
+    "docs/architecture/CL-005/model-gateway/validator-challenge-set.json": "eb04327cb865c3d8c2eec95e0233f41d493149b660556784a9e02a13d0d11aaf",
+    "docs/architecture/CL-006/README.md": "8fbdecd910891209ffd565c5e1f20a70ef36354fa5153f7535dda9cd9b556461",
+    "docs/architecture/CL-006/conceptual-model.md": "bf8c2e1fc883fb5c02480b95bf37584206255ad8d682933bcaf30b5b7e51bf4e",
+    "docs/architecture/CL-006/example-results.json": "d38e29bc67f83db1272cacfa37de349baf40a43c30ee1347a6f826ba896d6f4c",
+    "docs/architecture/CL-006/examples.json": "211ae527412c94bc496e6af29cee228814676f0d0b17d5e3728d4e8a001095cf",
+    "docs/architecture/CL-006/ownership-and-migrations.md": "e4b7ffa4d3d53273bae1814f87ae8adfa0fe96d3f39e505ce0657fffda8d845d",
+    "docs/architecture/CL-006/planning_reference.py": "b18a467dbc4b73a0b1f733532de91f85c848b725af06b718c4a6c01a5c7caf88",
+    "docs/architecture/CL-006/planning_review_examples.py": "7af9fd2b0f491f2c15f35a0ca736f21330d70fcf694ecc3ff06d98c07f50eff9",
+    "docs/architecture/CL-006/validate_examples.py": "dcfc50821f6185b6aa02c4bae8c34f7f3c24afb362c88afb9aded7638e043bdc",
+    "docs/reviews/2026-10-16-cl005-cl006-revisions.md": "d2002074e33fa5a6edc09c8dcff12ed26e0a7c138c7ac1a9e9625385b86cddd4"
+  },
+  "commit_push_performed": false,
+  "remote_ci_for_local_revision": false,
+  "closure_update": {
+    "scope": "User-confirmed independent review and explicit authorization to complete R0 design issues; no new runtime tests",
+    "issues": [
+      {
+        "issue": 28,
+        "state": "closed",
+        "state_reason": "completed",
+        "closed_at": "2026-10-16T04:00:27Z",
+        "labels": ["area:decision", "phase:R0", "priority:P0"],
+        "url": "https://github.com/cn-ryh/canlearn-v2/issues/28",
+        "acceptance_comment": "https://github.com/cn-ryh/canlearn-v2/issues/28#issuecomment-6207771868",
+        "acceptance_basis": "User confirms independent reviewer approved revisions and explicitly authorizes completion",
+        "reviewer_identity_provided": false,
+        "pre_close_validation_sha256": "7f89fa7efa1d5b4557e4661e64e4560cff296ac1f15a74d5c542f64f0be261d3"
+      },
+      {
+        "issue": 29,
+        "state": "closed",
+        "state_reason": "completed",
+        "closed_at": "2026-10-16T04:00:30Z",
+        "labels": ["area:decision", "phase:R0", "priority:P0"],
+        "url": "https://github.com/cn-ryh/canlearn-v2/issues/29",
+        "acceptance_comment": "https://github.com/cn-ryh/canlearn-v2/issues/29#issuecomment-6207772551",
+        "acceptance_basis": "User confirms independent reviewer approved revisions and explicitly authorizes completion",
+        "reviewer_identity_provided": false,
+        "pre_close_validation_sha256": "7f89fa7efa1d5b4557e4661e64e4560cff296ac1f15a74d5c542f64f0be261d3"
+      },
+      {
+        "issue": 30,
+        "state": "closed",
+        "state_reason": "completed",
+        "closed_at": "2026-10-16T04:00:34Z",
+        "labels": ["area:api", "phase:R0", "priority:P0"],
+        "url": "https://github.com/cn-ryh/canlearn-v2/issues/30",
+        "acceptance_comment": "https://github.com/cn-ryh/canlearn-v2/issues/30#issuecomment-6207773288",
+        "acceptance_basis": "User confirms independent reviewer approved revisions and explicitly authorizes completion",
+        "reviewer_identity_provided": false,
+        "pre_close_validation_sha256": "7f89fa7efa1d5b4557e4661e64e4560cff296ac1f15a74d5c542f64f0be261d3"
+      }
+    ],
+    "pre_close_snapshot": "2026-10-16-cl005-cl006-validation-before-close.json",
+    "pre_close_snapshot_sha256": "7f89fa7efa1d5b4557e4661e64e4560cff296ac1f15a74d5c542f64f0be261d3",
+    "latest_issue_counts": {
+      "total": 54,
+      "open": 47,
+      "closed": 7,
+      "needs_review": 20
+    },
+    "parent_issues_5_6": "open",
+    "reviewer_identity_provided": false
+  }
+}

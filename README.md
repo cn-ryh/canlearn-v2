@@ -14,6 +14,19 @@ CanLearn 是面向自主学习者的资料驱动学习平台。本仓库采用�
 
 详细决策见 [ADR-0001](docs/architecture/ADR-0001-technology-stack.md) 和 [ADR-0002](docs/architecture/ADR-0002-repository-and-deployment-topology.md)。研发、提交、测试和合并规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
+R0当前设计与证据入口：[CL-005选型交接](docs/architecture/CL-005/decision-closeout.md)、
+[CL-006数据模型](docs/architecture/CL-006/README.md)、[CL-009样本准备](docs/benchmarks/CL-009/README.md)。
+设计/隔离实测与真实业务实现、外部签审及部署验收分别记录。
+REST契约与真实健康接口门禁见[CL-007](docs/api/CL-007/README.md)；OpenAPI中的其余业务操作均为规划。
+Job七状态、事件/Outbox提案与34个可执行故障设计场景见[CL-008](docs/workflow/CL-008/README.md)；
+事件Schema和设计回归接入现有门禁。
+[CL-013a 合成 Job](docs/integration/CL-013a/README.md)已补默认关闭的本地 Web/API/PostgreSQL/Temporal 链路、
+取消/回执/SQL 回滚与重启验证；生产资源授权、真实解析/模型和完整删除恢复仍待后续验收。
+[CL-013b/c 门禁包](docs/integration/CL-013bc/README.md)补真实响应/事件破坏探针、升级兼容迁移验证、
+密钥/依赖扫描与版本固定；镜像漏洞保留报告及处置期限，交付状态见门禁包记录。
+[CL-010 MinerU 探针](docs/workflow/CL-010/README.md)已用原创 PDF 跑通真实 Basic/4070 V1 与
+主 API/SQL/Temporal，覆盖 300 页、强停恢复与未知创建；默认关闭，许可签审/生产接入和真实质量仍待验收。
+
 ## 仓库结构
 
 ```text
@@ -53,12 +66,21 @@ pnpm dev
 
 MinerU 不随默认 Compose 启动，因为其镜像、模型、解析档位和 GPU 配置需要按目标环境固定。通过 `MINERU_BASE_URL` 接入经过验收的实例。
 
+Docker Hub 镜像默认从 `jjs7iczbx3i38wpthb.xuanyuan.run` 拉取，可通过
+`CANLEARN_DOCKERHUB_REGISTRY` 覆盖前缀（直接访问上游时设为 `docker.io`）。
+官方基础镜像保留 `library/`，例如 `/library/postgres:17-alpine`；其他镜像保留其命名空间。
+后续 GHCR 镜像使用 `jjs7iczbx3i38wpthb-ghcr.xuanyuan.run/<owner>/<image>:<tag>`。
+当前 Compose 没有 GHCR 镜像；镜像入口设置不代表对应标签已拉取或部署验证。
+
 ## 质量检查
 
 ```bash
 pnpm check   # 格式、静态检查、类型、单元测试、契约和 Compose
 pnpm build   # 所有可构建工作区
 pnpm verify  # 完整合并前门禁：check + build
+pnpm smoke:test --skip-build # 真实隔离基础设施的合成 Job 集成验证
+pnpm security:scan # 密钥/依赖阻断；固定镜像扫描和残余项报告（Linux x86_64）
+pnpm security:probes # 不存在的密钥与漏洞锁文件受控探针
 ```
 
 TypeScript/JavaScript 使用 Biome，不重复引入 ESLint；Python 使用 Ruff 与 mypy。安装依赖后，Husky 会自动启用暂存区检查、提交信息检查和推送前完整验证。

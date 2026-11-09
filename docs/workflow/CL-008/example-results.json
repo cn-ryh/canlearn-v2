@@ -1,0 +1,1132 @@
+{
+  "scope": "pure-memory reference simulation; no live SQL/Temporal/provider/recovery",
+  "source_sha256": {
+    "job_model.py": "8b048333095772b1647af217e6326d302714da55d65198484b99a36587018e6b",
+    "scenarios.json": "2e9a233fab7418c6f84d5e05b4e94b45cdb346a24e5b9f143db5dff8fdf7863d"
+  },
+  "passed": 34,
+  "results": [
+    {
+      "id": "F01-network-retransmission",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F02-request-key-conflict",
+      "passed": true,
+      "rejections": ["IDEMPOTENCY_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F03-request-scope-isolation",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          },
+          "J2": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 2,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F04-admission-dedup",
+      "passed": true,
+      "rejections": ["ADMISSION_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F05-timeout-unknown",
+      "passed": true,
+      "rejections": ["JOB_CLOSED", "RETRY_NOT_ALLOWED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": "UPSTREAM_UNKNOWN",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F06-upstream-index-loss",
+      "passed": true,
+      "rejections": ["JOB_CLOSED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": "UPSTREAM_UNKNOWN",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F07-worker-restart",
+      "passed": true,
+      "rejections": ["RECONCILIATION_REQUIRED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F08-partial-pages",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "PARTIAL_READY",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success",
+              "2": "blank",
+              "3": "failed",
+              "4": "missing"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F09-blank-is-not-failure",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {
+              "1": "blank"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F10-permanent-error",
+      "passed": true,
+      "rejections": ["RETRY_NOT_ALLOWED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": "PERMANENT_ERROR",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F11-source-correction",
+      "passed": true,
+      "rejections": ["SNAPSHOT_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": "VERSION_CONFLICT",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F12-access-revision",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": "VERSION_CONFLICT",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": false,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F13-rights-withdrawal",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": "VERSION_CONFLICT",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": false,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F14-cancel-late-result",
+      "passed": true,
+      "rejections": ["JOB_CLOSED", "JOB_CLOSED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F15-delete-late-result",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 4,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": true,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F16-publish-before-cancel",
+      "passed": true,
+      "rejections": ["JOB_CLOSED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F17-delete-after-success",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": true,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F18-old-backup-restore",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "LATEST_LEDGER_REQUIRED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 6,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": true,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F19-outbox-consumer-crashes",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 3,
+        "effect_count": 2,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F20-reordered-event-after-delete",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 3,
+        "effect_count": 3,
+        "executor_busy": true,
+        "blocked": true,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F21-incomplete-page-manifest",
+      "passed": true,
+      "rejections": ["PAGE_MANIFEST_INCOMPLETE"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F22-publication-payload-conflict",
+      "passed": true,
+      "rejections": ["PUBLICATION_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F23-usage-conflict",
+      "passed": true,
+      "rejections": ["USAGE_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 1,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F24-lease-expiry-not-gpu-exit",
+      "passed": true,
+      "rejections": ["EXECUTOR_BUSY"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "CANCELLED",
+            "epoch": 2,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          },
+          "J2": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 2,
+        "calls": 2,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 4,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F25-review-gate",
+      "passed": true,
+      "rejections": ["NOT_RUNNING"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F26-stale-review",
+      "passed": true,
+      "rejections": ["SNAPSHOT_CONFLICT"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": "VERSION_CONFLICT",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F27-terminal-immutable",
+      "passed": true,
+      "rejections": ["JOB_CLOSED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F28-explicit-known-retry",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": "KNOWN_TRANSIENT",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          },
+          "J2": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 2,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F29-candidate-wrong-epoch",
+      "passed": true,
+      "rejections": ["ADMISSION_REVOKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "unknown_pending_reconciliation",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 1,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F30-review-deadline",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "FAILED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": "REVIEW_DEADLINE",
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F31-publication-transaction-rollback",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "SUCCEEDED",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success"
+            }
+          }
+        },
+        "job_count": 1,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F32-partial-retry-child",
+      "passed": true,
+      "rejections": [],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "PARTIAL_READY",
+            "epoch": 1,
+            "cost_state": "observed",
+            "failure": null,
+            "publications": 1,
+            "usable_pages": [1],
+            "visible_pages": [1],
+            "page_states": {
+              "1": "success",
+              "2": "failed"
+            }
+          },
+          "J2": {
+            "status": "QUEUED",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 2,
+        "calls": 1,
+        "known_charge_units": 7,
+        "receipt_count": 1,
+        "disputed_count": 0,
+        "outbox_count": 3,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": true,
+        "blocked": false,
+        "purpose_allowed": true,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F33-revocation-blocks-new-admission",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": false,
+        "restore_isolated": false
+      }
+    },
+    {
+      "id": "F34-revocation-blocks-new-admission",
+      "passed": true,
+      "rejections": ["SOURCE_BLOCKED", "SOURCE_BLOCKED"],
+      "observed": {
+        "jobs": {
+          "J1": {
+            "status": "RUNNING",
+            "epoch": 1,
+            "cost_state": "reserved",
+            "failure": null,
+            "publications": 0,
+            "usable_pages": [],
+            "visible_pages": [],
+            "page_states": {}
+          }
+        },
+        "job_count": 1,
+        "calls": 0,
+        "known_charge_units": 0,
+        "receipt_count": 0,
+        "disputed_count": 0,
+        "outbox_count": 2,
+        "delivery_count": 0,
+        "effect_count": 0,
+        "executor_busy": false,
+        "blocked": false,
+        "purpose_allowed": false,
+        "restore_isolated": false
+      }
+    }
+  ]
+}
