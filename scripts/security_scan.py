@@ -246,7 +246,7 @@ def scan(output: Path, images: bool) -> None:
     if (
         images
         and images_enforced(policy)
-        and any(blockers(image["findings"], []) for image in summary["images"])
+        and any(blockers(image["findings"], exceptions) for image in summary["images"])
     ):
         raise RuntimeError(
             "Image vulnerability triage deadline expired with unresolved HIGH/CRITICAL findings"
