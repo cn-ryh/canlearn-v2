@@ -1,0 +1,238 @@
+{
+  "version": "1",
+  "synthetic": true,
+  "scope": "Frozen validator challenge INPUTS and proposed oracle only; no validator/model run or measured quality rates",
+  "sources": [
+    {
+      "id": "S1-v2",
+      "space": "S-A",
+      "state": "current",
+      "page": 1,
+      "text": "原创课程样例：共24节，已完成9节，每天最多安排3节。开放时间为周一至周五。资料未说明收费、周日答疑或考试成绩。"
+    },
+    {
+      "id": "S1-v1",
+      "space": "S-A",
+      "state": "withdrawn",
+      "page": 1,
+      "text": "旧版课程共20节，已完成8节。不可作为当前来源。"
+    },
+    {
+      "id": "OTHER-v2",
+      "space": "S-B",
+      "state": "current",
+      "page": 1,
+      "text": "另一私有空间的同名课程，当前请求无读取权。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "V01",
+      "category": "correct",
+      "authorized_space": "S-A",
+      "question": "还剩多少节？",
+      "candidate": {
+        "answer": "15节",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "accept",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V02",
+      "category": "correct",
+      "authorized_space": "S-A",
+      "question": "完成剩余课程最少几天？",
+      "candidate": {
+        "answer": "5天",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "accept",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V03",
+      "category": "correct",
+      "authorized_space": "S-A",
+      "question": "开放日是什么？",
+      "candidate": {
+        "answer": "周一至周五",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "accept",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V04",
+      "category": "wrong_answer",
+      "authorized_space": "S-A",
+      "question": "还剩多少节？",
+      "candidate": {
+        "answer": "14节",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V05",
+      "category": "wrong_answer",
+      "authorized_space": "S-A",
+      "question": "完成剩余课程最少几天？",
+      "candidate": {
+        "answer": "4天",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V06",
+      "category": "wrong_answer",
+      "authorized_space": "S-A",
+      "question": "周末是否属于列明的开放日？",
+      "candidate": {
+        "answer": "是",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V07",
+      "category": "wrong_citation",
+      "authorized_space": "S-A",
+      "question": "还剩多少节？",
+      "candidate": {
+        "answer": "15节",
+        "citations": [
+          {
+            "source_version_id": "S1-v1",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V08",
+      "category": "wrong_citation",
+      "authorized_space": "S-A",
+      "question": "还剩多少节？",
+      "candidate": {
+        "answer": "15节",
+        "citations": [
+          {
+            "source_version_id": "OTHER-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V09",
+      "category": "wrong_citation",
+      "authorized_space": "S-A",
+      "question": "还剩多少节？",
+      "candidate": {
+        "answer": "15节",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 99
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V10",
+      "category": "insufficient_evidence",
+      "authorized_space": "S-A",
+      "question": "课程收费是多少？",
+      "candidate": {
+        "answer": "免费",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V11",
+      "category": "insufficient_evidence",
+      "authorized_space": "S-A",
+      "question": "导师周日是否答疑？",
+      "candidate": {
+        "answer": "答疑",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    },
+    {
+      "id": "V12",
+      "category": "insufficient_evidence",
+      "authorized_space": "S-A",
+      "question": "学完是否保证考试通过？",
+      "candidate": {
+        "answer": "保证通过",
+        "citations": [
+          {
+            "source_version_id": "S1-v2",
+            "page": 1
+          }
+        ]
+      },
+      "expected_verdict": "reject",
+      "oracle_kind": "synthetic_design_oracle_pending_non_author_review"
+    }
+  ],
+  "model_calls": 0,
+  "measured_false_acceptance": null,
+  "measured_false_rejection": null,
+  "human_non_author_review": "pending"
+}

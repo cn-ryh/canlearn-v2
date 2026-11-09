@@ -95,5 +95,16 @@
     "automatic_retries": 0,
     "max_repair_attempts": 1,
     "max_calls_per_chain": 4
+  },
+  "review_revision": {
+    "date": "2026-10-16",
+    "policy_document": "admission-and-unknown-calls.md",
+    "challenge_set": "validator-challenge-set.json",
+    "runtime_admission_implemented": false,
+    "execution_unknown_automatic_repair_allowed": false,
+    "unknown_reservations_and_slots_retained": true,
+    "historical_chain_success_is_not_cost_or_admission_acceptance": true,
+    "formal_verifier_quality_measured": false,
+    "non_author_final_acceptance": "pending"
   }
 }
