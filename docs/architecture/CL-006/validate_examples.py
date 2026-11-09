@@ -7,6 +7,9 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from planning_reference import unique_tasks
+from planning_review_examples import review_examples
+
 
 def closure(edges: list[dict], root: str) -> set[str]:
     reached, pending = {root}, [root]
@@ -33,7 +36,7 @@ def main() -> None:
         rows.append({"case": case, "passed": True, "observed": observed})
 
     tasks = data["tasks"]
-    unique = {task["occurrence_key"]: task["minutes"] for task in tasks}
+    unique = {task["occurrence_key"]: task["minutes"] for task in unique_tasks(tasks)}
     minutes = sum(unique.values())
     record(
         "shared-task-counted-once",
@@ -46,9 +49,7 @@ def main() -> None:
         {"requested": minutes, "limit": 30},
     )
     replayed = tasks + [tasks[0]]
-    replay_sum = sum(
-        {task["occurrence_key"]: task["minutes"] for task in replayed}.values()
-    )
+    replay_sum = sum(task["minutes"] for task in unique_tasks(replayed))
     record("duplicate-task-replay-no-extra-charge", replay_sum == minutes, replay_sum)
     packages = data["packages"]
     keys = {tuple(sorted(package)) for package in packages}
@@ -127,12 +128,17 @@ def main() -> None:
         closure(cyclic, "SRC-A-v1") == reached,
         "visited-set traversal; malformed cycles require review",
     )
+    review_examples(record)
     report = {
         "date": datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat(),
         "scope": "Pure-memory design examples; not a SQL, business authorization, deletion or recovery acceptance",
         "synthetic": True,
         "fixture_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "reference_sha256": {
+            name: hashlib.sha256(path.with_name(name).read_bytes()).hexdigest()
+            for name in ("planning_reference.py", "planning_review_examples.py")
+        },
         "checks": rows,
         "passed": len(rows),
         "human_non_author_review": "pending",

@@ -3,11 +3,16 @@
 2026-10-13 · R0设计与合成场景验证包；未实施数据库迁移或业务端点。
 对应父项#6、子项#30–#32；A=任宇航，B复核。非作者人工复核待补，不以脚本代签。
 
+2026-10-16 #30评审修订：稳定TaskOccurrence与每版PlanTask安排分离；补SkillNodeVersion及目标引用二选一、
+跨空间约束；容量按固定账户日历/周一周界和UTC秒切片，日周双约束、完成冻结占用与缩容超额分别处理。
+原13项加29项评审反例，共42项纯内存检查；同键异载荷不再被字典覆盖，两个确认顺序仅模拟CAS，不宣称真实并发。
+新增workflow门禁运行这些设计反例并核对归档SHA，未新增业务DDL或计划API，#30仍待实际B最终验收。
+
 依据：[P0范围](../../product/CL-001a-scope-boundaries.md)、
 [数据目录](../../security/CL-004/data-inventory-and-lifecycle.md)、
 [权限与用途](../../security/CL-004/permissions-and-content-rights.md)、
-[CL-005选型](../CL-005/README.md)。现有数据库只有
-[jobs骨架](../../../apps/api/src/database/schema.ts)，下面的实体、约束和事务均为拟实施设计。
+[CL-005选型](../CL-005/README.md)。现有[schema](../../../apps/api/src/database/schema.ts)包含jobs及
+CL-013/010隔离探针元数据；下面的领域实体、约束和计划事务仍为拟实施设计。
 
 | 子项 | 工件 | 当前交付 | 留待验收 |
 | --- | --- | --- | --- |

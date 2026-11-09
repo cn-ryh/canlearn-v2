@@ -1,9 +1,13 @@
 {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "scope": "Pure-memory design examples; not a SQL, business authorization, deletion or recovery acceptance",
   "synthetic": true,
-  "fixture_sha256": "96f7b7a152c79a6b07a1f4af3539ec45a516d1c2f24f61024baea8515517ed1a",
-  "script_sha256": "d371a5c813b0f73b3b5ba793415f5a8436bfb8e8df236737e1db779396665e1d",
+  "fixture_sha256": "211ae527412c94bc496e6af29cee228814676f0d0b17d5e3728d4e8a001095cf",
+  "script_sha256": "dcfc50821f6185b6aa02c4bae8c34f7f3c24afb362c88afb9aded7638e043bdc",
+  "reference_sha256": {
+    "planning_reference.py": "b18a467dbc4b73a0b1f733532de91f85c848b725af06b718c4a6c01a5c7caf88",
+    "planning_review_examples.py": "7af9fd2b0f491f2c15f35a0ca736f21330d70fcf694ecc3ff06d98c07f50eff9"
+  },
   "checks": [
     {
       "case": "shared-task-counted-once",
@@ -106,8 +110,187 @@
       "case": "dependency-cycle-walk-is-bounded",
       "passed": true,
       "observed": "visited-set traversal; malformed cycles require review"
+    },
+    {
+      "case": "same-identity-different-payload-forward",
+      "passed": true,
+      "observed": "OCCURRENCE_PAYLOAD_CONFLICT"
+    },
+    {
+      "case": "same-identity-different-payload-reverse",
+      "passed": true,
+      "observed": "OCCURRENCE_PAYLOAD_CONFLICT"
+    },
+    {
+      "case": "plan-copy-keeps-occurrence-identity",
+      "passed": true,
+      "observed": "O-1"
+    },
+    {
+      "case": "reorder-selects-current-arrangement-only",
+      "passed": true,
+      "observed": {
+        "day:2026-10-17": 900,
+        "week:2026-10-12": 900
+      }
+    },
+    {
+      "case": "completed-task-cannot-be-rescheduled",
+      "passed": true,
+      "observed": "PROTECTED_OCCURRENCE"
+    },
+    {
+      "case": "intentional-repeat-has-new-identity",
+      "passed": true,
+      "observed": {
+        "day:2026-10-16": 1800,
+        "week:2026-10-12": 1800
+      }
+    },
+    {
+      "case": "account-reference-cannot-mix",
+      "passed": true,
+      "observed": "ACCOUNT_MISMATCH"
+    },
+    {
+      "case": "midnight-and-monday-split-without-double-charge",
+      "passed": true,
+      "observed": {
+        "day:2026-10-18": 600,
+        "week:2026-10-12": 600,
+        "day:2026-10-19": 600,
+        "week:2026-10-19": 600
+      }
+    },
+    {
+      "case": "half-open-midnight-has-no-next-day-charge",
+      "passed": true,
+      "observed": {
+        "day:2026-10-18": 900,
+        "week:2026-10-12": 900
+      }
+    },
+    {
+      "case": "dst-fall-uses-elapsed-utc-seconds",
+      "passed": true,
+      "observed": {
+        "day:2026-11-01": 3600,
+        "week:2026-10-26": 3600
+      }
+    },
+    {
+      "case": "dst-spring-uses-elapsed-utc-seconds",
+      "passed": true,
+      "observed": {
+        "day:2026-03-08": 3600,
+        "week:2026-03-02": 3600
+      }
+    },
+    {
+      "case": "overlapping-tasks-rejected",
+      "passed": true,
+      "observed": "OVERLAPPING_TASKS"
+    },
+    {
+      "case": "duplicate-budget-does-not-add-capacity",
+      "passed": true,
+      "observed": "BUDGET_PERIOD_CONFLICT"
+    },
+    {
+      "case": "weekly-limit-blocks-when-day-fits",
+      "passed": true,
+      "observed": "CAPACITY_CONFLICT"
+    },
+    {
+      "case": "week-budget-must-start-on-monday",
+      "passed": true,
+      "observed": "BUDGET_PERIOD_INVALID"
+    },
+    {
+      "case": "noncanonical-period-cannot-create-second-budget",
+      "passed": true,
+      "observed": "BUDGET_PERIOD_INVALID"
+    },
+    {
+      "case": "daily-limit-blocks-when-week-fits",
+      "passed": true,
+      "observed": "CAPACITY_CONFLICT"
+    },
+    {
+      "case": "daily-weekly-equality-is-admissible",
+      "passed": true,
+      "observed": {
+        "protected_seconds": {},
+        "future_seconds": {
+          "day:2026-10-16": 900,
+          "week:2026-10-12": 900
+        },
+        "overcommitted": []
+      }
+    },
+    {
+      "case": "shrink-keeps-completed-charge-and-overage",
+      "passed": true,
+      "observed": {
+        "protected_seconds": {
+          "day:2026-10-16": 900,
+          "week:2026-10-12": 900
+        },
+        "future_seconds": {},
+        "overcommitted": ["week:2026-10-12"]
+      }
+    },
+    {
+      "case": "shrink-does-not-admit-more-work",
+      "passed": true,
+      "observed": "CAPACITY_CONFLICT"
+    },
+    {
+      "case": "next-plan-cannot-erase-this-weeks-completion",
+      "passed": true,
+      "observed": "CAPACITY_CONFLICT"
+    },
+    {
+      "case": "confirmation-interleaving-A-wins",
+      "passed": true,
+      "observed": "VERSION_CONFLICT"
+    },
+    {
+      "case": "confirmation-interleaving-A-single-effect",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "case": "confirmation-interleaving-B-wins",
+      "passed": true,
+      "observed": "VERSION_CONFLICT"
+    },
+    {
+      "case": "confirmation-interleaving-B-single-effect",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "case": "confirmation-request-replay-no-second-effect",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "case": "confirmation-request-key-conflict",
+      "passed": true,
+      "observed": "REQUEST_KEY_CONFLICT"
+    },
+    {
+      "case": "completion-replay-no-second-fact",
+      "passed": true,
+      "observed": 1
+    },
+    {
+      "case": "completion-payload-conflict",
+      "passed": true,
+      "observed": "COMPLETION_PAYLOAD_CONFLICT"
     }
   ],
-  "passed": 13,
+  "passed": 42,
   "human_non_author_review": "pending"
 }

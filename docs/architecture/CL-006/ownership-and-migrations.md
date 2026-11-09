@@ -18,6 +18,10 @@
 | Outbox/审计 | 由对应API事务写入 | 消费已授权事件，传递最小元数据 | 与相应业务写入同事务，消费者按event_id去重 |
 
 “模块”是同一NestJS API内的职责，不新增独立服务或第二业务数据库。
+2026-10-16 #30修订补充：Planning API同时拥有TaskOccurrence/Revision、每版PlanTask及CapacityCharge；
+Learning API按稳定实例写唯一CompletionFact，开始/完成与计划确认共享账户/实例锁及版本检查，
+事务内冻结容量占用并关联事实，worker不能自行重建occurrence或清除已完成占用。
+日周/跨版本/缩容不变量以[概念模型](conceptual-model.md)为准；纯内存CAS反例不代替真实SQL锁验证。
 Python worker只持受限服务身份、Temporal存储权限和限定临时对象能力；无业务PostgreSQL写账号。
 Temporal持久化编排进度，Redis保存可重建缓存/限流，费用与删除水位不只存在Redis/工作流history。
 
@@ -28,6 +32,9 @@ Temporal持久化编排进度，Redis保存可重建缓存/限流，费用与删
 晚到usage可以用于对账，但不能给已取消/删除Job继续生成或发布的资格。
 同一usage回执去重；缺回执/断流写unknown_pending_reconciliation，不记零或释放为免费额度。
 缓存价格未知时已知部分与情景估算分开；费用计算Decimal，reasoning若含在output中不重复计费。
+2026-10-16 #28修订按[未知调用合同](../CL-005/model-gateway/admission-and-unknown-calls.md)区分execution_unknown与billing_unknown：
+前者保留预留/在途名额并暂停链，不因超时或Temporal重试自动修复；后者仅在终止可核验且旧预留不释放、
+总预算足够时允许新步骤。完整不合格输出的修复单独准入；准入匹配供应商/配置版本/用途/数据类别且默认拒绝。
 本轮合成探针只是观察与有界请求演练，业务账本/锁尚未实现。
 
 | 新增逻辑记录 | 最小字段与约束 |

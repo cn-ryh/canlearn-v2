@@ -21,9 +21,25 @@
       "occurrence_key": "O-1",
       "account": "U-A",
       "minutes": 15,
+      "occurrence_revision": 1,
+      "resource_version_ref": "READ-v1",
+      "purpose": "practice",
+      "window_start": "2026-10-16T09:00:00+08:00",
+      "window_end": "2026-10-16T09:15:00+08:00",
       "goals": ["G-CS", "G-EN"]
     },
-    { "id": "T-PHY", "occurrence_key": "O-2", "account": "U-A", "minutes": 20, "goals": ["G-PHY"] }
+    {
+      "id": "T-PHY",
+      "occurrence_key": "O-2",
+      "account": "U-A",
+      "minutes": 20,
+      "occurrence_revision": 1,
+      "resource_version_ref": "PHYSICS-v1",
+      "purpose": "practice",
+      "window_start": "2026-10-16T09:15:00+08:00",
+      "window_end": "2026-10-16T09:35:00+08:00",
+      "goals": ["G-PHY"]
+    }
   ],
   "source_snapshots": [
     {
