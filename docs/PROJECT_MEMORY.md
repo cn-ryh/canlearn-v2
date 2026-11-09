@@ -1,6 +1,28 @@
 # CanLearn 项目记忆
 
-最后检查：2026-10-14（Asia/Shanghai）；早先段落的UTC日期/原始范围保留。以下为带日期的状态快照。
+最后检查：2026-10-16（UTC）；早先段落的日期/原始范围保留。以下为带日期的状态快照。
+
+
+## CL-005a/b 评审修订（2026-10-16 UTC）
+
+- 用户要求继续处理 #26/#27 评审意见。本轮交付
+  [身份与存储合同](architecture/CL-005/identity-storage-acceptance.md)及
+  [检索验收合同](architecture/CL-005/retrieval/acceptance-contract.md)，同步 ADR-0003/0004、
+  历史核验范围、接入清单与交接入口。前轮未提交修改全部保留。
+- #26：旧认证探针未归档，选择 CL-101 仓库内正式 HTTP/SQL 回归替换；
+  注册、邀请码消费、验证记录及通知意图同事务，邮件异步至少一次交付，明确未知交付/重放/撤销。
+  会话、加密/版本、保留/备份列候选策略、A/B/C 责任、触发节点和实际证据；
+  COS 合成验证矩阵及代理流量/容量矩阵尚待执行，不冒充实际桶或 SES 测试。
+- #27：选南京独立受限 CPU 进程为试点查询首选，启用前验同机混合负载；
+  候选 P95≤2秒、硬截止3秒、排队≤200ms/并发1候队4 尚未批准/实测。
+  补唯一授权入口、多来源交集/epoch、真实合成纵向链路交付规格，及删源/纠错/撤权/
+  同时发布/ACK丢失/旧备份恢复等时序矩阵。真实合法样本双标仍由 CL-009 接续。
+- 已更新 GitHub #26/#27 正文并复查均 Open / needs-review，未关闭父卡或新增验收签名。
+  本次仅文档修订，未访问远端/GPU/COS、无付费或真实邮件调用；候选参数不代表用户批准。
+- 75 条相关本地 Markdown 链接、围栏、差异空白及验证 JSON 格式检查通过，
+  [记录](reviews/2026-10-16-cl005ab-validation.json)保存九份文档 SHA 与 GitHub 更新回执。
+  未修改运行代码，不为文档重跑完整 pnpm verify；前轮完整门禁不能算这些文档的新 CI。
+  本地未提交、未推送，不能声称工作区干净或 PR 已包含修订。
 
 ## 最新收尾状态（2026-10-12，取代下文早先未提交/全部 Open 的快照）
 
@@ -552,6 +574,45 @@ Hatchling1.32.4固定，项目仍用pnpm12.4.2/uv0.12.15/Python3.12。
 详见[CL-010交付及Issue证据](delivery/2026-10-14-cl010-delivery.md)。
 本段随收尾提交，最终 docs HEAD 的 CI 在 PR Checks/最终查询核对，不回写自引用 SHA。
 
+## #30 / #28 / #29 评审修订（2026-10-16 UTC）
+
+用户转交评审意见并要求按#30→#28→#29顺序修订；三卡不关闭，不把转交意见当指定人员最终签审。
+开工基线`d08251d`、工作区干净，本轮本地修改未提交/推送；没有新付费调用、GPU/远端实验或部署。
+
+- #30：[概念模型](architecture/CL-006/conceptual-model.md)拆分稳定TaskOccurrence/Revision与每版PlanTask；
+  新增SkillNodeVersion、GoalTarget二选一及跨空间规则；固定账户容量日历、周一周界、UTC秒切片、日周双约束、
+  完成占用冻结与缩容超额。同键异载荷拒绝不再字典覆盖，原13项加29项反例共42项纯内存检查通过。
+  workflow新增1项归档/CLI门禁；确认并发只做两种顺序推演，不宣称真实SQL锁/计划API已实现。
+- #28：[新合同](architecture/CL-005/model-gateway/admission-and-unknown-calls.md)规定服务端按供应商/配置版本/
+  用途/数据类别默认拒绝，execution_unknown暂停链并保留费用预留及名额；完整不合格输出修复、仅费用未知分开。
+  历史Step期限后修复未改写，但明确不代表新准入策略验收。新增12例原创校验器挑战输入，模型未运行，
+  误接纳/误拒率为未测，正式网关/供应商与真实资料仍未准入，CL-205/114/115/207等接续。
+- #29：[内部运行合同](architecture/CL-005/internal-operations-contract.md)记录业务/Temporal共实例共卷风险、
+  优先拆Temporal存储、主API唯一GPU准入/有界FIFO、未知执行继续占槽；候选RPO≤24h/RTO≤4h、
+  已确认删除台账目标RPO=0，独立备份/最新删除head/恢复操作者与放行流程。均未批准或实测，不伪称恢复承诺。
+  ADR-0006及清单已同步CL-013合成强停/replay/回滚、CL-010真实Basic恢复；南京负载/公网mTLS/备份缺口保留。
+- 完整`pnpm verify`退出0：API149/Web9/Python66、质量故障14；格式/lint/类型/契约/Compose/构建通过。
+  CL-006设计脚本Ruff lint/format及42项结果源SHA一致，挑战集12例结构/分组通过；本轮未重跑GPU或模型。
+- 已更新GitHub #30/#28/#29正文的重新验收清单，#29误入CL-006父卡标题已清除；三卡仍Open/needs-review，
+  实际负责人/非作者/验收人确认框未勾，没有新增评论、指派或关闭卡。远端PR/CI仍对应旧提交，不算本地修订CI。
+
+逐条回应、接续与本轮验证见[修订记录](reviews/2026-10-16-cl005-cl006-revisions.md)及
+[文件摘要/Issue回执](reviews/2026-10-16-cl005-cl006-validation.json)。本轮不自动提交/推送或合并PR。
+
+## #28 / #29 / #30 独立评审后关闭（2026-10-16 UTC）
+
+用户明确确认独立评审员认定本次修订成功，并授权关闭三卡、标记完成。依此记录R0设计/决策验收，
+没有代填评审员姓名、指派身份或外部权利/教学签审；实现/生产部署及真实资料准入条件保留。
+已逐卡发布验收范围/证据评论、在正文标注最新结论、移除needs-review状态标签，并实际关闭为completed：
+
+- [CL-005c #28](https://github.com/cn-ryh/canlearn-v2/issues/28#issuecomment-6207771868)：Closed/completed。
+- [CL-005d #29](https://github.com/cn-ryh/canlearn-v2/issues/29#issuecomment-6207772551)：Closed/completed。
+- [CL-006a #30](https://github.com/cn-ryh/canlearn-v2/issues/30#issuecomment-6207773288)：Closed/completed。
+
+重查54卡：47 Open、7 Closed、20待评审；父卡#5/#6仍Open，其他卡未随子卡自动完成。
+本次仅补验收状态与证据，不新增运行验证、付费调用或远端实验。上轮修订仍未提交/推送，PR/CI仍绑定d08251d。
+关闭前验证记录原字节保存在reviews下before-close快照；当前验证记录更新文档SHA及关闭回执，不冒充重跑测试。
+
 ## 定位与依据
 
 CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规划入口是
@@ -570,7 +631,8 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 - `compose.yaml`：PostgreSQL、Redis、Temporal、Temporal UI 的本地配置。
 - 生产OpenAPI为健康接口及27个planned业务提案；默认运行时仅健康，CL-013a启用后另有独立本地合成契约。四类生产事件planned，其中三类已有合成Outbox/dispatcher验证，资源失效未实现。
 - 已配置 Biome、Ruff、mypy、TypeScript、Vitest、pytest、Redocly、GitHub Actions 与 Husky 门禁。
-- 尚无资料上传、MinerU Adapter、真实解析流程、鉴权或学习业务闭环；不要将产品文档、数据库枚举和健康烟测当作已交付功能。
+- 尚无生产用户上传/鉴权或正式学习闭环；CL-010已有默认关闭的原创夹具真实MinerU Adapter探针。
+  不把设计、隔离工程验证或数据库枚举当作生产功能验收。
 
 ## 架构与工作约束
 
@@ -578,7 +640,7 @@ CanLearn 是面向自主学习者的资料驱动学习平台。当前产品规�
 - PostgreSQL 保存业务事实；Redis 保存可重建状态、缓存与短期协调信息。
 - 前端只访问 CanLearn API，不直连数据库、Redis 或 MinerU。
 - MinerU 是外部独立微服务，通过 Adapter 接入；默认 Compose 不启动它。
-- 长任务使用异步任务资源；领域事件计划通过 PostgreSQL Outbox 发布，目前未实现。
+- 长任务使用异步任务资源；生产领域事件仍planned，CL-013已有隔离合成PostgreSQL Outbox，不能外推为生产派发已实现。
 - API、事件、数据库迁移、环境变量和部署配置变化须同步更新对应文档与契约。
 - 提交规则与检查以 `CONTRIBUTING.md` 为准，使用 Conventional Commits。
 

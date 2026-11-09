@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-16",
+  "scope": "documentation revision only; no runtime experiments",
+  "checks": {
+    "local_markdown_links": 75,
+    "fences": "passed",
+    "diff_check": "passed"
+  },
+  "sha256": {
+    "docs/architecture/CL-005/identity-storage-acceptance.md": "7921bd5f6c34546f7a39ca5418460ed1d7e678de51f9f541c4dfe5e70734ef38",
+    "docs/architecture/CL-005/retrieval/acceptance-contract.md": "83b60fa3ff99e2b6c3501f920ddc2c5a832ca6f203660f00daaf10d634f11f1f",
+    "docs/architecture/ADR-0003-identity-and-private-storage.md": "41c6a9d7fe24422627dc1ce82c236d175e52381c2460755fa413350e06e52f19",
+    "docs/architecture/ADR-0004-retrieval-and-index-boundaries.md": "3243244a2d0dbdd5377f4e4e9ade58c3e8cd4b5d7edf111a401cd3ba08153bd7",
+    "docs/architecture/CL-005/validation-record.md": "91b660b0caf210fe22ef77d60e8586aada0dd4791d78452677d80b1c80693f3c",
+    "docs/architecture/CL-005/retrieval/README.md": "e7ba6bd5096c7be0f35c324ac20f990d9607b679b4852ea1e85355d48d5b59da",
+    "docs/architecture/CL-005/README.md": "4355a358518300fa68e74494e6fa1de5902206472f6302d7ba79cbd746b57381",
+    "docs/architecture/CL-005/deployment-and-service-readiness.md": "0dc227d03729eef947fc734779630ad6c37d4575fd5ba08e2f88a18c54f68b59",
+    "docs/architecture/CL-005/decision-closeout.md": "ca16860c33f3040ce26544e1fea17893bf585cef031136904bc0326f86babca0"
+  },
+  "issues": [
+    {
+      "issue": 26,
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/26",
+      "state": "open",
+      "updated_at": "2026-10-16T04:12:36Z"
+    },
+    {
+      "issue": 27,
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/27",
+      "state": "open",
+      "updated_at": "2026-10-16T04:12:38Z"
+    }
+  ]
+}

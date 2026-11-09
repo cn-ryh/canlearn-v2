@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-16",
+  "baseline_commit": "d08251d4be8953f65003917576c8f1bfa71a3f76",
+  "scope": "Review revisions only; planning reference and counterexamples are pure-memory; no production DDL/API/gateway/scheduler or recovery deployment",
+  "pnpm_verify_exit_code": 0,
+  "checks": {
+    "api_tests": 149,
+    "web_tests": 9,
+    "workflow_tests": 66,
+    "quality_fault_tests": 14,
+    "cl006_design_examples": 42,
+    "cl006_original_examples": 13,
+    "cl006_review_counterexamples": 29,
+    "validator_challenge_inputs": 12,
+    "validator_strata_counts": {
+      "correct": 3,
+      "wrong_answer": 3,
+      "wrong_citation": 3,
+      "insufficient_evidence": 3
+    },
+    "validator_model_quality_measured": false,
+    "model_calls": 0,
+    "remote_experiments": 0,
+    "human_final_acceptance": "pending"
+  },
+  "issue_body_updates": [
+    {
+      "issue": 30,
+      "state": "open",
+      "labels": ["area:api", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/30",
+      "updated_at": "2026-10-16T03:45:07Z",
+      "actual_human_acceptance_recorded": false
+    },
+    {
+      "issue": 28,
+      "state": "open",
+      "labels": ["area:decision", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/28",
+      "updated_at": "2026-10-16T03:45:09Z",
+      "actual_human_acceptance_recorded": false
+    },
+    {
+      "issue": 29,
+      "state": "open",
+      "labels": ["area:decision", "phase:R0", "priority:P0", "status:needs-review"],
+      "url": "https://github.com/cn-ryh/canlearn-v2/issues/29",
+      "updated_at": "2026-10-16T03:45:11Z",
+      "actual_human_acceptance_recorded": false
+    }
+  ],
+  "source_and_document_sha256": {
+    "apps/workflow/tests/test_cl006_reference.py": "18469580b05aed313eef2ed4f9fbbf374f4d0e99c5821f9690a420764fe14bf7",
+    "docs/PROJECT_MEMORY.md": "eca00a98784869eeb3a1c2cc946789fc04ad5b9b6094c6cecc6922970b65ec90",
+    "docs/architecture/ADR-0005-model-gateway-and-provider-boundaries.md": "23df47c99973624ac20b711ab449ea24c00d4e7b79a21d49e51a3d8d02c0b319",
+    "docs/architecture/ADR-0006-deployment-and-async-coordination.md": "9cbaf3a34f246b306e2f519acc20b43c36450c8cdc7fd72dddf5f0c9670de2bc",
+    "docs/architecture/CL-005/README.md": "866c23847137572850e0fc26cd926e954553203cb9a8d9e62012e7a4d8beff21",
+    "docs/architecture/CL-005/decision-closeout.md": "f22af24d2c8b8690f28fcad2d5116fff0428bc2e44bc81b7243392fa1b9cea6a",
+    "docs/architecture/CL-005/deployment-and-service-readiness.md": "8dc3c25c91cf449891f65049d985d4b1e62d71fed95a588016a42c3b9ca65fd7",
+    "docs/architecture/CL-005/internal-operations-contract.md": "15db7fec0e4c77994bb27ba2883381c38c3a9beb71a61d145904ef100be75e76",
+    "docs/architecture/CL-005/model-gateway/admission-and-unknown-calls.md": "7baa113592f961f0c55824030902520dacbffa26df9f2a61e6d1b7a25b9243f3",
+    "docs/architecture/CL-005/model-gateway/business-chain-evaluation.md": "6cacb3bde5e91fdb50b76f625fcb1c5d5a59f66433749d22f177babce67153b8",
+    "docs/architecture/CL-005/model-gateway/selection-record.json": "d38740d578449eb0eec2c37c98657788699ff553bc5f5e9ceca2c472a16f4723",
+    "docs/architecture/CL-005/model-gateway/validator-challenge-set.json": "eb04327cb865c3d8c2eec95e0233f41d493149b660556784a9e02a13d0d11aaf",
+    "docs/architecture/CL-006/README.md": "8fbdecd910891209ffd565c5e1f20a70ef36354fa5153f7535dda9cd9b556461",
+    "docs/architecture/CL-006/conceptual-model.md": "d4e6284c03a75451b261a2ba711c0705011cc186fb3b6114bb9e245c3c33bfbc",
+    "docs/architecture/CL-006/example-results.json": "d38e29bc67f83db1272cacfa37de349baf40a43c30ee1347a6f826ba896d6f4c",
+    "docs/architecture/CL-006/examples.json": "211ae527412c94bc496e6af29cee228814676f0d0b17d5e3728d4e8a001095cf",
+    "docs/architecture/CL-006/ownership-and-migrations.md": "e4b7ffa4d3d53273bae1814f87ae8adfa0fe96d3f39e505ce0657fffda8d845d",
+    "docs/architecture/CL-006/planning_reference.py": "b18a467dbc4b73a0b1f733532de91f85c848b725af06b718c4a6c01a5c7caf88",
+    "docs/architecture/CL-006/planning_review_examples.py": "7af9fd2b0f491f2c15f35a0ca736f21330d70fcf694ecc3ff06d98c07f50eff9",
+    "docs/architecture/CL-006/validate_examples.py": "dcfc50821f6185b6aa02c4bae8c34f7f3c24afb362c88afb9aded7638e043bdc",
+    "docs/reviews/2026-10-16-cl005-cl006-revisions.md": "b3c8a7df68847ec9d2e779d8e7e3222bccdc3be544b21402003941647acb87f1"
+  },
+  "commit_push_performed": false,
+  "remote_ci_for_local_revision": false
+}
