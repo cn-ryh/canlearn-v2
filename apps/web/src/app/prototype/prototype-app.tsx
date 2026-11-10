@@ -9,23 +9,13 @@ import {
   subjectPackages,
   weekTasks,
 } from "./prototype-data";
+import { SourceNote, StatusTag } from "./prototype-shared";
+import RecoveryJourney from "./recovery-journey";
 
-type Journey = "public" | "private";
+type Journey = "public" | "private" | "recovery";
 type PublicStep = "select" | "plan" | "learn";
 type PrivateStep = "upload" | "process" | "learn";
 type Answers = Record<string, number>;
-
-function StatusTag({ children, tone = "neutral" }: { children: React.ReactNode; tone?: string }) {
-  return <span className={`status-tag ${tone}`}>{children}</span>;
-}
-
-function SourceNote({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="source-note">
-      <span aria-hidden="true">↳</span> {children}
-    </p>
-  );
-}
 
 export default function PrototypeApp() {
   const [journey, setJourney] = useState<Journey>("public");
@@ -300,9 +290,24 @@ export default function PrototypeApp() {
         >
           <span>旅程 B</span>私有资料学习
         </button>
+        <button
+          type="button"
+          className={journey === "recovery" ? "active" : ""}
+          onClick={() => switchJourney("recovery")}
+          aria-pressed={journey === "recovery"}
+        >
+          <span>旅程 C</span>中断恢复与权利
+        </button>
       </nav>
 
-      {journey === "public" ? (
+      {journey === "recovery" ? (
+        <RecoveryJourney
+          onOpenPrivate={(step = "upload") => {
+            switchJourney("private");
+            setPrivateStep(step);
+          }}
+        />
+      ) : journey === "public" ? (
         <>
           <section className="prototype-hero">
             <p className="eyebrow">FROM TRUSTED CONTENT TO REAL EVIDENCE</p>
@@ -687,7 +692,7 @@ export default function PrototypeApp() {
         </>
       )}
       <footer className="prototype-footer">
-        <span>CL-012a · 基于 CL-001b 首发旅程</span>
+        <span>CL-012a / CL-012b · 基于 CL-001b 首发旅程</span>
         <span>所有人物、文件与结果均为演示数据</span>
       </footer>
     </main>

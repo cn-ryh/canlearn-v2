@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import PrototypeApp from "./prototype-app";
 
 export const metadata: Metadata = {
-  title: "公共选包与私有资料学习原型 · CanLearn",
-  description: "CL-012a 可点击学习旅程原型，使用演示数据展示来源、校验状态与学习证据。",
+  title: "学习、中断恢复与数据权利原型 · CanLearn",
+  description: "CL-012a/b 可点击原型，使用演示数据展示学习证据、计划恢复、异常状态与数据权利。",
 };
 
 export default function PrototypePage() {
