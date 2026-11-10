@@ -1,0 +1,1 @@
+record_id,session_id,participant_code,consent_receipt_ref,scenario_id,execution_layer,build_ref,device_class,browser,viewport,assistive_technology,started_at,ended_at,result,actual_observation,participant_verbatim,moderator_intervention,issue_ref,evidence_ref,observer,reviewer,notes
