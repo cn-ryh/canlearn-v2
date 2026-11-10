@@ -11,7 +11,7 @@ CL-001 已确认完整 P0 首发范围，本研究用于检查需求和路径，
 | 子项 | 工件 | 当前状态 |
 | --- | --- | --- |
 | CL-002a / #18 | [招募与同意流程](recruitment-and-consent.md)、[空白招募明细](templates/recruitment.csv)、[目标/实际/缺口汇总](templates/recruitment-summary.csv) | 材料已准备，待 D 执行、A 复核；实际责任人及数据处理安排待填写 |
-| CL-002b / #19 | [统一访谈脚本](interview-and-concierge-script.md)、[会话记录模板](templates/session.md)、空白操作/工时台账 | 材料已准备，待 D 执行、B 复核及真实试跑 |
+| CL-002b / #19 | [访谈脚本与礼宾操作记录](interview-script-and-concierge-log.md)、[会话记录模板](templates/session.md)、空白操作/工时台账 | 材料已准备，待 D 执行、B 复核及真实试跑 |
 | CL-002c / #20 | [首轮探索记录与未验证假设](exploration-report.md) | 未收到可复核的真实试访证据，不能验收完成 |
 
 ## 执行顺序
