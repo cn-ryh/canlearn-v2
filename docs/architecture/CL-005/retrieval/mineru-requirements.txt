@@ -5,8 +5,8 @@ annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.15.1
 beautifulsoup4==4.15.0
-brotli==1.2.0
-certifi==2026.7.22
+brotli==1.2.1
+certifi==2026.10.18
 cffi==2.1.1
 charset-normalizer==3.5.2
 click==8.5.0
@@ -16,7 +16,7 @@ distro==1.9.0
 docvortex==0.5.16
 et-xmlfile==2.0.0
 fastapi==0.143.0
-filelock==3.32.7
+filelock==4.2.1
 flatbuffers==25.12.19
 fonttools==4.66.1
 fsspec==2026.9.0
@@ -80,7 +80,7 @@ opentelemetry-api==1.45.1
 orjson==3.13.0
 packaging==26.3
 pandas==3.0.6
-pillow==12.3.0
+pillow==13.0.0
 protobuf==7.36.2
 psutil==7.2.2
 pyclipper==1.4.0
@@ -90,7 +90,7 @@ pydantic-core==2.50.1
 pydub==0.25.1
 pygments==2.21.0
 pylatexenc==2.11
-pypdf==6.20.0
+pypdf==6.21.4
 pypdfium2==5.14.0
 pypptx-with-oxml==1.0.3
 python-dateutil==2.9.0.post0
@@ -107,7 +107,7 @@ rl-accel==0.9.1
 safehttpx==0.1.7
 safetensors==0.8.0
 semantic-version==2.10.0
-setuptools==84.0.0
+setuptools==84.1.0
 shapely==2.2.0
 shellingham==1.5.4
 six==1.17.0
@@ -118,7 +118,7 @@ sympy==1.14.0
 tinycss2==1.5.1
 tokenizers==0.23.3
 tomlkit==0.14.0
-torch==2.8.0
+torch==2.15.0
 torchvision==0.23.0
 tqdm==4.70.1
 transformers==5.19.0
