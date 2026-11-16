@@ -52,6 +52,31 @@ export const smokeOutbox = pgTable("smoke_outbox", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
+// CL-105 local isolated parse: synthetic page results only. document_id/version_id are opaque
+// references, not foreign keys to the production document tables that do not exist yet.
+export const localParseJobs = pgTable("local_parse_jobs", {
+  jobId: uuid("job_id")
+    .primaryKey()
+    .references(() => jobs.id),
+  requestKey: text("request_key").unique().notNull(),
+  requestHash: text("request_hash").notNull(),
+  snapshotId: uuid("snapshot_id").notNull(),
+  traceId: text("trace_id").notNull(),
+  documentId: uuid("document_id").notNull(),
+  versionId: uuid("version_id").notNull(),
+  profileId: text("profile_id").notNull(),
+  fixture: text("fixture").notNull(),
+  requestedPages: jsonb("requested_pages").$type<number[]>().notNull(),
+  pageResults:
+    jsonb("page_results").$type<
+      { pageIndex: number; status: "success" | "blank" | "failed" | "missing" }[]
+    >(),
+  revision: integer("revision").default(1).notNull(),
+  epoch: integer("epoch").default(1).notNull(),
+  failureCode: text("failure_code"),
+  terminationState: text("termination_state").default("not_requested").notNull(),
+});
+
 // CL-010 isolated parser probe: reference-only checkpoints; no production resource authorization.
 export const mineruProbeJobs = pgTable("mineru_probe_jobs", {
   jobId: uuid("job_id")

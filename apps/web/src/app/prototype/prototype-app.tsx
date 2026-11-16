@@ -2,12 +2,28 @@
 
 import { useMemo, useState } from "react";
 import {
-  exitQuestion,
+  type Admission,
+  formatDemoEvidence,
   getCapacity,
+  getChapterReadiness,
+  getCompletedTasks,
+  getDefaultChapter,
+  getPagePreview,
+  getPageStatus,
+  getPageStatusLabel,
+  getPrivateLearnAdmission,
+  getPrivateProcessAdmission,
+  getPublicLearnAdmission,
+  initialDemoBypass,
+  journeyHasAdmissionGate,
+  type LearningQuestion,
+  type LearningTrack,
   type PackageId,
-  questions,
+  PRIVATE_PAGE_COUNT,
+  privateChapters,
+  privatePagePreview,
+  resolveTrack,
   subjectPackages,
-  weekTasks,
 } from "./prototype-data";
 import { SourceNote, StatusTag } from "./prototype-shared";
 import RecoveryJourney from "./recovery-journey";
@@ -16,6 +32,19 @@ type Journey = "public" | "private" | "recovery";
 type PublicStep = "select" | "plan" | "learn";
 type PrivateStep = "upload" | "process" | "learn";
 type Answers = Record<string, number>;
+type DemoBypass = Record<"public" | "private", boolean>;
+
+const PUBLIC_STEPS: readonly { step: PublicStep; label: string }[] = [
+  { step: "select", label: "选择学科包" },
+  { step: "plan", label: "确认本周计划" },
+  { step: "learn", label: "学习与留证" },
+];
+
+const PRIVATE_STEPS: readonly { step: PrivateStep; label: string }[] = [
+  { step: "upload", label: "创建与上传" },
+  { step: "process", label: "逐页检查" },
+  { step: "learn", label: "学习与留证" },
+];
 
 export default function PrototypeApp() {
   const [journey, setJourney] = useState<Journey>("public");
@@ -28,16 +57,54 @@ export default function PrototypeApp() {
   const [recallAnswer, setRecallAnswer] = useState<number>();
   const [fileReady, setFileReady] = useState(false);
   const [selectedPage, setSelectedPage] = useState(12);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [capacityConfirmed, setCapacityConfirmed] = useState(false);
+  const [selectedChapterId, setSelectedChapterId] = useState<string>(getDefaultChapter().id);
+  // D16：演示模式按旅程分别记录，切换旅程不清除既有选择。
+  const [demoBypass, setDemoBypass] = useState<DemoBypass>(initialDemoBypass);
+
   const selectedPackage = subjectPackages.find((item) => item.id === packageId);
   if (!selectedPackage) throw new Error(`Unknown prototype package: ${packageId}`);
-  const capacity = useMemo(() => getCapacity(hours), [hours]);
-  const allAnswered = questions.every((question) => answers[question.id] !== undefined);
+
+  const track: LearningTrack = resolveTrack(
+    journey === "private" ? "private" : "public",
+    packageId,
+  );
+  const capacity = useMemo(() => getCapacity(hours, track.weekTasks), [hours, track]);
+  const completed = getCompletedTasks(track.weekTasks);
+  const allAnswered = track.questions.every((question) => answers[question.id] !== undefined);
+
+  const selectedChapterIdState = selectedChapterId;
+  const selectedChapter =
+    journey === "private"
+      ? getChapterReadiness(
+          privateChapters.find((chapter) => chapter.id === selectedChapterIdState) ??
+            getDefaultChapter(),
+        )
+      : undefined;
+
+  const bypass = demoBypass[journey === "private" ? "private" : "public"];
+
+  const publicAdmission: Admission = bypass
+    ? { allowed: true, reason: "" }
+    : getPublicLearnAdmission({ capacityConfirmed, capacityFeasible: capacity.feasible });
+
+  const privateProcessAdmission: Admission = bypass
+    ? { allowed: true, reason: "" }
+    : getPrivateProcessAdmission({ fileReady });
+  const privateLearnAdmission: Admission = bypass
+    ? { allowed: true, reason: "" }
+    : getPrivateLearnAdmission({
+        fileReady,
+        chapterLearnable: selectedChapter?.learnable === true,
+      });
 
   function switchJourney(next: Journey) {
     setJourney(next);
     setAnswers({});
     setExitAnswer(undefined);
     setRecallAnswer(undefined);
+    setPreviewOpen(false);
   }
 
   function answerQuestion(id: string, answer: number) {
@@ -50,59 +117,57 @@ export default function PrototypeApp() {
     setRecallAnswer(undefined);
   }
 
-  const learningPanel = (isPrivate: boolean) => (
+  function toggleDemoBypass() {
+    const key: "public" | "private" = journey === "private" ? "private" : "public";
+    setDemoBypass((current) => ({ ...current, [key]: !current[key] }));
+  }
+
+  const practiceQuestions = track.questions;
+
+  const learningPanel = () => (
     <div className="learning-grid">
       <section className="panel lesson-panel" aria-labelledby={`${journey}-lesson-title`}>
         <div className="panel-heading">
           <div>
             <p className="section-kicker">02 / 讲解与来源</p>
-            <h2 id={`${journey}-lesson-title`}>
-              {isPrivate ? "细胞膜的流动镶嵌模型" : "线性表与顺序存储"}
-            </h2>
+            <h2 id={`${journey}-lesson-title`}>{track.lessonTitle}</h2>
           </div>
-          <StatusTag tone={isPrivate ? "purple" : "teal"}>
-            {isPrivate ? "私有空间" : "公共维护"}
+          <StatusTag tone={journey === "private" ? "purple" : "teal"}>
+            {journey === "private" ? "私有空间" : "公共维护"}
           </StatusTag>
         </div>
         <div className="lesson-copy">
-          <p>
-            {isPrivate
-              ? "细胞膜主要由脂质和蛋白质构成。磷脂双分子层构成膜的基本支架，蛋白质分子以不同方式镶嵌其中，膜成分具有一定的流动性。"
-              : "线性表是具有相同特性的数据元素的有限序列。顺序存储把逻辑上相邻的元素放在物理上相邻的位置，因此可以计算地址并随机存取。"}
-          </p>
+          <p>{track.lessonBody}</p>
           <div className="concept-card">
             <span className="concept-number">01</span>
             <div>
-              <strong>{isPrivate ? "结构特点" : "按位查找"}</strong>
-              <p>
-                {isPrivate
-                  ? "磷脂双分子层 + 多样化膜蛋白"
-                  : "知道起始地址和元素大小，即可用 O(1) 时间定位。"}
-              </p>
+              <strong>{track.conceptTitle}</strong>
+              <p>{track.conceptBody}</p>
             </div>
           </div>
         </div>
-        <SourceNote>
-          {isPrivate
-            ? "《细胞生物学》演示文件 · 版本 1 · PDF 第 12 页 · 段落 2"
-            : "《数据结构学习导引》原型单元 · 2.1 节 · 内容版本 v3"}
-        </SourceNote>
-        {isPrivate && (
-          <div className="source-check">
-            <div>
-              <span className="file-icon" aria-hidden="true">
-                PDF
-              </span>
-              <span>第 {selectedPage} 页 · 原始资料</span>
+        <SourceNote>{track.sourceVersion}</SourceNote>
+        {journey === "private" && (
+          <>
+            <div className="source-check">
+              <div>
+                <span className="file-icon" aria-hidden="true">
+                  PDF
+                </span>
+                <span>
+                  第 {selectedPage} 页 · {getPageStatusLabel(selectedPage)}
+                </span>
+              </div>
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => setPreviewOpen((open) => !open)}
+              >
+                {previewOpen ? "收起页面预览" : "在原稿中核对 →"}
+              </button>
             </div>
-            <button
-              type="button"
-              className="text-button"
-              onClick={() => setSelectedPage(selectedPage === 12 ? 13 : 12)}
-            >
-              在原稿中核对 →
-            </button>
-          </div>
+            {previewOpen && <PagePreviewPanel page={selectedPage} onSelect={setSelectedPage} />}
+          </>
         )}
         <p className="supplement-note">
           补充说明：页面中的类比为无来源的学习辅助，不作为原文事实。
@@ -116,11 +181,11 @@ export default function PrototypeApp() {
             <h2 id={`${journey}-practice-title`}>边学边检验</h2>
           </div>
           <span className="question-count">
-            {Object.keys(answers).length} / {questions.length}
+            {Object.keys(answers).length} / {practiceQuestions.length}
           </span>
         </div>
         <p className="muted small">题目保留校验状态；“试用生成”不进入正式诊断。</p>
-        {questions.map((question, questionIndex) => {
+        {practiceQuestions.map((question: LearningQuestion, questionIndex: number) => {
           const answer = answers[question.id];
           const answered = answer !== undefined;
           return (
@@ -179,19 +244,19 @@ export default function PrototypeApp() {
           <div className="locked-state">
             <span aria-hidden="true">○</span>
             <p>
-              完成上方 2 道练习后，开启一次独立退出测。
+              完成上方 {practiceQuestions.length} 道练习后，开启一次独立退出测。
               <br />
               浏览讲解本身不会被视为掌握。
             </p>
           </div>
         ) : (
           <div className="exit-test">
-            <h3>{exitQuestion.stem}</h3>
+            <h3>{track.exitQuestion.stem}</h3>
             <div className="options">
-              {exitQuestion.options.map((option, index) => (
+              {track.exitQuestion.options.map((option, index) => (
                 <button
                   type="button"
-                  className={`option ${exitAnswer !== undefined && index === exitQuestion.answer ? "correct" : ""} ${exitAnswer === index && index !== exitQuestion.answer ? "wrong" : ""}`}
+                  className={`option ${exitAnswer !== undefined && index === track.exitQuestion.answer ? "correct" : ""} ${exitAnswer === index && index !== track.exitQuestion.answer ? "wrong" : ""}`}
                   key={option}
                   disabled={exitAnswer !== undefined}
                   onClick={() => setExitAnswer(index)}
@@ -208,20 +273,22 @@ export default function PrototypeApp() {
                   ✓
                 </div>
                 <div>
-                  <strong>学习证据 #DEMO-031</strong>
-                  <p>{exitQuestion.explanation}</p>
+                  <strong>学习证据 {formatDemoEvidence(track.evidenceId)}</strong>
+                  <p>{track.exitQuestion.explanation}</p>
                   <dl>
                     <div>
                       <dt>目标技能</dt>
-                      <dd>{isPrivate ? "解释膜结构" : "比较存储结构"}</dd>
+                      <dd>{track.skill}</dd>
                     </div>
                     <div>
                       <dt>作答结果</dt>
-                      <dd>{exitAnswer === exitQuestion.answer ? "正确" : "错误（已忠实记录）"}</dd>
+                      <dd>
+                        {exitAnswer === track.exitQuestion.answer ? "正确" : "错误（已忠实记录）"}
+                      </dd>
                     </div>
                     <div>
                       <dt>来源版本</dt>
-                      <dd>{isPrivate ? "PDF v1 · p.12" : "单元 v3 · 2.1 节"}</dd>
+                      <dd>{track.sourceVersion}</dd>
                     </div>
                   </dl>
                 </div>
@@ -257,6 +324,16 @@ export default function PrototypeApp() {
       </section>
     </div>
   );
+
+  const demoBypassControl = journeyHasAdmissionGate(journey) ? (
+    <div className="demo-bypass">
+      <label>
+        <input type="checkbox" checked={bypass} onChange={toggleDemoBypass} />
+        演示模式：允许直接跳转到学习页
+      </label>
+      <p>开启后不构成容量确认、文件上传或合格章节选择，只用于演示快捷导航，不代表真实准入通过。</p>
+    </div>
+  ) : null;
 
   return (
     <main className="prototype-shell">
@@ -321,14 +398,19 @@ export default function PrototypeApp() {
             </p>
           </section>
           <nav className="stepper" aria-label="公共学习步骤">
-            {["选择学科包", "确认本周计划", "学习与留证"].map((label, index) => {
-              const step: PublicStep = index === 0 ? "select" : index === 1 ? "plan" : "learn";
+            {PUBLIC_STEPS.map(({ step, label }, index) => {
+              const reachable =
+                step === "select" ||
+                step === "plan" ||
+                (step === "learn" && publicAdmission.allowed);
               return (
                 <button
                   type="button"
                   key={label}
                   className={publicStep === step ? "current" : ""}
-                  onClick={() => setPublicStep(step)}
+                  onClick={() => reachable && setPublicStep(step)}
+                  disabled={!reachable}
+                  title={reachable ? undefined : publicAdmission.reason}
                 >
                   <span>{index + 1}</span>
                   {label}
@@ -336,6 +418,7 @@ export default function PrototypeApp() {
               );
             })}
           </nav>
+          {demoBypassControl}
 
           {publicStep === "select" && (
             <section className="journey-section" aria-labelledby="package-heading">
@@ -427,14 +510,18 @@ export default function PrototypeApp() {
                 <div className="panel task-panel">
                   <div className="panel-heading">
                     <h3>本周任务</h3>
-                    <span>{weekTasks.length} 项</span>
+                    <span>{track.weekTasks.length} 项</span>
                   </div>
-                  {weekTasks.map((task) => (
+                  {track.weekTasks.map((task) => (
                     <div className="week-task" key={task.day}>
                       <span className="task-day">{task.day}</span>
                       <div>
                         <strong>{task.title}</strong>
-                        <small>{task.done ? "已有作答记录 · 不重新安排" : "待学习"}</small>
+                        <small>
+                          {task.done
+                            ? `已有真实作答${task.evidenceId ? ` · 证据 ${formatDemoEvidence(task.evidenceId)}` : ""}`
+                            : "待学习"}
+                        </small>
                       </div>
                       <span className="task-time">{task.minutes} 分钟</span>
                     </div>
@@ -452,7 +539,10 @@ export default function PrototypeApp() {
                         max="16"
                         step="0.5"
                         value={hours}
-                        onChange={(event) => setHours(Number(event.target.value))}
+                        onChange={(event) => {
+                          setHours(Number(event.target.value));
+                          setCapacityConfirmed(false);
+                        }}
                       />
                       <output htmlFor="weekly-hours">{hours} 小时</output>
                     </div>
@@ -480,21 +570,31 @@ export default function PrototypeApp() {
                   <dl className="plan-facts">
                     <div>
                       <dt>已完成任务</dt>
-                      <dd>2 项 · 保持不变</dd>
+                      <dd>
+                        {completed.length} 项 · 来自 {selectedPackage.shortName} 本包任务
+                      </dd>
                     </div>
                     <div>
                       <dt>当前计划</dt>
-                      <dd>版本 P1 · 尚未确认</dd>
+                      <dd>{capacityConfirmed ? "版本 P1 · 已确认容量" : "版本 P1 · 尚未确认"}</dd>
                     </div>
                   </dl>
                   <button
                     type="button"
                     className="primary-button full-width"
                     disabled={!capacity.feasible}
-                    onClick={() => setPublicStep("learn")}
+                    onClick={() => {
+                      setCapacityConfirmed(true);
+                      setPublicStep("learn");
+                    }}
                   >
                     确认容量，开始第一单元 →
                   </button>
+                  {!capacity.feasible && (
+                    <p className="admission-note">
+                      容量不足时不能进入学习，也不会自动缩短任务估时。
+                    </p>
+                  )}
                 </div>
               </div>
             </section>
@@ -505,11 +605,11 @@ export default function PrototypeApp() {
               <div className="learning-heading">
                 <div>
                   <StatusTag tone="teal">{selectedPackage.shortName} · 公共维护</StatusTag>
-                  <h1>第一单元 · 看清出处，再检验理解</h1>
+                  <h1>{selectedPackage.shortName} 第一单元 · 看清出处，再检验理解</h1>
                 </div>
-                <p>估时 45 分钟 · 内容版本 v3</p>
+                <p>{track.sourceVersion}</p>
               </div>
-              {learningPanel(false)}
+              {learningPanel()}
             </div>
           )}
         </>
@@ -527,14 +627,25 @@ export default function PrototypeApp() {
             </p>
           </section>
           <nav className="stepper" aria-label="私有资料学习步骤">
-            {["创建与上传", "逐页检查", "学习与留证"].map((label, index) => {
-              const step: PrivateStep = index === 0 ? "upload" : index === 1 ? "process" : "learn";
+            {PRIVATE_STEPS.map(({ step, label }, index) => {
+              const reachable =
+                step === "upload" ||
+                (step === "process" && privateProcessAdmission.allowed) ||
+                (step === "learn" && privateLearnAdmission.allowed);
+              const reason =
+                step === "process"
+                  ? privateProcessAdmission.reason
+                  : step === "learn"
+                    ? privateLearnAdmission.reason
+                    : "";
               return (
                 <button
                   type="button"
                   key={label}
                   className={privateStep === step ? "current" : ""}
-                  onClick={() => setPrivateStep(step)}
+                  onClick={() => reachable && setPrivateStep(step)}
+                  disabled={!reachable}
+                  title={reachable ? undefined : reason}
                 >
                   <span>{index + 1}</span>
                   {label}
@@ -542,6 +653,8 @@ export default function PrototypeApp() {
               );
             })}
           </nav>
+          {demoBypassControl}
+
           {privateStep === "upload" && (
             <section className="journey-section narrow-section" aria-labelledby="upload-heading">
               <div className="section-title-row">
@@ -595,9 +708,11 @@ export default function PrototypeApp() {
                 >
                   确认权限并开始解析 →
                 </button>
+                {!fileReady && <p className="admission-note">请先载入演示 PDF，再开始解析。</p>}
               </div>
             </section>
           )}
+
           {privateStep === "process" && (
             <section className="journey-section" aria-labelledby="process-heading">
               <div className="section-title-row">
@@ -618,23 +733,28 @@ export default function PrototypeApp() {
                     <StatusTag tone="green">解析完成</StatusTag>
                   </div>
                   <div className="page-grid">
-                    {Array.from({ length: 18 }, (_, index) => index + 1).map((page) => (
-                      <button
-                        type="button"
-                        key={page}
-                        className={`page-cell ${page === 7 ? "missing" : page === 14 ? "low" : "ok"}`}
-                        title={
-                          page === 7
-                            ? "第 7 页缺页"
-                            : page === 14
-                              ? "第 14 页低质量"
-                              : `第 ${page} 页可用`
-                        }
-                      >
-                        <span>{page}</span>
-                        <small>{page === 7 ? "缺页" : page === 14 ? "低质量" : "可用"}</small>
-                      </button>
-                    ))}
+                    {Array.from({ length: PRIVATE_PAGE_COUNT }, (_, index) => index + 1).map(
+                      (page) => {
+                        const status = getPageStatus(page);
+                        return (
+                          <button
+                            type="button"
+                            key={page}
+                            className={`page-cell ${status === "missing" ? "missing" : status === "low-quality" ? "low" : "ok"}`}
+                            title={`第 ${page} 页 · ${getPageStatusLabel(page)}`}
+                          >
+                            <span>{page}</span>
+                            <small>
+                              {status === "missing"
+                                ? "缺页"
+                                : status === "low-quality"
+                                  ? "低质量"
+                                  : "可用"}
+                            </small>
+                          </button>
+                        );
+                      },
+                    )}
                   </div>
                   <div className="page-legend">
                     <span>
@@ -653,40 +773,63 @@ export default function PrototypeApp() {
                 </div>
                 <div className="panel chapter-panel">
                   <h3>可学习章节</h3>
-                  <div className="chapter available">
-                    <StatusTag tone="green">可使用</StatusTag>
-                    <strong>3.1 细胞膜的结构</strong>
-                    <p>第 10–13 页 · 引用完整</p>
-                  </div>
-                  <div className="chapter blocked">
-                    <StatusTag tone="red">不可选择</StatusTag>
-                    <strong>3.2 跨膜运输</strong>
-                    <p>包含第 14 页低质量内容，需补充清晰原稿。</p>
-                  </div>
+                  {privateChapters.map((chapter) => {
+                    const readiness = getChapterReadiness(chapter);
+                    const selected = chapter.id === selectedChapterId;
+                    return (
+                      <button
+                        type="button"
+                        key={chapter.id}
+                        className={`chapter ${readiness.learnable ? "available" : "blocked"} ${selected ? "selected" : ""}`}
+                        disabled={!readiness.learnable}
+                        aria-pressed={selected}
+                        onClick={() => {
+                          if (readiness.learnable) setSelectedChapterId(chapter.id);
+                        }}
+                      >
+                        <StatusTag tone={readiness.learnable ? "green" : "red"}>
+                          {readiness.learnable ? "可使用" : "不可选择"}
+                        </StatusTag>
+                        <strong>
+                          {chapter.id} {chapter.title}
+                        </strong>
+                        <p>{readiness.summary}</p>
+                      </button>
+                    );
+                  })}
                   <div className="missing-warning">
                     缺页和低质量页不会由模型补造，也不会进入讲解或练习。
                   </div>
                   <button
                     type="button"
                     className="primary-button full-width"
+                    disabled={!privateLearnAdmission.allowed}
                     onClick={() => setPrivateStep("learn")}
                   >
-                    学习 3.1 · 查看来源 →
+                    学习 {selectedChapterId} · 查看来源 →
                   </button>
+                  {!privateLearnAdmission.allowed && (
+                    <p className="admission-note">{privateLearnAdmission.reason}</p>
+                  )}
                 </div>
               </div>
             </section>
           )}
+
           {privateStep === "learn" && (
             <div className="journey-section">
               <div className="learning-heading">
                 <div>
-                  <StatusTag tone="purple">细胞生物学 · 私有空间</StatusTag>
-                  <h1>3.1 细胞膜的结构</h1>
+                  <StatusTag tone="purple">
+                    {track.subject} · {selectedChapterId}
+                  </StatusTag>
+                  <h1>
+                    {selectedChapterId} {track.lessonTitle}
+                  </h1>
                 </div>
-                <p>PDF v1 · 引用 p.12 · 估时 35 分钟</p>
+                <p>{track.sourceVersion} · 估时 35 分钟</p>
               </div>
-              {learningPanel(true)}
+              {learningPanel()}
             </div>
           )}
         </>
@@ -696,5 +839,49 @@ export default function PrototypeApp() {
         <span>所有人物、文件与结果均为演示数据</span>
       </footer>
     </main>
+  );
+}
+
+function PagePreviewPanel({ page, onSelect }: { page: number; onSelect: (page: number) => void }) {
+  const preview = getPagePreview(page);
+  return (
+    <section className="page-preview" aria-label="页面预览占位">
+      <div className="page-preview-head">
+        <StatusTag
+          tone={
+            preview.status === "available"
+              ? "green"
+              : preview.status === "missing"
+                ? "red"
+                : "amber"
+          }
+        >
+          {preview.statusLabel}
+        </StatusTag>
+        <strong>{preview.heading}</strong>
+      </div>
+      <fieldset className="page-preview-pages" aria-label="选择预览页">
+        {privatePagePreview.pages.map((choice) => (
+          <button
+            type="button"
+            key={choice}
+            className={`page-preview-tab ${getPageStatus(choice)} ${choice === page ? "selected" : ""}`}
+            aria-pressed={choice === page}
+            onClick={() => onSelect(choice)}
+          >
+            第 {choice} 页 · {getPageStatusLabel(choice)}
+          </button>
+        ))}
+      </fieldset>
+      <div className="page-preview-body">
+        {preview.textBlocks.length > 0 ? (
+          preview.textBlocks.map((block) => <p key={block}>{block}</p>)
+        ) : (
+          <p className="page-preview-empty">该页没有可访问文本。</p>
+        )}
+      </div>
+      <p className="page-preview-note">{preview.note}</p>
+      <p className="page-preview-disclaimer">{privatePagePreview.disclaimer}</p>
+    </section>
   );
 }

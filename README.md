@@ -23,9 +23,12 @@ Job七状态、事件/Outbox提案与34个可执行故障设计场景见[CL-008]
 [CL-013a 合成 Job](docs/integration/CL-013a/README.md)已补默认关闭的本地 Web/API/PostgreSQL/Temporal 链路、
 取消/回执/SQL 回滚与重启验证；生产资源授权、真实解析/模型和完整删除恢复仍待后续验收。
 [CL-013b/c 门禁包](docs/integration/CL-013bc/README.md)补真实响应/事件破坏探针、升级兼容迁移验证、
-密钥/依赖扫描与版本固定；镜像漏洞保留报告及处置期限，交付状态见门禁包记录。
+密钥/依赖扫描与版本固定；镜像门禁的 `triage_due` 已过并自动转为强制，2026-11-11 实测仍有未覆盖发现
+导致阻断，处置见门禁包记录。
 [CL-010 MinerU 探针](docs/workflow/CL-010/README.md)已用原创 PDF 跑通真实 Basic/4070 V1 与
 主 API/SQL/Temporal，覆盖 300 页、强停恢复与未知创建；默认关闭，许可签审/生产接入和真实质量仍待验收。
+[CL-105 本地解析切片](docs/api/CL-105/README.md)另提供默认关闭、仅回环的解析任务端点与独立契约；
+生产 `canlearn.v1.yaml` 的 27 个业务操作仍全部为 planned。
 
 ## 仓库结构
 

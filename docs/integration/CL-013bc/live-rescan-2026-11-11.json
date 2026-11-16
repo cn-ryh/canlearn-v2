@@ -1,0 +1,64 @@
+{
+  "recorded_on": "2026-11-11",
+  "scope": "Live Trivy rescan of the four pinned Compose images plus pnpm/uv lockfiles, run locally through the configured HTTP proxy. Not a CI run.",
+  "command": "pnpm security:scan (with http(s)_proxy=http://10.10.10.11:7890)",
+  "result": "FAILED — image gate blocked. This is expected behaviour of images_enforced() after triage_due.",
+  "image_mode": "enforce",
+  "summary_row": "[FUNC] passed; pnpm/uv packages {'uv': 31, 'pnpm': 405}; dependency HIGH/CRITICAL blockers: 0; images: enforce",
+  "fatal_error": "RuntimeError: Image vulnerability triage deadline expired with unresolved HIGH/CRITICAL findings",
+  "dependencies": {
+    "pnpm_packages": 405,
+    "uv_packages": 31,
+    "high_critical_blockers": 0
+  },
+  "images": {
+    "postgres": {
+      "findings": 91,
+      "uncovered_high_critical": 19,
+      "uncovered": [
+        {
+          "package": "krb5-libs",
+          "version": "1.22.2-r1",
+          "severity": "HIGH",
+          "fixed_version": "1.22.3-r0",
+          "count": 16
+        },
+        {
+          "package": "libxslt",
+          "version": "1.1.43-r3",
+          "severity": "HIGH",
+          "fixed_version": "1.1.43-r4",
+          "count": 3
+        }
+      ]
+    },
+    "redis": {
+      "findings": 4,
+      "uncovered_high_critical": 0
+    },
+    "temporal": {
+      "findings": 510,
+      "uncovered_high_critical": 0
+    },
+    "temporal-ui": {
+      "findings": 115,
+      "uncovered_high_critical": 0
+    }
+  },
+  "root_cause": "Upstream vulnerability database added advisories after the 2026-10-14 archive; the 284 existing exceptions were matched against the older finding set.",
+  "not_caused_by_this_change": "compose.yaml, security/exceptions.json and security/image-policy.json were not modified in this working tree; the same block applies at HEAD.",
+  "correct_remediation": "Upgrade the pinned postgres:17-alpine digest so krb5-libs>=1.22.3-r0 and libxslt>=1.1.43-r4 are present. Adding exceptions requires A approval plus a bound expiry and GitHub review evidence; developers must not self-approve.",
+  "not_accepted": [
+    "image gate passing",
+    "that this block is a defect of this change",
+    "that 284 exceptions still cover the current finding set"
+  ],
+  "remediation_investigation": {
+    "tried": "Pulled a newer library/postgres:17-alpine (digest sha256:a77aa70e...) and rescanned it with the same Trivy 0.75.0 and live DB.",
+    "finding": "The newer digest fixes krb5-libs (to >=1.22.3-r0) and libxslt (to >=1.1.43-r4): total findings drop from 91 to 62 and both packages disappear.",
+    "but": "security/exceptions.json matches on the full `target` string, which embeds the image digest. Switching compose.yaml to the new digest therefore invalidates all 3 existing postgres exceptions and leaves 26 uncovered HIGH/CRITICAL findings (Go stdlib v1.24.6: 25 HIGH + 1 CRITICAL, from the bundled gosu binary).",
+    "consequence": "Upgrading the digest is NOT a self-contained fix: it requires new, A-approved exceptions bound to the new digest (or replacing gosu), which a developer must not self-approve. Conversely, keeping the current digest keeps the 19 newly-disclosed krb5-libs/libxslt findings uncovered.",
+    "decision_taken": "Do not change compose.yaml and do not add exceptions in this change. Record both states so the owner can decide between (a) upgrade digest + re-approve stdlib exceptions, or (b) keep pin and approve the 19 new advisories with a bound expiry.",
+    "owner": "A (任宇航) for exception approval; B for the digest upgrade and compatibility re-test."
+  }
+}

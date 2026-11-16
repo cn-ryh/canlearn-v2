@@ -1,0 +1,179 @@
+{
+  "recorded_on": "2026-11-11",
+  "scope": "CL-106 MinerU V1 Adapter design contract draft only: document reading, link/anchor checks, JSON format validation and whitespace check; no MinerU call, no GPU, no new code, endpoint, table or migration",
+  "package": "docs/api/CL-106",
+  "artifacts": {
+    "docs/api/CL-106/README.md": "new; 10 numbered sections plus a relationship section and a validation-boundary section",
+    "docs/api/CL-106/validation-record.json": "new; this file"
+  },
+  "not_accepted": [
+    "CL-106 completion (no Issue created in R1A, status remains draft)",
+    "the Adapter is implemented, wired to Temporal, or exercised against a real document version",
+    "any tier (flash/basic/standard/advanced) selected or approved; that decision belongs to #44",
+    "real parse quality evaluated; CL-010 keeps real_human_quality_verified=false and no CL-009 sample exists",
+    "any production endpoint promoted from planned to implemented",
+    "object storage staging, artifact promotion or cleanup semantics (CL-103 / CL-107)",
+    "cost ledger, price snapshot or usage receipt integration (CL-115)",
+    "physical GPU stop after cancel (termination_state=confirmed has no evidence source)",
+    "R0/R1A gate change; CL-014b No-Go remains in force"
+  ],
+  "executed_this_round": [
+    {
+      "action": "read source documents",
+      "files": [
+        "docs/api/CL-105/README.md",
+        "docs/api/CL-105/validation-record.json",
+        "docs/workflow/CL-010/README.md",
+        "docs/workflow/CL-010/integration-results.json",
+        "docs/workflow/CL-010/http-negative-results.json",
+        "docs/workflow/CL-010/http-request-example.json",
+        "docs/workflow/CL-010/basic-response.json",
+        "docs/workflow/CL-010/output-record.json",
+        "docs/workflow/CL-010/version-and-license.md",
+        "docs/workflow/CL-008/README.md",
+        "docs/workflow/CL-008/job-state-and-admission.md",
+        "docs/workflow/CL-008/failure-and-recovery.md",
+        "docs/architecture/CL-006/ownership-and-migrations.md",
+        "docs/api/CL-007/drift-and-admission.md",
+        "docs/security/CL-014/r0-r1a-gate-decision.md",
+        "docs/roadmap/CanLearn_V2.1_R1A_Issue_Split.md"
+      ],
+      "note": "read-only; no file in these paths was modified"
+    },
+    {
+      "action": "read implementation code for failure classification and timeout facts",
+      "files": [
+        "apps/workflow/src/canlearn_workflow/mineru.py",
+        "apps/workflow/src/canlearn_workflow/mineru_probe.py",
+        "apps/workflow/src/canlearn_workflow/settings.py",
+        "apps/workflow/tests/test_mineru.py",
+        "apps/api/src/local-parse/local-parse.dto.ts",
+        "apps/api/src/local-parse/local-parse.service.ts",
+        "apps/api/src/database/schema.ts",
+        "apps/api/src/mineru-probe/mineru-probe.dto.ts",
+        "contracts/fixtures/mineru-probe.v1.json"
+      ],
+      "note": "read-only inspection of existing code; nothing was executed from these paths"
+    },
+    {
+      "action": "relative Markdown link and CJK anchor check",
+      "script": "local python3 script, not committed to the repository",
+      "method": "for every [text](target) not starting with http/https/mailto: resolve the path against the containing file, require it to exist and stay inside the repository root, then re-derive heading anchors (lowercase, drop punctuation, spaces to hyphen) from the destination file and require the fragment to match",
+      "result": "57 relative links checked in docs/api/CL-106/README.md; all targets exist inside the repository and all CJK fragments resolve"
+    },
+    {
+      "action": "JSON format validation",
+      "command": "python3 -c \"import json;json.load(open('docs/api/CL-106/validation-record.json'))\"",
+      "result": "parsed as valid JSON"
+    },
+    {
+      "action": "whitespace check",
+      "command": "git diff --check",
+      "result": "no whitespace errors"
+    },
+    {
+      "action": "table structure check",
+      "method": "python3 script comparing the pipe count of each Markdown table row against its header row",
+      "result": "0 mismatched tables across the 12 sections"
+    },
+    {
+      "action": "error-code cross-check",
+      "method": "grep MINERU_[A-Z_]* over apps/workflow/src/canlearn_workflow/mineru.py and mineru_probe.py, compared with the list in factual_anchors_used",
+      "result": "19 codes in code, 19 listed; no missing and no invented code"
+    }
+  ],
+  "not_run": [
+    {
+      "command": "any MinerU / V1 request",
+      "reason": "this round is documentation only; no upstream service was started or contacted"
+    },
+    {
+      "command": "any GPU workload",
+      "reason": "no parsing executed; the 4070 was not used"
+    },
+    {
+      "command": "pnpm verify",
+      "reason": "parallel assistants are editing apps/web and apps/api/src/local-parse; a shared run would mix unrelated work, so it was deliberately skipped"
+    }
+  ],
+  "factual_anchors_used": {
+    "mineru_failure_codes": [
+      "MINERU_ENDPOINT_INVALID",
+      "MINERU_TLS_REQUIRED",
+      "MINERU_TRANSFER_REJECTED",
+      "MINERU_PROTOCOL_INVALID",
+      "MINERU_TRANSPORT_UNKNOWN",
+      "MINERU_RESOURCE_LOST",
+      "MINERU_HTTP_REJECTED",
+      "MINERU_RESPONSE_TOO_LARGE",
+      "MINERU_CAPABILITY_MISMATCH",
+      "MINERU_FIXTURE_TOO_LARGE",
+      "MINERU_FIXTURE_HASH_MISMATCH",
+      "MINERU_FILE_INTEGRITY_MISMATCH",
+      "MINERU_PROBE_INPUT_INVALID",
+      "MINERU_POLL_BUDGET_INVALID",
+      "MINERU_POLL_TIMEOUT",
+      "MINERU_OUTPUT_FORMAT_INVALID",
+      "MINERU_DOWNLOAD_REJECTED",
+      "MINERU_ARTIFACT_SCHEMA_MISMATCH",
+      "MINERU_PAGE_COVERAGE_INVALID"
+    ],
+    "probe_phase_codes": ["CREATE_UNKNOWN", "UPSTREAM_LOST", "UPSTREAM_FAILED", "PROTOCOL_INVALID"],
+    "cl010_observed_http_status": {
+      "401": "unauthenticated V1 upload rejected (http-negative-results.json)",
+      "404": "legacy /file_parse absent (http-negative-results.json); old V1 job after upstream restart also 404 -> UPSTREAM_LOST (integration-results.json)",
+      "202": "POST /v1/parse/jobs expected status (http-request-example.json)"
+    },
+    "cl010_integration_checks": 26,
+    "cl010_http_negatives": 2,
+    "cl010_measured_tiers": ["flash", "basic"],
+    "cl010_measured_page_ranges": ["1-2", "1-300"],
+    "cl010_cancel_scope": "queued upstream task only; physical_active_job_stop_verified=false",
+    "adapter_test_timeouts_current": {
+      "client_timeout_seconds": 10,
+      "poll_seconds_max": 600,
+      "activity_start_to_close_seconds": 720,
+      "activity_schedule_to_close_seconds": 1500,
+      "activity_heartbeat_seconds": 15,
+      "activity_maximum_attempts": 2
+    },
+    "open_issue_decisions_not_made_here": [
+      "#44 tiers/page range",
+      "#39-#41 legal samples",
+      "#14 external signoff"
+    ]
+  },
+  "known_gaps_listed_in_readme": {
+    "G1": "create-phase MineruError is always recorded as CREATE_UNKNOWN, including a definite 401 rejection",
+    "G2": "create_job only accepts an integer page count and builds 1-N; page sets are not expressible",
+    "G3": "no dedicated 429/5xx classification; folded into MINERU_HTTP_REJECTED",
+    "G4": "upstream partial cannot reach PARTIAL_READY; the later check requires file status completed",
+    "G5": "termination_state=confirmed has no data source"
+  },
+  "limitations_of_this_record": [
+    "Every statement about CL-010 is a re-reading of its committed evidence, not a re-execution",
+    "No numeric threshold, date, issue number or performance figure was invented; undecided items are marked pending with a trigger node",
+    "The link check validates existence and anchors, not that prose in a destination still supports the claim",
+    "This record does not accept CL-106, does not close any card and does not change the CL-014b No-Go gate"
+  ],
+  "document_stats": {
+    "docs/api/CL-106/README.md": {
+      "lines_wc": 328,
+      "numbered_sections": 10,
+      "cl010_vs_adapter_rows": 12,
+      "failure_matrix_rows": 12,
+      "open_question_rows": 10,
+      "known_gap_list": ["G1", "G2", "G3", "G4", "G5"],
+      "relative_links_checked": 58,
+      "lines_wc_final": 328
+    },
+    "note": "this validation-record.json is not self-measured; its line count would change every time the record is edited"
+  },
+  "naming_decision": {
+    "recorded_on": "2026-11-11",
+    "decision": "Business failure_code follows CL-008a: UPSTREAM_OUTCOME_UNKNOWN (event level) / UPSTREAM_UNKNOWN (internal failure_code). CL-010 probe's UPSTREAM_LOST is a probe-local record only and must not be copied into jobs.failure_code.",
+    "authority": "docs/workflow/CL-008/job-state-and-admission.md (closed CL-008 design contract)",
+    "evidence_preserved": "CL-010 integration-results.json and README are intentionally not rewritten; they keep the observed probe label.",
+    "owner": "A (design contract) + B (CL-106 implementation)"
+  }
+}

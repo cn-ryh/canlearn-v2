@@ -11,7 +11,7 @@
     "build": "pnpm -r --if-present build",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:unit && pnpm contracts:check && pnpm compose:check && pnpm quality:check",
     "compose:check": "docker compose config --quiet",
-    "contracts:check": "redocly lint contracts/openapi/canlearn.v1.yaml contracts/openapi/canlearn.smoke.v1.json",
+    "contracts:check": "redocly lint contracts/openapi/canlearn.v1.yaml contracts/openapi/canlearn.smoke.v1.json contracts/openapi/canlearn.local.v1.json",
     "dev": "concurrently --names web,api,workflow --prefix-colors cyan,green,yellow \"pnpm dev:web\" \"pnpm dev:api\" \"pnpm dev:workflow\"",
     "dev:api": "pnpm --filter @canlearn/api dev",
     "dev:web": "pnpm --filter @canlearn/web dev",
@@ -48,11 +48,11 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.14",
-    "@commitlint/cli": "21.2.3",
-    "@commitlint/config-conventional": "21.2.3",
-    "@redocly/cli": "2.55.0",
-    "concurrently": "10.0.6",
+    "@biomejs/biome": "2.6.6",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
+    "@redocly/cli": "2.77.0",
+    "concurrently": "10.0.7",
     "husky": "9.1.7",
     "lint-staged": "17.6.0"
   }

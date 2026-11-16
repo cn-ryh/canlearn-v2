@@ -42,3 +42,11 @@ schema编译与合成DTO正负例由Ajv8.20.0/ajv-formats3.0.1、YAML2.9.1验证
 官方方法对照：[Nest测试/Fastify inject](https://docs.nestjs.com/fundamentals/testing)、
 [Swagger createDocument](https://docs.nestjs.com/openapi/introduction)。实际证据见
 [核验记录](validation-record.json)；人工非作者评审与业务运行验收分别接续。
+
+2026-11-11 补充：新增 [CL-105 本地解析切片](../CL-105/README.md) 的独立契约
+`contracts/openapi/canlearn.local.v1.json`，只描述 `/v1/local/parse-jobs`、
+`/v1/local/jobs/{jobId}`、`/v1/local/jobs/{jobId}/cancel` 三个操作，标
+`x-runtime-scope: local-isolated-only`，默认关闭、仅回环、仅合成夹具，并已纳入
+`pnpm contracts:check`。生产 [canlearn.v1.yaml](../../../contracts/openapi/canlearn.v1.yaml)
+的 27 个规划操作状态与内容均未变化，仍全部为 `planned`；上文第 1–6 条准入条件未因该切片豁免，
+新增本地契约不构成任何生产端点升级为 implemented 的证据。

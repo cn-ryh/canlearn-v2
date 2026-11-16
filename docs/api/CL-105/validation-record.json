@@ -1,0 +1,105 @@
+{
+  "recorded_on": "2026-11-11",
+  "scope": "CL-105 local isolated parse slice: default-off loopback routes, synthetic page fixtures, independent contract; no production session, document, MinerU, Temporal or billing execution",
+  "not_accepted": [
+    "CL-105 issue completion (not created yet, R1A)",
+    "any production endpoint promoted from planned to implemented",
+    "real document/version tables and ownership checks (CL-101/CL-103/CL-104)",
+    "real MinerU adapter, parser quality, Temporal dispatch, cost ledger (CL-106/CL-010/CL-114/CL-115)"
+  ],
+  "contracts": {
+    "contracts/openapi/canlearn.v1.yaml": "unchanged; 27 planned business operations plus 1 implemented health operation",
+    "contracts/openapi/canlearn.smoke.v1.json": "unchanged; CL-013a local synthetic scope",
+    "contracts/openapi/canlearn.local.v1.json": "new; 3 local-isolated-only operations, all implemented in the local slice"
+  },
+  "endpoint_behaviour": {
+    "POST /v1/local/parse-jobs": [
+      "202 + Location + strong ETag on first accept",
+      "202 + Idempotency-Replayed: true on the same key and payload",
+      "409 IDEMPOTENCY_KEY_REUSED on the same key with a different fingerprint",
+      "422 when both `all` and `pages` are given, neither is given, or pages repeat",
+      "400 for invalid fixture/profile/page range/extra fields/malformed idempotency key",
+      "403 off loopback, without X-Smoke-Client: 1, or with an untrusted Origin",
+      "503 LOCAL_PARSE_CAPACITY_REACHED above 10 active local jobs"
+    ],
+    "GET /v1/local/jobs/{jobId}": [
+      "200 + Cache-Control: no-store + strong ETag",
+      "404 for a UUID that is not a local_parse job",
+      "400 for a non-UUID path parameter",
+      "403 off loopback"
+    ],
+    "POST /v1/local/jobs/{jobId}/cancel": [
+      "200 + Cache-Control: no-store + strong ETag",
+      "active job becomes CANCELLED with epoch+1, revision+1 and terminationState=requested",
+      "already terminal job is returned unchanged (no epoch/revision/ETag change)",
+      "404/400/403 as above"
+    ],
+    "POST /v1/internal/local-parse/jobs/{jobId}/admit": [
+      "private transport (ApiExcludeController + loopback + CANLEARN_SMOKE_TOKEN)",
+      "200 once when snapshot/epoch match and the page set equals the requested set",
+      "409 LOCAL_PARSE_MANIFEST_REJECTED on a missing/extra/duplicate page",
+      "409 LOCAL_PARSE_JOB_TERMINAL after cancel wins the row lock",
+      "409 LOCAL_PARSE_RESULT_ALREADY_ACCEPTED on a repeated receipt"
+    ]
+  },
+  "page_result_matrix": {
+    "success": "SUCCEEDED, all requested pages success",
+    "blank": "SUCCEEDED, all requested pages blank (learnable page count 0)",
+    "fail": "FAILED, all requested pages failed, failureCode PERMANENT_ERROR",
+    "partial (all)": "PARTIAL_READY, success/failed/success/missing/failed/success",
+    "partial pages=[1,2]": "PARTIAL_READY, only pages 1 and 2 reported, denominator stays 2",
+    "pending": "QUEUED with pageResults null until an internal receipt or cancel"
+  },
+  "migration": {
+    "tag": "0003_real_zarda",
+    "change": "append-only CREATE TABLE local_parse_jobs (document_id/version_id NOT NULL as opaque references, no FK to production document tables) + FK to jobs(id)",
+    "existing_migrations_modified": false,
+    "runtime_and_snapshot": "drizzle-kit generate produced both the SQL file and meta/0003_snapshot.json; a second run reported no changes"
+  },
+  "commands": [
+    {
+      "command": "pnpm --filter @canlearn/api db:generate",
+      "exit_code": 0,
+      "note": "first run created 0003_real_zarda; a re-run printed 'No schema changes, nothing to migrate'"
+    },
+    {
+      "command": "pnpm quality:check",
+      "exit_code": 0,
+      "note": "version and append-only migration policy passed; schema matches committed snapshots; 14 python gate tests passed"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api test",
+      "exit_code": 0,
+      "note": "7 files passed, 1 skipped (DB suite); 186 passed, 10 skipped by default (DB suite runs only with an explicit disposable database URL)"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "pnpm contracts:check",
+      "exit_code": 0,
+      "note": "all three OpenAPI documents validated by Redocly"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api build",
+      "exit_code": 0
+    },
+    {
+      "command": "CANLEARN_LOCAL_PARSE_TEST_DATABASE_URL=postgresql://canlearn:canlearn_local@127.0.0.1:15434/canlearn pnpm --filter @canlearn/api exec vitest run src/local-parse/local-parse.db.test.ts",
+      "exit_code": 0,
+      "note": "10 tests on a disposable postgres:17-alpine: requested-page denominator, idempotent replay, same-key conflict, repeated cancel, late receipt after cancel, single acceptance with stale-epoch rejection, 4-way concurrent same key, cancel vs late receipt race, fixed active-job capacity (503), and read after an application rebuild"
+    },
+    {
+      "command": "pnpm verify",
+      "exit_code": 0,
+      "note": "final run after the parallel apps/web edits settled: format/lint/typecheck/test/contracts/compose/quality plus api+web builds all pass. An earlier run failed only on a transient web-side test file (apps/web/src/app/prototype/__tmp_render.test.tsx, JSX parse error) that the other assistant was still writing; that file no longer exists and the api part passed in both runs."
+    }
+  ],
+  "api_test_breakdown": {
+    "domain_logic": 7,
+    "http_swagger_contract_and_negative_cases": 30,
+    "db_suite_optional": 10,
+    "pre_existing_api_tests": 149
+  }
+}

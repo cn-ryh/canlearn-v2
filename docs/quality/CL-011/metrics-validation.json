@@ -1,0 +1,111 @@
+{
+  "recorded_at": "2026-11-11T10:13:23Z",
+  "scope": "CL-011c 指标参考实现的隔离验证：纯函数口径 + 合成事实；不接数据库、事件投递、权限、删除水位或真实用户数据",
+  "baseline_commit": "f641ef116e27b76135a76a08818fe12dbae617bd",
+  "source_sha256": {
+    "apps/api/src/metrics/vlu-reference.ts": "2d446ab06a9a3814f2d1dd287b80471d328b78997adeea5da5382699d4c2108f",
+    "apps/api/src/metrics/vlu-reference.test.ts": "b7a53df0b3580a17e09d60a54ec0b5a56ffb58b07587acb6e3d2d30d05713ba9",
+    "docs/quality/CL-011/metrics-reference.md": "0baef16c68ebc1dbad8c9f861fcfb06872b8d23554842d798350c6871ba1ec3b"
+  },
+  "commands": [
+    {
+      "command": "pnpm --filter @canlearn/api test",
+      "exit_code": 0,
+      "observed": "Test Files 8 passed | 1 skipped (9); Tests 245 passed | 10 skipped (255)",
+      "note": "本轮之前基线为 7 passed | 1 skipped (8) 文件、186 passed | 10 skipped (196) 用例；新增 1 个测试文件与 59 个用例"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api exec vitest run src/metrics/vlu-reference.test.ts",
+      "exit_code": 0,
+      "observed": "Test Files 1 passed (1); Tests 59 passed (59)",
+      "note": "新增用例数 59，超过 15 个的最低要求"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api typecheck",
+      "exit_code": 0,
+      "observed": "tsc --noEmit 无输出"
+    },
+    {
+      "command": "pnpm --filter @canlearn/api build",
+      "exit_code": 0,
+      "observed": "tsc -p tsconfig.build.json 无输出"
+    },
+    {
+      "command": "npx biome lint apps/api/src/metrics/",
+      "exit_code": 0,
+      "observed": "Checked 2 files. No fixes applied. 0 warning / 0 error",
+      "note": "只检查本卡新增目录；仓库级 npx biome lint . 仍报 apps/web/src/app/prototype/prototype-app.tsx:64 的 1 条既有 warning，属本卡范围外"
+    },
+    {
+      "command": "npx biome format apps/api/src/metrics/",
+      "exit_code": 0,
+      "observed": "Checked 2 files. No fixes applied.",
+      "note": "仓库级 npx biome format . 仍报 2 处既有格式差异（apps/web/src/app/prototype/prototype-app.tsx、docs/api/CL-106/validation-record.json），未改动"
+    },
+    {
+      "command": "npx biome format .",
+      "exit_code": 1,
+      "observed": "2 files differ: apps/web/src/app/prototype/prototype-app.tsx, docs/api/CL-106/validation-record.json",
+      "note": "与本卡新增文件无关；两处文件在本轮开始前即为已修改的工作区文件，且不在允许修改范围内，故保持原样"
+    },
+    {
+      "command": "python3 /tmp/check_links_cl011.py",
+      "exit_code": 0,
+      "observed": "所有新增文档的相对链接均指向存在的文件"
+    }
+  ],
+  "checks": {
+    "new_test_cases": 59,
+    "new_test_files": 1,
+    "clauses_covered": [
+      "§1 共同口径",
+      "§2.1 条件 1/2/3/4",
+      "§2.2 去重与归属",
+      "§2.3 正反例",
+      "§3 WVLU / WAL",
+      "§4.1 7 日首个 VLU 激活",
+      "§5 W1/W4 留存",
+      "§6.1/§6.2 72 小时恢复",
+      "§7 延迟检验触达率与正确率",
+      "§8.1/§8.2/§8.3 分组、报表与决策线",
+      "§9 未决项与不可判定处理",
+      "事件字典 §3.3 删除后聚合重算"
+    ],
+    "spec_gaps_returning_undefined": [
+      "hint-level-grading",
+      "normalized-content-key",
+      "interruption-session-exit-anchor",
+      "account-merge-entry-attribution",
+      "entry-attribution-tie",
+      "partial-result-binary-aggregation"
+    ],
+    "candidate_thresholds_encoded": false,
+    "new_dependencies": false,
+    "existing_files_modified": false,
+    "database_or_contract_changed": false,
+    "implementation_functions": [
+      "parseUtcInstant/toUtcInstant/weekStart/addDays/addHours/isWithin/rate",
+      "assessContentQuality/hintEvidenceGrade",
+      "canonicalSubjectIndex/buildEvaluationContext",
+      "evaluateVlu/selectVlus/dedupeVlus",
+      "selectWal/computeWeeklyVlu",
+      "evaluateEntry/computeActivation/firstVluByUser",
+      "computeRetention",
+      "resolveInterruptedAt/mergeInterruptions/computeRecovery",
+      "computeDelayedCheck",
+      "withInvalidations/recomputeAfterInvalidation/computeMetrics"
+    ]
+  },
+  "not_accepted": [
+    "不是生产指标管线：没有事件投递、消费者、指标事实表、聚合任务或调度。",
+    "不是真实用户数据：全部输入是手写合成事实，未连接任何环境。",
+    "未验证学习效果：没有实测激活率、W4 留存率、恢复率或延迟触达率，也不支持任何掌握/提分/PMF 结论。",
+    "未验证删除合规：删除后重算只在纯函数集合层成立，不含删除水位、跨存储副本清理或已发布快照的不可变存储。",
+    "未验证权限与隐私：不实现跨空间隔离、小样本抑制、重识别评估或导出控制。",
+    "未证明并发与乱序安全：函数是同步的纯计算，不模拟并发写入、ACK 丢失、迟到事件或重复投递。",
+    "未验证跨学科规范化内容键：该算法未冻结，实现显式返回 undefined-by-spec。",
+    "候选阈值（40% 激活、25% W4）未编码、未验证，仍是假设线，不是 KPI。"
+  ],
+  "human_review": "pending",
+  "owner_and_reviewer": "未指派（沿用 CL-011a/CL-011b 的待确认状态）"
+}

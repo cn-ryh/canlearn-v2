@@ -64,18 +64,20 @@ SQL 词法规则采用保守拒绝，不能证明任意 SQL 的语义安全；�
 | --- | --- | --- |
 | 密钥 | Gitleaks 扫完整 Git 历史及当前受版本管理/未忽略文件；发现即阻断 | A（任宇航）组织吊销/轮换与调查，B 修复；不能只删 Git 字符串 |
 | 依赖 | Trivy 扫 pnpm/uv 两个锁文件，包含开发依赖；HIGH/CRITICAL 全部阻断，包括未修复漏洞 | B/C 升级，B/A 非作者复核；中低危报告并跟进 |
-| 镜像 | 四个固定摘要真实扫描；扫描失败立即阻断，已知漏洞暂报告 | A/B 在 2026-10-21 前逐项处置；期限后未解决 HIGH/CRITICAL 自动阻断 |
+| 镜像 | 四个固定摘要真实扫描；扫描失败立即阻断。`triage_due` 2026-10-21 已过，门禁由 `images_enforced()` 自动转为强制 | A/B 逐项处置并续批或升级镜像；2026-11-11 实测 postgres 有 19 条未覆盖新 HIGH，门禁按预期阻断 |
 | 版本 | 直接依赖/构建后端精确版本、Actions 完整 SHA、镜像 tag+digest、扫描器 SHA 校验 | B/C 变更锁文件并完整复验；平台托管 runner/漏洞 DB 本身仍会更新 |
 | 迁移 | 已应用文件不可改、增量兼容规则、schema 漂移与真实升级/失败回滚 | B 实施，A 非作者审核；无自动破坏性回退 |
 
-这些是职责映射和工程跟进目标，未新增实际指派或人工签审。镜像暂报告是公开残余项，不是安全验收或风险豁免。
+这些是职责映射和工程跟进目标，未新增实际指派或人工签审。镜像残余项仍属公开残余，不是安全验收或风险豁免。
 `security/image-policy.json` 固定跟进日期；CI 执行状态为绿只说明已配置规则通过。
 
 本轮实际发现并修复：Next.js 16.3.7 → 16.3.8（CVE-2026-94483）、source-map-js 1.2.1 → 1.2.2
 （CVE-2026-93749）、concurrently 10.0.5 → 10.0.6，带入 shell-quote 1.12.0（修复 CVE-2026-102422）。
 清除旧 Next 版本的 release-age 例外，固定 Hatchling 1.32.4。修复后扫描 403 个 pnpm、31 个 uv 包，
 HIGH/CRITICAL 为 0；仍有开发工具链 esbuild 0.18.20 的 MEDIUM GHSA-67mh-4wv8-2f99，
-随 Drizzle 工具升级跟进（B/C，目标 2026-10-21），没有忽略该条报告。
+随 Drizzle 工具升级跟进（B/C）。2026-11-11 复核：`drizzle-kit` 0.31.11 已是 npm 最新版，
+仍钉内部 `esbuild` 0.18.20，无上游修复路径，原定 2026-10-21 目标已过期且不可达；
+该条保持 MEDIUM 报告，不计入 HIGH/CRITICAL 阻断，也不以例外表消除。
 
 | 固定镜像 | HIGH | CRITICAL | 当前结论 |
 | --- | ---: | ---: | --- |
@@ -87,7 +89,7 @@ HIGH/CRITICAL 为 0；仍有开发工具链 esbuild 0.18.20 的 MEDIUM GHSA-67mh
 计数来自本轮漏洞 DB 和实际摘要，按发现记录计数，不等于独立 CVE 数或已经可利用的漏洞数。
 不得把“本地回环”或扫描器匹配当作已完成可达性判断；当前不用于真实用户试点/生产安全放行。
 
-人工例外统一记录于 `security/exceptions.json`，当前为空。依赖例外必须精确匹配 target/id/package/version，
+人工例外统一记录于 `security/exceptions.json`。2026-11-09 起该表已有 284 条镜像例外（均为单条发现的精确匹配，见下文），依赖例外仍为空。依赖例外必须精确匹配 target/id/package/version，
 填写原因、实际批准人、GitHub 评审证据和到期日；缺字段、过期或不匹配不能消除阻断。
 批准前由非作者核对上游公告、锁文件路径、调用可达性和补丁范围；不可直接关闭扫描、降低严重级别或全局忽略 CVE。
 密钥发现不能通过依赖例外消除。
@@ -106,7 +108,7 @@ lodash 4.17.20 锁文件，不安装/执行漏洞包。两者均验证扫描器�
 
 本包 `integration-results.json`、`migration-results.json`、`security-summary.json`、`security-probes.json`
 是本轮本地实测记录；`validation-record.json` 记录基线提交、工作区源码摘要和边界。
-CL-013a 的旧记录仍绑定原提交，不能当本轮结果。初次归档时新 CI 配置尚未推送执行，远端 Issue/PR 未改变。
+CL-013a 的旧记录仍绑定原提交，不能当本轮结果。初次归档时新 CI 配置尚未推送执行；这些变更后续已随 PR #55 合入 main 并在远端 CI 通过。
 
 回退应用/工具版本前先保留发现与证据；不能为回退而恢复已知漏洞依赖或修改迁移账本。
 需要暂停合成环境时使用 smoke:down；新增数据库验证只操作自己的临时库，没有新增业务迁移。
@@ -119,3 +121,36 @@ CL-009、生产身份/空间/上传与正式 R0 退出评审的未完成条件�
 [Trivy 严重级别与未修复漏洞](https://www.trivy.dev/docs/dev/guide/scanner/vulnerability/)、
 [Gitleaks 固定版本](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1)、
 [Trivy 固定版本](https://github.com/aquasecurity/trivy/releases/tag/v0.75.0)。
+
+2026-11-11 复核门禁真实状态：`security/image-policy.json` 的 `triage_due` 2026-10-21 已过，
+`images_enforced()` 因此在无人工改配置的情况下自动转为强制。该行为与
+`scripts/test_quality_gates.py::test_image_triage_deadline_enforces_blocking` 的断言一致，不是配置漂移。
+
+同日以最新漏洞库实际重扫（经代理，Trivy 在线库）得到与 2026-10-14 归档不同的结果，**门禁按预期阻断**：
+
+| 镜像 | 发现数 | 未覆盖 HIGH/CRITICAL | 结论 |
+| --- | ---: | ---: | --- |
+| PostgreSQL 17-alpine | 91 | **19** | `krb5-libs 1.22.2-r1` ×16（修复版 1.22.3-r0）、`libxslt 1.1.43-r3` ×3（修复版 1.1.43-r4）——漏洞库更新后新增，不在现有 284 条例外内 |
+| Redis 8-alpine | 4 | 0 | 全部覆盖 |
+| Temporal auto-setup 1.29.7 | 510 | 0 | 全部覆盖 |
+| Temporal UI 2.54.1 | 115 | 0 | 全部覆盖 |
+
+即：**镜像门禁当前在本地真实失败**（`pnpm security:scan` 报
+`Image vulnerability triage deadline expired with unresolved HIGH/CRITICAL findings`）。
+这不是本轮代码变更引入的——`compose.yaml`、`security/exceptions.json`、`security/image-policy.json`
+在本轮均未修改，该阻断在 `HEAD` 上同样成立；触发原因是上游漏洞库新增了 advisory。
+
+机器记录见 [live-rescan-2026-11-11.json](live-rescan-2026-11-11.json)。
+
+处置归属：19 条均有上游修复版本可用，正确处置是**升级 postgres 镜像摘要**（而非新增例外）。
+但当日修复调查发现这不是一步可完成的修复——`security/exceptions.json` 按完整 `target` 字符串匹配，
+而 `target` 内嵌镜像 digest：
+
+- 换成新 digest（`sha256:a77aa70e…`）确实消除了 `krb5-libs` 与 `libxslt`（发现数 91→62），
+  但同时使现有 3 条 postgres 例外全部失效，留下 26 条未覆盖（`stdlib v1.24.6`，来自 gosu 二进制）。
+- 保留现 digest 则维持这 19 条新增公告未覆盖。
+
+两条路都需要 A 批准新的、绑定 digest 与到期日的例外（或替换 gosu），开发侧不自签。
+本轮**不修改** `compose.yaml`，也**不新增例外**，只把两种状态记录在
+[live-rescan-2026-11-11.json](live-rescan-2026-11-11.json) 供决策。
+在该项解决前，不能声称镜像门禁通过，也不能把它当作本轮交付的阻塞缺陷。

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { formatDemoEvidence } from "./prototype-data";
 import { StatusTag } from "./prototype-shared";
 import {
   completedTasks,
@@ -243,7 +244,9 @@ export default function RecoveryPlan() {
               <div>
                 <strong>{task.title}</strong>
                 <p>{task.minutes} 分钟 · 已有真实作答</p>
-                <small>证据 #DEMO-02{index + 7} · 单元 v3</small>
+                <small>
+                  证据 {formatDemoEvidence(task.evidenceId ?? `#DEMO-02${index + 7}`)} · 单元 v3
+                </small>
               </div>
             </article>
           ))}

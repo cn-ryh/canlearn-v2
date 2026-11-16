@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { formatDemoEvidence } from "./prototype-data";
 import { StatusTag } from "./prototype-shared";
 
 type RightTab = "export" | "delete";
@@ -137,7 +138,7 @@ export default function RightsStates() {
           <dl>
             <div>
               <dt>操作回执</dt>
-              <dd>#DEMO-DEL-018</dd>
+              <dd>{formatDemoEvidence("#DEMO-DEL-018")}</dd>
             </div>
             <div>
               <dt>完成时间</dt>
