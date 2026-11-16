@@ -44,7 +44,25 @@
 
 `pnpm verify` 退出 0（Web 42、API 245 passed / 10 skipped、Workflow 66、质量门 14，含 API/Web 构建）；`pnpm smoke:test --skip-build` 35 项通过；`pnpm quality:check` 通过；`npx biome lint .` 259 文件 0 warning；`npx biome format .` 通过；648+ 条 Markdown 相对链接有效；全仓 JSON 可解析；`git diff --check` 干净。所有临时容器、端口（3391/3392/3395/3396/3397/3399）与进程已清理，未改用户 `.env`、全局 Docker 配置或远端主机。
 
-### 6. 仍待处理
+### 6. 已修复的环境坑：CL-013a 合成卷残留会阻断 smoke
+
+`pnpm smoke:test --skip-build` 曾在 `db:migrate` 失败（`relation "local_parse_jobs" already exists`）。
+原因不是代码缺陷，而是 CL-013a 的隔离卷 `canlearn-cl013_postgres-data` 里留着旧 `0003` 的迁移台账，
+而重建的 `_journal.json` 给了 `0003` 不同的 `when` 时间戳，Drizzle 因此认为它未应用、却又撞上已存在的表。
+`python3 scripts/smoke_runtime.py clean`（会 `down --volumes`）后重跑，35 项集成检查通过。
+后续若再次出现同类迁移错误，先确认该卷是否为陈旧残留，不要先去改迁移。
+
+### 7. 远端 CI 实测结果（PR #77）
+
+- `validate pull request title` 首次失败：PR 标题 `feat: R0 post-No-Go engineering (...)` 触发
+  `subject-case`（sentence-case）。已用 REST PATCH 改为 `feat: add R0 post-no-go engineering`。
+  本地 commit message 不受影响（各自的 subject 合规）。
+- `security` job **在 CI 上独立复现了同一镜像阻断**：
+  `[FUNC] passed; pnpm/uv packages {'uv': 31, 'pnpm': 405}; dependency HIGH/CRITICAL blockers: 0; images: enforce`
+  随后 `RuntimeError: Image vulnerability triage deadline expired with unresolved HIGH/CRITICAL findings`。
+  这证实本地的 19 条 postgres 发现不是本地环境差异，而是真实的、与 HEAD 无关的阻断。
+
+### 8. 仍待处理
 
 - 镜像门禁：postgres 19 条未覆盖新 HIGH，需 A 在“升级 digest + 重批 stdlib 例外”与“保留 digest + 批 19 条新公告”之间决策。
 - `docs/quality/CL-012` 的 D04–D12 仍为契约/产品待确认项。
