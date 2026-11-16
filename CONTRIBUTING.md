@@ -52,7 +52,7 @@ docs(repo): record repository boundary
 - [CL-013b/c](docs/integration/CL-013bc/README.md)将完整公共响应/错误 Schema、实际事件破坏探针、
   迁移升级/失败回滚接入 CI；`pnpm verify`另检查版本、既有迁移不可变和 schema 漂移。
   `pnpm security:scan`扫描历史/当前文件密钥、全部锁定依赖及镜像；密钥与依赖 HIGH/CRITICAL 阻断。
-  镜像现为有期限的报告模式，不能据此声明安全通过；规则、职责和精确人工例外见门禁包。
+  镜像 `triage_due`（2026-10-21）已过，门禁自动转为强制；2026-11-11 实测仍有未覆盖发现导致阻断。仍不能据此声明安全通过；规则、职责和精确人工例外见门禁包。
 - [CL-010](docs/workflow/CL-010/README.md)提供独立 MinerU V1 Adapter 与默认关闭的原创夹具探针。
   私有 API/worker 双开关同时启用，主 API 唯一写库；生产业务契约不因此升级。
   实际 GPU/服务重启测试由操作者在自己的隔离实例执行，不要求公共 CI 访问 GPU 或凭据。

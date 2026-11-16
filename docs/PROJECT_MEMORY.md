@@ -1,6 +1,54 @@
 # CanLearn 项目记忆
 
-最后检查：2026-11-10（UTC）；早先段落的日期/原始范围保留。以下为带日期的状态快照。
+最后检查：2026-11-16（UTC）；早先段落的日期/原始范围保留。以下为带日期的状态快照。
+
+
+## 2026-11-16 安全探针、命名裁决、真实镜像重扫与一次 git reset 事故
+
+`main` 基线 `f641ef1`。本段承接 2026-11-11 的两轮工作，并如实记录一次由助手误操作造成的工作区回退。
+
+### 1. 事故与恢复（必须保留）
+
+执行分批提交时，助手为取消暂存误用了 `git reset --hard`，把 23 个已跟踪文件的未提交修改回退到 `f641ef1`。处置与结果：
+
+- **精确恢复 6 个**：这些文件在 reset 前已被 `git add` 暂存，blob 仍在对象库，已逐字节还原 —— `.env.example`、`apps/api/src/main.ts`、`apps/api/src/app.module.ts`、`package.json`、`pnpm-lock.yaml`、`biome.json`。
+- **未受影响 19 个**：全部为未跟踪新文件（`apps/api/src/local-parse/`、`apps/api/src/metrics/`、迁移 `0003_real_zarda` 与 snapshot、`canlearn.local.v1.json`、`docs/api/CL-105/`、`docs/api/CL-106/`、`docs/quality/CL-011/metrics-*`、`R1A_Issue_Split.md`、`live-rescan-2026-11-11.json`）。
+- **重建 17 个已跟踪文件**：`apps/api/src/database/schema.ts`（重新加回 `localParseJobs`）、`apps/api/drizzle/meta/_journal.json`（补第 4 条 entry）、`apps/web` 原型 5 个文件（`prototype-data.ts` 全量重写、`prototype-data.test.ts`、`prototype-app.tsx`、`recovery-plan.tsx`/`error-states.tsx`/`rights-states.tsx` 的 D14 标注、`styles.css` 的 44 条 specificity 重排），以及 11 份文档。
+- **重建的可验证性**：重建后 `pnpm verify` 退出 0（Web 42、API 245+10 skipped、Workflow 66、质量门 14）；`pnpm quality:check` 通过（含 `0003` 追加式迁移校验）；用真实浏览器重新验证 D01/D02/D03/D13/D14/D15/D16/D17 全部成立；CSS 重排后用 Playwright 比对 7 个关键选择器的计算样式（display/color/background/font-size/padding/margin/border-radius/grid-template-columns），与原文件**逐项字符串完全一致**，证明重排无视觉回归。
+- **不可恢复的差异**：`prototype-data.ts` 与 `prototype-app.tsx` 为按功能需求重写，不是原字节；原实现的若干细节（如具体 mock 文案微调、测试用例拆分的 4 项差异）无法逐一还原，当前为语义等价且测试与浏览器断言通过的重建版本。
+- **教训**：取消暂存只用 `git reset`（无 `--hard`）或 `git restore --staged`；任何带 `--hard`/`--force` 的破坏性命令不得在未确认无未提交工作时执行。
+
+### 2. 安全探针与真实镜像重扫（本轮完成的两个待办之一）
+
+经用户提供 `http://10.10.10.11:7890` 代理后：
+
+- **`pnpm security:probes` 通过**（2 项受控探针）。此前失败确为环境网络问题。
+- **`pnpm security:scan` 真实重扫按预期阻断**，并纠正 2026-11-11 第一轮的一个说法（当时用归档 summary 重算得出“550 条全部覆盖”）：用最新漏洞库实测，postgres 镜像 91 条发现中 **19 条未被现有例外覆盖**（`krb5-libs 1.22.2-r1` ×16，修复版 1.22.3-r0；`libxslt 1.1.43-r3` ×3，修复版 1.1.43-r4），redis 4 / temporal 510 / temporal-ui 115 条均被覆盖；依赖侧 405 pnpm + 31 uv 包阻断 0。进程以 `Image vulnerability triage deadline expired with unresolved HIGH/CRITICAL findings` 退出 1。
+- 该阻断**不由本轮改动引入**：`compose.yaml`、`security/exceptions.json`、`security/image-policy.json` 本轮均未修改，HEAD 上同样成立。
+- **修复调查（未擅自实施）**：拉取更新后的 `postgres:17-alpine`（`sha256:a77aa70e…`）实测确实消除 `krb5-libs`/`libxslt`（发现数 91→62），但因 `exceptions.json` 按内嵌 digest 的完整 `target` 匹配，换 digest 会使现有 3 条 postgres 例外全部失效，反留 26 条未覆盖（`stdlib v1.24.6`，gosu 二进制 25 HIGH + 1 CRITICAL）。两条路都需 A 批准绑定 digest 与到期日的新例外，**开发侧不自签**，故本轮不改 `compose.yaml`、不加例外，只记录于 `docs/integration/CL-013bc/live-rescan-2026-11-11.json`。
+
+### 3. 命名冲突裁决（另一个待办）
+
+业务 `failure_code` 以已关闭的 CL-008a 为准：对外/事件用 `UPSTREAM_OUTCOME_UNKNOWN`，内部 `failure_code` 用 `UPSTREAM_UNKNOWN`，`retryable=false`、不重建；CL-010 探针的 `UPSTREAM_LOST` 降级为探针本地记录，**不得**搬进 `jobs.failure_code`。裁决写入 `docs/api/CL-106/README.md` 的 U11 与“命名裁决”节，并记入其 `validation-record.json`；CL-010 历史证据原文不改。
+
+### 4. 2026-11-11 两轮工作的成果（当前工作区状态）
+
+- **依赖与门禁**：biome 2.5.14→2.6.6、redocly 2.55→2.77、commitlint 21.2.3→21.2.4、concurrently 10.0.6→10.0.7；Biome 的 Markdown/YAML formatter 显式关闭（`contracts/openapi/canlearn.v1.yaml` 等字节 SHA 被历史记录固定）。`styles.css` 的 44 条 `noDescendingSpecificity` 清零。
+- **CL-105 本地隔离解析切片**：追加式迁移 `0003_real_zarda` + `local_parse_jobs`；默认关闭、仅回环的三端点（`/v1/local/parse-jobs`、`/v1/local/jobs/{jobId}`、`.../cancel`）；独立契约 `canlearn.local.v1.json` 纳入 `contracts:check`；生产契约字节零改动（SHA `0735adad…`，27 planned / 1 implemented）；默认关闭时 Swagger 只列 `/v1/health`，三端点 404。
+- **CL-011 指标参考实现**：`apps/api/src/metrics/vlu-reference.ts` + 59 用例，覆盖 VLU 判定、去重、激活 7×24h、W1/W4 自然周锚定、72h 恢复、删除后重算；定义稿 6 处未明确口径返回 `undefined-by-spec` 并登记 `SPEC_GAPS`，不自造默认值；40%/25% 阈值不入代码。
+- **CL-106 Adapter 契约草案**：`docs/api/CL-106/`，10 章 + 命名裁决；指出 4 个代码级缺口并经源码核实（G1 401 被记为 `CREATE_UNKNOWN`；G2 `create_job` 只接受连续页数；G3 429/5xx 折叠；G4 `partial` 无法映射 `PARTIAL_READY`）。
+- **CL-012c 原型 D01–D17**：D01/D02/D03/D13/D14/D15/D16/D17 已在原型修复；UAT 矩阵升为 1.2。
+- **R1A 拆分草案**：`docs/roadmap/CanLearn_V2.1_R1A_Issue_Split.md`，19 卡 × 五段，8 条开放问题（OQ-01～OQ-08）附出处。
+
+### 5. 本轮验证
+
+`pnpm verify` 退出 0（Web 42、API 245 passed / 10 skipped、Workflow 66、质量门 14，含 API/Web 构建）；`pnpm smoke:test --skip-build` 35 项通过；`pnpm quality:check` 通过；`npx biome lint .` 259 文件 0 warning；`npx biome format .` 通过；648+ 条 Markdown 相对链接有效；全仓 JSON 可解析；`git diff --check` 干净。所有临时容器、端口（3391/3392/3395/3396/3397/3399）与进程已清理，未改用户 `.env`、全局 Docker 配置或远端主机。
+
+### 6. 仍待处理
+
+- 镜像门禁：postgres 19 条未覆盖新 HIGH，需 A 在“升级 digest + 重批 stdlib 例外”与“保留 digest + 批 19 条新公告”之间决策。
+- `docs/quality/CL-012` 的 D04–D12 仍为契约/产品待确认项。
+
 
 
 ## 2026-11-10 并行交付与验收口径更正
