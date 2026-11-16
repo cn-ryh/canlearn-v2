@@ -1,14 +1,20 @@
 # 固定镜像 CRITICAL 初步核对
 
 2026-10-14（UTC）。承接 [CL-013c 扫描](../../integration/CL-013bc/security-summary.json)：
-223 条 HIGH、3 条 CRITICAL 发现记录，后者对应 2 个独立 CVE。当前扫描计数、固定摘要、报告模式、
-人工例外空表及 2026-10-21 处置期限保持不变；本页是初步技术证据，不是已批准风险例外。
+223 条 HIGH、3 条 CRITICAL 发现记录，后者对应 2 个独立 CVE。本页是 2026-10-14 的初步技术证据，
+不是已批准风险例外。
+
+> **2026-11-11 状态更新（原文保留）**：当时的人工例外空表与"2026-10-21 前处置"目标此后已变化——
+> 2026-11-09 起 `security/exceptions.json` 记录 284 条精确匹配的镜像例外（统一到期 2027-02-09）。
+> `triage_due` 已过，`images_enforced()` 自动将门禁转为强制；2026-11-11 以最新漏洞库实测，
+> postgres 镜像出现 19 条未被例外覆盖的新 HIGH（`krb5-libs` ×16、`libxslt` ×3），门禁按预期阻断。
+> 详见 [live-rescan-2026-11-11.json](../../integration/CL-013bc/live-rescan-2026-11-11.json)。
 
 从扫描对应的 PostgreSQL/Temporal 固定摘要容器中只读复制三份二进制，临时容器/匿名卷已移除，
 没有启动现有业务数据库或更改镜像。使用本机 `go version -m` 和 `go tool nm` 核对真实二进制；
 SHA、编译版本和符号计数见[机器记录](image-critical-binaries.json)。
 
-| 镜像/文件 | 发现与技术证据 | 建议处置（A/B，10 月 21 日前） |
+| 镜像/文件 | 发现与技术证据 | 建议处置（A/B；原定 2026-10-21 前，见上方状态更新） |
 | --- | --- | --- |
 | PostgreSQL `/usr/local/bin/gosu` | Go 1.24.6，CVE-2025-68121；该 CVE 涉及 crypto/tls 会话恢复与 CA 配置变更。实际 gosu 1.19 二进制的符号表无 crypto/tls 符号，固定源码 main 为切换用户和 exec | 非作者复核固定源码/二进制是否确无受影响路径，或采用带修复 Go 编译器的 gosu/上游镜像；新摘要完整回归 |
 | Temporal `/usr/local/bin/tctl` | gRPC-Go 1.56.3，CVE-2026-33186；含 gRPC server 符号，不能凭 CLI 名称判定无影响 | 优先上游升级/重建或生产镜像排除旧管理工具，保留许可并验证 Temporal 启动/健康/恢复 |

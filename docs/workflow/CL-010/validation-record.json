@@ -1,6 +1,7 @@
 {
   "recorded_at": "2026-10-14",
   "baseline_commit": "6714527940187c8c4d0d7f448d35871a43cea41f",
+  "staleness_note": "2026-11-11 note: the source_sha256 values below record the state at the original 2026-10-14 baseline and are intentionally NOT updated. Later work (CL-105 local parse slice) changed apps/api/src/app.module.ts, apps/api/src/database/schema.ts, apps/api/drizzle/meta/_journal.json and .env.example. Those files now differ from the recorded digests; this record remains valid only for the commit it describes.",
   "source_binding": "archived current source snapshot after final formatting; committed identity added in delivery record",
   "source_sha256": {
     ".env.example": "e5241a3b28abb9bf55f7c1b1722c4189d1bec16364a6e56851fe7362442a9b94",

@@ -124,7 +124,7 @@ smoke:test 启动真实隔离栈，依次检查 Web 提交、并发同键、异�
 结果默认写私有 runtime 下的 integration-results.json，仅包含合成 ID 与断言，不含 token/原文。
 本轮公开归档见 [validation-record.json](validation-record.json) 与 [integration-results.json](integration-results.json)。
 现有 CI 在 pnpm verify 后运行同一 smoke:test。原始 31 项记录绑定本包交付提交；
-后续 [CL-013b/c](../CL-013bc/README.md)在本地补至 35 项与独立迁移/安全验证，最新变更尚未推送。
+后续 [CL-013b/c](../CL-013bc/README.md)在本地补至 35 项与独立迁移/安全验证，这些变更后续已随 PR #55 合入 main。
 CI 成功只证明对应提交的合成范围，不代表生产验收。
 
 另有7项真实 Chromium 页面交互检查及[桌面成功](screenshots/success-desktop.png)、

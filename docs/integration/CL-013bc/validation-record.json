@@ -1,6 +1,7 @@
 {
   "recorded_at": "2026-10-14T10:24:32.228023+00:00",
   "scope": "CL-013b/c local engineering validation; synthetic data only; no production security or human review acceptance",
+  "staleness_note": "2026-11-11 note: the source_sha256 values below record the state at the original 2026-10-14 baseline and are intentionally NOT updated. Subsequent tool upgrades (biome, redocly, commitlint, concurrently) and the CL-105 local parse slice changed package.json, pnpm-lock.yaml, biome.json, apps/api/src/app.module.ts, apps/api/src/database/schema.ts, apps/api/src/main.ts, apps/web/src/app/styles.css and others. This record remains valid only for the commit it describes; do not treat mismatches as tampering.",
   "base_commit": "f9c50c4e8dcc76d6489596011aafe6920301680c",
   "worktree_changes_committed": false,
   "github_updated": false,
