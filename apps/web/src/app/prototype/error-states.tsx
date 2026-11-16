@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { formatDemoEvidence } from "./prototype-data";
 import { StatusTag } from "./prototype-shared";
 
 type ErrorKind = "queued" | "failed" | "partial" | "cancelled" | "quota" | "forbidden";
@@ -121,7 +122,7 @@ function ErrorDetail({
     return (
       <>
         <p>
-          影响范围：处理任务 #DEMO-P18
+          影响范围：处理任务 {formatDemoEvidence("#DEMO-P18")}
           已取消。取消前没有通过质量门的结果；后续晚到结果会被丢弃，不会复活资料。
         </p>
         <div className="state-actions">
